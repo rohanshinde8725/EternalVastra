@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+
+.custom-pagination .swiper-pagination-bullet {
+  width: 10px;
+  height: 10px;
+  transition: all 0.3s ease;
+}
+
+.custom-pagination .swiper-pagination-bullet-active {
+  background: #8b1c2c; /* rich saree red */
+}
+
+
+@media screen and (max-width: 768px) {
+   .banner-p{
+    width: 60%;
+   }
+}
