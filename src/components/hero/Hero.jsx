@@ -9,7 +9,7 @@ const Hero = () => {
   return (
     <>
     <Swiper
-        className='h-75 sm:h-100 md:h-125 lg:h-162.5 w-full'
+        className='h-75 sm:h-100 md:h-125 lg:h-162.5 2xl:h-200 w-full'
         modules={[Pagination, Autoplay]} 
         spaceBetween={0}
         slidesPerView={1}

@@ -45,7 +45,7 @@ const About = () => {
 
 
       {/* Banner Start */}
-      <div className="bg-[url('/images/banner-2.png')] bg-cover bg-center h-75 sm:h-100 md:h-125 lg:h-162.5 w-full 
+      <div className="bg-[url('/images/banner-2.png')] bg-cover bg-center h-75 sm:h-100 md:h-125 lg:h-162.5 2xl:h-200 w-full 
       flex items-center px-5 md:px-16 lg:px-24 relative overflow-hidden">
         <div className='w-full lg:w-[70%] lg:ml-10 absolute'>
           <h3 className='text-xs md:text-sm text-[#74202D] font-bold uppercase'>About Us</h3>
@@ -74,7 +74,7 @@ const About = () => {
 
       {/* Journey Start */}
       <div className='py-15 px-5 md:py-10 md:px-15 flex flex-col lg:flex-row gap-10 lg:gap-20'>
-        <div className='w-full h-auto md:w-[80%] mx-auto lg:w-[40%] md:h-90 lg:h-100 '>
+        <div className='w-full h-auto md:w-[80%] mx-auto lg:w-[40%] md:h-90 lg:h-100 2xl:h-120'>
           <img className='h-full w-full object-cover rounded-xl' src="/images/aboutjourney.png" alt="" />
         </div>
 

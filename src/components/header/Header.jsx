@@ -40,7 +40,7 @@ const Header = () => {
             <ul className='flex gap-10 uppercase text-sm font-semibold'>
                 <Link to={"/"}><li className='cursor-pointer hover:text-[#74202D] transition-all duration-300'>Home</li></Link>
                 <Link to={"/about"}><li className='cursor-pointer hover:text-[#74202D] transition-all duration-300'>About</li></Link>
-                <li className='cursor-pointer hover:text-[#74202D] transition-all duration-300'>Shop</li>
+                <Link to={"/shop"}><li className='cursor-pointer hover:text-[#74202D] transition-all duration-300'>Shop</li></Link>
                 <li className='cursor-pointer hover:text-[#74202D] transition-all duration-300'>Silk Saree</li>
                 <li className='cursor-pointer hover:text-[#74202D] transition-all duration-300'>Cotten Saree</li>
                 <li className='cursor-pointer hover:text-[#74202D] transition-all duration-300'>New Arrivals</li>
@@ -87,7 +87,7 @@ const Header = () => {
             <ul className='flex flex-col gap-6 px-6 uppercase text-sm font-semibold'>
             <Link to={"/"}><li className='cursor-pointer hover:text-[#74202D]'>Home</li></Link>
             <Link to={"/about"}><li className='cursor-pointer hover:text-[#74202D]'>About</li></Link>
-            <li className='cursor-pointer hover:text-[#74202D]'>Shop</li>
+            <Link to={"/shop"}><li className='cursor-pointer hover:text-[#74202D]'>Shop</li></Link>
             <li className='cursor-pointer hover:text-[#74202D]'>Silk Saree</li>
             <li className='cursor-pointer hover:text-[#74202D]'>Cotten Saree</li>
             <li className='cursor-pointer hover:text-[#74202D]'>New Arrivals</li>

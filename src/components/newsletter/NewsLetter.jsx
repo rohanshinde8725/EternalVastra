@@ -42,7 +42,7 @@ const NewsLetter = () => {
         </div>
 
         {/* Icons Section */}
-        <div className='w-full lg:w-1/2 flex justify-center items-center 
+        <div className='w-full lg:w-1/2 flex justify-center items-center 2xl:justify-start
             gap-6 sm:gap-8 md:gap-10 py-10 flex-wrap'>
 
             <div className='flex flex-col items-center text-center'>
