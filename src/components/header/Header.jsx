@@ -43,7 +43,7 @@ const Header = () => {
                 <Link to={"/shop"}><li className='cursor-pointer hover:text-[#74202D] transition-all duration-300'>Shop</li></Link>
                 <li className='cursor-pointer hover:text-[#74202D] transition-all duration-300'>Silk Saree</li>
                 <li className='cursor-pointer hover:text-[#74202D] transition-all duration-300'>Cotten Saree</li>
-                <li className='cursor-pointer hover:text-[#74202D] transition-all duration-300'>New Arrivals</li>
+                <Link to={"/contact"}><li className='cursor-pointer hover:text-[#74202D] transition-all duration-300'>Contact Us</li></Link>
                 <li className='cursor-pointer hover:text-[#74202D] transition-all duration-300'>Sale</li>
             </ul>
         </div>
@@ -90,7 +90,7 @@ const Header = () => {
             <Link to={"/shop"}><li className='cursor-pointer hover:text-[#74202D]'>Shop</li></Link>
             <li className='cursor-pointer hover:text-[#74202D]'>Silk Saree</li>
             <li className='cursor-pointer hover:text-[#74202D]'>Cotten Saree</li>
-            <li className='cursor-pointer hover:text-[#74202D]'>New Arrivals</li>
+            <Link to={"/contact"}><li className='cursor-pointer hover:text-[#74202D]'>Contact Us</li></Link>
             <li className='cursor-pointer hover:text-[#74202D]'>Sale</li>
             </ul>
         </div>

@@ -6,6 +6,7 @@ import Shop from '../pages/Shop'
 import Cart from '../pages/Cart'
 import Header from '../components/header/Header'
 import Footer from '../components/footer/Footer'
+import Contact from '../pages/Contact'
 
 const MainLayout = () => {
   return (
@@ -27,6 +28,7 @@ const AppRoutes = () => {
                     <Route path='about' element={<About />} />
                     <Route path='cart' element={<Cart />} />
                     <Route path='shop' element={<Shop />} />
+                    <Route path='contact' element={<Contact />} />
                 </Route>
             </Routes>
         </>

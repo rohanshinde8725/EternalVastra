@@ -68,10 +68,6 @@ const About = () => {
 
 
 
-
-
-
-
       {/* Journey Start */}
       <div className='py-15 px-5 md:py-10 md:px-15 flex flex-col lg:flex-row gap-10 lg:gap-20'>
         <div className='w-full h-auto md:w-[80%] mx-auto lg:w-[40%] md:h-90 lg:h-100 2xl:h-120'>
