@@ -99,9 +99,9 @@ const Testimonial = () => {
 
                         <div>
                             <h3 className='font-semibold mb-2'>{testimonial.name}</h3>
-                            <p className='text-sm text-gray-500'>
-                            <Rating rating={testimonial.rating} />
-                            </p>
+                            <div className="text-sm text-gray-500">
+                                <Rating rating={5}/>
+                            </div>
                         </div>
 
                         </div>

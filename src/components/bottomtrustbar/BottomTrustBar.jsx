@@ -8,7 +8,7 @@ import { CiHeadphones } from "react-icons/ci";
 const BottomTrustBar = () => {
   return (
     <div className='w-full bg-[#FEFAF8] mt-10'>
-    <div className='w-[90%] mx-auto bg-white rounded-lg shadow-md 
+    <div className='w-[95%] mx-auto bg-white rounded-lg shadow-md 
         grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-15 md:gap-6 py-10 md:p-10 lg:p-10'>
 
         {/* Item */}

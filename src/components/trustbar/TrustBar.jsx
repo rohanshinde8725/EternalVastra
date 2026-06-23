@@ -8,7 +8,7 @@ import { CiHeadphones } from "react-icons/ci";
 const TrustBar = () => {
   return (
     <div className='w-full py-10 bg-[#FEFAF8]'>
-        <div className='w-[90%] py-10 gap-8 mx-auto shadow-md bg-white rounded-lg 
+        <div className='w-[95%] py-10 gap-5 mx-auto shadow-md bg-white rounded-lg 
             grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 px-5'>
 
             {/* Item */}
