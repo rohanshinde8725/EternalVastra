@@ -64,7 +64,7 @@ const Category = () => {
             />
 
             {/* Title */}
-            <h1 className='uppercase font-semibold mt-4 text-xs sm:text-sm md:text-base lg:text-base xl:text-lg'>
+            <h1 className='uppercase font-semibold mt-4 text-xs sm:text-sm md:text-base'>
               {saree.title}
             </h1>
 

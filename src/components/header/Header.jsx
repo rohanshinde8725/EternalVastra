@@ -38,12 +38,12 @@ const Header = () => {
 
         <div className="hidden lg:block">
             <ul className='flex gap-10 uppercase text-sm font-semibold'>
-                <Link to={"/"}><li className='cursor-pointer hover:text-[#74202D] transition-all duration-300'>Home</li></Link>
-                <Link to={"/about"}><li className='cursor-pointer hover:text-[#74202D] transition-all duration-300'>About</li></Link>
-                <Link to={"/shop"}><li className='cursor-pointer hover:text-[#74202D] transition-all duration-300'>Shop</li></Link>
+                <li className='cursor-pointer hover:text-[#74202D] transition-all duration-300'><Link to={"/"}>Home</Link></li>
+                <li className='cursor-pointer hover:text-[#74202D] transition-all duration-300'><Link to={"/about"}>About</Link></li>
+                <li className='cursor-pointer hover:text-[#74202D] transition-all duration-300'><Link to={"/shop"}>Shop</Link></li>
                 <li className='cursor-pointer hover:text-[#74202D] transition-all duration-300'>Silk Saree</li>
                 <li className='cursor-pointer hover:text-[#74202D] transition-all duration-300'>Cotten Saree</li>
-                <Link to={"/contact"}><li className='cursor-pointer hover:text-[#74202D] transition-all duration-300'>Contact Us</li></Link>
+                <li className='cursor-pointer hover:text-[#74202D] transition-all duration-300'><Link to={"/contact"}>Contact Us</Link></li>
                 <li className='cursor-pointer hover:text-[#74202D] transition-all duration-300'>Sale</li>
             </ul>
         </div>

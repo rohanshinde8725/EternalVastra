@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 // import { FiPhone } from "react-icons/fi";
 // import { CiMail, CiClock2, CiLocationOn } from "react-icons/ci";
 import { FaClock } from "react-icons/fa6";
@@ -9,6 +9,36 @@ import {  FiMapPin, FiPhone, FiMail, FiSend } from "react-icons/fi";
 import BottomTrustBar from "../components/bottomtrustbar/BottomTrustBar";
 
 const Contact = () => {
+
+  const [formData, setFormData] = useState({
+    firstName : '',
+    lastName : '',
+    phoneNo : '',
+    email : '',
+    subject : '',
+    message : '',
+  })
+
+  const handleChange = (e) => {
+    setFormData(
+      {...formData, [e.target.name] : e.target.value}
+    )
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log(formData)
+    setFormData({
+      firstName : '',
+      lastName : '',
+      phoneNo : '',
+      email : '',
+      subject : '',
+      message : '',
+    })
+  }
+
+
   const info = [
     {
       id: 1,
@@ -69,7 +99,7 @@ const Contact = () => {
 
       {/* TrustBar Start here */}
       <div
-        className="w-[95%] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 bg-[#FEFAF8] mt-20 mx-auto md:mx-10 
+        className="w-[95%] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 bg-[#FEFAF8] mt-20 mx-auto md:mx-10 
         rounded-xl overflow-hidden shadow-sm">
         {info.map((item, index) => (
           <div
@@ -97,7 +127,7 @@ const Contact = () => {
       <div className="w-[95%] flex flex-col lg:flex-row gap-10 mx-auto my-20">
         {/* Form */}
         <div className="lg:w-1/2 border border-gray-300 rounded-sm p-10 px-5">
-          <h1 className="uppercase text-center text-2xl font-semibold mb-6">
+          <h1 className="uppercase text-center text-2xl font-semibold mb-6 text-[#8f3f50]">
             Send Us A Message
           </h1>
 
@@ -107,6 +137,9 @@ const Contact = () => {
               <div className="flex flex-col w-full gap-2">
                 <label htmlFor="firstName">First Name</label>
                 <input
+                  name="firstName"
+                  value={formData.firstName}
+                  onChange={handleChange}
                   id="firstName"
                   className="w-full py-2 px-4 border border-gray-300 rounded-sm outline-none focus:border-[#74202D]"
                   type="text"
@@ -117,6 +150,9 @@ const Contact = () => {
               <div className="flex flex-col w-full gap-2">
                 <label htmlFor="lastName">Last Name</label>
                 <input
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleChange}
                   id="lastName"
                   className="w-full py-2 px-4 border border-gray-300 rounded-sm outline-none focus:border-[#74202D]"
                   type="text"
@@ -130,6 +166,9 @@ const Contact = () => {
               <div className="flex flex-col w-full gap-2">
                 <label htmlFor="phone">Phone No</label>
                 <input
+                  name="phoneNo"
+                  value={formData.phoneNo}
+                  onChange={handleChange}
                   id="phone"
                   className="w-full py-2 px-4 border border-gray-300 rounded-sm outline-none focus:border-[#74202D]"
                   type="tel"
@@ -140,6 +179,9 @@ const Contact = () => {
               <div className="flex flex-col w-full gap-2">
                 <label htmlFor="email">Email</label>
                 <input
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
                   id="email"
                   className="w-full py-2 px-4 border border-gray-300 rounded-sm outline-none focus:border-[#74202D]"
                   type="email"
@@ -152,6 +194,9 @@ const Contact = () => {
             <div className="flex flex-col gap-2">
               <label htmlFor="subject">Subject</label>
               <input
+                name="subject"
+                value={formData.subject}
+                onChange={handleChange}
                 id="subject"
                 className="w-full py-2 px-4 border border-gray-300 rounded-sm outline-none focus:border-[#74202D]"
                 type="text"
@@ -164,6 +209,9 @@ const Contact = () => {
               <label htmlFor="message">Message</label>
 
               <textarea
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
                 id="message"
                 rows="5"
                 className="w-full py-2 px-4 border border-gray-300 rounded-sm outline-none resize-none focus:border-[#74202D]"
@@ -173,6 +221,7 @@ const Contact = () => {
 
             {/* Button */}
             <button
+            onClick={handleSubmit}
               type="submit"
               className="
                 bg-[#74202D] text-white uppercase py-2 px-8 rounded-sm

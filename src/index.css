@@ -1,9 +1,7 @@
 @import "tailwindcss";
 
-html, body, #root {
-  min-height: 100%;
-  height: auto;
-  overflow: visible !important;
+body {
+  font-family: poppins, poppins Fallback;
 }
 
 .custom-pagination .swiper-pagination-bullet {
