@@ -13,27 +13,27 @@ const About = () => {
 
   const crafts = [
     {
-      img : "/images/craft-1.png",
+      img : "/images/craft/craft-1.png",
       title : "Finest Material",
       subTitle : "We source premium quality fabrics that define elegance and comfort.",
     },
     {
-      img : "/images/craft-2.png",
+      img : "/images/craft/craft-2.png",
       title : "Skilled Artist",
       subTitle : "Our Sarees are woven by skilled hands with Generations of expertise.",
     },
     {
-      img : "/images/craft-3.png",
+      img : "/images/craft/craft-3.png",
       title : "Exquisite Designs",
       subTitle : "From Classic weaves to contemporary styles designed for every you.",
     },
     {
-      img : "/images/craft-4.png",
+      img : "/images/craft/craft-4.png",
       title : "Impeccable Finish",
       subTitle : "Every Sarees goes through strict quality checks to ensure perfection.",
     },
     {
-      img : "/images/craft-5.png",
+      img : "/images/craft/craft-5.png",
       title : "Thoughful Packaging",
       subTitle : "Delivered with care, because you deserve the best experience.",
     },
@@ -45,7 +45,7 @@ const About = () => {
 
 
       {/* Banner Start */}
-      <div className="bg-[url('/images/banner-2.png')] bg-cover bg-center h-75 sm:h-100 md:h-125 lg:h-162.5 2xl:h-200 w-full 
+      <div className="bg-[url('/images/banner/banner-2.png')] bg-cover bg-center h-75 sm:h-100 md:h-125 lg:h-162.5 2xl:h-200 w-full 
       flex items-center px-5 md:px-16 lg:px-24 relative overflow-hidden">
         <div className='w-full lg:w-[70%] lg:ml-10 absolute'>
           <h3 className='text-xs md:text-sm text-[#74202D] font-bold uppercase'>About Us</h3>

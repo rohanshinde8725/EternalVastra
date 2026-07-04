@@ -73,7 +73,7 @@ const Contact = () => {
     <div>
       {/* Banner Start */}
       <div
-        className="bg-[url('/images/contact-banner.png')] bg-cover bg-center h-75 sm:h-100 md:h-125 lg:h-162.5 2xl:h-200 w-full 
+        className="bg-[url('/images/banner/contact-banner.png')] bg-cover bg-center h-75 sm:h-100 md:h-125 lg:h-162.5 2xl:h-200 w-full 
         flex items-center px-5 md:px-16 lg:px-24 relative overflow-hidden"
       >
         <div className="w-full lg:w-[70%] lg:ml-10 absolute">

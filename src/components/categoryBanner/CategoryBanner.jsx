@@ -6,7 +6,7 @@ const CategoryBanner = () => {
         <div className='lg:px-10 px-4 flex flex-col md:flex-row gap-5'>
 
             {/* banner-1 */}
-            <div className='bg-[url(/images/category-banner1.png)] h-62.5 sm:h-75 md:h-87.5 lg:h-100 2xl:h-150 w-full 
+            <div className='bg-[url(/images/banner/category-banner1.png)] h-62.5 sm:h-75 md:h-87.5 lg:h-100 2xl:h-150 w-full 
                 lg:w-1/2 bg-cover bg-center rounded-lg'>
 
                 <div className='w-full lg:w-1/2 h-full flex flex-col justify-center 
@@ -28,7 +28,7 @@ const CategoryBanner = () => {
 
 
             {/* banner-2 */}
-            <div className='bg-[url(/images/category-banner2.png)] h-62.5 sm:h-75 md:h-87.5 lg:h-100 2xl:h-150 
+            <div className='bg-[url(/images/banner/category-banner2.png)] h-62.5 sm:h-75 md:h-87.5 lg:h-100 2xl:h-150 
                 w-full lg:w-1/2 bg-cover bg-center rounded-lg'>
 
                 <div className='w-full lg:w-1/2 h-full flex flex-col justify-center px-6 sm:px-8 md:px-10 lg:px-12 gap-2 sm:gap-3'>

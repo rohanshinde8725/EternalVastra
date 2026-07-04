@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { MdMenuOpen } from "react-icons/md";
 import { FaHeart } from "react-icons/fa";
 import Rating from "../components/rating/Rating";
+import sarees from "../api/LocalStorage";
 
 const Shop = () => {
   const [cart, setCart] = useState([]);
@@ -9,12 +10,20 @@ const Shop = () => {
   const [maxPrice, setMaxPrice] = useState(25000);
   const [sort, setSort] = useState("default");
   const [showFilter, setShowFilter] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const productsPerPage = 8;
 
   // LOAD CART
   useEffect(() => {
     const stored = JSON.parse(localStorage.getItem("cart")) || [];
     setCart(stored);
   }, []);
+
+  // Reset page when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [selectedCategory, maxPrice, sort]);
+
 
   // ADD TO CART
   const addToCart = (product) => {
@@ -39,71 +48,12 @@ const Shop = () => {
     window.dispatchEvent(new Event("cartUpdated"));
   };
 
-  // DATA
-  const sareesSale = [
-    {
-      id: 1,
-      img: "/images/categoryImg-1.png",
-      label: "New",
-      category: "Silk",
-      title: "Silk Sarees",
-      discountPrice: 2899,
-      actualPrice: 3699,
-      rating: 4,
-      ratings: "124",
-    },
-    {
-      id: 2,
-      img: "/images/categoryImg-2.png",
-      label: "-20%",
-      category: "Cotton",
-      title: "Cotton Sarees",
-      discountPrice: 3299,
-      actualPrice: 4199,
-      rating: 4,
-      ratings: "98",
-    },
-    {
-      id: 3,
-      img: "/images/categoryImg-3.png",
-      label: "-10%",
-      category: "Paithani",
-      title: "Paithani Sarees",
-      discountPrice: 2999,
-      actualPrice: 3799,
-      rating: 4,
-      ratings: "87",
-    },
-    {
-      id: 4,
-      img: "/images/categoryImg-4.png",
-      label: "New",
-      category: "Georgette",
-      title: "Georgette Sarees",
-      discountPrice: 1499,
-      actualPrice: 1999,
-      rating: 4,
-      ratings: "64",
-    },
-    {
-      id: 5,
-      img: "/images/categoryImg-6.png",
-      label: "New",
-      category: "Organza",
-      title: "Organza Sarees",
-      discountPrice: 1299,
-      actualPrice: 1999,
-      rating: 4,
-      ratings: "93",
-    },
-  ];
-
   // FILTER + SORT
-  const filteredProducts = sareesSale
+  const filteredProducts = sarees
     .filter(
       (item) =>
         (selectedCategory === "All" ||
-          item.category === selectedCategory) &&
+        item.category.includes(selectedCategory)) &&
         item.discountPrice <= maxPrice
     )
     .sort((a, b) => {
@@ -112,11 +62,23 @@ const Shop = () => {
       return 0;
     });
 
+    // pagination
+  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = filteredProducts.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
+
+  console.log(currentProducts.length);
+console.log(currentProducts.map(item => item.id));
+
   return (
     <div className="bg-[#FEFAF8]">
 
       {/* Banner */}
-      <div className="bg-[url('/images/banner-1.png')] bg-cover bg-center h-75 sm:h-100 md:h-125 lg:h-162.5 2xl:h-200 w-full 
+      <div className="bg-[url('/images/banner/banner-1.png')] bg-cover bg-center h-75 sm:h-100 md:h-125 lg:h-162.5 2xl:h-200 w-full 
       flex items-center px-5 md:px-16 lg:px-24 relative overflow-hidden">
         <div className='w-full lg:w-[70%] lg:ml-10 absolute'>
           <h3 className='text-xs md:text-sm text-[#74202D] font-bold uppercase'>Shop</h3>
@@ -136,17 +98,11 @@ const Shop = () => {
 
       {/* Mobile Top Bar */}
       <div className="flex justify-between items-center p-4 lg:hidden">
-        <button
-          onClick={() => setShowFilter(true)}
-          className="border px-3 py-1 rounded"
-        >
+        <button onClick={() => setShowFilter(true)} className="border px-3 py-1 rounded">
           Filters
         </button>
 
-        <select
-          onChange={(e) => setSort(e.target.value)}
-          className="border px-2 py-1 text-sm"
-        >
+        <select onChange={(e) => setSort(e.target.value)} className="border px-2 py-1 text-sm">
           <option value="default">Sort</option>
           <option value="low">Low → High</option>
           <option value="high">High → Low</option>
@@ -170,49 +126,32 @@ const Shop = () => {
           </div>
 
           {/* Categories */}
-          <h1 className="text-[#74202D] mt-6 mb-3 font-semibold">
-            Categories
-          </h1>
+          <h1 className="text-[#74202D] mt-6 mb-3 font-semibold">Categories</h1>
 
-          {["All", "Silk", "Cotton", "Paithani", "Georgette", "Organza"].map(
+          {["All", "Silk Sarees", "Cotton Sarees", "Paithani Sarees", "Georgette Sarees", "Organza Sarees"].map(
             (cat) => (
-              <p
-                key={cat}
-                onClick={() => setSelectedCategory(cat)}
-                className={`cursor-pointer mb-2 text-sm ${
-                  selectedCategory === cat
-                    ? "text-[#74202D] font-semibold"
-                    : ""
-                }`}
-              >
+              <p key={cat} onClick={() => setSelectedCategory(cat)}
+                className={`cursor-pointer mb-2 text-sm ${ selectedCategory === cat
+                    ? "text-[#74202D] font-semibold" : "" }`}>
                 {cat}
               </p>
             )
           )}
 
           {/* Price */}
-          <h1 className="text-[#74202D] mt-6 mb-2 font-semibold">
-            Price
-          </h1>
+          <h1 className="text-[#74202D] mt-6 mb-2 font-semibold">Price</h1>
 
-          <input
-            type="range"
-            min="500"
-            max="25000"
+          <input type="range"
+            min="500" max="25000"
             value={maxPrice}
             onChange={(e) => setMaxPrice(e.target.value)}
-            className="w-full accent-[#74202D]"
-          />
-
+            className="w-full accent-[#74202D]" />
           <p className="text-sm mt-2">Up to ₹{maxPrice}</p>
         </div>
 
         {/* Overlay */}
         {showFilter && (
-          <div
-            onClick={() => setShowFilter(false)}
-            className="fixed inset-0 bg-black/40 lg:hidden"
-          ></div>
+          <div onClick={() => setShowFilter(false)} className="fixed inset-0 bg-black/40 lg:hidden"></div>
         )}
 
         {/* Products */}
@@ -221,7 +160,9 @@ const Shop = () => {
           {/* Desktop Top */}
           <div className="hidden lg:flex justify-between items-center my-5">
             <p className="text-sm text-gray-600">
-              Showing {filteredProducts.length} products
+              Showing {indexOfFirstProduct + 1} -
+              {Math.min(indexOfLastProduct, filteredProducts.length)} of{" "}
+              {filteredProducts.length} products
             </p>
 
             <select
@@ -240,14 +181,11 @@ const Shop = () => {
             {filteredProducts.length === 0 ? (
               <p>No products found</p>
             ) : (
-              filteredProducts.map((item) => (
+              currentProducts.map((item) => (
                 <div key={item.id} className="shadow rounded overflow-hidden bg-white">
-
-                  <img src={item.img} alt="" className="w-full" />
-
+                  <img src={item.img} alt="" className="h-60 w-full object-cover object-top" />
                   <div className="p-4">
                     <h2 className="font-semibold text-sm">{item.title}</h2>
-
                     <div className="flex gap-2 mt-1">
                       <span className="text-[#74202D] font-bold">
                         ₹{item.discountPrice}
@@ -264,19 +202,60 @@ const Shop = () => {
                       </span>
                     </div>
 
-                    <button
-                      onClick={() => addToCart(item)}
+                    <button onClick={() => addToCart(item)}
                       className="w-full mt-3 border border-[#74202D] text-[#74202D] py-1 text-sm 
                       hover:bg-[#74202D] hover:text-white cursor-pointer rounded-sm transition-all duration-300"
                     >
                       Add To Cart
                     </button>
                   </div>
-
                 </div>
               ))
             )}
+          </div>
 
+          
+          {/* Pagination */}
+          <div className="flex justify-center items-center gap-2 mt-5 flex-wrap">
+            <button
+              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+              disabled={currentPage === 1}
+              className={`px-4 py-1 border rounded ${
+                currentPage === 1
+                  ? "opacity-50 cursor-not-allowed"
+                  : "hover:bg-[#74202D] hover:text-white cursor-pointer"
+              }`}
+            >
+              Prev
+            </button>
+
+            {[...Array(totalPages)].map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentPage(index + 1)}
+                className={`py-1 px-4 rounded border transition ${
+                  currentPage === index + 1
+                    ? "bg-[#74202D] text-white border-[#74202D]"
+                    : "hover:bg-[#74202D] hover:text-white cursor-pointer" 
+                }`}
+              >
+                {index + 1}
+              </button>
+            ))}
+
+            <button
+              onClick={() =>
+                setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+              }
+              disabled={currentPage === totalPages}
+              className={`px-4 py-1 border rounded ${
+                currentPage === totalPages
+                  ? "opacity-50 cursor-not-allowed"
+                  : "hover:bg-[#74202D] hover:text-white cursor-pointer"
+              }`}
+            >
+              Next
+            </button>
           </div>
         </div>
       </div>

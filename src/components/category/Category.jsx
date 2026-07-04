@@ -5,22 +5,22 @@ const Category = () => {
 
   const sarees = [
     {
-      img : "/images/categoryImg-1.png",
+      img : "/images/silk/silkCategory.png",
       title : "Silk Sarees",
     },
 
     {
-      img : "/images/categoryImg-2.png",
+      img : "/images/cotton/cottonCategory.png",
       title : "Cotton Sarees",
     },
 
     {
-      img : "/images/categoryImg-3.png",
+      img : "/images/paithani/paithaniCategory.png",
       title : "Paithani Sarees",
     },
 
     {
-      img : "/images/categoryImg-4.png",
+      img : "/images/georgette/georgetteCategory.png",
       title : "Georgette Sarees",
     },
 
@@ -30,7 +30,7 @@ const Category = () => {
     },
 
     {
-      img : "/images/categoryImg-6.png",
+      img : "/images/organza/organzaCategory.png",
       title : "Organza Sarees",
     },
   ]

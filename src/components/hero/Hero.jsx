@@ -23,7 +23,7 @@ const Hero = () => {
 
         {/* Slide 1 */}
         <SwiperSlide className="h-full">
-          <div className="bg-[url('/images/banner-1.png')] bg-cover bg-center h-full w-full flex items-center px-5 md:px-16 lg:px-24">
+          <div className="bg-[url('/images/banner/banner-1.png')] bg-cover bg-center h-full w-full flex items-center px-5 md:px-16 lg:px-24">
             
             <div className='w-full lg:w-[70%] lg:ml-10'>
               <h1 className="text-2xl sm:text-3xl lg:text-6xl font-semibold text-[#74202D]">
@@ -47,7 +47,7 @@ const Hero = () => {
 
         {/* Slide 2 */}
         <SwiperSlide className="h-full">
-          <div className="bg-[url('/images/banner-2.png')] bg-cover bg-center h-full w-full flex items-center px-5 md:px-16 lg:px-24">
+          <div className="bg-[url('/images/banner/banner-2.png')] bg-cover bg-center h-full w-full flex items-center px-5 md:px-16 lg:px-24">
             
             <div className='w-full lg:w-[70%] lg:ml-20'>
               <h1 className="text-2xl sm:text-3xl lg:text-6xl font-semibold text-[#74202D]">
@@ -71,7 +71,7 @@ const Hero = () => {
 
         {/* Slide 3 */}
         <SwiperSlide className="h-full">
-          <div className="bg-[url('/images/banner-3.png')] bg-cover bg-center h-full w-full flex items-center px-5 md:px-16 lg:px-24">
+          <div className="bg-[url('/images/banner/banner-3.png')] bg-cover bg-center h-full w-full flex items-center px-5 md:px-16 lg:px-24">
             
             <div className='w-full lg:w-[70%] lg:ml-20'>
               <h1 className="text-2xl sm:text-3xl lg:text-6xl xl:text-7xl font-semibold text-[#74202D]">
