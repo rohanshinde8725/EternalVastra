@@ -97,7 +97,7 @@ console.log(currentProducts.map(item => item.id));
       </div>
 
       {/* Mobile Top Bar */}
-      <div className="flex justify-between items-center p-4 lg:hidden">
+      {/* <div className="flex justify-between items-center p-4 lg:hidden">
         <button onClick={() => setShowFilter(true)} className="border px-3 py-1 rounded">
           Filters
         </button>
@@ -107,104 +107,121 @@ console.log(currentProducts.map(item => item.id));
           <option value="low">Low → High</option>
           <option value="high">High → Low</option>
         </select>
-      </div>
+      </div> */}
 
-      <div className="w-[95%] mx-auto py-10 flex gap-6">
+      <div className="w-[95%] mx-auto py-10">
 
-        {/* Sidebar */}
-        <div
-          className={`fixed lg:static top-0 left-0 h-full lg:h-auto w-3/4 lg:w-[20%] bg-white z-20 p-5 shadow-md 
-            transition-transform duration-300 rounded-lg border border-gray-300
-          ${showFilter ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}`}
-        >
+        {/* Mobile Filter */}
+        <div className="lg:hidden flex justify-between items-center mb-5">
+          <button  onClick={() => setShowFilter(true)}
+            className="flex items-center gap-2 border px-4 py-2 rounded-md" >
+            <MdMenuOpen />
+            Filters
+          </button>
+
+          <select onChange={(e) => setSort(e.target.value)} className="border px-3 py-2 rounded-md text-sm">
+            <option value="default">Sort By</option>
+            <option value="low">Price: Low → High</option>
+            <option value="high">Price: High → Low</option>
+          </select>
+        </div>
+
+        {/* Desktop Filter Bar */}
+        <div className="hidden lg:flex justify-between items-center bg-white border border-gray-300 rounded-xl shadow-sm px-6 py-5 mb-6">
+          <div className="flex items-center gap-3 flex-wrap">
+            <h3 className="text-[#74202D] font-semibold mr-2">
+              Filter By Category
+            </h3>
+
+            {[ "All", "Silk Sarees", "Cotton Sarees", "Paithani Sarees", "Georgette Sarees", "Organza Sarees", 
+            ].map((cat) => (
+              <button key={cat} onClick={() => setSelectedCategory(cat)}
+                className={`px-5 py-2 rounded-md border text-sm transition-all duration-300 cursor-pointer
+                  ${ selectedCategory === cat
+                      ? "bg-[#74202D] text-white border-[#74202D]"
+                      : "border-gray-300 hover:border-[#74202D] hover:text-[#74202D]"
+                  }`}>
+                {cat}
+              </button>
+            ))}
+          </div>
+
+          <select onChange={(e) => setSort(e.target.value)}
+           className="border border-gray-300 px-4 py-2 rounded-md text-sm cursor-pointer">
+            <option value="default">Sort By</option>
+            <option value="low">Price: Low → High</option>
+            <option value="high">Price: High → Low</option>
+          </select>
+        </div>
+
+        {/* Mobile Sidebar */}
+        <div className={`fixed top-0 left-0 h-full w-72 bg-white z-50 p-5 shadow-lg transition-transform 
+        duration-300 lg:hidden ${ showFilter ? "translate-x-0" : "-translate-x-full" }`}>
           <div className="flex justify-between items-center">
-            <h4 className="text-[#74202D] font-semibold">Filter By</h4>
+            <h3 className="font-semibold text-[#74202D] text-lg"> Filter By </h3>
             <MdMenuOpen
-              className="text-xl cursor-pointer lg:hidden"
+              className="text-2xl cursor-pointer"
               onClick={() => setShowFilter(false)}
             />
           </div>
 
-          {/* Categories */}
-          <h1 className="text-[#74202D] mt-6 mb-3 font-semibold">Categories</h1>
+          <h4 className="mt-8 mb-3 font-semibold text-[#74202D]">
+            Categories
+          </h4>
 
-          {["All", "Silk Sarees", "Cotton Sarees", "Paithani Sarees", "Georgette Sarees", "Organza Sarees"].map(
-            (cat) => (
-              <p key={cat} onClick={() => setSelectedCategory(cat)}
-                className={`cursor-pointer mb-2 text-sm ${ selectedCategory === cat
-                    ? "text-[#74202D] font-semibold" : "" }`}>
-                {cat}
-              </p>
-            )
-          )}
-
-          {/* Price */}
-          <h1 className="text-[#74202D] mt-6 mb-2 font-semibold">Price</h1>
-
-          <input type="range"
-            min="500" max="25000"
-            value={maxPrice}
-            onChange={(e) => setMaxPrice(e.target.value)}
-            className="w-full accent-[#74202D]" />
-          <p className="text-sm mt-2">Up to ₹{maxPrice}</p>
+          {[ "All", "Silk Sarees", "Cotton Sarees", "Paithani Sarees", "Georgette Sarees", "Organza Sarees",
+          ].map((cat) => (
+            <button key={cat} onClick={() => {
+                setSelectedCategory(cat);
+                setShowFilter(false);
+              }}
+              className={`block w-full text-left py-2 text-sm ${
+                selectedCategory === cat
+                  ? "text-[#74202D] font-semibold"
+                  : ""
+              }`}>
+              {cat}
+            </button>
+          ))}
         </div>
 
-        {/* Overlay */}
         {showFilter && (
-          <div onClick={() => setShowFilter(false)} className="fixed inset-0 bg-black/40 lg:hidden"></div>
+          <div className="fixed inset-0 bg-black/40 lg:hidden" onClick={() => setShowFilter(false)}/>
         )}
 
         {/* Products */}
-        <div className="w-full lg:w-[80%] bg-white py-5 px-10 border border-gray-300 rounded-lg shadow-md">
+        <div className="bg-white border border-gray-300 rounded-xl shadow-sm p-6">
 
-          {/* Desktop Top */}
-          <div className="hidden lg:flex justify-between items-center my-5">
+          <div className="flex justify-between items-center mb-6">
             <p className="text-sm text-gray-600">
               Showing {indexOfFirstProduct + 1} -
               {Math.min(indexOfLastProduct, filteredProducts.length)} of{" "}
               {filteredProducts.length} products
             </p>
-
-            <select
-              onChange={(e) => setSort(e.target.value)}
-              className="border px-2 py-1 text-sm cursor-pointer rounded-sm"
-            >
-              <option value="default">Default</option>
-              <option value="low">Low → High</option>
-              <option value="high">High → Low</option>
-            </select>
           </div>
 
-          {/* Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-5 pb-10">
-
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-5">
             {filteredProducts.length === 0 ? (
               <p>No products found</p>
             ) : (
               currentProducts.map((item) => (
-                <div key={item.id} className="shadow rounded overflow-hidden bg-white">
-                  <img loading="lazy" decoding="async" src={item.img} alt="" className="h-60 w-full object-cover object-top" />
+                <div key={item.id}
+                  className="rounded-lg overflow-hidden border border-gray-200 bg-white hover:shadow-lg transition"
+                >
+                  <img loading="lazy" src={item.img} alt={item.title} className="w-full h-72 object-cover object-top"/>
                   <div className="p-4">
-                    <h2 className="font-semibold text-sm">{item.title}</h2>
-                    <div className="flex gap-2 mt-1">
-                      <span className="text-[#74202D] font-bold">
-                        ₹{item.discountPrice}
-                      </span>
-                      <span className="line-through text-gray-400 text-sm">
-                        ₹{item.actualPrice}
-                      </span>
+                    <h2 className="font-medium text-sm line-clamp-2">{item.title}</h2>
+                    <div className="flex gap-2 mt-2">
+                      <span className="text-[#74202D] font-bold">₹{item.discountPrice}</span>
+                      <span className="line-through text-gray-400 text-sm">₹{item.actualPrice}</span>
                     </div>
-
-                    <div className="flex items-center gap-2 mt-1">
+                    <div className="flex items-center gap-2 mt-2">
                       <Rating rating={item.rating} />
-                      <span className="text-xs text-gray-500">
-                        ({item.ratings})
-                      </span>
+                      <span className="text-xs text-gray-500">({item.ratings})</span>
                     </div>
-
-                    <button onClick={() => addToCart(item)}
-                      className="w-full mt-3 border border-[#74202D] text-[#74202D] py-1 text-sm 
-                      hover:bg-[#74202D] hover:text-white cursor-pointer rounded-sm transition-all duration-300"
+                    <button
+                      onClick={() => addToCart(item)}
+                      className="w-full mt-4 border border-[#74202D] text-[#74202D] py-2 rounded-md text-sm hover:bg-[#74202D] hover:text-white transition cursor-pointer"
                     >
                       Add To Cart
                     </button>
@@ -214,44 +231,37 @@ console.log(currentProducts.map(item => item.id));
             )}
           </div>
 
-          
           {/* Pagination */}
-          <div className="flex justify-center items-center gap-2 mt-5 flex-wrap">
-            <button
-              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+          <div className="flex justify-center items-center gap-2 mt-10 flex-wrap">
+            <button onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
               disabled={currentPage === 1}
-              className={`px-4 py-1 border rounded ${
+              className={`px-4 py-2 border rounded ${
                 currentPage === 1
                   ? "opacity-50 cursor-not-allowed"
-                  : "hover:bg-[#74202D] hover:text-white cursor-pointer"
+                  : "hover:bg-[#74202D] hover:text-white"
               }`}
             >
               Prev
             </button>
 
             {[...Array(totalPages)].map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentPage(index + 1)}
-                className={`py-1 px-4 rounded border transition ${
+              <button key={index} onClick={() => setCurrentPage(index + 1)}
+                className={`px-4 py-2 border rounded ${
                   currentPage === index + 1
                     ? "bg-[#74202D] text-white border-[#74202D]"
-                    : "hover:bg-[#74202D] hover:text-white cursor-pointer" 
+                    : "hover:bg-[#74202D] hover:text-white"
                 }`}
               >
                 {index + 1}
               </button>
             ))}
 
-            <button
-              onClick={() =>
-                setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-              }
+            <button onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
               disabled={currentPage === totalPages}
-              className={`px-4 py-1 border rounded ${
+              className={`px-4 py-2 border rounded ${
                 currentPage === totalPages
                   ? "opacity-50 cursor-not-allowed"
-                  : "hover:bg-[#74202D] hover:text-white cursor-pointer"
+                  : "hover:bg-[#74202D] hover:text-white"
               }`}
             >
               Next

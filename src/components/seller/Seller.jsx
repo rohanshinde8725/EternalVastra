@@ -57,7 +57,8 @@ const Seller = () => {
               <img
                 loading="lazy"
                 decoding="async"
-                className="sm:h-auto lg:h-auto 2xl:h-95 w-full cursor-pointer transition-all duration-300 rounded-t-lg"
+                className="sm:h-auto lg:h-auto 2xl:h-95 w-full cursor-pointer transition-all duration-300 
+                rounded-t-lg object-cover"
                 src={sarees.img}
                 alt=""
               />
