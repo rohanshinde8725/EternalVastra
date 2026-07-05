@@ -183,7 +183,7 @@ console.log(currentProducts.map(item => item.id));
             ) : (
               currentProducts.map((item) => (
                 <div key={item.id} className="shadow rounded overflow-hidden bg-white">
-                  <img src={item.img} alt="" className="h-60 w-full object-cover object-top" />
+                  <img loading="lazy" decoding="async" src={item.img} alt="" className="h-60 w-full object-cover object-top" />
                   <div className="p-4">
                     <h2 className="font-semibold text-sm">{item.title}</h2>
                     <div className="flex gap-2 mt-1">

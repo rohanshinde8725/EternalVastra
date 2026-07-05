@@ -71,7 +71,8 @@ const About = () => {
       {/* Journey Start */}
       <div className='py-15 px-5 md:py-10 md:px-15 flex flex-col lg:flex-row gap-10 lg:gap-20'>
         <div className='w-full h-auto md:w-[80%] mx-auto lg:w-[40%] md:h-90 lg:h-100 2xl:h-120'>
-          <img className='h-full w-full object-cover rounded-xl' src="/images/aboutjourney.png" alt="" />
+          <img loading="lazy" decoding="async" 
+          className='h-full w-full object-cover rounded-xl' src="/images/aboutjourney.png" alt="" />
         </div>
 
         <div className='w-full lg:w-[60%] text-center lg:text-start'>
@@ -138,7 +139,9 @@ const About = () => {
         <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-10 mt-10'>
           {crafts.map((craft, index) => (
               <div className='text-center group'>
-                <img className='h-40 w-40 lg:h-35 lg:w-35 mx-auto object-cover rounded-full border-4 border-[#F4EFEA] group-hover:border-[#74202D] 
+                <img 
+                loading="lazy" decoding="async"
+                className='h-40 w-40 lg:h-35 lg:w-35 mx-auto object-cover rounded-full border-4 border-[#F4EFEA] group-hover:border-[#74202D] 
                 group-hover:scale-105 transition-all duration-300 cursor-pointer' src={craft.img} />
                 <h1 className='mt-4 mb-2 font-semibold'>{craft.title}</h1>
                 <p className='text-sm text-gray-500'>{craft.subTitle}</p>

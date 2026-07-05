@@ -1,13 +1,13 @@
 import React from 'react'
 import { Routes, Route, Outlet, Navigate } from 'react-router-dom'
-import Home from '../pages/Home'
-import About from '../pages/About'
-import Shop from '../pages/Shop'
-import Cart from '../pages/Cart'
-import Header from '../components/header/Header'
-import Footer from '../components/footer/Footer'
-import Contact from '../pages/Contact'
-
+import { lazy, Suspense } from "react";
+const Home = lazy(() => import("../pages/Home"));
+const About = lazy(() => import("../pages/About"));
+const Shop = lazy(() => import("../pages/Shop"));
+const Cart = lazy(()=> import ('../pages/Cart'));
+const Header = lazy(()=> import ('../components/header/Header'));
+const Footer = lazy(()=> import ('../components/footer/Footer'));
+const Contact = lazy(() => import("../pages/Contact"));
 const MainLayout = () => {
   return (
     <>
@@ -22,15 +22,17 @@ const MainLayout = () => {
 const AppRoutes = () => {
     return (
         <>
-            <Routes>
-                <Route path='/' element={<MainLayout />}>
-                    <Route index element={<Home />} />
-                    <Route path='about' element={<About />} />
-                    <Route path='cart' element={<Cart />} />
-                    <Route path='shop' element={<Shop />} />
-                    <Route path='contact' element={<Contact />} />
-                </Route>
-            </Routes>
+            <Suspense fallback={<div className='flex justify-center items-center h-screen'>Loading...</div>}>
+                <Routes>
+                    <Route path='/' element={<MainLayout />}>
+                        <Route index element={<Home />} />
+                        <Route path='about' element={<About />} />
+                        <Route path='cart' element={<Cart />} />
+                        <Route path='shop' element={<Shop />} />
+                        <Route path='contact' element={<Contact />} />
+                    </Route>
+                </Routes>
+            </Suspense>
         </>
     )
 }

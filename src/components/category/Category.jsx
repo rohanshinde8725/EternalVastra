@@ -56,6 +56,8 @@ const Category = () => {
             
             {/* Image */}
             <img
+              loading="lazy"
+              decoding="async"
               className='h-32 w-32 sm:h-36 sm:w-36 md:h-40 md:w-40 lg:h-44 lg:w-44 2xl:h-48 2xl:w-48 cursor-pointer
               object-cover rounded-full border-4 border-white group-hover:border-[#74202D] group-hover:scale-105 
               transition-all duration-300 mx-auto'

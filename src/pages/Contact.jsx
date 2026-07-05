@@ -286,6 +286,8 @@ const Contact = () => {
               {/* Image */}
               <div className="mt-10 lg:mt-0">
                 <img
+                  loading="lazy"
+                  decoding="async"
                   src="/images/store.jpg"
                   alt="store"
                   className=" w-full h-102.5 object-cover rounded-xl" />

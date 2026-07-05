@@ -73,16 +73,11 @@ const Cart = () => {
             <p>Your cart is empty</p>
           ) : (
             cart.map((item) => (
-              <div
-                key={item.id}
-                className="flex items-center gap-5 border-gray-300r p-4 rounded-lg shadow-lg"
-              >
+              <div key={item.id}
+                className="flex items-center gap-5 border-gray-300r p-4 rounded-lg shadow-lg">
                 {/* Image */}
-                <img
-                  src={item.img}
-                  alt=""
-                  className="w-24 h-24 object-cover rounded"
-                />
+                <img loading="lazy" decoding="async"
+                  src={item.img} alt="" className="w-24 h-24 object-cover rounded"/>
 
                 {/* Info */}
                 <div className="flex-1">
@@ -93,21 +88,17 @@ const Cart = () => {
 
                   {/* Quantity */}
                   <div className="flex items-center gap-3 mt-2">
-                    <button
-                      onClick={() => updateQuantity(item.id, "dec")}
+                    <button onClick={() => updateQuantity(item.id, "dec")}
                       className="px-2 -py-1 border rounded-sm bg-[#74202D] text-white hover:bg-transparent cursor-pointer 
-                      hover:text-[#74202D] hover:border-[#74202D] transition-all duration-300"
-                    >
+                      hover:text-[#74202D] hover:border-[#74202D] transition-all duration-300" >
                       -
                     </button>
 
                     <span>{item.quantity}</span>
 
-                    <button
-                      onClick={() => updateQuantity(item.id, "inc")}
+                    <button onClick={() => updateQuantity(item.id, "inc")}
                       className="px-2 -py-1 border rounded-sm bg-[#74202D] text-white hover:bg-transparent cursor-pointer 
-                      hover:text-[#74202D] hover:border-[#74202D] transition-all duration-300"
-                    >
+                      hover:text-[#74202D] hover:border-[#74202D] transition-all duration-300">
                       +
                     </button>
                   </div>
