@@ -4,6 +4,8 @@ import { GiThreeLeaves } from "react-icons/gi";
 import Rating from "../rating/Rating";
 import { useState } from "react";
 import sarees from "../../api/LocalStorage";
+import FadeImage from "../animations/FadeImage";
+import FadeUp from "../animations/FadeUp";
 
 const Seller = () => {
 
@@ -37,7 +39,7 @@ const Seller = () => {
     <div className="py-12 bg-[#FEFAF8]">
 
       {/* Heading */}
-      <div className="py-20 lg:py-10">
+      <div className="py-20 lg:py-10 lg:px-8">
 
         <div className="flex items-center justify-center gap-2">
           <GiThreeLeaves className="text-[#74202D] text-2xl" />
@@ -51,8 +53,7 @@ const Seller = () => {
           {sarees.slice(0, 5).map((sarees, index) => (
             <div
               key={index}
-              className="shadow rounded-b-lg relative overflow-hidden"
-            >
+              className="shadow rounded-b-lg relative overflow-hidden">
 
               <img
                 loading="lazy"
@@ -71,33 +72,44 @@ const Seller = () => {
                 <FaHeart className="text-lg font-bold text-white cursor-pointer hover:text-red-600 transition-all duration-300" />{" "}
               </div>
 
-
               <div className="p-5">
-                <h1 className="uppercase font-semibold text-base">
-                  {sarees.title}
-                </h1>
+                <FadeUp>
+                  <h1 className="uppercase font-semibold text-xl">
+                    {sarees.title}
+                  </h1>
+                </FadeUp>
 
 
                 <div className="flex gap-5 mt-2">
-                  <h2 className="text-[#74202D] font-bold">
-                    ₹{sarees.discountPrice}
-                  </h2>
-                  <h2 className="line-through text-gray-500 font-semibold">
-                    ₹{sarees.actualPrice}
-                  </h2>
+                  <FadeUp>
+                    <h2 className="text-[#74202D] font-bold text-xl">
+                      ₹{sarees.discountPrice}
+                    </h2>
+                  </FadeUp>
+                  <FadeUp>
+                    <h2 className="line-through text-gray-500 font-semibold text-xl">
+                      ₹{sarees.actualPrice}
+                    </h2>
+                  </FadeUp>
                 </div>
 
 
-                <div className="flex gap-5 mt-2">
-                  <Rating rating={sarees.rating} />
-                  <span className="text-sm text-gray-600">
+                <div className="flex items-center gap-5 mt-2">
+                  <FadeUp>
+                    <Rating className="text-xl" rating={sarees.rating} />
+                  </FadeUp>
+                  <FadeUp>
+                    <span className="text-sm text-gray-600 lg:text-lg">
                     ({sarees.ratings})
                   </span>
+                 </FadeUp>
                 </div>
 
 
                 <button onClick={() => addToCart(sarees)}
-                className="bg-white text-[#74202D] uppercase py-1.5 rounded-sm cursor-pointer hover:bg-[#74202D] border-2 border-[#74202D] hover:text-white transition-all w-full duration-300 font-semibold text-sm mt-5">
+                className="bg-white text-[#74202D] uppercase py-1.5 rounded-sm cursor-pointer 
+                hover:bg-[#74202D] border-2 border-[#74202D] hover:text-white transition-all w-full 
+                duration-300 font-semibold text-lg mt-5">
                   Add To Cart
                 </button>
 

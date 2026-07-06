@@ -7,6 +7,8 @@ import 'swiper/css/pagination'
 import { Navigation, Pagination, Autoplay } from 'swiper/modules'
 import Rating from '../rating/Rating';
 import BottomTrustBar from '../bottomtrustbar/BottomTrustBar'
+import FadeUp from '../animations/FadeUp';
+import FadeImage from '../animations/FadeImage';
 
 
 const Testimonial = () => {
@@ -72,7 +74,7 @@ const Testimonial = () => {
                 slidesPerView: 3, 
                 },
                 1440: {
-                slidesPerView: 4, 
+                slidesPerView: 3, 
                 },
             }}
             >
@@ -80,9 +82,11 @@ const Testimonial = () => {
                 <SwiperSlide key={index}>
                     <div className='h-full bg-[#FEFAF8] backdrop-blur-md shadow-md rounded-xl py-10 px-10 flex flex-col justify-between'>
                         {/* Review */}
-                        <p className='text-gray-600 italic text-center'>
-                        “{testimonial.review}”
-                        </p>
+                        <FadeUp>
+                            <p className='text-gray-600 italic text-center'>
+                            “{testimonial.review}”
+                            </p>
+                        </FadeUp>
                         {/* User */}
                         <div className='flex items-center justify-center gap-5 mt-6'>
                     
@@ -92,15 +96,17 @@ const Testimonial = () => {
                                 decoding="async"
                                 src={testimonial.img}
                                 alt={testimonial.name}
-                                className='w-25 h-25 rounded-full object-cover'
-                            />
+                                className='w-25 h-25 rounded-full object-cover' 
+                            />  
                         </div>
-                        <div>
-                            <h3 className='font-semibold mb-2'>{testimonial.name}</h3>
-                            <div className="text-sm text-gray-500">
-                                <Rating rating={5}/>
+                        <FadeUp>
+                            <div>
+                                <h3 className='font-semibold mb-2'>{testimonial.name}</h3>
+                                <div className="text-sm text-gray-500">
+                                    <Rating rating={5}/>
+                                </div>
                             </div>
-                        </div>
+                        </FadeUp>
                         </div>
                     </div>
                 </SwiperSlide>
