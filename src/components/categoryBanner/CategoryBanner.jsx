@@ -11,8 +11,8 @@ const CategoryBanner = () => {
             <div className="relative h-62.5 sm:h-75 md:h-87.5 lg:h-100 2xl:h-150 w-full lg:w-1/2 rounded-lg overflow-hidden">
                 {/* Background Image */}
                 <FadeImage src="/images/banner/category-banner1.png" alt="Category Banner" 
-                viewport={{once: true}}
-                className="absolute inset-0 w-full h-full object-cover" />
+                    viewport={{once: true}}
+                    className="absolute inset-0 w-full h-full object-cover" />
                 {/* Overlay Content */}
                 <div className="relative z-10 w-full lg:w-1/2 h-full flex flex-col justify-center px-6 sm:px-8 md:px-10 lg:px-12 gap-2 sm:gap-3">
                     <FadeUp delay={0.2}>

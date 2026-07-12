@@ -11,7 +11,7 @@ const Shop = () => {
   const [sort, setSort] = useState("default");
   const [showFilter, setShowFilter] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const productsPerPage = 8;
+  const productsPerPage = 10;
 
   // LOAD CART
   useEffect(() => {
@@ -238,7 +238,7 @@ console.log(currentProducts.map(item => item.id));
               className={`px-4 py-2 border rounded ${
                 currentPage === 1
                   ? "opacity-50 cursor-not-allowed"
-                  : "hover:bg-[#74202D] hover:text-white"
+                  : "hover:bg-[#74202D] hover:text-white cursor-pointer"
               }`}
             >
               Prev
@@ -249,7 +249,7 @@ console.log(currentProducts.map(item => item.id));
                 className={`px-4 py-2 border rounded ${
                   currentPage === index + 1
                     ? "bg-[#74202D] text-white border-[#74202D]"
-                    : "hover:bg-[#74202D] hover:text-white"
+                    : "hover:bg-[#74202D] hover:text-white cursor-pointer"
                 }`}
               >
                 {index + 1}
@@ -261,7 +261,7 @@ console.log(currentProducts.map(item => item.id));
               className={`px-4 py-2 border rounded ${
                 currentPage === totalPages
                   ? "opacity-50 cursor-not-allowed"
-                  : "hover:bg-[#74202D] hover:text-white"
+                  : "hover:bg-[#74202D] hover:text-white cursor-pointer"
               }`}
             >
               Next
