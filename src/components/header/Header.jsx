@@ -37,7 +37,7 @@ const Header = () => {
         </div>
 
         <div className="hidden lg:block">
-            <ul className='flex gap-10 uppercase text-lg font-semibold'>
+            <ul className='flex gap-10 uppercase text-base font-semibold'>
                 <li className='cursor-pointer hover:text-[#74202D] transition-all duration-300'><Link to={"/"}>Home</Link></li>
                 <li className='cursor-pointer hover:text-[#74202D] transition-all duration-300'><Link to={"/about"}>About</Link></li>
                 <li className='cursor-pointer hover:text-[#74202D] transition-all duration-300'><Link to={"/shop"}>Shop</Link></li>

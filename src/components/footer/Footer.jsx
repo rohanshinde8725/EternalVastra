@@ -31,14 +31,14 @@ const Footer = () => {
       
       <div>
         <h1 className='font-bold text-lg uppercase'>Quick Links</h1>
-        <div className='mt-4 flex flex-col gap-2 text-[#3b3737] text-sm'>
-          <li className='cursor-pointer hover:scale-105 transition'><Link to={"/about"}>About</Link></li>
-          <li className='cursor-pointer hover:scale-105 transition'><Link to={"/contact"}>Contact Us</Link></li>
-          <li className='cursor-pointer hover:scale-105 transition'>Track order</li>
-          <li className='cursor-pointer hover:scale-105 transition'>Shipping Policy</li>
-          <li className='cursor-pointer hover:scale-105 transition'>Returns & Refunds</li>
-          <li className='cursor-pointer hover:scale-105 transition'>FAQ's</li>
-        </div>
+          <ul className='mt-4 flex flex-col gap-2 text-[#3b3737] text-sm list-none'>
+            <li className='cursor-pointer hover:scale-105 transition'><Link to={"/about"}>About</Link></li>
+            <li className='cursor-pointer hover:scale-105 transition'><Link to={"/contact"}>Contact Us</Link></li>
+            <li className='cursor-pointer hover:scale-105 transition'>Track order</li>
+            <li className='cursor-pointer hover:scale-105 transition'>Shipping Policy</li>
+            <li className='cursor-pointer hover:scale-105 transition'>Returns & Refunds</li>
+            <li className='cursor-pointer hover:scale-105 transition'>FAQ's</li>
+          </ul>
       </div>
 
       <div>
