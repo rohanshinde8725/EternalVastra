@@ -1,5 +1,6 @@
 import React from 'react'
 import { FaFacebookF, FaInstagram, FaGithub, FaLinkedinIn } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -31,25 +32,25 @@ const Footer = () => {
       <div>
         <h1 className='font-bold text-lg uppercase'>Quick Links</h1>
         <div className='mt-4 flex flex-col gap-2 text-[#3b3737] text-sm'>
-          <p className='cursor-pointer hover:scale-105 transition'>About Us</p>
-          <p className='cursor-pointer hover:scale-105 transition'>Contact Us</p>
-          <p className='cursor-pointer hover:scale-105 transition'>Track order</p>
-          <p className='cursor-pointer hover:scale-105 transition'>Shipping Policy</p>
-          <p className='cursor-pointer hover:scale-105 transition'>Returns & Refunds</p>
-          <p className='cursor-pointer hover:scale-105 transition'>FAQ's</p>
+          <li className='cursor-pointer hover:scale-105 transition'><Link to={"/about"}>About</Link></li>
+          <li className='cursor-pointer hover:scale-105 transition'><Link to={"/contact"}>Contact Us</Link></li>
+          <li className='cursor-pointer hover:scale-105 transition'>Track order</li>
+          <li className='cursor-pointer hover:scale-105 transition'>Shipping Policy</li>
+          <li className='cursor-pointer hover:scale-105 transition'>Returns & Refunds</li>
+          <li className='cursor-pointer hover:scale-105 transition'>FAQ's</li>
         </div>
       </div>
 
       <div>
         <h1 className='font-bold text-lg uppercase'>Shop</h1>
-        <div className='mt-4 flex flex-col gap-2 text-[#3b3737] text-sm'>
+        <ul className='mt-4 flex flex-col gap-2 text-[#3b3737] text-sm decoration-none'>
           <p className='cursor-pointer hover:scale-105 transition'>All Sarees</p>
           <p className='cursor-pointer hover:scale-105 transition'>Silk Sarees</p>
           <p className='cursor-pointer hover:scale-105 transition'>Cotton Sarees</p>
           <p className='cursor-pointer hover:scale-105 transition'>Paithani Sarees</p>
           <p className='cursor-pointer hover:scale-105 transition'>New Arrivals</p>
           <p className='cursor-pointer hover:scale-105 transition'>Sale</p>
-        </div>
+        </ul>
       </div>
 
       <div>

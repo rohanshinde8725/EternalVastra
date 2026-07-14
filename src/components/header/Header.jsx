@@ -84,7 +84,7 @@ const Header = () => {
             </div>
 
             {/* Menu Items */}
-            <ul className='flex flex-col gap-6 px-6 uppercase text-xs font-semibold'>
+            <ul className='flex flex-col gap-6 px-6 uppercase text-base font-semibold'>
                 <Link to={"/"}><li className='cursor-pointer hover:text-[#74202D]'>Home</li></Link>
                 <Link to={"/about"}><li className='cursor-pointer hover:text-[#74202D]'>About</li></Link>
                 <Link to={"/shop"}><li className='cursor-pointer hover:text-[#74202D]'>Shop</li></Link>
