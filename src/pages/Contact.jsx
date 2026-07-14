@@ -112,11 +112,11 @@ const Contact = () => {
               {item.icon}
             </div>
             <div>
-              <h2 className="font-bold text-[#74202D] text-sm">
+              <h2 className="font-bold text-[#74202D] text-xl">
                 {item.heading}
               </h2>
-              <p className="mt-1 text-xs text-gray-600">{item.desc}</p>
-              <p className="text-xs text-gray-600">{item.desc2}</p>
+              <p className="mt-1 text-base text-gray-600">{item.desc}</p>
+              <p className="text-base text-gray-600">{item.desc2}</p>
             </div>
           </div>
         ))}
