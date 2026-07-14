@@ -1,7 +1,13 @@
 @import "tailwindcss";
 
+html {
+  font-size: 100%;
+}
+
 body {
-  font-family: poppins, poppins Fallback;
+  font-family: 'Poppins', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .custom-pagination .swiper-pagination-bullet {
