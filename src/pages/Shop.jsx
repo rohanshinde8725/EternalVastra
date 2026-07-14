@@ -11,7 +11,7 @@ const Shop = () => {
   const [sort, setSort] = useState("default");
   const [showFilter, setShowFilter] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const productsPerPage = 10;
+  const productsPerPage = 8;
 
   // LOAD CART
   useEffect(() => {

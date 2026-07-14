@@ -82,12 +82,12 @@ const Seller = () => {
 
                 <div className="flex gap-5 mt-2">
                   <FadeUp>
-                    <h2 className="text-[#74202D] font-bold text-xl">
+                    <h2 className="text-[#74202D] font-bold text-base">
                       ₹{sarees.discountPrice}
                     </h2>
                   </FadeUp>
                   <FadeUp>
-                    <h2 className="line-through text-gray-500 font-semibold text-xl">
+                    <h2 className="line-through text-gray-500 font-semibold text-base">
                       ₹{sarees.actualPrice}
                     </h2>
                   </FadeUp>
@@ -109,7 +109,7 @@ const Seller = () => {
                 <button onClick={() => addToCart(sarees)}
                 className="bg-white text-[#74202D] uppercase py-1.5 rounded-sm cursor-pointer 
                 hover:bg-[#74202D] border-2 border-[#74202D] hover:text-white transition-all w-full 
-                duration-300 font-semibold text-lg mt-5">
+                duration-300 font-semibold text-sm mt-5">
                   Add To Cart
                 </button>
 

@@ -28,7 +28,7 @@ const NewsLetter = () => {
                 <h3 className='text-[#E6C7A1] uppercase text-xs sm:text-sm'>
                     Handpicked For You
                 </h3>
-                <h1 className='text-[#E6C7A1] text-2xl sm:text-3xl lg:text-3xl font-semibold'>
+                <h1 className='text-[#E6C7A1] text-2xl sm:text-3xl lg:text-2xl font-semibold'>
                     Tradition Woven With Love
                 </h1>
                 <p className='text-sm text-gray-200 max-w-md mx-auto lg:mx-0'>

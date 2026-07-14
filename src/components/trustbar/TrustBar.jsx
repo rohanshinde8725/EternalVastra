@@ -14,42 +14,42 @@ const TrustBar = () => {
                 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 px-5'>
                 {/* Item */}
                 <div className='flex flex-col sm:flex-row gap-4 items-center text-center sm:text-left'>
-                    <FaMedal className='text-5xl text-[#74202D]' />
+                    <FaMedal className='text-4xl text-[#74202D]' />
                     <div>
-                        <h1 className='uppercase font-semibold text-lg'>Premium Quality</h1>
-                        <p className='text-base mt-2'>Finest Fabrics, Crafted to Perfection</p>
+                        <h1 className='uppercase font-semibold text-base'>Premium Quality</h1>
+                        <p className='text-sm mt-2'>Finest Fabrics, Crafted to Perfection</p>
                     </div>
                 </div>
 
                 <div className='flex flex-col sm:flex-row gap-4 items-center text-center sm:text-left'>
-                    <LiaShippingFastSolid className='text-5xl text-[#74202D]' />
+                    <LiaShippingFastSolid className='text-4xl text-[#74202D]' />
                     <div>
-                        <h1 className='uppercase font-semibold text-lg'>Free Shipping</h1>
-                        <p className='text-base mt-2'>On Orders Above ₹1499</p>
+                        <h1 className='uppercase font-semibold text-base'>Free Shipping</h1>
+                        <p className='text-sm mt-2'>On Orders Above ₹1499</p>
                     </div>
                 </div>
 
                 <div className='flex flex-col sm:flex-row gap-4 items-center text-center sm:text-left'>
-                    <FiRefreshCw className='text-5xl text-[#74202D]' />
+                    <FiRefreshCw className='text-4xl text-[#74202D]' />
                     <div>
-                        <h1 className='uppercase font-semibold text-lg'>Easy Returns</h1>
-                        <p className='text-base mt-2'>Hassle-free within 7 days</p>
+                        <h1 className='uppercase font-semibold text-base'>Easy Returns</h1>
+                        <p className='text-sm mt-2'>Hassle-free within 7 days</p>
                     </div>
                 </div>
 
                 <div className='flex flex-col sm:flex-row gap-4 items-center text-center sm:text-left'>
-                    <GoShieldCheck className='text-5xl text-[#74202D]' />
+                    <GoShieldCheck className='text-4xl text-[#74202D]' />
                     <div>
-                        <h1 className='uppercase font-semibold text-lg'>Secure Payments</h1>
-                        <p className='text-base mt-2'>100% Safe & Trusted</p>
+                        <h1 className='uppercase font-semibold text-base'>Secure Payments</h1>
+                        <p className='text-sm mt-2'>100% Safe & Trusted</p>
                     </div>
                 </div>
 
                 <div className='flex flex-col sm:flex-row gap-4 items-center text-center sm:text-left'>
-                    <CiHeadphones className='text-5xl text-[#74202D]' />
+                    <CiHeadphones className='text-4xl text-[#74202D]' />
                     <div>
-                        <h1 className='uppercase font-semibold text-lg'>Customer Support</h1>
-                        <p className='text-base mt-2'>Available Anytime</p>
+                        <h1 className='uppercase font-semibold text-base'>Customer Support</h1>
+                        <p className='text-sm mt-2'>Available Anytime</p>
                     </div>
                 </div>
             </div>

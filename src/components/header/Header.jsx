@@ -84,14 +84,14 @@ const Header = () => {
             </div>
 
             {/* Menu Items */}
-            <ul className='flex flex-col gap-6 px-6 uppercase text-sm font-semibold'>
-            <Link to={"/"}><li className='cursor-pointer hover:text-[#74202D]'>Home</li></Link>
-            <Link to={"/about"}><li className='cursor-pointer hover:text-[#74202D]'>About</li></Link>
-            <Link to={"/shop"}><li className='cursor-pointer hover:text-[#74202D]'>Shop</li></Link>
-            <li className='cursor-pointer hover:text-[#74202D]'>Silk Saree</li>
-            <li className='cursor-pointer hover:text-[#74202D]'>Cotten Saree</li>
-            <Link to={"/contact"}><li className='cursor-pointer hover:text-[#74202D]'>Contact Us</li></Link>
-            <li className='cursor-pointer hover:text-[#74202D]'>Sale</li>
+            <ul className='flex flex-col gap-6 px-6 uppercase text-xs font-semibold'>
+                <Link to={"/"}><li className='cursor-pointer hover:text-[#74202D]'>Home</li></Link>
+                <Link to={"/about"}><li className='cursor-pointer hover:text-[#74202D]'>About</li></Link>
+                <Link to={"/shop"}><li className='cursor-pointer hover:text-[#74202D]'>Shop</li></Link>
+                <li className='cursor-pointer hover:text-[#74202D]'>Silk Saree</li>
+                <li className='cursor-pointer hover:text-[#74202D]'>Cotten Saree</li>
+                <Link to={"/contact"}><li className='cursor-pointer hover:text-[#74202D]'>Contact Us</li></Link>
+                <li className='cursor-pointer hover:text-[#74202D]'>Sale</li>
             </ul>
         </div>
 

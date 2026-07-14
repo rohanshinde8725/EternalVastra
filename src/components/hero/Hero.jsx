@@ -34,12 +34,12 @@ const Hero = () => {
 
             <div className="w-full lg:w-[70%] lg:ml-10 relative z-10">
               <FadeUp delay={0.2}>
-                <h1 className="text-2xl sm:text-3xl lg:text-6xl font-semibold text-[#74202D]">
+                <h1 className="text-2xl sm:text-3xl lg:text-5xl font-semibold text-[#74202D]">
                   Timeless Waves, <br /> Eternal Elegance
                 </h1>
               </FadeUp>
               <FadeUp delay={0.5}>
-                <p className="banner-p w-full sm:w-[60%] md:w-[70%] my-4 text-[#3b3737] text-sm md:text-base xl:text-xl">
+                <p className="banner-p w-full sm:w-[60%] md:w-[70%] my-4 text-[#3b3737] text-sm md:text-base xl:text-lg">
                   Discover our exquisite collection of sarees crafted with tradition,
                   quality & love.
                 </p>
@@ -48,7 +48,7 @@ const Hero = () => {
                 <button
                   className="bg-[#74202D] text-white uppercase py-2 px-4 md:px-8 rounded-lg
                   hover:bg-white border-2 border-[#74202D] hover:text-[#74202D]
-                  cursor-pointer transition text-xs md:text-sm font-semibold">
+                  cursor-pointer transition text-xs font-semibold">
                   Shop Now
                 </button>
               </FadeUp>
@@ -68,12 +68,12 @@ const Hero = () => {
             {/* Content */}
             <div className="w-full lg:w-[70%] lg:ml-20 relative z-10">
               <FadeUp delay={0.2}>
-                <h1 className="text-2xl sm:text-3xl lg:text-6xl font-semibold text-[#74202D]">
+                <h1 className="text-2xl sm:text-3xl lg:text-5xl font-semibold text-[#74202D]">
                   Elegance for <br /> Every Celebration
                 </h1>
               </FadeUp>
               <FadeUp delay={0.5}>
-                <p className="banner-p w-full sm:w-[80%] md:w-[70%] my-4 text-[#3b3737] text-sm md:text-base xl:text-xl">
+                <p className="banner-p w-full sm:w-[80%] md:w-[70%] my-4 text-[#3b3737] text-sm md:text-base xl:text-lg">
                   From weddings to festive moments, explore sarees that make every occasion unforgettable.
                 </p>
               </FadeUp>
@@ -102,12 +102,13 @@ const Hero = () => {
             {/* Content */}
             <div className="w-full lg:w-[70%] lg:ml-20 relative z-10">
               <FadeUp delay={0.2}>
-                <h1 className="text-2xl sm:text-3xl lg:text-6xl xl:text-7xl font-semibold text-[#74202D]">
+                <h1 className="text-2xl sm:text-3xl lg:text-5xl font-semibold text-[#74202D]">
                   Designed for <br /> Modern Grace
                 </h1>
               </FadeUp>
               <FadeUp delay={0.5}>
-                <p className="banner-p w-full sm:w-[80%] md:w-[70%] my-4 text-[#3b3737] text-sm md:text-base xl:text-xl">
+                <p className="banner-p w-full sm:w-[80%] md:w-[70%] my-4 text-[#3b3737] text-sm 
+                md:text-base xl:text-lg">
                   Contemporary sarees crafted for the modern woman — effortless elegance for every day.
                 </p>
               </FadeUp>

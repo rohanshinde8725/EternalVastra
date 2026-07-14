@@ -19,7 +19,7 @@ const BottomTrustBar = () => {
                     <FaMedal className='text-4xl text-[#74202D]' />
                 </div>
                 <div>
-                    <h1 className='uppercase font-semibold text-sm lg:text-xl'>100% Original</h1>
+                    <h1 className='uppercase font-semibold text-sm lg:text-lg'>100% Original</h1>
                     <p className='text-center md:text-start text-xs lg:text-base text-gray-600'>Product</p>
                 </div>                                  
             </div>
@@ -29,7 +29,7 @@ const BottomTrustBar = () => {
             <div className='flex flex-col md:flex-row items-center justify-center gap-4'>
                 <FiRefreshCw className='text-4xl text-[#74202D]' />
                 <div>
-                    <h1 className='uppercase font-semibold text-sm lg:text-xl'>7 Days</h1>
+                    <h1 className='uppercase font-semibold text-sm lg:text-lg'>7 Days</h1>
                     <p className='text-center md:text-start text-xs text-gray-600 lg:text-base'>Easy Returns</p>
                 </div>
             </div>
@@ -39,7 +39,7 @@ const BottomTrustBar = () => {
             <div className='flex flex-col md:flex-row items-center justify-center gap-4'>
                 <LiaShippingFastSolid className='text-4xl text-[#74202D]' />
                 <div>
-                    <h1 className='uppercase font-semibold text-sm lg:text-xl'>Free Shipping</h1>
+                    <h1 className='uppercase font-semibold text-sm lg:text-lg'>Free Shipping</h1>
                     <p className='text-center md:text-start text-xs text-gray-600 lg:text-base'>Above ₹1499</p>
                 </div>
             </div>
@@ -50,7 +50,7 @@ const BottomTrustBar = () => {
             <div className='flex flex-col md:flex-row items-center justify-center gap-4'>
                 <GoShieldCheck className='text-4xl text-[#74202D]' />
                 <div>
-                    <h1 className='uppercase font-semibold text-sm lg:text-xl'>Secure</h1>
+                    <h1 className='uppercase font-semibold text-sm lg:text-lg'>Secure</h1>
                     <p className='text-center md:text-start text-xs text-gray-600 lg:text-base'>Payments</p>
                 </div>
             </div>
