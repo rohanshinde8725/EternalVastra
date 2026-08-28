@@ -1,0 +1,74 @@
+[
+  {
+    "customerId": "CUST-001",
+    "name": "Ritika Sharma",
+    "email": "ritika.sharma@example.com",
+    "phone": "+91 98201 45678",
+    "city": "Mumbai, Maharashtra",
+    "ordersCount": 8,
+    "totalSpent": 48950,
+    "avatar": "/images/testimonial/testimonial-1.png",
+    "tier": "VIP Patron",
+    "joined": "Jan 2025"
+  },
+  {
+    "customerId": "CUST-002",
+    "name": "Anjali Mehta",
+    "email": "anjali.mehta@gmail.com",
+    "phone": "+91 98450 12389",
+    "city": "Bangalore, Karnataka",
+    "ordersCount": 5,
+    "totalSpent": 32400,
+    "avatar": "/images/testimonial/testimonial-2.png",
+    "tier": "Gold Member",
+    "joined": "Mar 2025"
+  },
+  {
+    "customerId": "CUST-003",
+    "name": "Priya Verma",
+    "email": "priya.verma@yahoo.com",
+    "phone": "+91 99100 87654",
+    "city": "New Delhi, Delhi",
+    "ordersCount": 4,
+    "totalSpent": 26800,
+    "avatar": "/images/testimonial/testimonial-3.png",
+    "tier": "Gold Member",
+    "joined": "Apr 2025"
+  },
+  {
+    "customerId": "CUST-004",
+    "name": "Sneha Joshi",
+    "email": "sneha.joshi@outlook.com",
+    "phone": "+91 97654 32109",
+    "city": "Pune, Maharashtra",
+    "ordersCount": 2,
+    "totalSpent": 11200,
+    "avatar": "/images/testimonial/testimonial-4.png",
+    "tier": "Silver Patron",
+    "joined": "Jun 2025"
+  },
+  {
+    "customerId": "CUST-005",
+    "name": "Kavita Singh",
+    "email": "kavita.singh@gmail.com",
+    "phone": "+91 94150 99887",
+    "city": "Chandigarh, Punjab",
+    "ordersCount": 6,
+    "totalSpent": 39500,
+    "avatar": "/images/testimonial/testimonial-1.png",
+    "tier": "VIP Patron",
+    "joined": "Feb 2025"
+  },
+  {
+    "customerId": "CUST-006",
+    "name": "Aarav Sharma",
+    "email": "aarav.sharma@gmail.com",
+    "phone": "+91 98112 33445",
+    "city": "Hyderabad, Telangana",
+    "ordersCount": 3,
+    "totalSpent": 18450,
+    "avatar": "/images/testimonial/testimonial-2.png",
+    "tier": "Silver Patron",
+    "joined": "Aug 2025"
+  }
+]

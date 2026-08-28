@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Festival Saree Showcase 2026",
+    "subtitle": "Up to 30% Off On Handloom Silk & Royal Paithanis",
+    "image": "/images/banner/banner-1.png",
+    "link": "/shop",
+    "position": "Hero Main Banner",
+    "active": true
+  },
+  {
+    "title": "The Regal Wedding Collection",
+    "subtitle": "Handcrafted Pure Zari Weaves for Brides & Bridesmaids",
+    "image": "/images/banner/banner-2.png",
+    "link": "/shop",
+    "position": "Homepage Mid Banner",
+    "active": true
+  },
+  {
+    "title": "Lightweight Chanderi & Summer Cottons",
+    "subtitle": "Daily Drapes with Artisanal Comfort",
+    "image": "/images/banner/banner-3.png",
+    "link": "/shop",
+    "position": "Category Top Banner",
+    "active": true
+  }
+]

@@ -25,6 +25,7 @@ const productSchema = new mongoose.Schema(
     tag: { type: String, trim: true, default: "New" },
     discountPrice: { type: Number, required: true, min: 0 },
     actualPrice: { type: Number, required: true, min: 0 },
+    inventory: { type: Number, min: 0, default: 0 },
     rating: { type: Number, min: 0, max: 5, default: 0 },
     ratings: { type: String, default: "0" },
     details: {

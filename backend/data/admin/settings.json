@@ -1,0 +1,12 @@
+{
+  "storeName": "Eternal Vastra",
+  "tagline": "Elegance Eternal — Handcrafted Indian Sarees",
+  "contactEmail": "support@eternalvastra.com",
+  "contactPhone": "+91 98200 12345",
+  "currency": "INR (₹)",
+  "freeShippingAbove": "1999",
+  "standardShippingFee": "150",
+  "gstPercentage": "5",
+  "codEnabled": true,
+  "maintenanceMode": false
+}

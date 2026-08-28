@@ -5,6 +5,8 @@ const cors = require("cors");
 const path = require("path");
 const connectDB = require("./config/db");
 const productRoutes = require("./routes/productRoutes");
+const adminRoutes = require("./routes/adminRoutes");
+const authRoutes = require("./routes/authRoutes");
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -14,12 +16,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/images", express.static(path.join(__dirname, "uploads", "images")));
+app.use("/uploads/admin", express.static(path.join(__dirname, "uploads", "admin")));
 
 app.get("/api/health", (_req, res) => {
 	res.json({ status: "ok", service: "EternalVastra API" });
 });
 
+app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
+app.use("/api/admin", adminRoutes);
 
 app.use((error, _req, res, _next) => {
 	if (error.name === "MulterError" || error.message === "Only image files are allowed") {
