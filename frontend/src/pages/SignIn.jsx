@@ -280,25 +280,6 @@ const SignIn = () => {
               </button>
             </div>
 
-            {/* Quick Demo Credentials Autofill Helper */}
-            <div className="pt-2 flex items-center justify-center gap-2 text-[10px] text-slate-500">
-              <span>Quick Login:</span>
-              <button
-                type="button"
-                onClick={() => handleDemoFill("admin")}
-                className="px-2 py-0.5 rounded bg-rose-50 hover:bg-rose-100 text-[#701A2B] font-bold cursor-pointer"
-              >
-                Rohan Shinde (Admin)
-              </button>
-              <button
-                type="button"
-                onClick={() => handleDemoFill("customer")}
-                className="px-2 py-0.5 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold cursor-pointer"
-              >
-                Patron
-              </button>
-            </div>
-
             {/* Footer Sign Up Link */}
             <div className="text-center pt-2 border-t border-slate-100 text-xs text-slate-600">
               Don't have an account?{" "}

@@ -69,32 +69,32 @@ const Reviews = () => {
   };
 
   return (
-    <div className="space-y-6 max-w-[1600px] mx-auto pb-10">
+    <div className="space-y-7 max-w-[1600px] mx-auto pb-12 text-slate-800">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h3 className="text-xl font-bold text-slate-800">Customer Ratings & Reviews</h3>
-          <p className="text-xs text-slate-500 mt-0.5">
+          <h3 className="text-2xl md:text-3xl font-bold text-slate-800 tracking-tight">Customer Ratings & Reviews</h3>
+          <p className="text-sm md:text-base text-slate-500 mt-1">
             Moderate verified buyer feedback, ratings, and customer stories in MongoDB.
           </p>
         </div>
         <button
           onClick={fetchReviews}
-          className="p-2.5 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 transition"
+          className="p-3 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 transition cursor-pointer"
           title="Refresh Reviews"
         >
-          <FiRotateCw className={`text-sm ${loading ? "animate-spin" : ""}`} />
+          <FiRotateCw className={`text-base ${loading ? "animate-spin" : ""}`} />
         </button>
       </div>
 
       {/* Review List */}
-      <div className="space-y-4">
+      <div className="space-y-5">
         {reviews.map((rev) => (
           <div
             key={rev._id || rev.id}
-            className="bg-white rounded-2xl p-5 border border-slate-100 shadow-xs hover:shadow-md transition flex flex-col md:flex-row items-start justify-between gap-4"
+            className="bg-white rounded-2xl p-6 border border-slate-200/90 shadow-sm hover:shadow-md transition flex flex-col md:flex-row items-start justify-between gap-5"
           >
-            <div className="flex items-start gap-3.5">
+            <div className="flex items-start gap-4">
               <img
                 src={rev.avatar}
                 alt={rev.reviewer}
@@ -102,56 +102,56 @@ const Reviews = () => {
                   e.target.onerror = null;
                   e.target.src = "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&auto=format&fit=crop&q=80";
                 }}
-                className="w-11 h-11 rounded-full object-cover border border-slate-200 flex-shrink-0"
+                className="w-13 h-13 rounded-full object-cover border border-slate-200 flex-shrink-0"
               />
-              <div className="space-y-1">
-                <div className="flex items-center gap-2">
-                  <h4 className="font-bold text-slate-800 text-sm">{rev.reviewer}</h4>
+              <div className="space-y-1.5">
+                <div className="flex items-center gap-2.5">
+                  <h4 className="font-bold text-slate-900 text-base">{rev.reviewer}</h4>
                   {rev.verified && (
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700">
+                    <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-100">
                       Verified Buyer
                     </span>
                   )}
                   <span
-                    className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
-                      rev.status === "Approved" ? "bg-emerald-100 text-emerald-800" : "bg-slate-100 text-slate-600"
+                    className={`text-xs font-bold px-2.5 py-0.5 rounded-full ${
+                      rev.status === "Approved" ? "bg-emerald-100 text-emerald-800" : "bg-slate-100 text-slate-700"
                     }`}
                   >
                     {rev.status || "Approved"}
                   </span>
                 </div>
-                <div className="text-xs font-semibold text-[#8B1C2C]">{rev.product}</div>
+                <div className="text-sm font-bold text-[#8B1C2C]">{rev.product}</div>
 
-                <div className="flex items-center gap-1 text-amber-400 my-1">
+                <div className="flex items-center gap-1.5 text-amber-500 my-1">
                   {[...Array(rev.rating || 5)].map((_, i) => (
-                    <FiStar key={i} className="fill-amber-400 text-xs" />
+                    <FiStar key={i} className="fill-amber-400 text-sm" />
                   ))}
-                  <span className="text-xs font-bold text-slate-700 ml-1">
+                  <span className="text-sm font-bold text-slate-800 ml-1">
                     {Number(rev.rating || 5).toFixed(1)}
                   </span>
                 </div>
 
-                <p className="text-xs text-slate-600 leading-relaxed max-w-3xl pt-1">
+                <p className="text-sm text-slate-700 leading-relaxed max-w-4xl pt-1">
                   "{rev.comment}"
                 </p>
               </div>
             </div>
 
             <div className="flex md:flex-col items-end justify-between gap-3 w-full md:w-auto border-t md:border-t-0 pt-3 md:pt-0 border-slate-100">
-              <span className="text-[11px] text-slate-400">{rev.date}</span>
+              <span className="text-xs text-slate-400 font-medium">{rev.date}</span>
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => handleToggleStatus(rev)}
-                  className="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-medium transition"
+                  className="px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-sm font-semibold transition cursor-pointer"
                 >
                   {rev.status === "Approved" ? "Hide" : "Approve"}
                 </button>
                 <button
                   onClick={() => handleDelete(rev)}
-                  className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition text-xs"
+                  className="p-2 rounded-xl text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition cursor-pointer"
                   title="Delete Review"
                 >
-                  <FiTrash2 className="text-sm" />
+                  <FiTrash2 className="text-base" />
                 </button>
               </div>
             </div>

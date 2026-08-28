@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { FaHeart } from "react-icons/fa";
+import { CiHeart } from "react-icons/ci";
+import { FiEye } from "react-icons/fi";
 import { GiThreeLeaves } from "react-icons/gi";
 import { Link } from "react-router-dom";
 import Rating from "../rating/Rating";
@@ -27,13 +28,8 @@ const Seller = () => {
     loadWishlist();
     loadCart();
 
-    const syncWishlist = () => {
-      loadWishlist();
-    };
-
-    const syncCart = () => {
-      loadCart();
-    };
+    const syncWishlist = () => loadWishlist();
+    const syncCart = () => loadCart();
 
     window.addEventListener("wishlistUpdated", syncWishlist);
     window.addEventListener("cartUpdated", syncCart);
@@ -55,13 +51,10 @@ const Seller = () => {
     window.dispatchEvent(new Event("wishlistUpdated"));
   };
 
-  // ADD TO CART FUNCTION
   const addToCart = (product) => {
     const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
     const isInCart = existingCart.some((item) => item.id === product.id);
-    if (isInCart) {
-      return;
-    }
+    if (isInCart) return;
 
     const updatedCart = [...existingCart, { ...product, quantity: 1 }];
     localStorage.setItem("cart", JSON.stringify(updatedCart));
@@ -73,95 +66,111 @@ const Seller = () => {
     <div className="py-10 bg-[#FEFAF8]">
 
       {/* Heading */}
-      <div className="">
-
+      <div>
         <div className="flex items-center justify-center gap-2">
           <GiThreeLeaves className="text-[#74202D] text-2xl" />
           <h1 className="uppercase font-semibold text-xl md:text-2xl">Best Sellers</h1>
           <GiThreeLeaves className="text-[#74202D] text-2xl" />
         </div>
 
-        <div className="seller px-5 mt-10 mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 justify-center 
-        items-center">
-          
+        <div className="seller px-5 mt-10 mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 justify-center items-center">
+
           {sarees.slice(0, 5).map((saree, index) => (
             <div
               key={index}
-              className="shadow rounded-b-lg relative overflow-hidden">
+              className="group shadow rounded-b-lg relative overflow-hidden border border-gray-200 bg-white transition"
+            >
+              {/* Image + Hover Overlay */}
+              <div className="relative overflow-hidden">
+                <Link to={`/shop/${saree.id}`} className="block">
+                  <FadeImage
+                    src={saree.img}
+                    alt={saree.title}
+                    loading="lazy"
+                    decoding="async"
+                    className="sm:h-auto lg:h-auto 2xl:h-95 w-full rounded-t-lg object-cover object-top transition duration-300 group-hover:scale-[1.05]"
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                </Link>
 
-              <Link to={`/shop/${saree.id}`} className="block overflow-hidden">
-                <FadeImage
-                  src={saree.img}
-                  alt={saree.title}
-                  loading="lazy"
-                  decoding="async"
-                  className="sm:h-auto lg:h-auto 2xl:h-95 w-full rounded-t-lg object-cover"
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.3 }}
-                />
-              </Link>
+                {/* Hover Overlay — matches Shop page exactly */}
+                <div className="pointer-events-none absolute inset-0 flex items-start justify-between bg-black/10 p-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100 rounded-t-lg">
+                  {/* Tag Badge (bottom-left style → top-left like shop) */}
+                  <span className="rounded-full bg-[#e9829a] px-2.5 py-1 text-[10px] font-bold uppercase text-white shadow-sm">
+                    {saree.tag || "Handcrafted"}
+                  </span>
 
-              <div className="absolute top-3 left-0 flex items-center justify-between w-full px-3">
-                <p className="bg-[#74202D] py-1 px-3 text-xs text-white rounded-sm cursor-pointer">
-                  {saree.tag}
-                </p>
+                  {/* Action Icons — Wishlist + Quick View */}
+                  <div className="pointer-events-auto flex flex-col gap-2">
+                    <button
+                      type="button"
+                      onClick={() => toggleSellerWishlist(saree)}
+                      aria-label={wishlistIds.includes(saree.id) ? "Remove from wishlist" : "Add to wishlist"}
+                      className={`flex h-9 w-9 items-center justify-center rounded-full bg-white shadow-sm transition hover:bg-[#6C2C12] hover:text-white ${
+                        wishlistIds.includes(saree.id) ? "text-[#6C2C12]" : "text-[#6C2C12]"
+                      }`}
+                    >
+                      <CiHeart className="text-xl" />
+                    </button>
 
-                <button
-                  type="button"
-                  onClick={() => toggleSellerWishlist(saree)}
-                  className={`rounded-full p-2 bg-transparent transition-all duration-300 ${wishlistIds.includes(saree.id) ? 
-                    'text-[#74202D]' : 'text-white hover:text-[#74202D]'}`}
-                >
-                  <FaHeart className="text-lg cursor-pointer" />
-                </button>
+                    <Link
+                      to={`/shop/${saree.id}`}
+                      aria-label={`View ${saree.title}`}
+                      className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-[#6C2C12] shadow-sm transition hover:bg-[#6C2C12] hover:text-white"
+                    >
+                      <FiEye className="text-lg" />
+                    </Link>
+                  </div>
+                </div>
               </div>
 
-              <div className="p-5">
+              {/* Card Body */}
+              <div className="p-4">
                 <FadeUp>
-                  <Link to={`/shop/${saree.id}`} className="block uppercase font-semibold text-base hover:text-[#74202D] transition">
+                  <Link
+                    to={`/shop/${saree.id}`}
+                    className="block uppercase font-semibold text-sm line-clamp-2 hover:text-[#74202D] transition mb-2"
+                  >
                     {saree.title}
                   </Link>
                 </FadeUp>
 
-
-                <div className="flex gap-5 mt-2">
+                <div className="flex gap-3 mt-1">
                   <FadeUp>
                     <h2 className="text-[#74202D] font-bold text-base">
                       ₹{saree.discountPrice}
                     </h2>
                   </FadeUp>
                   <FadeUp>
-                    <h2 className="line-through text-gray-500 font-semibold text-base">
+                    <h2 className="line-through text-gray-400 font-semibold text-sm mt-0.5">
                       ₹{saree.actualPrice}
                     </h2>
                   </FadeUp>
                 </div>
 
-
-                <div className="flex items-center gap-5 mt-2">
+                <div className="flex items-center gap-2 mt-1.5">
                   <FadeUp>
                     <Rating className="text-xl" rating={saree.rating} />
                   </FadeUp>
                   <FadeUp>
-                    <span className="text-sm text-gray-600 lg:text-lg">
-                    ({saree.ratings})
-                  </span>
-                 </FadeUp>
+                    <span className="text-sm text-gray-600">
+                      ({saree.ratings})
+                    </span>
+                  </FadeUp>
                 </div>
-
 
                 <button
                   onClick={() => addToCart(saree)}
                   disabled={cartIds.includes(saree.id)}
-                  className={`w-full uppercase py-1.5 rounded-sm transition-all duration-300 font-semibold text-sm mt-5
+                  className={`w-full mt-4 rounded-md py-2 text-sm font-semibold transition-all duration-300
                     ${cartIds.includes(saree.id)
-                    ? 'bg-gray-200 text-gray-500 border border-gray-200'
-                    : 'bg-white text-[#74202D] hover:bg-[#74202D] border-2 border-[#74202D] hover:text-white cursor-pointer'
-                  }`}
+                      ? "border border-gray-200 bg-gray-200 text-gray-500 cursor-not-allowed"
+                      : "border border-[#74202D] text-[#74202D] hover:bg-[#74202D] hover:text-white cursor-pointer"
+                    }`}
                 >
-                  {cartIds.includes(saree.id) ? 'Already in Cart' : 'Add To Cart'}
+                  {cartIds.includes(saree.id) ? "Already in Cart" : "Add To Cart"}
                 </button>
-
               </div>
             </div>
           ))}

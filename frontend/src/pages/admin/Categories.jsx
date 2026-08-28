@@ -125,41 +125,41 @@ const Categories = () => {
   };
 
   return (
-    <div className="space-y-6 max-w-400 mx-auto pb-10">
+    <div className="space-y-7 max-w-[1600px] mx-auto pb-12 text-slate-800">
       {/* Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h3 className="text-xl font-bold text-slate-800">Saree Categories & Weaves</h3>
-          <p className="text-xs text-slate-500 mt-0.5">
+          <h3 className="text-2xl md:text-3xl font-bold text-slate-800 tracking-tight">Saree Categories & Weaves</h3>
+          <p className="text-sm md:text-base text-slate-500 mt-1">
             Organize sarees by collection, fabric types, and festive classifications in MongoDB.
           </p>
         </div>
         <div className="flex items-center gap-3">
           <button
             onClick={fetchCategories}
-            className="p-2.5 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 transition"
+            className="p-3 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 transition cursor-pointer"
             title="Refresh Categories"
           >
-            <FiRotateCw className={`text-sm ${loading ? "animate-spin" : ""}`} />
+            <FiRotateCw className={`text-base ${loading ? "animate-spin" : ""}`} />
           </button>
           <button
             onClick={() => setIsModalOpen(true)}
-            className="flex items-center gap-2 px-4 py-2 rounded bg-[#6B1527] hover:bg-white border-2 border-[#6B1527] text-white text-xs md:text-sm font-medium shadow-sm transition-all duration-300 hover:text-[#6B1527] cursor-pointer"
+            className="flex items-center gap-2 px-5 py-3 rounded-xl bg-[#6B1527] hover:bg-white border-2 border-[#6B1527] text-white text-sm md:text-base font-semibold shadow-sm transition-all duration-300 hover:text-[#6B1527] cursor-pointer"
           >
-            <FiPlus className="text-base" />
+            <FiPlus className="text-lg" />
             <span>Add New Category</span>
           </button>
         </div>
       </div>
 
       {/* Grid of Categories */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {categories.map((cat) => (
           <div
             key={cat._id || cat.id}
-            className="bg-white rounded-2xl border border-slate-100 shadow-xs overflow-hidden hover:shadow-md transition-shadow group flex flex-col justify-between"
+            className="bg-white rounded-2xl border border-slate-200/90 shadow-sm overflow-hidden hover:shadow-md transition-shadow group flex flex-col justify-between"
           >
-            <div className="relative h-40 bg-slate-100 overflow-hidden">
+            <div className="relative h-48 bg-slate-100 overflow-hidden">
               <img
                 src={cat.banner}
                 alt={cat.name}
@@ -169,32 +169,32 @@ const Categories = () => {
                 }}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
-              <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent" />
-              <div className="absolute bottom-3 left-4 right-4 text-white">
+              <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/25 to-transparent" />
+              <div className="absolute bottom-4 left-5 right-5 text-white">
                 <div className="flex items-center justify-between">
-                  <h4 className="text-base font-bold drop-shadow-sm">{cat.name}</h4>
-                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-white/20 backdrop-blur-xs">
+                  <h4 className="text-lg font-bold drop-shadow-sm">{cat.name}</h4>
+                  <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-white/20 backdrop-blur-xs">
                     {cat.share || "15%"} sales
                   </span>
                 </div>
-                <span className="text-xs text-amber-200/90 font-medium">{cat.count || 24} Sarees Live</span>
+                <span className="text-sm text-amber-200 font-semibold">{cat.count || 24} Sarees Live</span>
               </div>
             </div>
 
-            <div className="p-4 flex flex-col justify-between flex-1">
-              <p className="text-xs text-slate-500 line-clamp-2 leading-relaxed">
+            <div className="p-5 flex flex-col justify-between flex-1">
+              <p className="text-sm text-slate-600 line-clamp-2 leading-relaxed">
                 {cat.description || "Traditional curated weaves for festive and everyday elegance."}
               </p>
 
-              <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
-                <span className="text-[11px] text-slate-400 font-mono">/{cat.slug || cat.name?.toLowerCase()}</span>
-                <div className="flex items-center gap-1">
+              <div className="mt-5 pt-3.5 border-t border-slate-100 flex items-center justify-between">
+                <span className="text-xs text-slate-500 font-mono font-semibold">/{cat.slug || cat.name?.toLowerCase()}</span>
+                <div className="flex items-center gap-1.5">
                   <button
                     onClick={() => handleDelete(cat)}
-                    className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition"
+                    className="p-2 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition cursor-pointer"
                     title="Move Category to Recycle Bin"
                   >
-                    <FiTrash2 className="text-sm" />
+                    <FiTrash2 className="text-base" />
                   </button>
                 </div>
               </div>
@@ -206,38 +206,38 @@ const Categories = () => {
       {/* Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs">
-          <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 border border-slate-200 animate-in fade-in zoom-in-95 max-h-[90vh] overflow-y-auto custom-admin-scroll">
-            <div className="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
-              <h4 className="text-base font-bold text-slate-800">Add Saree Category</h4>
+          <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-7 border border-slate-200 animate-in fade-in zoom-in-95 max-h-[90vh] overflow-y-auto custom-admin-scroll">
+            <div className="flex items-center justify-between border-b border-slate-200 pb-4 mb-5">
+              <h4 className="text-xl font-bold text-slate-900">Add Saree Category</h4>
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="p-1 rounded-lg text-slate-400 hover:text-slate-700"
+                className="p-2 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition cursor-pointer"
               >
-                <FiX />
+                <FiX className="text-xl" />
               </button>
             </div>
 
-            <form onSubmit={handleAddCategory} className="space-y-3.5 text-xs">
+            <form onSubmit={handleAddCategory} className="space-y-4 text-sm">
               <div>
-                <label className="font-semibold text-slate-700 block mb-1">Category Name</label>
+                <label className="font-semibold text-slate-800 block mb-1.5">Category Name</label>
                 <input
                   type="text"
                   required
                   placeholder="e.g. Banarasi Sarees"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 focus:border-[#6B1527] focus:outline-none"
+                  className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-800 focus:border-[#6B1527] focus:outline-none"
                 />
               </div>
 
               <div>
-                <label className="font-semibold text-slate-700 block mb-1">Description</label>
+                <label className="font-semibold text-slate-800 block mb-1.5">Description</label>
                 <textarea
                   rows="3"
                   placeholder="Short description of this saree style..."
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
-                  className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 focus:border-[#6B1527] focus:outline-none"
+                  className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-800 focus:border-[#6B1527] focus:outline-none"
                 />
               </div>
 
@@ -247,17 +247,17 @@ const Categories = () => {
                 onChange={(url) => setBanner(url)}
               />
 
-              <div className="pt-3 flex items-center gap-3">
+              <div className="pt-4 flex items-center gap-3">
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="flex-1 py-2.5 rounded-xl border border-slate-200 text-slate-600 font-semibold hover:bg-slate-50 transition"
+                  className="flex-1 py-3 rounded-xl border border-slate-200 text-slate-700 font-semibold hover:bg-slate-50 transition text-sm cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded bg-[#6B1527] hover:bg-white border-2 border-[#6B1527] text-white text-xs md:text-sm font-medium shadow-sm transition-all duration-300 hover:text-[#6B1527] cursor-pointer"
+                  className="flex-1 flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-[#6B1527] hover:bg-white border-2 border-[#6B1527] text-white text-sm font-semibold shadow-sm transition-all duration-300 hover:text-[#6B1527] cursor-pointer"
                 >
                   Save to Database
                 </button>

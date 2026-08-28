@@ -179,126 +179,126 @@ const AdminDashboard = () => {
   const activities = [
     {
       icon: FiShoppingBag,
-      iconBg: "bg-rose-50 text-rose-500",
+      iconBg: "bg-rose-50 text-rose-600",
       title: "New order #ORD12345 received",
       time: "2 mins ago",
     },
     {
       icon: FiTag,
-      iconBg: "bg-emerald-50 text-emerald-500",
+      iconBg: "bg-emerald-50 text-emerald-600",
       title: 'Product "Mysore Silk Saree" added',
       time: "15 mins ago",
     },
     {
       icon: FiUsers,
-      iconBg: "bg-amber-50 text-amber-500",
+      iconBg: "bg-amber-50 text-amber-600",
       title: "Customer Priya Verma registered",
       time: "1 hr ago",
     },
     {
       icon: FiTruck,
-      iconBg: "bg-blue-50 text-blue-500",
+      iconBg: "bg-blue-50 text-blue-600",
       title: "Order #ORD12343 shipped",
       time: "3 hrs ago",
     },
     {
       icon: FiImage,
-      iconBg: "bg-purple-50 text-purple-500",
+      iconBg: "bg-purple-50 text-purple-600",
       title: 'Banner "Festival Offer" updated',
       time: "5 hrs ago",
     },
   ];
 
   return (
-    <div className="space-y-6 max-w-[1600px] mx-auto pb-10">
+    <div className="space-y-7 max-w-[1600px] mx-auto pb-12 text-slate-800">
       {/* 1. TOP METRIC SUMMARY CARDS (4-Column Grid) */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
         {/* Total Sales */}
-        <div className="bg-white rounded-2xl p-5 border border-slate-100 shadow-xs hover:shadow-md transition-shadow flex items-start gap-4">
-          <div className="w-13 h-13 rounded-2xl bg-[#FDE8EC] flex items-center justify-center flex-shrink-0 text-[#8B1C2C]">
+        <div className="bg-white rounded-2xl p-6 border border-slate-200/90 shadow-sm hover:shadow-md transition-shadow flex items-start gap-4">
+          <div className="w-14 h-14 rounded-2xl bg-[#FDE8EC] flex items-center justify-center flex-shrink-0 text-[#8B1C2C]">
             <FiShoppingBag className="text-2xl" />
           </div>
           <div className="flex-1 min-w-0">
-            <span className="text-xs font-medium text-slate-500 block">Total Sales</span>
-            <h3 className="text-2xl font-bold text-slate-800 tracking-tight mt-0.5">
+            <span className="text-sm font-semibold text-slate-500 block">Total Sales</span>
+            <h3 className="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight mt-1">
               ₹{Number(stats.totalSales).toLocaleString("en-IN")}
             </h3>
-            <div className="flex items-center gap-1 mt-1 text-emerald-600 text-xs font-semibold">
+            <div className="flex items-center gap-1.5 mt-1.5 text-emerald-600 text-sm font-semibold">
               <span>↑ 18.6%</span>
-              <span className="text-slate-400 font-normal">vs last 7 days</span>
+              <span className="text-slate-400 font-normal text-xs">vs last 7 days</span>
             </div>
           </div>
         </div>
 
         {/* Orders */}
-        <div className="bg-white rounded-2xl p-5 border border-slate-100 shadow-xs hover:shadow-md transition-shadow flex items-start gap-4">
-          <div className="w-13 h-13 rounded-2xl bg-[#FEF3C7] flex items-center justify-center flex-shrink-0 text-[#D97706]">
+        <div className="bg-white rounded-2xl p-6 border border-slate-200/90 shadow-sm hover:shadow-md transition-shadow flex items-start gap-4">
+          <div className="w-14 h-14 rounded-2xl bg-[#FEF3C7] flex items-center justify-center flex-shrink-0 text-[#D97706]">
             <FiShoppingBag className="text-2xl" />
           </div>
           <div className="flex-1 min-w-0">
-            <span className="text-xs font-medium text-slate-500 block">Orders</span>
-            <h3 className="text-2xl font-bold text-slate-800 tracking-tight mt-0.5">
+            <span className="text-sm font-semibold text-slate-500 block">Orders</span>
+            <h3 className="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight mt-1">
               {stats.totalOrdersCount}
             </h3>
-            <div className="flex items-center gap-1 mt-1 text-emerald-600 text-xs font-semibold">
+            <div className="flex items-center gap-1.5 mt-1.5 text-emerald-600 text-sm font-semibold">
               <span>↑ 15.3%</span>
-              <span className="text-slate-400 font-normal">vs last 7 days</span>
+              <span className="text-slate-400 font-normal text-xs">vs last 7 days</span>
             </div>
           </div>
         </div>
 
         {/* Customers */}
-        <div className="bg-white rounded-2xl p-5 border border-slate-100 shadow-xs hover:shadow-md transition-shadow flex items-start gap-4">
-          <div className="w-13 h-13 rounded-2xl bg-[#DCFCE7] flex items-center justify-center flex-shrink-0 text-[#16A34A]">
+        <div className="bg-white rounded-2xl p-6 border border-slate-200/90 shadow-sm hover:shadow-md transition-shadow flex items-start gap-4">
+          <div className="w-14 h-14 rounded-2xl bg-[#DCFCE7] flex items-center justify-center flex-shrink-0 text-[#16A34A]">
             <FiUsers className="text-2xl" />
           </div>
           <div className="flex-1 min-w-0">
-            <span className="text-xs font-medium text-slate-500 block">Customers</span>
-            <h3 className="text-2xl font-bold text-slate-800 tracking-tight mt-0.5">
+            <span className="text-sm font-semibold text-slate-500 block">Customers</span>
+            <h3 className="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight mt-1">
               {stats.totalCustomersCount}
             </h3>
-            <div className="flex items-center gap-1 mt-1 text-emerald-600 text-xs font-semibold">
+            <div className="flex items-center gap-1.5 mt-1.5 text-emerald-600 text-sm font-semibold">
               <span>↑ 11.8%</span>
-              <span className="text-slate-400 font-normal">vs last 7 days</span>
+              <span className="text-slate-400 font-normal text-xs">vs last 7 days</span>
             </div>
           </div>
         </div>
 
         {/* Products */}
-        <div className="bg-white rounded-2xl p-5 border border-slate-100 shadow-xs hover:shadow-md transition-shadow flex items-start gap-4">
-          <div className="w-13 h-13 rounded-2xl bg-[#EDE9FE] flex items-center justify-center flex-shrink-0 text-[#7C3AED]">
+        <div className="bg-white rounded-2xl p-6 border border-slate-200/90 shadow-sm hover:shadow-md transition-shadow flex items-start gap-4">
+          <div className="w-14 h-14 rounded-2xl bg-[#EDE9FE] flex items-center justify-center flex-shrink-0 text-[#7C3AED]">
             <FiBox className="text-2xl" />
           </div>
           <div className="flex-1 min-w-0">
-            <span className="text-xs font-medium text-slate-500 block">Products</span>
-            <h3 className="text-2xl font-bold text-slate-800 tracking-tight mt-0.5">
+            <span className="text-sm font-semibold text-slate-500 block">Products</span>
+            <h3 className="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight mt-1">
               {stats.totalProductsCount}
             </h3>
-            <div className="flex items-center gap-1 mt-1 text-emerald-600 text-xs font-semibold">
+            <div className="flex items-center gap-1.5 mt-1.5 text-emerald-600 text-sm font-semibold">
               <span>↑ 8.2%</span>
-              <span className="text-slate-400 font-normal">vs last 7 days</span>
+              <span className="text-slate-400 font-normal text-xs">vs last 7 days</span>
             </div>
           </div>
         </div>
       </div>
 
       {/* 2. MIDDLE ROW (Sales Overview Chart, Recent Orders, Top Selling Products) */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Sales Overview Line / Area Chart */}
-        <div className="bg-white rounded-2xl p-6 border border-slate-100 shadow-xs flex flex-col justify-between">
+        <div className="bg-white rounded-2xl p-6 border border-slate-200/90 shadow-sm flex flex-col justify-between">
           <div className="flex items-center justify-between mb-4">
-            <h4 className="text-base font-bold text-slate-800">Sales Overview</h4>
+            <h4 className="text-lg font-bold text-slate-900">Sales Overview</h4>
             <div className="relative">
               <button
                 onClick={() => setShowPeriodDropdown(!showPeriodDropdown)}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-medium text-slate-600 hover:bg-slate-50 transition"
+                className="flex items-center gap-2 px-3.5 py-2 rounded-xl border border-slate-200 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition cursor-pointer"
               >
                 <span>{salesPeriod}</span>
-                <FiChevronDown className="text-slate-400 text-xs" />
+                <FiChevronDown className="text-slate-400 text-sm" />
               </button>
 
               {showPeriodDropdown && (
-                <div className="absolute right-0 mt-1 w-32 bg-white border border-slate-200 rounded-xl shadow-lg p-1.5 z-20 text-xs">
+                <div className="absolute right-0 mt-1.5 w-36 bg-white border border-slate-200 rounded-xl shadow-xl p-2 z-20 text-sm">
                   {["This Week", "Last Week", "This Month", "This Year"].map((opt) => (
                     <button
                       key={opt}
@@ -307,7 +307,7 @@ const AdminDashboard = () => {
                         setShowPeriodDropdown(false);
                         showToast.info(`Switched view to ${opt}`);
                       }}
-                      className="w-full text-left px-2.5 py-1.5 rounded-lg hover:bg-rose-50 text-slate-700 hover:text-[#8B1C2C]"
+                      className="w-full text-left px-3 py-2 rounded-lg hover:bg-rose-50 text-slate-700 hover:text-[#8B1C2C] font-medium cursor-pointer"
                     >
                       {opt}
                     </button>
@@ -318,8 +318,8 @@ const AdminDashboard = () => {
           </div>
 
           {/* Smooth Bezier Curve Chart SVG */}
-          <div className="relative pt-2 pb-1">
-            <div className="absolute left-0 top-0 bottom-8 flex flex-col justify-between text-[11px] font-medium text-slate-400 select-none">
+          <div className="relative pt-3 pb-1">
+            <div className="absolute left-0 top-0 bottom-8 flex flex-col justify-between text-xs font-semibold text-slate-400 select-none">
               <span>20K</span>
               <span>15K</span>
               <span>10K</span>
@@ -327,7 +327,7 @@ const AdminDashboard = () => {
               <span>0</span>
             </div>
 
-            <div className="ml-8 relative h-48">
+            <div className="ml-9 relative h-52">
               <svg viewBox="0 0 400 180" className="w-full h-full overflow-visible">
                 <defs>
                   <linearGradient id="maroonSalesGradient" x1="0" y1="0" x2="0" y2="1">
@@ -357,56 +357,56 @@ const AdminDashboard = () => {
                   strokeLinejoin="round"
                 />
 
-                <circle cx="100" cy="105" r="4.5" fill="#8B1C2C" stroke="#ffffff" strokeWidth="2" />
-                <circle cx="170" cy="125" r="4.5" fill="#8B1C2C" stroke="#ffffff" strokeWidth="2" />
-                <circle cx="250" cy="95" r="4.5" fill="#8B1C2C" stroke="#ffffff" strokeWidth="2" />
-                <circle cx="320" cy="100" r="4.5" fill="#8B1C2C" stroke="#ffffff" strokeWidth="2" />
+                <circle cx="100" cy="105" r="5" fill="#8B1C2C" stroke="#ffffff" strokeWidth="2" />
+                <circle cx="170" cy="125" r="5" fill="#8B1C2C" stroke="#ffffff" strokeWidth="2" />
+                <circle cx="250" cy="95" r="5" fill="#8B1C2C" stroke="#ffffff" strokeWidth="2" />
+                <circle cx="320" cy="100" r="5" fill="#8B1C2C" stroke="#ffffff" strokeWidth="2" />
                 
                 <circle cx="390" cy="70" r="7" fill="#8B1C2C" stroke="#ffffff" strokeWidth="3" className="animate-pulse" />
                 <circle cx="390" cy="70" r="3" fill="#ffffff" />
               </svg>
 
               <div
-                className="absolute right-0 -top-2 bg-[#6B1527] text-white px-3 py-1.5 rounded-lg shadow-lg text-[11px] text-center pointer-events-none transform -translate-x-2"
+                className="absolute right-0 -top-2 bg-[#6B1527] text-white px-3 py-1.5 rounded-lg shadow-lg text-xs text-center pointer-events-none transform -translate-x-2"
                 style={{ filter: "drop-shadow(0 4px 6px rgba(107, 21, 39, 0.3))" }}
               >
                 <div className="font-bold tracking-tight">₹{Number(stats.totalSales).toLocaleString("en-IN")}</div>
-                <div className="text-[9px] text-rose-200 opacity-90">28 Aug, 2026</div>
+                <div className="text-[11px] text-rose-200 opacity-90">28 Aug, 2026</div>
                 <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1 w-2 h-2 bg-[#6B1527] rotate-45" />
               </div>
             </div>
 
-            <div className="ml-8 mt-2 flex justify-between text-[10px] font-medium text-slate-400">
+            <div className="ml-9 mt-2 flex justify-between text-xs font-semibold text-slate-400">
               <span>22 Aug</span>
               <span>23 Aug</span>
               <span>24 Aug</span>
               <span>25 Aug</span>
               <span>26 Aug</span>
               <span>27 Aug</span>
-              <span className="font-semibold text-slate-700">28 Aug</span>
+              <span className="font-bold text-slate-800">28 Aug</span>
             </div>
           </div>
         </div>
 
         {/* Recent Orders List Card */}
-        <div className="bg-white rounded-2xl p-6 border border-slate-100 shadow-xs flex flex-col justify-between">
+        <div className="bg-white rounded-2xl p-6 border border-slate-200/90 shadow-sm flex flex-col justify-between">
           <div className="flex items-center justify-between mb-4">
-            <h4 className="text-base font-bold text-slate-800">Recent Orders</h4>
+            <h4 className="text-lg font-bold text-slate-900">Recent Orders</h4>
             <Link
               to="/admin/orders"
-              className="text-xs font-semibold text-[#8B1C2C] hover:text-[#6B1527] transition"
+              className="text-sm font-semibold text-[#8B1C2C] hover:text-[#6B1527] transition"
             >
               View All
             </Link>
           </div>
 
-          <div className="space-y-3.5">
+          <div className="space-y-4">
             {displayOrders.map((order) => (
               <div
                 key={order.id}
-                className="flex items-center justify-between p-1.5 hover:bg-slate-50 rounded-xl transition"
+                className="flex items-center justify-between p-2 hover:bg-slate-50 rounded-xl transition"
               >
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3.5">
                   <img
                     src={order.img}
                     alt={order.customer}
@@ -414,18 +414,18 @@ const AdminDashboard = () => {
                       e.target.onerror = null;
                       e.target.src = "https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=100&auto=format&fit=crop&q=80";
                     }}
-                    className="w-10 h-10 rounded-lg object-cover bg-slate-100 border border-slate-100 flex-shrink-0"
+                    className="w-12 h-12 rounded-xl object-cover bg-slate-100 border border-slate-200 flex-shrink-0"
                   />
                   <div>
-                    <span className="text-xs font-bold text-slate-800 block">{order.id}</span>
-                    <span className="text-xs text-slate-500 block">{order.customer}</span>
+                    <span className="text-sm font-bold text-slate-900 block">{order.id}</span>
+                    <span className="text-xs font-medium text-slate-500 block">{order.customer}</span>
                   </div>
                 </div>
 
                 <div className="text-right flex items-center gap-3">
-                  <span className="text-xs font-bold text-slate-800">{order.price}</span>
+                  <span className="text-sm font-bold text-slate-900">{order.price}</span>
                   <span
-                    className={`text-[11px] font-semibold px-2.5 py-1 rounded-full text-center min-w-[76px] ${order.statusColor}`}
+                    className={`text-xs font-bold px-3 py-1 rounded-full text-center min-w-[84px] ${order.statusColor}`}
                   >
                     {order.status}
                   </span>
@@ -436,12 +436,12 @@ const AdminDashboard = () => {
         </div>
 
         {/* Top Selling Products Card */}
-        <div className="bg-white rounded-2xl p-6 border border-slate-100 shadow-xs flex flex-col justify-between">
+        <div className="bg-white rounded-2xl p-6 border border-slate-200/90 shadow-sm flex flex-col justify-between">
           <div className="flex items-center justify-between mb-4">
-            <h4 className="text-base font-bold text-slate-800">Top Selling Products</h4>
+            <h4 className="text-lg font-bold text-slate-900">Top Selling Products</h4>
             <Link
               to="/admin/products"
-              className="text-xs font-semibold text-[#8B1C2C] hover:text-[#6B1527] transition"
+              className="text-sm font-semibold text-[#8B1C2C] hover:text-[#6B1527] transition"
             >
               View All
             </Link>
@@ -449,7 +449,7 @@ const AdminDashboard = () => {
 
           <div className="space-y-4">
             {displayTopProducts.map((prod) => (
-              <div key={prod.name} className="space-y-1.5">
+              <div key={prod.name} className="space-y-2">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <img
@@ -459,17 +459,17 @@ const AdminDashboard = () => {
                         e.target.onerror = null;
                         e.target.src = "https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=100&auto=format&fit=crop&q=80";
                       }}
-                      className="w-9 h-9 rounded-lg object-cover bg-slate-100 border border-slate-100 flex-shrink-0"
+                      className="w-11 h-11 rounded-xl object-cover bg-slate-100 border border-slate-200 flex-shrink-0"
                     />
                     <div>
-                      <h5 className="text-xs font-bold text-slate-800 truncate max-w-[150px]">{prod.name}</h5>
-                      <span className="text-[11px] text-slate-400">{prod.sold}</span>
+                      <h5 className="text-sm font-bold text-slate-900 truncate max-w-[160px]">{prod.name}</h5>
+                      <span className="text-xs font-semibold text-slate-500">{prod.sold}</span>
                     </div>
                   </div>
-                  <span className="text-xs font-bold text-slate-800">{prod.revenue}</span>
+                  <span className="text-sm font-bold text-slate-900">{prod.revenue}</span>
                 </div>
 
-                <div className="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                <div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
                   <div
                     className="h-full bg-[#8B1C2C] rounded-full transition-all duration-500"
                     style={{ width: `${prod.progress}%` }}
@@ -482,13 +482,13 @@ const AdminDashboard = () => {
       </div>
 
       {/* 3. BOTTOM ROW (Orders by Status Donut, Sales by Category Donut, Store Activity) */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Orders by Status Donut Chart Card */}
-        <div className="bg-white rounded-2xl p-6 border border-slate-100 shadow-xs">
-          <h4 className="text-base font-bold text-slate-800 mb-4">Orders by Status</h4>
+        <div className="bg-white rounded-2xl p-6 border border-slate-200/90 shadow-sm">
+          <h4 className="text-lg font-bold text-slate-900 mb-4">Orders by Status</h4>
           
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="relative w-36 h-36 flex-shrink-0 flex items-center justify-center">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-5">
+            <div className="relative w-40 h-40 flex-shrink-0 flex items-center justify-center">
               <svg viewBox="0 0 100 100" className="w-full h-full transform -rotate-90">
                 <circle cx="50" cy="50" r="38" fill="none" stroke="#f1f5f9" strokeWidth="13" />
                 <circle
@@ -544,61 +544,61 @@ const AdminDashboard = () => {
               </svg>
 
               <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-                <span className="text-lg font-extrabold text-slate-800 leading-tight">{stats.totalOrdersCount}</span>
-                <span className="text-[10px] text-slate-400 font-medium">Total</span>
+                <span className="text-2xl font-extrabold text-slate-900 leading-tight">{stats.totalOrdersCount}</span>
+                <span className="text-xs text-slate-400 font-semibold uppercase tracking-wider">Total</span>
               </div>
             </div>
 
-            <div className="flex-1 space-y-2 text-xs w-full">
+            <div className="flex-1 space-y-2.5 text-sm w-full">
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#22C55E]" />
-                  <span className="text-slate-600 font-medium">Delivered</span>
+                <div className="flex items-center gap-2.5">
+                  <span className="w-3 h-3 rounded-full bg-[#22C55E]" />
+                  <span className="text-slate-700 font-semibold">Delivered</span>
                 </div>
-                <span className="text-slate-500 font-medium">320 (37.7%)</span>
+                <span className="text-slate-600 font-medium">320 (37.7%)</span>
               </div>
 
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#F59E0B]" />
-                  <span className="text-slate-600 font-medium">Processing</span>
+                <div className="flex items-center gap-2.5">
+                  <span className="w-3 h-3 rounded-full bg-[#F59E0B]" />
+                  <span className="text-slate-700 font-semibold">Processing</span>
                 </div>
-                <span className="text-slate-500 font-medium">210 (24.8%)</span>
+                <span className="text-slate-600 font-medium">210 (24.8%)</span>
               </div>
 
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#3B82F6]" />
-                  <span className="text-slate-600 font-medium">Shipped</span>
+                <div className="flex items-center gap-2.5">
+                  <span className="w-3 h-3 rounded-full bg-[#3B82F6]" />
+                  <span className="text-slate-700 font-semibold">Shipped</span>
                 </div>
-                <span className="text-slate-500 font-medium">180 (21.2%)</span>
+                <span className="text-slate-600 font-medium">180 (21.2%)</span>
               </div>
 
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#EF4444]" />
-                  <span className="text-slate-600 font-medium">Cancelled</span>
+                <div className="flex items-center gap-2.5">
+                  <span className="w-3 h-3 rounded-full bg-[#EF4444]" />
+                  <span className="text-slate-700 font-semibold">Cancelled</span>
                 </div>
-                <span className="text-slate-500 font-medium">90 (10.6%)</span>
+                <span className="text-slate-600 font-medium">90 (10.6%)</span>
               </div>
 
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#8B5CF6]" />
-                  <span className="text-slate-600 font-medium">Pending</span>
+                <div className="flex items-center gap-2.5">
+                  <span className="w-3 h-3 rounded-full bg-[#8B5CF6]" />
+                  <span className="text-slate-700 font-semibold">Pending</span>
                 </div>
-                <span className="text-slate-500 font-medium">48 (5.7%)</span>
+                <span className="text-slate-600 font-medium">48 (5.7%)</span>
               </div>
             </div>
           </div>
         </div>
 
         {/* Sales by Category Donut Chart Card */}
-        <div className="bg-white rounded-2xl p-6 border border-slate-100 shadow-xs">
-          <h4 className="text-base font-bold text-slate-800 mb-4">Sales by Category</h4>
+        <div className="bg-white rounded-2xl p-6 border border-slate-200/90 shadow-sm">
+          <h4 className="text-lg font-bold text-slate-900 mb-4">Sales by Category</h4>
 
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="relative w-36 h-36 flex-shrink-0 flex items-center justify-center">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-5">
+            <div className="relative w-40 h-40 flex-shrink-0 flex items-center justify-center">
               <svg viewBox="0 0 100 100" className="w-full h-full transform -rotate-90">
                 <circle cx="50" cy="50" r="38" fill="none" stroke="#f1f5f9" strokeWidth="13" />
                 <circle
@@ -654,83 +654,83 @@ const AdminDashboard = () => {
               </svg>
 
               <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-2">
-                <span className="text-xs font-extrabold text-slate-800 leading-tight">
+                <span className="text-sm font-extrabold text-slate-900 leading-tight">
                   ₹{Number(stats.totalSales).toLocaleString("en-IN")}
                 </span>
-                <span className="text-[10px] text-slate-400 font-medium">Total</span>
+                <span className="text-xs text-slate-400 font-semibold uppercase tracking-wider">Total</span>
               </div>
             </div>
 
-            <div className="flex-1 space-y-2 text-xs w-full">
+            <div className="flex-1 space-y-2.5 text-sm w-full">
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#881337]" />
-                  <span className="text-slate-600 font-medium">Silk Sarees</span>
+                <div className="flex items-center gap-2.5">
+                  <span className="w-3 h-3 rounded-full bg-[#881337]" />
+                  <span className="text-slate-700 font-semibold">Silk Sarees</span>
                 </div>
-                <span className="text-slate-500 font-medium">45%</span>
+                <span className="text-slate-600 font-medium">45%</span>
               </div>
 
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#F97316]" />
-                  <span className="text-slate-600 font-medium">Cotton Sarees</span>
+                <div className="flex items-center gap-2.5">
+                  <span className="w-3 h-3 rounded-full bg-[#F97316]" />
+                  <span className="text-slate-700 font-semibold">Cotton Sarees</span>
                 </div>
-                <span className="text-slate-500 font-medium">25%</span>
+                <span className="text-slate-600 font-medium">25%</span>
               </div>
 
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#10B981]" />
-                  <span className="text-slate-600 font-medium">Paithani Sarees</span>
+                <div className="flex items-center gap-2.5">
+                  <span className="w-3 h-3 rounded-full bg-[#10B981]" />
+                  <span className="text-slate-700 font-semibold">Paithani Sarees</span>
                 </div>
-                <span className="text-slate-500 font-medium">15%</span>
+                <span className="text-slate-600 font-medium">15%</span>
               </div>
 
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#0284C7]" />
-                  <span className="text-slate-600 font-medium">Georgette Sarees</span>
+                <div className="flex items-center gap-2.5">
+                  <span className="w-3 h-3 rounded-full bg-[#0284C7]" />
+                  <span className="text-slate-700 font-semibold">Georgette Sarees</span>
                 </div>
-                <span className="text-slate-500 font-medium">10%</span>
+                <span className="text-slate-600 font-medium">10%</span>
               </div>
 
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#8B5CF6]" />
-                  <span className="text-slate-600 font-medium">Organza Sarees</span>
+                <div className="flex items-center gap-2.5">
+                  <span className="w-3 h-3 rounded-full bg-[#8B5CF6]" />
+                  <span className="text-slate-700 font-semibold">Organza Sarees</span>
                 </div>
-                <span className="text-slate-500 font-medium">5%</span>
+                <span className="text-slate-600 font-medium">5%</span>
               </div>
             </div>
           </div>
         </div>
 
         {/* Store Activity Timeline Card */}
-        <div className="bg-white rounded-2xl p-6 border border-slate-100 shadow-xs flex flex-col justify-between">
+        <div className="bg-white rounded-2xl p-6 border border-slate-200/90 shadow-sm flex flex-col justify-between">
           <div className="flex items-center justify-between mb-4">
-            <h4 className="text-base font-bold text-slate-800">Store Activity</h4>
+            <h4 className="text-lg font-bold text-slate-900">Store Activity</h4>
             <span
               onClick={() => showToast.info("Displaying recent automated store events")}
-              className="text-xs font-semibold text-[#8B1C2C] cursor-pointer hover:underline"
+              className="text-sm font-semibold text-[#8B1C2C] cursor-pointer hover:underline"
             >
               View All
             </span>
           </div>
 
-          <div className="space-y-3.5">
+          <div className="space-y-4">
             {activities.map((act, index) => {
               const Icon = act.icon;
               return (
                 <div key={index} className="flex items-center justify-between">
-                  <div className="flex items-center gap-3 min-w-0">
+                  <div className="flex items-center gap-3.5 min-w-0">
                     <div
-                      className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${act.iconBg}`}
+                      className={`w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 ${act.iconBg}`}
                     >
-                      <Icon className="text-sm" />
+                      <Icon className="text-base" />
                     </div>
-                    <p className="text-xs text-slate-700 font-medium truncate">{act.title}</p>
+                    <p className="text-sm text-slate-800 font-medium truncate">{act.title}</p>
                   </div>
-                  <span className="text-[11px] text-slate-400 whitespace-nowrap ml-2">
+                  <span className="text-xs text-slate-400 whitespace-nowrap ml-2 font-medium">
                     {act.time}
                   </span>
                 </div>

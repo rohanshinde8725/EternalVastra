@@ -72,29 +72,29 @@ const ImageUploader = ({ value, onChange, label = "Image" }) => {
   };
 
   return (
-    <div className="space-y-2">
-      <label className="font-semibold text-slate-700 block text-xs">{label}</label>
+    <div className="space-y-2.5">
+      <label className="font-semibold text-slate-800 block text-sm">{label}</label>
 
       {/* Tab switcher */}
-      <div className="flex rounded-xl bg-slate-100 p-1 gap-1 w-fit">
+      <div className="flex rounded-xl bg-slate-100 p-1.5 gap-1.5 w-fit">
         <button
           type="button"
           onClick={() => setTab("url")}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-semibold transition ${
-            tab === "url" ? "bg-white shadow-xs text-[#6B1527]" : "text-slate-500 hover:text-slate-700"
+          className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-bold transition cursor-pointer ${
+            tab === "url" ? "bg-white shadow-xs text-[#6B1527]" : "text-slate-600 hover:text-slate-800"
           }`}
         >
-          <FiLink className="text-xs" />
+          <FiLink className="text-sm" />
           URL
         </button>
         <button
           type="button"
           onClick={() => setTab("upload")}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-semibold transition ${
-            tab === "upload" ? "bg-white shadow-xs text-[#6B1527]" : "text-slate-500 hover:text-slate-700"
+          className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-bold transition cursor-pointer ${
+            tab === "upload" ? "bg-white shadow-xs text-[#6B1527]" : "text-slate-600 hover:text-slate-800"
           }`}
         >
-          <FiUpload className="text-xs" />
+          <FiUpload className="text-sm" />
           Upload from Device
         </button>
       </div>
@@ -106,7 +106,7 @@ const ImageUploader = ({ value, onChange, label = "Image" }) => {
           value={value || ""}
           onChange={handleUrlChange}
           placeholder="https://... or /images/silk/silk-1.jpg"
-          className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-800 focus:outline-none focus:border-[#6B1527]"
+          className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-800 focus:outline-none focus:border-[#6B1527]"
         />
       )}
 
@@ -128,7 +128,7 @@ const ImageUploader = ({ value, onChange, label = "Image" }) => {
               }
             }
           }}
-          className="relative w-full border-2 border-dashed border-slate-200 hover:border-[#6B1527] transition rounded-xl p-6 text-center cursor-pointer bg-slate-50 hover:bg-rose-50/40 group"
+          className="relative w-full border-2 border-dashed border-slate-200 hover:border-[#6B1527] transition rounded-xl p-7 text-center cursor-pointer bg-slate-50 hover:bg-rose-50/40 group"
         >
           <input
             ref={fileRef}
@@ -139,16 +139,16 @@ const ImageUploader = ({ value, onChange, label = "Image" }) => {
           />
           {uploading ? (
             <div className="space-y-2">
-              <div className="w-8 h-8 rounded-full border-2 border-[#6B1527] border-t-transparent animate-spin mx-auto" />
-              <p className="text-xs text-slate-500">Uploading to server…</p>
+              <div className="w-9 h-9 rounded-full border-2 border-[#6B1527] border-t-transparent animate-spin mx-auto" />
+              <p className="text-sm text-slate-600 font-medium">Uploading to server…</p>
             </div>
           ) : (
             <>
-              <FiImage className="text-2xl text-slate-400 group-hover:text-[#6B1527] mx-auto transition" />
-              <p className="text-xs text-slate-500 mt-2">
-                <span className="font-semibold text-[#6B1527]">Click to browse</span> or drag & drop
+              <FiImage className="text-3xl text-slate-400 group-hover:text-[#6B1527] mx-auto transition" />
+              <p className="text-sm text-slate-600 mt-2">
+                <span className="font-bold text-[#6B1527]">Click to browse</span> or drag & drop
               </p>
-              <p className="text-[10px] text-slate-400 mt-0.5">JPG, PNG, WEBP, GIF — max 10 MB</p>
+              <p className="text-xs text-slate-400 mt-1">JPG, PNG, WEBP, GIF — max 10 MB</p>
             </>
           )}
         </div>
@@ -164,14 +164,14 @@ const ImageUploader = ({ value, onChange, label = "Image" }) => {
               e.target.onerror = null;
               e.target.style.display = "none";
             }}
-            className="w-full h-32 object-cover rounded-xl border border-slate-200 bg-slate-100"
+            className="w-full h-36 object-cover rounded-xl border border-slate-200 bg-slate-100"
           />
           <button
             type="button"
             onClick={clearImage}
-            className="absolute top-2 right-2 w-6 h-6 rounded-full bg-white border border-slate-200 shadow flex items-center justify-center text-slate-500 hover:text-rose-600 hover:border-rose-400 transition opacity-0 group-hover:opacity-100"
+            className="absolute top-2 right-2 w-7 h-7 rounded-full bg-white border border-slate-200 shadow flex items-center justify-center text-slate-500 hover:text-rose-600 hover:border-rose-400 transition opacity-0 group-hover:opacity-100 cursor-pointer"
           >
-            <FiX className="text-xs" />
+            <FiX className="text-sm" />
           </button>
           <div className="absolute inset-0 rounded-xl ring-1 ring-inset ring-black/5 pointer-events-none" />
         </div>

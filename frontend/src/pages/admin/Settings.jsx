@@ -67,104 +67,104 @@ const Settings = () => {
   };
 
   return (
-    <div className="space-y-6 max-w-[1200px] mx-auto pb-10">
+    <div className="space-y-7 max-w-[1400px] mx-auto pb-12 text-slate-800">
       <div className="flex items-center justify-between">
         <div>
-          <h3 className="text-xl font-bold text-slate-800">Store Configuration & Preferences</h3>
-          <p className="text-xs text-slate-500 mt-0.5">
+          <h3 className="text-2xl md:text-3xl font-bold text-slate-800 tracking-tight">Store Configuration & Preferences</h3>
+          <p className="text-sm md:text-base text-slate-500 mt-1">
             Configure business rules, payment policies, tax rates, and logistics stored live in MongoDB.
           </p>
         </div>
         <button
           onClick={fetchSettings}
-          className="p-2.5 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 transition"
+          className="p-3 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 transition cursor-pointer"
           title="Reload Settings"
         >
-          <FiRotateCw className={`text-sm ${loading ? "animate-spin" : ""}`} />
+          <FiRotateCw className={`text-base ${loading ? "animate-spin" : ""}`} />
         </button>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-6 text-xs">
+      <form onSubmit={handleSubmit} className="space-y-7 text-sm">
         {/* General Store Settings */}
-        <div className="bg-white rounded-2xl p-6 border border-slate-100 shadow-xs space-y-4">
-          <div className="border-b border-slate-100 pb-3 flex items-center gap-2 text-slate-800 font-bold text-sm">
-            <FiShield className="text-[#6B1527]" />
+        <div className="bg-white rounded-2xl p-7 border border-slate-200/90 shadow-sm space-y-5">
+          <div className="border-b border-slate-200 pb-3.5 flex items-center gap-2.5 text-slate-900 font-bold text-base">
+            <FiShield className="text-[#6B1527] text-lg" />
             <span>Store Identity</span>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div>
-              <label className="font-semibold text-slate-700 block mb-1">Brand Name</label>
+              <label className="font-semibold text-slate-800 block mb-1.5">Brand Name</label>
               <input
                 type="text"
                 value={storeInfo.storeName || ""}
                 onChange={(e) => setStoreInfo({ ...storeInfo, storeName: e.target.value })}
-                className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 focus:border-[#6B1527] focus:outline-none"
+                className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-800 focus:border-[#6B1527] focus:outline-none"
               />
             </div>
             <div>
-              <label className="font-semibold text-slate-700 block mb-1">Tagline</label>
+              <label className="font-semibold text-slate-800 block mb-1.5">Tagline</label>
               <input
                 type="text"
                 value={storeInfo.tagline || ""}
                 onChange={(e) => setStoreInfo({ ...storeInfo, tagline: e.target.value })}
-                className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 focus:border-[#6B1527] focus:outline-none"
+                className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-800 focus:border-[#6B1527] focus:outline-none"
               />
             </div>
             <div>
-              <label className="font-semibold text-slate-700 block mb-1">Support Email</label>
+              <label className="font-semibold text-slate-800 block mb-1.5">Support Email</label>
               <input
                 type="email"
                 value={storeInfo.contactEmail || ""}
                 onChange={(e) => setStoreInfo({ ...storeInfo, contactEmail: e.target.value })}
-                className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 focus:border-[#6B1527] focus:outline-none"
+                className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-800 focus:border-[#6B1527] focus:outline-none"
               />
             </div>
             <div>
-              <label className="font-semibold text-slate-700 block mb-1">Support Phone</label>
+              <label className="font-semibold text-slate-800 block mb-1.5">Support Phone</label>
               <input
                 type="text"
                 value={storeInfo.contactPhone || ""}
                 onChange={(e) => setStoreInfo({ ...storeInfo, contactPhone: e.target.value })}
-                className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 focus:border-[#6B1527] focus:outline-none"
+                className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-800 focus:border-[#6B1527] focus:outline-none"
               />
             </div>
           </div>
         </div>
 
         {/* Shipping & Tax */}
-        <div className="bg-white rounded-2xl p-6 border border-slate-100 shadow-xs space-y-4">
-          <div className="border-b border-slate-100 pb-3 flex items-center gap-2 text-slate-800 font-bold text-sm">
-            <FiTruck className="text-[#6B1527]" />
+        <div className="bg-white rounded-2xl p-7 border border-slate-200/90 shadow-sm space-y-5">
+          <div className="border-b border-slate-200 pb-3.5 flex items-center gap-2.5 text-slate-900 font-bold text-base">
+            <FiTruck className="text-[#6B1527] text-lg" />
             <span>Shipping & Taxes</span>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             <div>
-              <label className="font-semibold text-slate-700 block mb-1">Free Shipping Min Order (₹)</label>
+              <label className="font-semibold text-slate-800 block mb-1.5">Free Shipping Min Order (₹)</label>
               <input
                 type="number"
                 value={storeInfo.freeShippingAbove || ""}
                 onChange={(e) => setStoreInfo({ ...storeInfo, freeShippingAbove: e.target.value })}
-                className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 focus:border-[#6B1527] focus:outline-none"
+                className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-800 focus:border-[#6B1527] focus:outline-none"
               />
             </div>
             <div>
-              <label className="font-semibold text-slate-700 block mb-1">Standard Delivery Charge (₹)</label>
+              <label className="font-semibold text-slate-800 block mb-1.5">Standard Delivery Charge (₹)</label>
               <input
                 type="number"
                 value={storeInfo.standardShippingFee || ""}
                 onChange={(e) => setStoreInfo({ ...storeInfo, standardShippingFee: e.target.value })}
-                className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 focus:border-[#6B1527] focus:outline-none"
+                className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-800 focus:border-[#6B1527] focus:outline-none"
               />
             </div>
             <div>
-              <label className="font-semibold text-slate-700 block mb-1">GST Rate for Sarees (%)</label>
+              <label className="font-semibold text-slate-800 block mb-1.5">GST Rate for Sarees (%)</label>
               <input
                 type="number"
                 value={storeInfo.gstPercentage || ""}
                 onChange={(e) => setStoreInfo({ ...storeInfo, gstPercentage: e.target.value })}
-                className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 focus:border-[#6B1527] focus:outline-none"
+                className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-800 focus:border-[#6B1527] focus:outline-none"
               />
             </div>
           </div>
@@ -175,9 +175,9 @@ const Settings = () => {
           <button
             type="submit"
             disabled={saving}
-            className="flex items-center gap-2 px-6 py-2 rounded bg-[#6B1527] hover:bg-white border-2 border-[#6B1527] text-white text-xs md:text-sm font-medium shadow-sm transition-all duration-300 hover:text-[#6B1527] cursor-pointer disabled:opacity-50"
+            className="flex items-center gap-2 px-6 py-3 rounded-xl bg-[#6B1527] hover:bg-white border-2 border-[#6B1527] text-white text-sm md:text-base font-semibold shadow-sm transition-all duration-300 hover:text-[#6B1527] cursor-pointer disabled:opacity-50"
           >
-            <FiSave className="text-base" />
+            <FiSave className="text-lg" />
             <span>{saving ? "Saving to Database..." : "Save Preferences"}</span>
           </button>
         </div>

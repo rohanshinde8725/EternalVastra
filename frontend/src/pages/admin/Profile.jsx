@@ -69,26 +69,26 @@ const Profile = () => {
   };
 
   return (
-    <div className="space-y-6 max-w-[900px] mx-auto pb-10">
+    <div className="space-y-7 max-w-[1000px] mx-auto pb-12 text-slate-800">
       <div className="flex items-center justify-between">
         <div>
-          <h3 className="text-xl font-bold text-slate-800">Admin Account & Credentials</h3>
-          <p className="text-xs text-slate-500 mt-0.5">
+          <h3 className="text-2xl md:text-3xl font-bold text-slate-800 tracking-tight">Admin Account & Credentials</h3>
+          <p className="text-sm md:text-base text-slate-500 mt-1">
             Manage your administrator profile, security credentials, and role privileges stored in MongoDB.
           </p>
         </div>
         <button
           onClick={fetchProfile}
-          className="p-2.5 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 transition"
+          className="p-3 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 transition cursor-pointer"
           title="Refresh Profile"
         >
-          <FiRotateCw className={`text-sm ${loading ? "animate-spin" : ""}`} />
+          <FiRotateCw className={`text-base ${loading ? "animate-spin" : ""}`} />
         </button>
       </div>
 
-      <form onSubmit={handleSubmit} className="bg-white rounded-2xl p-6 border border-slate-100 shadow-xs space-y-6 text-xs">
+      <form onSubmit={handleSubmit} className="bg-white rounded-2xl p-7 border border-slate-200/90 shadow-sm space-y-7 text-sm">
         {/* Profile Card Header */}
-        <div className="flex items-center gap-4 border-b border-slate-100 pb-5">
+        <div className="flex items-center gap-4 border-b border-slate-200 pb-6">
           <img
             src={profile.avatar}
             alt={profile.name}
@@ -96,73 +96,73 @@ const Profile = () => {
               e.target.onerror = null;
               e.target.src = "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&auto=format&fit=crop&q=80";
             }}
-            className="w-16 h-16 rounded-full object-cover border-2 border-rose-200"
+            className="w-18 h-18 rounded-full object-cover border-2 border-rose-200"
           />
           <div>
-            <h4 className="text-base font-bold text-slate-800">{profile.name}</h4>
-            <span className="text-xs text-slate-500 block">{profile.role}</span>
-            <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-50 text-[#6B1527] inline-block mt-1">
+            <h4 className="text-lg font-bold text-slate-900">{profile.name}</h4>
+            <span className="text-sm text-slate-500 font-medium block">{profile.role}</span>
+            <span className="text-xs font-bold px-3 py-1 rounded-full bg-rose-50 text-[#6B1527] inline-block mt-1.5 border border-rose-100">
               Super Admin Access
             </span>
           </div>
         </div>
 
         {/* Inputs */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <div>
-            <label className="font-semibold text-slate-700 block mb-1">Full Name</label>
+            <label className="font-semibold text-slate-800 block mb-1.5">Full Name</label>
             <input
               type="text"
               value={profile.name}
               onChange={(e) => setProfile({ ...profile, name: e.target.value })}
-              className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 focus:border-[#6B1527] focus:outline-none"
+              className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-800 focus:border-[#6B1527] focus:outline-none"
             />
           </div>
           <div>
-            <label className="font-semibold text-slate-700 block mb-1">Email Address</label>
+            <label className="font-semibold text-slate-800 block mb-1.5">Email Address</label>
             <input
               type="email"
               value={profile.email}
               onChange={(e) => setProfile({ ...profile, email: e.target.value })}
-              className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 focus:border-[#6B1527] focus:outline-none"
+              className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-800 focus:border-[#6B1527] focus:outline-none"
             />
           </div>
         </div>
 
         {/* Password Security */}
-        <div className="pt-2 border-t border-slate-100 space-y-3">
-          <h5 className="font-bold text-slate-800 text-sm">Security & Password</h5>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="pt-3 border-t border-slate-200 space-y-4">
+          <h5 className="font-bold text-slate-900 text-base">Security & Password</h5>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div>
-              <label className="font-semibold text-slate-700 block mb-1">Current Password</label>
+              <label className="font-semibold text-slate-800 block mb-1.5">Current Password</label>
               <input
                 type="password"
                 placeholder="••••••••"
                 value={profile.currentPassword}
                 onChange={(e) => setProfile({ ...profile, currentPassword: e.target.value })}
-                className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 focus:border-[#6B1527] focus:outline-none"
+                className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-800 focus:border-[#6B1527] focus:outline-none"
               />
             </div>
             <div>
-              <label className="font-semibold text-slate-700 block mb-1">New Password</label>
+              <label className="font-semibold text-slate-800 block mb-1.5">New Password</label>
               <input
                 type="password"
                 placeholder="New password (optional)"
                 value={profile.newPassword}
                 onChange={(e) => setProfile({ ...profile, newPassword: e.target.value })}
-                className="w-full px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 focus:border-[#6B1527] focus:outline-none"
+                className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-800 focus:border-[#6B1527] focus:outline-none"
               />
             </div>
           </div>
         </div>
 
-        <div className="flex justify-end pt-2">
+        <div className="flex justify-end pt-3">
           <button
             type="submit"
             disabled={saving}
-            className="flex items-center gap-2 px-6 py-2 rounded bg-[#6B1527] hover:bg-white border-2 border-[#6B1527] text-white text-xs md:text-sm font-medium shadow-sm transition-all duration-300 hover:text-[#6B1527] cursor-pointer disabled:opacity-50"
+            className="flex items-center gap-2 px-6 py-3 rounded-xl bg-[#6B1527] hover:bg-white border-2 border-[#6B1527] text-white text-sm md:text-base font-semibold shadow-sm transition-all duration-300 hover:text-[#6B1527] cursor-pointer disabled:opacity-50"
           >
-            <FiSave className="text-base" />
+            <FiSave className="text-lg" />
             <span>{saving ? "Updating..." : "Update Profile"}</span>
           </button>
         </div>

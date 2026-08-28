@@ -40,9 +40,6 @@ const About = () => {
   return (
     <div className='container bg-[#FEFAF8]'>
 
-
-
-
       {/* Banner Start */}
       <div className="bg-[url('/images/banner/banner-2.png')] bg-cover bg-center h-75 sm:h-100 md:h-125 lg:h-162.5 2xl:h-200 w-full 
       flex items-center px-5 md:px-16 lg:px-24 relative overflow-hidden">

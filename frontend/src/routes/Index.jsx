@@ -9,6 +9,8 @@ const Wishlist = lazy(() => import('../components/wishlist/Wishlist'));
 const Header = lazy(()=> import ('../components/header/Header'));
 const Footer = lazy(()=> import ('../components/footer/Footer'));
 const Contact = lazy(() => import("../pages/Contact"));
+const Blog = lazy(() => import("../pages/Blog"));
+const BlogDetail = lazy(() => import("../pages/BlogDetail"));
 const AdminLayout = lazy(() => import("../pages/admin/AdminLayout"));
 const AdminDashboard = lazy(() => import("../pages/admin/AdminDashboard"));
 const AdminOrders = lazy(() => import("../pages/admin/Orders"));
@@ -61,6 +63,8 @@ const AppRoutes = () => {
                         <Route path='shop' element={<Shop />} />
                         <Route path='shop/:productId' element={<SareeDetail />} />
                         <Route path='contact' element={<Contact />} />
+                        <Route path='blog' element={<Blog />} />
+                        <Route path='blog/:id' element={<BlogDetail />} />
                         <Route path='wishlist' element={<Wishlist />} />
                         <Route path='signin' element={<SignIn />} />
                         <Route path='login' element={<SignIn />} />
