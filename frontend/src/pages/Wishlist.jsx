@@ -80,21 +80,13 @@ const Wishlist = () => {
                     <div className="flex flex-wrap gap-3">
                       <button
                         onClick={() => addToCart(item)}
-<<<<<<< HEAD
                         className="rounded-full border border-[#74202D] bg-[#74202D] px-5 py-2 text-sm font-semibold text-white hover:bg-[#5c1b2b] transition cursor-pointer"
-=======
-                        className="rounded-full border border-[#74202D] bg-[#74202D] px-5 py-2 text-sm font-semibold text-white hover:bg-[#5c1b2b] transition"
->>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
                       >
                         Add to Cart
                       </button>
                       <button
                         onClick={() => removeFromWishlist(item.id)}
-<<<<<<< HEAD
                         className="rounded-full border border-[#74202D] bg-white px-5 py-2 text-sm font-semibold text-[#74202D] hover:bg-[#fdf2f0] transition cursor-pointer"
-=======
-                        className="rounded-full border border-[#74202D] bg-white px-5 py-2 text-sm font-semibold text-[#74202D] hover:bg-[#fdf2f0] transition"
->>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
                       >
                         Remove
                       </button>

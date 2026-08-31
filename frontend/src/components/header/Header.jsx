@@ -179,12 +179,9 @@ const Header = () => {
                   }`}
                 >
                   Home
-<<<<<<< HEAD
-=======
                   {isActivePath("/") && (
                     <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#6B1527] rounded-full" />
                   )}
->>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
                 </Link>
               </li>
               <li>
@@ -197,12 +194,9 @@ const Header = () => {
                   }`}
                 >
                   About
-<<<<<<< HEAD
-=======
                   {isActivePath("/about") && (
                     <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#6B1527] rounded-full" />
                   )}
->>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
                 </Link>
               </li>
               <li>
@@ -215,12 +209,9 @@ const Header = () => {
                   }`}
                 >
                   Shop
-<<<<<<< HEAD
-=======
                   {isActivePath("/shop") && (
                     <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#6B1527] rounded-full" />
                   )}
->>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
                 </Link>
               </li>
               <li>
@@ -233,12 +224,9 @@ const Header = () => {
                   }`}
                 >
                   Blog
-<<<<<<< HEAD
-=======
                   {isActivePath("/blog") && (
                     <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#6B1527] rounded-full" />
                   )}
->>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
                 </Link>
               </li>
               <li>
@@ -251,12 +239,9 @@ const Header = () => {
                   }`}
                 >
                   Contact Us
-<<<<<<< HEAD
-=======
                   {isActivePath("/contact") && (
                     <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#6B1527] rounded-full" />
                   )}
->>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
                 </Link>
               </li>
             </ul>
@@ -312,7 +297,6 @@ const Header = () => {
             {/* Desktop Wishlist Icon */}
             <Link
               to="/wishlist"
-<<<<<<< HEAD
               className="hidden lg:flex p-2.5 rounded-full text-slate-700 hover:text-[#6B1527] hover:bg-rose-50/60 transition cursor-pointer"
               title="Saved Sarees"
             >
@@ -324,23 +308,11 @@ const Header = () => {
                   </span>
                 )}
               </div>
-=======
-              className="hidden lg:flex relative p-2.5 rounded-full text-slate-700 hover:text-[#6B1527] hover:bg-rose-50/60 transition cursor-pointer"
-              title="Saved Sarees"
-            >
-              <FiHeart className="text-xl" />
-              {wishlistCount > 0 && (
-                <span className="absolute -top-0.5 -right-0.5 bg-[#6B1527] text-white text-[10px] font-bold min-w-4 h-4 px-1 rounded-full flex items-center justify-center shadow-xs animate-in zoom-in-75">
-                  {wishlistCount}
-                </span>
-              )}
->>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
             </Link>
 
             {/* Desktop Cart Icon */}
             <Link
               to="/cart"
-<<<<<<< HEAD
               className="hidden lg:flex p-2.5 rounded-full text-slate-700 hover:text-[#6B1527] hover:bg-rose-50/60 transition cursor-pointer"
               title="Shopping Cart"
             >
@@ -352,17 +324,6 @@ const Header = () => {
                   </span>
                 )}
               </div>
-=======
-              className="hidden lg:flex relative p-2.5 rounded-full text-slate-700 hover:text-[#6B1527] hover:bg-rose-50/60 transition cursor-pointer"
-              title="Shopping Cart"
-            >
-              <HiOutlineShoppingBag className="text-2xl" />
-              {cartCount > 0 && (
-                <span className="absolute -top-0.5 -right-0.5 bg-[#6B1527] text-white text-[10px] font-bold min-w-4 h-4 px-1 rounded-full flex items-center justify-center shadow-xs animate-in zoom-in-75">
-                  {cartCount}
-                </span>
-              )}
->>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
             </Link>
 
             {/* Desktop User Profile Button & Dropdown */}
@@ -372,12 +333,6 @@ const Header = () => {
                   if (!currentUser) navigate("/signin");
                   else setIsUserMenuOpen((prev) => !prev);
                 }}
-<<<<<<< HEAD
-                className="p-2.5 rounded-full text-slate-700 hover:text-[#6B1527] hover:bg-rose-50/60 transition cursor-pointer"
-                title={currentUser ? currentUser.name : "Sign In"}
-              >
-                <FiUser className="text-xl" />
-=======
                 className={`flex items-center gap-2 p-2 rounded-full transition cursor-pointer ${
                   currentUser
                     ? "bg-rose-50 text-[#6B1527] ring-1 ring-rose-200"
@@ -391,7 +346,6 @@ const Header = () => {
                     {currentUser.name?.split(" ")[0]}
                   </span>
                 )}
->>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
               </button>
 
               {/* User Dropdown */}
@@ -535,11 +489,7 @@ const Header = () => {
             <div className="relative">
               <FiHeart className={`text-xl ${isActivePath("/wishlist") ? "fill-[#6B1527] text-[#6B1527]" : ""}`} />
               {wishlistCount > 0 && (
-<<<<<<< HEAD
-                <span className="absolute -top-0.5 -right-0.5 bg-[#6B1527] text-white text-[10px] font-bold min-w-4 h-4 px-1 rounded-full flex items-center justify-center shadow-xs animate-in zoom-in-75">
-=======
                 <span className="absolute -top-1.5 -right-2 bg-[#6B1527] text-white text-[9px] font-bold min-w-3.5 h-3.5 px-0.5 rounded-full flex items-center justify-center shadow-xs">
->>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
                   {wishlistCount}
                 </span>
               )}
@@ -561,11 +511,7 @@ const Header = () => {
             <div className="relative">
               <HiOutlineShoppingBag className="text-xl" />
               {cartCount > 0 && (
-<<<<<<< HEAD
-                <span className="absolute -top-0.5 -right-0.5 bg-[#6B1527] text-white text-[10px] font-bold min-w-4 h-4 px-1 rounded-full flex items-center justify-center shadow-xs animate-in zoom-in-75">
-=======
                 <span className="absolute -top-1.5 -right-2 bg-[#6B1527] text-white text-[9px] font-bold min-w-3.5 h-3.5 px-0.5 rounded-full flex items-center justify-center shadow-xs">
->>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
                   {cartCount}
                 </span>
               )}

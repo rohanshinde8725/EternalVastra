@@ -24,11 +24,7 @@ const Hero = () => {
 
         {/* Slide 1 */}
         <SwiperSlide className="h-full">
-<<<<<<< HEAD
-          <div className="relative h-full w-full overflow-hidden flex items-center px-5">
-=======
           <div className="relative h-full w-full overflow-hidden flex items-center px-5 md:px-16 lg:px-24">
->>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
             {/* Background Image */}
             <FadeImage
               src="/images/banner/banner-1.png"
@@ -65,11 +61,7 @@ const Hero = () => {
 
         {/* Slide 2 */}
         <SwiperSlide className="h-full">
-<<<<<<< HEAD
-          <div className="relative h-full w-full overflow-hidden flex items-center px-5">
-=======
           <div className="relative h-full w-full overflow-hidden flex items-center px-5 md:px-16 lg:px-24">
->>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
             {/* Background Image */}
             <FadeImage
               src="/images/banner/banner-2.png"
@@ -104,11 +96,7 @@ const Hero = () => {
 
         {/* Slide 3 */}
         <SwiperSlide className="h-full">
-<<<<<<< HEAD
-          <div className="relative h-full w-full overflow-hidden flex items-center px-5">
-=======
           <div className="relative h-full w-full overflow-hidden flex items-center px-5 md:px-16 lg:px-24">
->>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
             {/* Background Image */}
             <FadeImage
               src="/images/banner/banner-3.png"

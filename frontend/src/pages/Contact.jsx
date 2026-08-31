@@ -70,19 +70,11 @@ const Contact = () => {
     },
   ];
   return (
-<<<<<<< HEAD
-    <div className="w-full bg-[#FEFAF8] pb-20">
-      {/* Banner Start */}
-      <div
-        className="bg-[url('/images/banner/contact-banner.png')] bg-cover bg-center h-75 sm:h-100 md:h-125 lg:h-162.5 2xl:h-200 w-full 
-        flex items-center px-5 relative overflow-hidden"
-=======
     <div className="container">
       {/* Banner Start */}
       <div
         className="bg-[url('/images/banner/contact-banner.png')] bg-cover bg-center h-75 sm:h-100 md:h-125 lg:h-162.5 2xl:h-200 w-full 
         flex items-center px-5 md:px-16 lg:px-24 relative overflow-hidden"
->>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
       >
         <div className="w-full lg:w-[70%] lg:ml-10 absolute">
           <h3 className="text-xs md:text-sm text-[#74202D] font-bold uppercase">
@@ -107,13 +99,8 @@ const Contact = () => {
 
       {/* TrustBar Start here */}
       <div
-<<<<<<< HEAD
         className="container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 bg-[#FEFAF8] mt-20 mx-auto 
         rounded-xl overflow-hidden shadow-sm border border-gray-200">
-=======
-        className="w-[95%] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 bg-[#FEFAF8] mt-20 mx-auto md:mx-10 
-        rounded-xl overflow-hidden shadow-sm">
->>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
         {info.map((item, index) => (
           <div
             key={index}
@@ -137,11 +124,7 @@ const Contact = () => {
       {/* TrustBar End here */}
 
       {/* Form Start here */}
-<<<<<<< HEAD
       <div className="container flex flex-col lg:flex-row gap-10 mx-auto mt-20 mb-0">
-=======
-      <div className="w-[95%] flex flex-col lg:flex-row gap-10 mx-auto my-20">
->>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
         {/* Form */}
         <div className="lg:w-1/2 border border-gray-300 rounded-sm p-10 px-5">
           <h1 className="uppercase text-center text-2xl font-semibold mb-6 text-[#8f3f50]">
@@ -256,11 +239,7 @@ const Contact = () => {
         <h2 className="text-2xl font-semibold tracking-wide">
             OUR STORE
         </h2>
-<<<<<<< HEAD
           <div className="max-w-6xl mx-auto rounded-xl overflow-hidden">
-=======
-          <div className="max-w-6xl mx-auto bg-white rounded-xl overflow-hidden">
->>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
             <div className="grid grid-cols-1 md:grid-cols-2 items-center">
               {/* Left Content */}
               <div className="">
@@ -318,13 +297,10 @@ const Contact = () => {
         </div>
       </div>
       {/* Form End here */}
-<<<<<<< HEAD
-=======
 
       <div className="mb-20">
         <BottomTrustBar />
       </div>
->>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
     </div>
   );
 };

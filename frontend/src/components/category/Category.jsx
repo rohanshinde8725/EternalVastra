@@ -41,7 +41,6 @@ const Category = () => {
   };
 
   return (
-<<<<<<< HEAD
     <div className='py-10 bg-[#FEFAF8] w-full'>
       <div className='max-w-[1600px] mx-auto px-5'>
 
@@ -58,25 +57,6 @@ const Category = () => {
 
         {/* Grid */}
         <div className='mt-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-5 sm:gap-6 md:gap-8 lg:gap-10'>
-=======
-    <div className='py-10 bg-[#FEFAF8]'>
-
-      {/* Heading */}
-      <FadeUp delay={0.2}>
-        <div className='flex items-center justify-center gap-2'>
-          <GiThreeLeaves className='text-lg sm:text-xl md:text-2xl' />
-          <h1 className='uppercase font-semibold text-lg sm:text-xl md:text-2xl lg:text-2xl'>
-            Shop By Category
-          </h1>
-          <GiThreeLeaves className='text-lg sm:text-xl md:text-2xl' />
-        </div>
-      </FadeUp>
-
-      {/* Grid */}
-      <div className='px-4 sm:px-6 md:px-8 mt-10 mx-auto 
-      grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5
-      gap-5 sm:gap-6 md:gap-8 lg:gap-10'>
->>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
         
         {sarees.map((saree, index) => (
           <FadeUp key={index} delay={0.3}>
@@ -106,10 +86,7 @@ const Category = () => {
           </FadeUp>
         ))}
       </div>
-<<<<<<< HEAD
       </div>
-=======
->>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
     </div>
     )
   }

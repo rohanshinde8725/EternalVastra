@@ -81,11 +81,7 @@ const AdminLayout = () => {
         />
 
         {/* Top Branding & Admin Profile */}
-<<<<<<< HEAD
         <div className="relative z-20 p-6 pb-2">
-=======
-        <div className="relative z-10 p-6 pb-2">
->>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
           {/* Logo Header */}
           <div className="flex items-center justify-between">
             <div className="flex flex-col items-center mx-auto text-center">

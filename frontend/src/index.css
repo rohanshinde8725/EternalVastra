@@ -11,8 +11,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-<<<<<<< HEAD
-=======
 .container {
   max-width: 1600px;
   margin-inline: auto;
@@ -30,7 +28,6 @@ body {
   }
 } */
 
->>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
 .custom-pagination .swiper-pagination-bullet {
   width: 10px;
   height: 10px;

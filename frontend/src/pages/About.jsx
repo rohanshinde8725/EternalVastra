@@ -38,19 +38,11 @@ const About = () => {
     },
   ]
   return (
-<<<<<<< HEAD
     <div className='w-full bg-[#FEFAF8]'>
 
       {/* Banner Start */}
       <div className="bg-[url('/images/banner/banner-2.png')] bg-cover bg-center h-75 sm:h-100 md:h-125 lg:h-162.5 2xl:h-200 w-full 
       flex items-center px-5 relative overflow-hidden">
-=======
-    <div className='container bg-[#FEFAF8]'>
-
-      {/* Banner Start */}
-      <div className="bg-[url('/images/banner/banner-2.png')] bg-cover bg-center h-75 sm:h-100 md:h-125 lg:h-162.5 2xl:h-200 w-full 
-      flex items-center px-5 md:px-16 lg:px-24 relative overflow-hidden">
->>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
         <div className='w-full lg:w-[70%] lg:ml-10 absolute'>
           <h3 className='text-xs md:text-sm text-[#74202D] font-bold uppercase'>About Us</h3>
           <h1 className="text-lg sm:text-3xl lg:text-5xl font-semibold text-[#4A1F1C]">Celebrating Tradition, <br /> Embracing Elegance</h1>
@@ -73,11 +65,7 @@ const About = () => {
 
 
       {/* Journey Start */}
-<<<<<<< HEAD
       <div className='container py-15 px-5 md:py-10 md:px-15 flex flex-col lg:flex-row gap-10 lg:gap-20 mx-auto'>
-=======
-      <div className='py-15 px-5 md:py-10 md:px-15 flex flex-col lg:flex-row gap-10 lg:gap-20'>
->>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
         <div className='w-full h-auto md:w-[80%] mx-auto lg:w-[40%] md:h-90 lg:h-100 2xl:h-120'>
           <img loading="lazy" decoding="async" 
           className='h-full w-full object-cover rounded-xl' src="/images/aboutjourney.png" alt="" />
@@ -134,12 +122,8 @@ const About = () => {
 
 
       {/* Craftmanship Start */}
-<<<<<<< HEAD
       <div className='w-full bg-[#F4EFEA] py-10'>
         <div className='container mx-auto px-4 md:px-20'>
-=======
-      <div className='bg-[#F4EFEA] px-4 py-10 md:px-20'>
->>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
         <div className='w-full md:w-[90%] lg:w-[50%] mx-auto'>
           <div className='flex justify-center items-center gap-2 text-center'>
             <IoIosArrowRoundForward className='h-10 w-10 text-[#74202D]' />
@@ -162,10 +146,7 @@ const About = () => {
           ))}
         </div>
       </div>
-<<<<<<< HEAD
       </div>
-=======
->>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
 
 
       <div className='bg-[#74202D] py-10'>
@@ -208,11 +189,7 @@ const About = () => {
       
       
       {/* Our Values Start */}
-<<<<<<< HEAD
       <div className='container bg-[#FEFAF8] py-10 px-4 mx-auto'>
-=======
-      <div className='bg-[#FEFAF8] py-10 px-4 '>
->>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
         <div className='w-full md:w-[90%] lg:w-[50%] mx-auto'>
           <div className='flex justify-center items-center gap-2 text-center'>
             <IoIosArrowRoundForward className='h-10 w-10 text-[#74202D]' />

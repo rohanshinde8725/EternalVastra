@@ -8,13 +8,9 @@
   "standardShippingFee": "150",
   "gstPercentage": "5",
   "codEnabled": true,
-<<<<<<< HEAD
   "maintenanceMode": false,
   "instagram": "https://www.instagram.com/_rohan_.0710/",
   "facebook": "https://www.facebook.com/",
   "github": "https://github.com/rohanshinde8725",
   "linkedin": "https://www.linkedin.com/in/rohan-shinde-397195256"
-=======
-  "maintenanceMode": false
->>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
 }

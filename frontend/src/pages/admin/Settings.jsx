@@ -1,9 +1,5 @@
 import React, { useState, useEffect } from "react";
-<<<<<<< HEAD
 import { FiSave, FiShield, FiTruck, FiRotateCw, FiGlobe } from "react-icons/fi";
-=======
-import { FiSave, FiShield, FiTruck, FiRotateCw } from "react-icons/fi";
->>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
 import { API_BASE_URL } from "../../api/products";
 import { useToast } from "../../context/ToastContext";
 
@@ -174,7 +170,6 @@ const Settings = () => {
           </div>
         </div>
 
-<<<<<<< HEAD
         {/* Social Media Links */}
         <div className="bg-white rounded-2xl p-7 border border-slate-200/90 shadow-sm space-y-5">
           <div className="border-b border-slate-200 pb-3.5 flex items-center gap-2.5 text-slate-900 font-bold text-base">
@@ -226,8 +221,6 @@ const Settings = () => {
           </div>
         </div>
 
-=======
->>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
         {/* Save Button */}
         <div className="flex justify-end">
           <button

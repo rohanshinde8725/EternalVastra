@@ -12,13 +12,10 @@ const storeSettingsSchema = new mongoose.Schema(
     gstPercentage: { type: String, default: "5" },
     codEnabled: { type: Boolean, default: true },
     maintenanceMode: { type: Boolean, default: false },
-<<<<<<< HEAD
     instagram: { type: String, default: "https://www.instagram.com/_rohan_.0710/" },
     facebook: { type: String, default: "https://www.facebook.com/" },
     github: { type: String, default: "https://github.com/rohanshinde8725" },
     linkedin: { type: String, default: "https://www.linkedin.com/in/rohan-shinde-397195256" },
-=======
->>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
   },
   { timestamps: true, versionKey: false }
 );
