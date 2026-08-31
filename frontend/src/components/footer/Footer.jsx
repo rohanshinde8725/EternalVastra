@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useEffect, useState } from "react";
 import { FaFacebookF, FaInstagram, FaGithub, FaLinkedinIn } from "react-icons/fa";
 import { Link } from "react-router-dom";
@@ -30,6 +31,15 @@ const Footer = () => {
   return (
     <div className='bg-[#F6DBC6] w-full pt-10 pb-24 lg:py-10'>
   <div className='px-5 sm:px-8 lg:px-10 flex flex-col lg:flex-row gap-10'>
+=======
+import { FaFacebookF, FaInstagram, FaGithub, FaLinkedinIn } from "react-icons/fa";
+import { Link } from "react-router-dom";
+
+const Footer = () => {
+  return (
+    <div className='bg-[#F6DBC6] w-full pt-10 pb-24 lg:py-10'>
+  <div className='container px-5 sm:px-8 lg:px-10 flex flex-col lg:flex-row gap-10'>
+>>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
 
     {/* Div 1 */}
     <div className='w-full lg:w-[25%] text-center lg:text-left'>
@@ -42,6 +52,7 @@ const Footer = () => {
       </p>
 
       <div className='flex justify-center lg:justify-start gap-6 text-[#74202D] text-lg'>
+<<<<<<< HEAD
         <a href={socialLinks.facebook} target="_blank" rel="noopener noreferrer">
           <FaFacebookF className='cursor-pointer hover:text-[#440710]' />
         </a>
@@ -52,6 +63,18 @@ const Footer = () => {
           <FaGithub className='cursor-pointer hover:text-[#440710]' />
         </a>
         <a href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer">
+=======
+        <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">
+          <FaFacebookF className='cursor-pointer hover:text-[#440710]' />
+        </a>
+        <a href="https://www.instagram.com/_rohan_.0710/" target="_blank" rel="noopener noreferrer">
+          <FaInstagram className='cursor-pointer hover:text-[#440710]' />
+        </a>
+        <a href="https://github.com/rohanshinde8725" target="_blank" rel="noopener noreferrer">
+          <FaGithub className='cursor-pointer hover:text-[#440710]' />
+        </a>
+        <a href="https://www.linkedin.com/in/rohan-shinde-397195256" target="_blank" rel="noopener noreferrer">
+>>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
           <FaLinkedinIn className='cursor-pointer hover:text-[#440710]' />
         </a>
       </div>

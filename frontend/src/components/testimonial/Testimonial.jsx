@@ -42,8 +42,13 @@ const Testimonial = () => {
     ]
 
   return (
+<<<<<<< HEAD
     <div className='py-10 bg-[#FEFAF8] w-full'>
       <div className='max-w-[1600px] mx-auto px-5'>
+=======
+    <div className='py-10 bg-[#FEFAF8]'>
+
+>>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
         <div className='flex items-center justify-center gap-2 sm:gap-3 text-center px-4'>
             <GiThreeLeaves className='text-[#74202D] text-lg sm:text-xl md:text-2xl' />
             <h1 className='uppercase font-semibold text-lg sm:text-xl md:text-2xl lg:text-2xl leading-snug'>What Our Customer Says</h1>
@@ -112,7 +117,11 @@ const Testimonial = () => {
         </Swiper>
 
         <BottomTrustBar />
+<<<<<<< HEAD
       </div>
+=======
+        
+>>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
     </div>
   )
 }

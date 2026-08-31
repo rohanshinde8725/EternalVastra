@@ -6,9 +6,13 @@ import FadeUp from '../animations/FadeUp';
 
 const NewsLetter = () => {
   return (
+<<<<<<< HEAD
     <div className="w-full bg-[#FEFAF8] py-10">
       <div className="max-w-[1600px] mx-auto px-5">
         <div className='flex flex-col md:flex-row w-full overflow-hidden rounded-xl shadow-md'>
+=======
+    <div className='flex flex-col md:flex-row w-full py-10'>
+>>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
 
     {/* Left Image */}
     <div className='w-full md:w-[30%]'>
@@ -90,10 +94,16 @@ const NewsLetter = () => {
             </FadeUp>
         </div>
         </div>
+<<<<<<< HEAD
         </div>
         </div>
       </div>
     </div>
+=======
+    </div>
+
+</div>
+>>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
   )
 }
 

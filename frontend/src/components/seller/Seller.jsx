@@ -63,32 +63,54 @@ const Seller = () => {
   };
 
   return (
+<<<<<<< HEAD
     <div className="py-10 bg-[#FEFAF8] w-full">
       <div className="max-w-[1600px] mx-auto px-5">
 
         {/* Heading */}
+=======
+    <div className="py-10 bg-[#FEFAF8]">
+
+      {/* Heading */}
+      <div>
+>>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
         <div className="flex items-center justify-center gap-2">
           <GiThreeLeaves className="text-[#74202D] text-2xl" />
           <h1 className="uppercase font-semibold text-xl md:text-2xl">Best Sellers</h1>
           <GiThreeLeaves className="text-[#74202D] text-2xl" />
         </div>
 
+<<<<<<< HEAD
         <div className="seller mt-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 justify-center items-center">
+=======
+        <div className="seller px-5 mt-10 mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 justify-center items-center">
+>>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
 
           {sarees.slice(0, 5).map((saree, index) => (
             <div
               key={index}
+<<<<<<< HEAD
               className="group shadow rounded-b-lg relative overflow-hidden border border-gray-200 bg-white transition rounded-t-lg"
             >
               {/* Image + Hover Overlay */}
               <div className="relative overflow-hidden rounded-t-lg">
+=======
+              className="group shadow rounded-b-lg relative overflow-hidden border border-gray-200 bg-white transition"
+            >
+              {/* Image + Hover Overlay */}
+              <div className="relative overflow-hidden">
+>>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
                 <Link to={`/shop/${saree.id}`} className="block">
                   <FadeImage
                     src={saree.img}
                     alt={saree.title}
                     loading="lazy"
                     decoding="async"
+<<<<<<< HEAD
                     className="sm:h-auto lg:h-auto 2xl:h-75 w-full rounded-t-lg object-cover object-top transition duration-300 group-hover:scale-[1.05]"
+=======
+                    className="sm:h-auto lg:h-auto 2xl:h-95 w-full rounded-t-lg object-cover object-top transition duration-300 group-hover:scale-[1.05]"
+>>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
                     whileHover={{ scale: 1.05 }}
                     transition={{ duration: 0.3 }}
                   />

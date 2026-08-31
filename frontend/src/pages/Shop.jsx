@@ -168,13 +168,21 @@ const Shop = () => {
   const gridClassNames = "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4";
 
   return (
+<<<<<<< HEAD
     <div className="w-full bg-[#FEFAF8]">
+=======
+    <div className="container bg-[#FEFAF8]">
+>>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
 
       {loading && <p className="px-5 py-8 text-center">Loading products...</p>}
       {error && <p className="px-5 py-8 text-center text-red-700">{error}</p>}
 
       {/* Banner */}
+<<<<<<< HEAD
       <div className="h-70 w-full bg-center bg-[url('/images/banner/banner-1.png')] flex items-center px-5">
+=======
+      <div className="h-70 w-full bg-center bg-[url('/images/banner/banner-1.png')] flex items-center px-5 md:px-16 lg:px-24">
+>>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
         <div className="flex items-baseline gap-3">
           <h3 className="text-xs md:text-sm text-[#74202D] font-bold uppercase">Shop</h3>
           <span>/</span>
@@ -195,7 +203,11 @@ const Shop = () => {
         </select>
       </div> */}
 
+<<<<<<< HEAD
       <div className="container mx-auto py-10">
+=======
+      <div className="w-[95%] mx-auto py-10">
+>>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
 
         {/* Mobile Filter */}
         <div className="lg:hidden flex justify-between items-center mb-5">
@@ -382,7 +394,11 @@ const Shop = () => {
                 >
                   <div className="relative overflow-hidden">
                     <Link to={`/shop/${item.id}`} className="block">
+<<<<<<< HEAD
                     <img loading="lazy" src={item.img} alt={item.title} className="w-full h-90 2xl:object-center object-cover object-top transition duration-300 group-hover:scale-[1.05]"/>
+=======
+                    <img loading="lazy" src={item.img} alt={item.title} className="w-full h-72 2xl:h-120 2xl:object-center object-cover object-top transition duration-300 group-hover:scale-[1.05]"/>
+>>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
                     </Link>
                     <div className="pointer-events-none absolute inset-0 flex items-start justify-between bg-black/10 p-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                       <span className="rounded-full bg-[#e9829a] px-2.5 py-1 text-[10px] font-bold uppercase text-white shadow-sm">

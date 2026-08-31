@@ -4,7 +4,11 @@ import FadeImage from '../animations/FadeImage'
 const CategoryBanner = () => {
   return (
     <div className='bg-[#FEFAF8] py-10'>
+<<<<<<< HEAD
         <div className='max-w-[1600px] mx-auto px-5 flex flex-col md:flex-row gap-5'>
+=======
+        <div className='lg:px-10 px-4 flex flex-col md:flex-row gap-5'>
+>>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
 
             {/* banner-1 */}
             <div className="relative h-62.5 sm:h-75 md:h-87.5 lg:h-100 2xl:h-150 w-full lg:w-1/2 rounded-lg overflow-hidden">

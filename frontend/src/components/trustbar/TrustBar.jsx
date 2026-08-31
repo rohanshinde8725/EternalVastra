@@ -9,8 +9,12 @@ const TrustBar = () => {
   return (
     <div className='w-full py-10 bg-[#FEFAF8]'>
         <FadeUp delay={0.2}>
+<<<<<<< HEAD
           <div className="max-w-[1600px] mx-auto px-5">
             <div className='w-full py-10 gap-5 mx-auto shadow-md bg-white rounded-lg 
+=======
+            <div className='w-[95%] py-10 gap-5 mx-auto shadow-md bg-white rounded-lg 
+>>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
                 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 px-5'>
                 {/* Item */}
                 <div className='flex flex-col sm:flex-row gap-4 items-center text-center sm:text-left'>
@@ -53,7 +57,10 @@ const TrustBar = () => {
                     </div>
                 </div>
             </div>
+<<<<<<< HEAD
           </div>
+=======
+>>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
         </FadeUp>
     </div>
   )

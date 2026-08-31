@@ -8,7 +8,11 @@ import Testimonial from '../components/testimonial/Testimonial'
 
 const Home = () => {
   return (
+<<<<<<< HEAD
     <div className='w-full bg-[#FEFAF8]'>
+=======
+    <div className='container'>
+>>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
       <Hero />
       <TrustBar />
       <Category />

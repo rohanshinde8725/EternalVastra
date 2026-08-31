@@ -149,7 +149,11 @@ const Blog = () => {
       {/* 1. HERO BANNER SECTION (MATCHING SCREENSHOT) */}
       {/* ========================================================================= */}
       <section className="bg-[url('/images/banner/banner-4.png')] bg-cover bg-center h-60 w-full 
+<<<<<<< HEAD
       flex items-center px-5 relative overflow-hidden">
+=======
+      flex items-center px-5 md:px-16 lg:px-24 relative overflow-hidden">
+>>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
         <div className="container max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
 

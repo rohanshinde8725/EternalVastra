@@ -74,7 +74,11 @@ const Cart = () => {
   const total = subtotal - discount;
 
   return (
+<<<<<<< HEAD
     <div className="w-full bg-[#FEFAF8]">
+=======
+    <div className="container bg-[#FEFAF8]">
+>>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
       {/* Banner */}
       <div className="h-60 bg-[url(/images/banner/banner-3.png)] bg-cover bg-center">
         <div className="py-20 px-5 sm:px-8 md:px-10 lg:px-12">
@@ -84,7 +88,11 @@ const Cart = () => {
         </div>
       </div>
 
+<<<<<<< HEAD
       <div className="container p-5 md:p-10 flex flex-col lg:flex-row gap-10 max-w-7xl mx-auto">
+=======
+      <div className="p-5 md:p-10 flex flex-col lg:flex-row gap-10 max-w-7xl mx-auto">
+>>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
         
         {/* LEFT SIDE */}
         <div className="w-full lg:w-[70%] space-y-5">
@@ -99,7 +107,11 @@ const Cart = () => {
                   key={option.id}
                   onClick={() => handleViewModeChange(option.id)}
                   aria-label={option.label}
+<<<<<<< HEAD
                   className={`flex h-10 w-10 items-center justify-center rounded-md border transition cursor-pointer ${
+=======
+                  className={`flex h-10 w-10 items-center justify-center rounded-md border transition ${
+>>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
                     viewMode === option.id
                       ? "bg-[#74202D] text-white border-[#74202D]"
                       : "bg-white text-[#3b3737] border-gray-300 hover:border-[#74202D] hover:text-[#74202D]"
@@ -141,19 +153,31 @@ const Cart = () => {
                       <td className="px-4 py-4 align-top">
                         <div className="flex items-center gap-2">
                           <button onClick={() => updateQuantity(item.id, "dec")}
+<<<<<<< HEAD
                             className="px-3 py-1 border rounded-sm bg-[#74202D] text-white hover:bg-transparent hover:text-[#74202D] transition-all duration-300 cursor-pointer">
+=======
+                            className="px-3 py-1 border rounded-sm bg-[#74202D] text-white hover:bg-transparent hover:text-[#74202D] transition-all duration-300">
+>>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
                             -
                           </button>
                           <span>{item.quantity}</span>
                           <button onClick={() => updateQuantity(item.id, "inc")}
+<<<<<<< HEAD
                             className="px-3 py-1 border rounded-sm bg-[#74202D] text-white hover:bg-transparent hover:text-[#74202D] transition-all duration-300 cursor-pointer">
+=======
+                            className="px-3 py-1 border rounded-sm bg-[#74202D] text-white hover:bg-transparent hover:text-[#74202D] transition-all duration-300">
+>>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
                             +
                           </button>
                         </div>
                       </td>
                       <td className="px-4 py-4 align-top font-bold text-[#74202D]">₹{item.discountPrice * item.quantity}</td>
                       <td className="px-4 py-4 align-top">
+<<<<<<< HEAD
                         <button onClick={() => removeItem(item.id)} className="text-[#74202D] hover:text-[#5c1b2b] transition-colors cursor-pointer">
+=======
+                        <button onClick={() => removeItem(item.id)} className="text-[#74202D] hover:text-[#5c1b2b] transition-colors">
+>>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
                           <FaTrash className="text-xl" />
                         </button>
                       </td>
@@ -163,7 +187,11 @@ const Cart = () => {
               </table>
             </div>
           ) : (
+<<<<<<< HEAD
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+=======
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+>>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
               {cart.map((item) => (
                 <div key={item.id} className="rounded-lg border border-gray-300 bg-white p-4 shadow-lg">
                   <img loading="lazy" decoding="async" src={item.img} alt={item.title} className="w-full h-44 object-cover rounded" />
@@ -172,12 +200,20 @@ const Cart = () => {
                     <p className="text-[#74202D] font-bold">₹{item.discountPrice}</p>
                     <div className="flex items-center gap-2">
                       <button onClick={() => updateQuantity(item.id, "dec")}
+<<<<<<< HEAD
                         className="px-3 py-1 border rounded-sm bg-[#74202D] text-white hover:bg-transparent hover:text-[#74202D] transition-all duration-300 cursor-pointer">
+=======
+                        className="px-3 py-1 border rounded-sm bg-[#74202D] text-white hover:bg-transparent hover:text-[#74202D] transition-all duration-300">
+>>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
                         -
                       </button>
                       <span>{item.quantity}</span>
                       <button onClick={() => updateQuantity(item.id, "inc")}
+<<<<<<< HEAD
                         className="px-3 py-1 border rounded-sm bg-[#74202D] text-white hover:bg-transparent hover:text-[#74202D] transition-all duration-300 cursor-pointer">
+=======
+                        className="px-3 py-1 border rounded-sm bg-[#74202D] text-white hover:bg-transparent hover:text-[#74202D] transition-all duration-300">
+>>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
                         +
                       </button>
                     </div>
@@ -185,7 +221,11 @@ const Cart = () => {
                       <span className="font-semibold">Total</span>
                       <span className="font-bold text-[#74202D]">₹{item.discountPrice * item.quantity}</span>
                     </div>
+<<<<<<< HEAD
                     <button onClick={() => removeItem(item.id)} className="w-full rounded-md border border-[#74202D] py-2 text-sm font-semibold text-[#74202D] hover:bg-[#74202D] hover:text-white transition cursor-pointer">
+=======
+                    <button onClick={() => removeItem(item.id)} className="w-full rounded-md border border-[#74202D] py-2 text-sm font-semibold text-[#74202D] hover:bg-[#74202D] hover:text-white transition">
+>>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
                       Remove
                     </button>
                   </div>

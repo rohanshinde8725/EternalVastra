@@ -11,6 +11,26 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+<<<<<<< HEAD
+=======
+.container {
+  max-width: 1600px;
+  margin-inline: auto;
+}
+
+/* @media screen and (min-width: 640px) {
+  .container {
+    width: min(calc(100% - 3rem), 1600px);
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .container {
+    width: min(calc(100% - 4rem), 1600px);
+  }
+} */
+
+>>>>>>> 64d6d1144c03d9eb5691cc2bdd6429646a9075ae
 .custom-pagination .swiper-pagination-bullet {
   width: 10px;
   height: 10px;
