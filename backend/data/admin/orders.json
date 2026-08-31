@@ -1,0 +1,116 @@
+[
+  {
+    "orderId": "#ORD12345",
+    "customerName": "Ritika Sharma",
+    "email": "ritika.sharma@example.com",
+    "phone": "+91 98201 45678",
+    "address": "B-402, Lotus Grandeur, Bandra West, Mumbai - 400050",
+    "paymentMethod": "UPI (Google Pay)",
+    "total": 3299,
+    "status": "Delivered",
+    "orderDate": "28 Aug, 2026",
+    "items": [
+      {
+        "name": "Mysore Silk Saree - Crimson Gold",
+        "qty": 1,
+        "price": 3299,
+        "img": "/images/silk/silk-1.jpg"
+      }
+    ]
+  },
+  {
+    "orderId": "#ORD12344",
+    "customerName": "Anjali Mehta",
+    "email": "anjali.mehta@gmail.com",
+    "phone": "+91 98450 12389",
+    "address": "12/4, Koramangala 4th Block, Bangalore - 560034",
+    "paymentMethod": "Credit Card (HDFC)",
+    "total": 2899,
+    "status": "Processing",
+    "orderDate": "28 Aug, 2026",
+    "items": [
+      {
+        "name": "Temple Border Silk Saree",
+        "qty": 1,
+        "price": 2899,
+        "img": "/images/cotton/cotton-1.jpg"
+      }
+    ]
+  },
+  {
+    "orderId": "#ORD12343",
+    "customerName": "Priya Verma",
+    "email": "priya.verma@yahoo.com",
+    "phone": "+91 99100 87654",
+    "address": "74, Golf Links, New Delhi - 110003",
+    "paymentMethod": "Net Banking",
+    "total": 4199,
+    "status": "Shipped",
+    "orderDate": "27 Aug, 2026",
+    "items": [
+      {
+        "name": "Royal Blue Paithani Saree",
+        "qty": 1,
+        "price": 4199,
+        "img": "/images/silk/silk-2.jpg"
+      }
+    ]
+  },
+  {
+    "orderId": "#ORD12342",
+    "customerName": "Sneha Joshi",
+    "email": "sneha.joshi@outlook.com",
+    "phone": "+91 97654 32109",
+    "address": "Flat 501, Mayflower Heights, Pune - 411001",
+    "paymentMethod": "Cash on Delivery",
+    "total": 3699,
+    "status": "Cancelled",
+    "orderDate": "26 Aug, 2026",
+    "items": [
+      {
+        "name": "Emerald Kanjeevaram Saree",
+        "qty": 1,
+        "price": 3699,
+        "img": "/images/cotton/cotton-2.jpg"
+      }
+    ]
+  },
+  {
+    "orderId": "#ORD12341",
+    "customerName": "Kavita Singh",
+    "email": "kavita.singh@gmail.com",
+    "phone": "+91 94150 99887",
+    "address": "Sector 15, Chandigarh - 160015",
+    "paymentMethod": "UPI (PhonePe)",
+    "total": 2199,
+    "status": "Delivered",
+    "orderDate": "26 Aug, 2026",
+    "items": [
+      {
+        "name": "Pearl White Chanderi Saree",
+        "qty": 1,
+        "price": 2199,
+        "img": "/images/silk/silk-3.jpg"
+      }
+    ]
+  },
+  {
+    "orderId": "#ORD12340",
+    "customerName": "Aarav Sharma",
+    "email": "aarav.sharma@gmail.com",
+    "phone": "+91 98112 33445",
+    "address": "Plot 89, Banjara Hills, Hyderabad - 500034",
+    "paymentMethod": "Credit Card (ICICI)",
+    "total": 5499,
+    "status": "Delivered",
+    "orderDate": "25 Aug, 2026",
+    "items": [
+      {
+        "name": "Banarasi Georgette Saree",
+        "qty": 1,
+        "price": 5499,
+        "img": "/images/silk/silk-6.jpg"
+      }
+    ]
+  }
+]

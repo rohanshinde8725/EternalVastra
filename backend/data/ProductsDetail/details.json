@@ -1,0 +1,782 @@
+[
+  {
+    "productId": 1,
+    "description": "Mysore Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "100% Pure Silk",
+    "occasion": "Weddings and festive ceremonies",
+    "care": "Dry clean only. Store folded in a cool, dry place away from direct sunlight.",
+    "highlights": [
+      "Mysore Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Silk Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 2,
+    "description": "Temple Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "Premium Cotton",
+    "occasion": "Everyday gatherings and casual events",
+    "care": "Hand wash gently or dry clean. Iron on low heat.",
+    "highlights": [
+      "Temple Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Cotton Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 3,
+    "description": "Crimson Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "Premium blended fabric",
+    "occasion": "Special occasions",
+    "care": "Dry clean only. Store folded in a cool, dry place away from direct sunlight.",
+    "highlights": [
+      "Crimson Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Paithani Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 4,
+    "description": "Emerald Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "Lightweight Georgette",
+    "occasion": "Evening parties and celebrations",
+    "care": "Dry clean only. Store folded in a cool, dry place away from direct sunlight.",
+    "highlights": [
+      "Emerald Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Georgette Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 5,
+    "description": "Pearl Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "Delicate Organza",
+    "occasion": "Formal receptions and upscale events",
+    "care": "Dry clean only. Store folded in a cool, dry place away from direct sunlight.",
+    "highlights": [
+      "Pearl Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Organza Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 6,
+    "description": "Ocean Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "100% Pure Silk",
+    "occasion": "Weddings and festive ceremonies",
+    "care": "Dry clean only. Store folded in a cool, dry place away from direct sunlight.",
+    "highlights": [
+      "Ocean Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Silk Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 7,
+    "description": "Ivory Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "Premium Cotton",
+    "occasion": "Everyday gatherings and casual events",
+    "care": "Hand wash gently or dry clean. Iron on low heat.",
+    "highlights": [
+      "Ivory Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Cotton Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 8,
+    "description": "Lotus Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "Delicate Organza",
+    "occasion": "Formal receptions and upscale events",
+    "care": "Dry clean only. Store folded in a cool, dry place away from direct sunlight.",
+    "highlights": [
+      "Lotus Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Organza Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 9,
+    "description": "Moonlit Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "Lightweight Georgette",
+    "occasion": "Evening parties and celebrations",
+    "care": "Dry clean only. Store folded in a cool, dry place away from direct sunlight.",
+    "highlights": [
+      "Moonlit Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Georgette Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 10,
+    "description": "Velvet Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "Premium blended fabric",
+    "occasion": "Special occasions",
+    "care": "Dry clean only. Store folded in a cool, dry place away from direct sunlight.",
+    "highlights": [
+      "Velvet Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Paithani Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 11,
+    "description": "Golden Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "Premium Cotton",
+    "occasion": "Everyday gatherings and casual events",
+    "care": "Hand wash gently or dry clean. Iron on low heat.",
+    "highlights": [
+      "Golden Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Cotton Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 12,
+    "description": "Saffron Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "100% Pure Silk",
+    "occasion": "Weddings and festive ceremonies",
+    "care": "Dry clean only. Store folded in a cool, dry place away from direct sunlight.",
+    "highlights": [
+      "Saffron Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Silk Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 13,
+    "description": "Meera Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "Lightweight Georgette",
+    "occasion": "Evening parties and celebrations",
+    "care": "Dry clean only. Store folded in a cool, dry place away from direct sunlight.",
+    "highlights": [
+      "Meera Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Georgette Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 14,
+    "description": "Aurora Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "Premium blended fabric",
+    "occasion": "Special occasions",
+    "care": "Dry clean only. Store folded in a cool, dry place away from direct sunlight.",
+    "highlights": [
+      "Aurora Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Paithani Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 15,
+    "description": "Floral Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "Delicate Organza",
+    "occasion": "Formal receptions and upscale events",
+    "care": "Dry clean only. Store folded in a cool, dry place away from direct sunlight.",
+    "highlights": [
+      "Floral Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Organza Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 16,
+    "description": "Dusk Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "100% Pure Silk",
+    "occasion": "Weddings and festive ceremonies",
+    "care": "Dry clean only. Store folded in a cool, dry place away from direct sunlight.",
+    "highlights": [
+      "Dusk Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Silk Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 17,
+    "description": "Twilight Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "Lightweight Georgette",
+    "occasion": "Evening parties and celebrations",
+    "care": "Dry clean only. Store folded in a cool, dry place away from direct sunlight.",
+    "highlights": [
+      "Twilight Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Georgette Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 18,
+    "description": "Cherry Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "Premium Cotton",
+    "occasion": "Everyday gatherings and casual events",
+    "care": "Hand wash gently or dry clean. Iron on low heat.",
+    "highlights": [
+      "Cherry Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Cotton Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 19,
+    "description": "Radiant Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "Premium blended fabric",
+    "occasion": "Special occasions",
+    "care": "Dry clean only. Store folded in a cool, dry place away from direct sunlight.",
+    "highlights": [
+      "Radiant Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Paithani Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 20,
+    "description": "Dewdrop Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "Delicate Organza",
+    "occasion": "Formal receptions and upscale events",
+    "care": "Dry clean only. Store folded in a cool, dry place away from direct sunlight.",
+    "highlights": [
+      "Dewdrop Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Organza Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 21,
+    "description": "Harmony Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "100% Pure Silk",
+    "occasion": "Weddings and festive ceremonies",
+    "care": "Dry clean only. Store folded in a cool, dry place away from direct sunlight.",
+    "highlights": [
+      "Harmony Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Silk Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 22,
+    "description": "Royal Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "Premium Cotton",
+    "occasion": "Everyday gatherings and casual events",
+    "care": "Hand wash gently or dry clean. Iron on low heat.",
+    "highlights": [
+      "Royal Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Cotton Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 23,
+    "description": "Mysore Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "Lightweight Georgette",
+    "occasion": "Evening parties and celebrations",
+    "care": "Dry clean only. Store folded in a cool, dry place away from direct sunlight.",
+    "highlights": [
+      "Mysore Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Georgette Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 24,
+    "description": "Temple Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "Premium blended fabric",
+    "occasion": "Special occasions",
+    "care": "Dry clean only. Store folded in a cool, dry place away from direct sunlight.",
+    "highlights": [
+      "Temple Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Paithani Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 25,
+    "description": "Crimson Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "Delicate Organza",
+    "occasion": "Formal receptions and upscale events",
+    "care": "Dry clean only. Store folded in a cool, dry place away from direct sunlight.",
+    "highlights": [
+      "Crimson Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Organza Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 26,
+    "description": "Emerald Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "100% Pure Silk",
+    "occasion": "Weddings and festive ceremonies",
+    "care": "Dry clean only. Store folded in a cool, dry place away from direct sunlight.",
+    "highlights": [
+      "Emerald Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Silk Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 27,
+    "description": "Pearl Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "Lightweight Georgette",
+    "occasion": "Evening parties and celebrations",
+    "care": "Dry clean only. Store folded in a cool, dry place away from direct sunlight.",
+    "highlights": [
+      "Pearl Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Georgette Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 28,
+    "description": "Ocean Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "Premium Cotton",
+    "occasion": "Everyday gatherings and casual events",
+    "care": "Hand wash gently or dry clean. Iron on low heat.",
+    "highlights": [
+      "Ocean Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Cotton Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 29,
+    "description": "Ivory Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "Premium blended fabric",
+    "occasion": "Special occasions",
+    "care": "Dry clean only. Store folded in a cool, dry place away from direct sunlight.",
+    "highlights": [
+      "Ivory Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Paithani Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 30,
+    "description": "Lotus Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "Delicate Organza",
+    "occasion": "Formal receptions and upscale events",
+    "care": "Dry clean only. Store folded in a cool, dry place away from direct sunlight.",
+    "highlights": [
+      "Lotus Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Organza Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 31,
+    "description": "Moonlit Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "100% Pure Silk",
+    "occasion": "Weddings and festive ceremonies",
+    "care": "Dry clean only. Store folded in a cool, dry place away from direct sunlight.",
+    "highlights": [
+      "Moonlit Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Silk Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 32,
+    "description": "Velvet Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "Premium Cotton",
+    "occasion": "Everyday gatherings and casual events",
+    "care": "Hand wash gently or dry clean. Iron on low heat.",
+    "highlights": [
+      "Velvet Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Cotton Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 33,
+    "description": "Golden Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "Lightweight Georgette",
+    "occasion": "Evening parties and celebrations",
+    "care": "Dry clean only. Store folded in a cool, dry place away from direct sunlight.",
+    "highlights": [
+      "Golden Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Georgette Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 34,
+    "description": "Saffron Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "Premium blended fabric",
+    "occasion": "Special occasions",
+    "care": "Dry clean only. Store folded in a cool, dry place away from direct sunlight.",
+    "highlights": [
+      "Saffron Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Paithani Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 35,
+    "description": "Meera Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "Delicate Organza",
+    "occasion": "Formal receptions and upscale events",
+    "care": "Dry clean only. Store folded in a cool, dry place away from direct sunlight.",
+    "highlights": [
+      "Meera Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Organza Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 36,
+    "description": "Aurora Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "100% Pure Silk",
+    "occasion": "Weddings and festive ceremonies",
+    "care": "Dry clean only. Store folded in a cool, dry place away from direct sunlight.",
+    "highlights": [
+      "Aurora Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Silk Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 37,
+    "description": "Floral Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "Lightweight Georgette",
+    "occasion": "Evening parties and celebrations",
+    "care": "Dry clean only. Store folded in a cool, dry place away from direct sunlight.",
+    "highlights": [
+      "Floral Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Georgette Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 38,
+    "description": "Dusk Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "Premium Cotton",
+    "occasion": "Everyday gatherings and casual events",
+    "care": "Hand wash gently or dry clean. Iron on low heat.",
+    "highlights": [
+      "Dusk Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Cotton Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 39,
+    "description": "Twilight Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "Premium blended fabric",
+    "occasion": "Special occasions",
+    "care": "Dry clean only. Store folded in a cool, dry place away from direct sunlight.",
+    "highlights": [
+      "Twilight Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Paithani Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 40,
+    "description": "Cherry Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "Delicate Organza",
+    "occasion": "Formal receptions and upscale events",
+    "care": "Dry clean only. Store folded in a cool, dry place away from direct sunlight.",
+    "highlights": [
+      "Cherry Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Organza Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 41,
+    "description": "Radiant Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "100% Pure Silk",
+    "occasion": "Weddings and festive ceremonies",
+    "care": "Dry clean only. Store folded in a cool, dry place away from direct sunlight.",
+    "highlights": [
+      "Radiant Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Silk Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 42,
+    "description": "Dewdrop Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "Premium Cotton",
+    "occasion": "Everyday gatherings and casual events",
+    "care": "Hand wash gently or dry clean. Iron on low heat.",
+    "highlights": [
+      "Dewdrop Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Cotton Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 43,
+    "description": "Harmony Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "Lightweight Georgette",
+    "occasion": "Evening parties and celebrations",
+    "care": "Dry clean only. Store folded in a cool, dry place away from direct sunlight.",
+    "highlights": [
+      "Harmony Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Georgette Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 44,
+    "description": "Royal Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "Premium blended fabric",
+    "occasion": "Special occasions",
+    "care": "Dry clean only. Store folded in a cool, dry place away from direct sunlight.",
+    "highlights": [
+      "Royal Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Paithani Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 45,
+    "description": "Mysore Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "Delicate Organza",
+    "occasion": "Formal receptions and upscale events",
+    "care": "Dry clean only. Store folded in a cool, dry place away from direct sunlight.",
+    "highlights": [
+      "Mysore Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Organza Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 46,
+    "description": "Temple Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "100% Pure Silk",
+    "occasion": "Weddings and festive ceremonies",
+    "care": "Dry clean only. Store folded in a cool, dry place away from direct sunlight.",
+    "highlights": [
+      "Temple Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Silk Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 47,
+    "description": "Crimson Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "Premium Cotton",
+    "occasion": "Everyday gatherings and casual events",
+    "care": "Hand wash gently or dry clean. Iron on low heat.",
+    "highlights": [
+      "Crimson Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Cotton Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 48,
+    "description": "Emerald Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "Lightweight Georgette",
+    "occasion": "Evening parties and celebrations",
+    "care": "Dry clean only. Store folded in a cool, dry place away from direct sunlight.",
+    "highlights": [
+      "Emerald Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Georgette Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 49,
+    "description": "Pearl Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "Premium blended fabric",
+    "occasion": "Special occasions",
+    "care": "Dry clean only. Store folded in a cool, dry place away from direct sunlight.",
+    "highlights": [
+      "Pearl Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Paithani Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 50,
+    "description": "Ocean Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "Delicate Organza",
+    "occasion": "Formal receptions and upscale events",
+    "care": "Dry clean only. Store folded in a cool, dry place away from direct sunlight.",
+    "highlights": [
+      "Ocean Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Organza Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 51,
+    "description": "Ivory Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "100% Pure Silk",
+    "occasion": "Weddings and festive ceremonies",
+    "care": "Dry clean only. Store folded in a cool, dry place away from direct sunlight.",
+    "highlights": [
+      "Ivory Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Silk Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 52,
+    "description": "Lotus Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "Premium Cotton",
+    "occasion": "Everyday gatherings and casual events",
+    "care": "Hand wash gently or dry clean. Iron on low heat.",
+    "highlights": [
+      "Lotus Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Cotton Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 53,
+    "description": "Moonlit Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "Lightweight Georgette",
+    "occasion": "Evening parties and celebrations",
+    "care": "Dry clean only. Store folded in a cool, dry place away from direct sunlight.",
+    "highlights": [
+      "Moonlit Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Georgette Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 54,
+    "description": "Velvet Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "Premium blended fabric",
+    "occasion": "Special occasions",
+    "care": "Dry clean only. Store folded in a cool, dry place away from direct sunlight.",
+    "highlights": [
+      "Velvet Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Paithani Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 55,
+    "description": "Golden Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "Delicate Organza",
+    "occasion": "Formal receptions and upscale events",
+    "care": "Dry clean only. Store folded in a cool, dry place away from direct sunlight.",
+    "highlights": [
+      "Golden Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Organza Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 56,
+    "description": "Saffron Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "100% Pure Silk",
+    "occasion": "Weddings and festive ceremonies",
+    "care": "Dry clean only. Store folded in a cool, dry place away from direct sunlight.",
+    "highlights": [
+      "Saffron Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Silk Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 57,
+    "description": "Meera Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "Premium Cotton",
+    "occasion": "Everyday gatherings and casual events",
+    "care": "Hand wash gently or dry clean. Iron on low heat.",
+    "highlights": [
+      "Meera Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Cotton Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 58,
+    "description": "Aurora Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "Lightweight Georgette",
+    "occasion": "Evening parties and celebrations",
+    "care": "Dry clean only. Store folded in a cool, dry place away from direct sunlight.",
+    "highlights": [
+      "Aurora Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Georgette Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 59,
+    "description": "Floral Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "Premium blended fabric",
+    "occasion": "Special occasions",
+    "care": "Dry clean only. Store folded in a cool, dry place away from direct sunlight.",
+    "highlights": [
+      "Floral Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Paithani Sarees styling for contemporary looks"
+    ]
+  },
+  {
+    "productId": 60,
+    "description": "Dusk Silk saree blends elegant texture with refined color detail. Designed for a graceful silhouette, this saree is ideal for special occasions and festive celebrations.",
+    "material": "Delicate Organza",
+    "occasion": "Formal receptions and upscale events",
+    "care": "Dry clean only. Store folded in a cool, dry place away from direct sunlight.",
+    "highlights": [
+      "Dusk Silk inspired elegance",
+      "Comfortable drape throughout the day",
+      "Lightweight feel with premium finish",
+      "Organza Sarees styling for contemporary looks"
+    ]
+  }
+]

@@ -1,0 +1,10 @@
+const mongoose = require("mongoose");
+
+const connectDB = async () => {
+  const mongoUri = process.env.MONGO_URI || "mongodb://127.0.0.1:27017";
+
+  await mongoose.connect(mongoUri, { dbName: "EternalVastra" });
+  console.log('MongoDB connected to "EternalVastra"');
+};
+
+module.exports = connectDB;

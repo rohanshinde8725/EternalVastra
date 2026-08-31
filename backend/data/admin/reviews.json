@@ -1,0 +1,42 @@
+[
+  {
+    "reviewer": "Ritika Sharma",
+    "product": "Mysore Silk Saree - Crimson Gold",
+    "rating": 5,
+    "date": "27 Aug, 2026",
+    "comment": "The silk texture is mesmerizing! Pure authentic zari and the drape feels so regal. Received countless compliments at my cousin's wedding.",
+    "verified": true,
+    "status": "Approved",
+    "avatar": "/images/testimonial/testimonial-1.png"
+  },
+  {
+    "reviewer": "Anjali Mehta",
+    "product": "Temple Border Silk Saree",
+    "rating": 5,
+    "date": "25 Aug, 2026",
+    "comment": "Stunning temple border craftsmanship. Color matches exactly with the photographs. Prompt packaging too!",
+    "verified": true,
+    "status": "Approved",
+    "avatar": "/images/testimonial/testimonial-2.png"
+  },
+  {
+    "reviewer": "Priya Verma",
+    "product": "Royal Blue Paithani Saree",
+    "rating": 4,
+    "date": "24 Aug, 2026",
+    "comment": "Heavy pallu with gorgeous peacock motifs. Beautiful saree overall, arrived in 3 days.",
+    "verified": true,
+    "status": "Approved",
+    "avatar": "/images/testimonial/testimonial-3.png"
+  },
+  {
+    "reviewer": "Sneha Joshi",
+    "product": "Emerald Kanjeevaram Saree",
+    "rating": 5,
+    "date": "22 Aug, 2026",
+    "comment": "Truly heirloom quality. Eternal Vastra has become my go-to luxury boutique for traditional sarees.",
+    "verified": true,
+    "status": "Approved",
+    "avatar": "/images/testimonial/testimonial-4.png"
+  }
+]
