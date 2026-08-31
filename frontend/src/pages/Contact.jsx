@@ -70,7 +70,7 @@ const Contact = () => {
     },
   ];
   return (
-    <div className="container">
+    <div>
       {/* Banner Start */}
       <div
         className="bg-[url('/images/banner/contact-banner.png')] bg-cover bg-center h-75 sm:h-100 md:h-125 lg:h-162.5 2xl:h-200 w-full 
