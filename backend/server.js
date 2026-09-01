@@ -81,7 +81,7 @@ app.use((error, _req, res, _next) => {
 		return res.status(400).json({ message: error.message });
 	}
 	console.error(error);
-	res.status(500).json({ message: "Internal server error" });
+	res.status(500).json({ message: error.message || "Internal server error" });
 });
 
 const startServer = async () => {
