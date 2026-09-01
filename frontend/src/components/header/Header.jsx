@@ -351,14 +351,21 @@ const Header = () => {
               {/* User Dropdown */}
               {isUserMenuOpen && currentUser && (
                 <div className="absolute right-0 mt-3 w-64 bg-white rounded-2xl border border-slate-100 shadow-2xl p-2.5 z-50 text-sm animate-in fade-in zoom-in-95 duration-150">
-                  <div className="p-3 bg-gradient-to-br from-[#6B1527] to-[#450C16] rounded-xl text-white mb-2">
+                  <div className="p-3.5 bg-gradient-to-br from-[#74202D] via-[#5B131F] to-[#400B15] rounded-xl text-white mb-2 shadow-sm">
                     <div className="flex items-center gap-2.5">
-                      <div className="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center font-bold text-amber-200 text-sm">
-                        {currentUser.name?.charAt(0) || "U"}
+                      <div className="w-9 h-9 rounded-full bg-white/20 border border-white/30 flex items-center justify-center font-bold text-amber-200 text-sm flex-shrink-0">
+                        {currentUser.name?.charAt(0)?.toUpperCase() || "U"}
                       </div>
                       <div className="min-w-0 flex-1">
-                        <h4 className="font-bold text-sm truncate leading-tight">{currentUser.name}</h4>
-                        <p className="text-xs text-rose-200/90 truncate mt-0.5">{currentUser.email}</p>
+                        <div className="flex items-center gap-1.5">
+                          <h4 className="font-bold text-sm truncate leading-tight">{currentUser.name}</h4>
+                          {currentUser.role === "admin" && (
+                            <span className="text-[9px] bg-amber-400/25 text-amber-200 border border-amber-300/40 px-1.5 py-0.5 rounded font-semibold uppercase tracking-wider">
+                              Admin
+                            </span>
+                          )}
+                        </div>
+                        <p className="text-xs text-rose-200/80 truncate mt-0.5">{currentUser.email}</p>
                       </div>
                     </div>
                   </div>
@@ -369,38 +376,26 @@ const Header = () => {
                         setIsProfileModalOpen(true);
                         setIsUserMenuOpen(false);
                       }}
-                      className="w-full text-left flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-slate-700 hover:bg-rose-50 hover:text-[#6B1527] transition cursor-pointer font-medium"
+                      className="w-full text-left flex items-center justify-between px-3.5 py-2.5 rounded-xl text-slate-700 hover:bg-rose-50 hover:text-[#74202D] transition cursor-pointer font-medium group"
                     >
-                      <FiUser className="text-slate-400 text-base" />
-                      <span>My Profile Details</span>
+                      <div className="flex items-center gap-2.5">
+                        <FiUser className="text-slate-400 group-hover:text-[#74202D] text-base transition" />
+                        <span>My Profile Details</span>
+                      </div>
+                      <span className="text-slate-300 group-hover:text-[#74202D] text-xs">→</span>
                     </button>
-
-                    <Link
-                      to="/cart"
-                      onClick={() => setIsUserMenuOpen(false)}
-                      className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-slate-700 hover:bg-rose-50 hover:text-[#6B1527] transition font-medium"
-                    >
-                      <FiShoppingBag className="text-slate-400 text-base" />
-                      <span>My Cart ({cartCount})</span>
-                    </Link>
-
-                    <Link
-                      to="/wishlist"
-                      onClick={() => setIsUserMenuOpen(false)}
-                      className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-slate-700 hover:bg-rose-50 hover:text-[#6B1527] transition font-medium"
-                    >
-                      <FiHeart className="text-slate-400 text-base" />
-                      <span>Saved Wishlist ({wishlistCount})</span>
-                    </Link>
 
                     {currentUser.role === "admin" && (
                       <Link
                         to="/admin"
                         onClick={() => setIsUserMenuOpen(false)}
-                        className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl bg-amber-50 text-amber-900 font-semibold hover:bg-amber-100 transition"
+                        className="flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-amber-50/80 text-amber-950 font-semibold hover:bg-amber-100/90 border border-amber-200/60 transition group"
                       >
-                        <FiShield className="text-amber-700 text-base" />
-                        <span>Admin Control Portal</span>
+                        <div className="flex items-center gap-2.5">
+                          <FiShield className="text-amber-700 text-base" />
+                          <span>Admin Control Portal</span>
+                        </div>
+                        <span className="text-amber-600 group-hover:translate-x-0.5 transition text-xs font-bold">→</span>
                       </Link>
                     )}
 

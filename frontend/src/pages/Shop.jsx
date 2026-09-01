@@ -427,14 +427,14 @@ const Shop = () => {
                           type="button"
                           onClick={() => toggleWishlist(item)}
                           aria-label={wishlistIds.includes(item.id) ? "Remove from wishlist" : "Add to wishlist"}
-                          className={`flex h-9 w-9 items-center justify-center rounded-full bg-white shadow-sm transition hover:bg-[#6C2C12] hover:text-white ${wishlistIds.includes(item.id) ? "text-[#6C2C12]" : "text-[#6C2C12]"}`}
+                          className={`flex h-9 w-9 items-center justify-center cursor-pointer rounded-full bg-white shadow-sm transition hover:bg-[#75212E] hover:text-white ${wishlistIds.includes(item.id) ? "text-[#75212E]" : "text-[#75212E]"}`}
                         >
                           <CiHeart className="text-xl" />
                         </button>
                         <Link
                           to={`/shop/${item.id}`}
                           aria-label={`View ${item.title}`}
-                          className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-[#6C2C12] shadow-sm transition hover:bg-[#6C2C12] hover:text-white"
+                          className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-[#75212E] shadow-sm transition hover:bg-[#75212E] hover:text-white"
                         >
                           <FiEye className="text-lg" />
                         </Link>
@@ -456,7 +456,7 @@ const Shop = () => {
                     <button
                       onClick={() => addToCart(item)}
                       disabled={cartIds.includes(item.id)}
-                      className={`w-full mt-4 rounded-md py-2 text-sm transition ${
+                      className={`w-full mt-4 rounded-md py-2 text-sm transition cursor-pointer ${
                         cartIds.includes(item.id)
                           ? "border border-gray-200 bg-gray-200 text-gray-500 cursor-not-allowed"
                           : "border border-[#74202D] text-[#74202D] hover:bg-[#74202D] hover:text-white"
