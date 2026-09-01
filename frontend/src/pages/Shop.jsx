@@ -5,21 +5,45 @@ import { CiHeart } from "react-icons/ci";
 import { FiEye } from "react-icons/fi";
 import Rating from "../components/rating/Rating";
 import useProducts from "../hooks/useProducts";
+import { API_BASE_URL } from "../api/products";
+
+const DEFAULT_CATEGORIES = [
+  "Silk Sarees",
+  "Cotton Sarees",
+  "Paithani Sarees",
+  "Georgette Sarees",
+  "Organza Sarees",
+];
 
 const Shop = () => {
   const { products: sarees, loading, error } = useProducts();
+  const [categoryList, setCategoryList] = useState(["All", ...DEFAULT_CATEGORIES]);
   const [selectedCategory, setSelectedCategory] = useState("All");
   const maxPrice = 25000;
   const [sort, setSort] = useState("default");
   const [showFilter, setShowFilter] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const productsPerPage = 8;
+  const productsPerPage = 12;
   const [viewMode, setViewMode] = useState("4");
   const [cartIds, setCartIds] = useState([]);
   const [wishlistIds, setWishlistIds] = useState([]);
   const location = useLocation();
   const searchQuery = (new URLSearchParams(location.search).get("search") || "").trim().toLowerCase();
   const categoryQuery = new URLSearchParams(location.search).get("category") || "";
+
+  useEffect(() => {
+    fetch(`${API_BASE_URL}/api/admin/categories`)
+      .then((res) => (res.ok ? res.json() : []))
+      .then((data) => {
+        if (Array.isArray(data) && data.length > 0) {
+          const apiCats = data.map((c) => c.name).filter(Boolean);
+          const productCats = sarees.flatMap((p) => p.category || []).filter(Boolean);
+          const combined = Array.from(new Set([...apiCats, ...DEFAULT_CATEGORIES, ...productCats]));
+          setCategoryList(["All", ...combined]);
+        }
+      })
+      .catch(() => {});
+  }, [sarees]);
 
   useEffect(() => {
     const savedViewMode = localStorage.getItem("shopViewMode");
@@ -216,8 +240,7 @@ const Shop = () => {
               Filter By Category
             </h3>
 
-            {[ "All", "Silk Sarees", "Cotton Sarees", "Paithani Sarees", "Georgette Sarees", "Organza Sarees", 
-            ].map((cat) => (
+            {categoryList.map((cat) => (
               <button key={cat} onClick={() => handleCategoryChange(cat)}
                 className={`px-5 py-2 rounded-md border text-sm transition-all duration-300 cursor-pointer
                   ${ selectedCategory === cat
@@ -246,8 +269,7 @@ const Shop = () => {
             Categories
           </h4>
 
-          {[ "All", "Silk Sarees", "Cotton Sarees", "Paithani Sarees", "Georgette Sarees", "Organza Sarees",
-          ].map((cat) => (
+          {categoryList.map((cat) => (
             <button key={cat} onClick={() => {
                 handleCategoryChange(cat);
                 setShowFilter(false);

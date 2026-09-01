@@ -39,7 +39,7 @@ const removeStoredImage = async (imageUrl) => {
 const getProducts = async (_req, res, next) => {
   try {
     const products = await Product.aggregate([
-      { $sort: { id: 1 } },
+      { $sort: { createdAt: -1, id: -1, _id: -1 } },
       {
         $lookup: {
           from: "ProductsDetail",
