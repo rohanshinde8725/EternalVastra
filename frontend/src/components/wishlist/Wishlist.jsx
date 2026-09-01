@@ -95,7 +95,8 @@ const Wishlist = () => {
                 Saved items that you can review or move to your cart.
               </p>
             </div>
-            <div className="flex flex-wrap items-center gap-2">
+            {/* View Switcher: Hidden on mobile */}
+            <div className="hidden sm:flex flex-wrap items-center gap-2">
               <span className="text-sm text-gray-600">View</span>
               {[
                 { id: "4", label: "4/4", icon: <MdGridView className="h-5 w-5" /> },
@@ -121,109 +122,125 @@ const Wishlist = () => {
             <div className="rounded-lg border border-dashed border-[#d1b5ae] bg-[#fff6f2] p-10 text-center text-sm text-[#74202D]">
               Your wishlist is empty. Browse the shop and click the heart icon to save your favorite sarees.
             </div>
-          ) : viewMode === "table" ? (
-            <div className="overflow-x-auto rounded-lg border border-gray-200 bg-white shadow-sm">
-              <table className="min-w-full text-left text-sm">
-                <thead className="bg-[#FEFAF8] text-gray-600">
-                  <tr>
-                    <th className="px-4 py-3">Product</th>
-                    <th className="px-4 py-3">Price</th>
-                    <th className="px-4 py-3">Rating</th>
-                    <th className="px-4 py-3 text-right">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {wishlist.map((item) => (
-                    <tr key={item.id} className="border-b border-gray-200 hover:bg-gray-50 transition">
-                      <td className="px-4 py-4 align-top">
-                        <div className="flex items-start gap-3">
-                          <img src={item.img} alt={item.title} className="w-20 h-20 object-cover rounded" />
-                          <div>
-                            <Link to={`/shop/${item.id}`} className="font-semibold text-sm hover:text-[#74202D] transition">
-                              {item.title}
-                            </Link>
-                            <p className="text-xs text-gray-500 mt-1">{item.category?.join(", ") || ""}</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td className="px-4 py-4 align-top">
-                        <div className="text-[#74202D] font-semibold">₹{item.discountPrice}</div>
-                        <div className="text-xs text-gray-400 line-through">₹{item.actualPrice}</div>
-                      </td>
-                      <td className="px-4 py-4 align-top">
-                        <div className="flex items-center gap-2">
-                          <Rating rating={item.rating} />
-                          <span className="text-xs text-gray-500">({item.ratings})</span>
-                        </div>
-                      </td>
-                      <td className="px-4 py-4 align-top text-right">
-                        <div className="flex justify-end gap-2">
-                          <button
-                            onClick={() => addToCart(item)}
-                            disabled={cartIds.includes(item.id)}
-                            className={`rounded-md px-3 py-1.5 text-xs font-semibold uppercase border-2 transition cursor-pointer ${
-                              cartIds.includes(item.id)
-                                ? "border-gray-200 bg-gray-200 text-gray-500 cursor-not-allowed"
-                                : "border-[#74202D] bg-[#74202D] text-white hover:bg-transparent hover:text-[#74202D]"
-                            }`}
-                          >
-                            {cartIds.includes(item.id) ? "In Cart" : "Add to Cart"}
-                          </button>
-                          <button
-                            onClick={() => removeFromWishlist(item.id)}
-                            className="rounded-md border-2 border-[#74202D] bg-white px-3 py-1.5 text-xs font-semibold text-[#74202D] uppercase hover:bg-[#74202D] hover:text-white transition cursor-pointer"
-                          >
-                            Remove
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {wishlist.map((item) => (
-                <div key={item.id} className="group shadow rounded-lg relative overflow-hidden border border-gray-200 bg-white transition">
-                  <Link to={`/shop/${item.id}`} className="block overflow-hidden relative">
-                    <img src={item.img} alt={item.title} className="w-full h-80 object-cover transition-transform duration-300 group-hover:scale-105" />
-                  </Link>
-                  <div className="p-4 space-y-3">
-                    <Link to={`/shop/${item.id}`} className="block text-base font-semibold uppercase text-gray-800 hover:text-[#74202D] transition truncate">
-                      {item.title}
+            <>
+              {/* Desktop Table View (Only visible on desktop/tablet when List mode is selected) */}
+              {viewMode === "table" && (
+                <div className="hidden sm:block overflow-x-auto rounded-lg border border-gray-200 bg-white shadow-sm">
+                  <table className="min-w-full text-left text-sm">
+                    <thead className="bg-[#FEFAF8] text-gray-600">
+                      <tr>
+                        <th className="px-4 py-3">Product</th>
+                        <th className="px-4 py-3">Price</th>
+                        <th className="px-4 py-3">Rating</th>
+                        <th className="px-4 py-3 text-right">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {wishlist.map((item) => (
+                        <tr key={item.id} className="border-b border-gray-200 hover:bg-gray-50 transition">
+                          <td className="px-4 py-4 align-top">
+                            <div className="flex items-start gap-3">
+                              <Link to={`/shop/${item.id}`} className="shrink-0 group">
+                                <img
+                                  src={item.img}
+                                  alt={item.title}
+                                  onError={(e) => {
+                                    e.currentTarget.onerror = null;
+                                    e.currentTarget.src = "/images/silk/silk-1.jpg";
+                                  }}
+                                  className="w-20 h-20 object-cover rounded group-hover:opacity-90 transition cursor-pointer"
+                                />
+                              </Link>
+                              <div>
+                                <Link to={`/shop/${item.id}`} className="font-semibold text-sm hover:text-[#74202D] transition block">
+                                  {item.title}
+                                </Link>
+                                <p className="text-xs text-gray-500 mt-1">{item.category?.join(", ") || ""}</p>
+                              </div>
+                            </div>
+                          </td>
+                          <td className="px-4 py-4 align-top">
+                            <div className="text-[#74202D] font-semibold">₹{item.discountPrice}</div>
+                            <div className="text-xs text-gray-400 line-through">₹{item.actualPrice}</div>
+                          </td>
+                          <td className="px-4 py-4 align-top">
+                            <div className="flex items-center gap-2">
+                              <Rating rating={item.rating} />
+                              <span className="text-xs text-gray-500">({item.ratings})</span>
+                            </div>
+                          </td>
+                          <td className="px-4 py-4 align-top text-right">
+                            <div className="flex justify-end gap-2">
+                              <button
+                                onClick={() => addToCart(item)}
+                                disabled={cartIds.includes(item.id)}
+                                className={`rounded-md px-3 py-1.5 text-xs font-semibold uppercase border-2 transition cursor-pointer ${
+                                  cartIds.includes(item.id)
+                                    ? "border-gray-200 bg-gray-200 text-gray-500 cursor-not-allowed"
+                                    : "border-[#74202D] bg-[#74202D] text-white hover:bg-transparent hover:text-[#74202D]"
+                                }`}
+                              >
+                                {cartIds.includes(item.id) ? "In Cart" : "Add to Cart"}
+                              </button>
+                              <button
+                                onClick={() => removeFromWishlist(item.id)}
+                                className="rounded-md border-2 border-[#74202D] bg-white px-3 py-1.5 text-xs font-semibold text-[#74202D] uppercase hover:bg-[#74202D] hover:text-white transition cursor-pointer"
+                              >
+                                Remove
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+
+              {/* Grid View (Always active on mobile, and active on desktop when Grid mode is selected) */}
+              <div className={`${viewMode === "table" ? "block sm:hidden" : "grid"} grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6`}>
+                {wishlist.map((item) => (
+                  <div key={item.id} className="group shadow rounded-lg relative overflow-hidden border border-gray-200 bg-white transition">
+                    <Link to={`/shop/${item.id}`} className="block overflow-hidden relative">
+                      <img src={item.img} alt={item.title} className="w-full h-80 object-cover transition-transform duration-300 group-hover:scale-105" />
                     </Link>
-                    <div className="flex items-center gap-2">
-                      <span className="text-[#74202D] font-bold">₹{item.discountPrice}</span>
-                      <span className="line-through text-xs text-gray-400">₹{item.actualPrice}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Rating rating={item.rating} />
-                      <span className="text-xs text-gray-500">({item.ratings})</span>
-                    </div>
-                    <div className="flex gap-2 pt-2">
-                      <button
-                        onClick={() => addToCart(item)}
-                        disabled={cartIds.includes(item.id)}
-                        className={`flex-1 rounded-md py-2 text-xs font-semibold uppercase border-2 transition cursor-pointer ${
-                          cartIds.includes(item.id)
-                            ? "border-gray-200 bg-gray-200 text-gray-500 cursor-not-allowed"
-                            : "border-[#74202D] bg-[#74202D] text-white hover:bg-transparent hover:text-[#74202D]"
-                        }`}
-                      >
-                        {cartIds.includes(item.id) ? "In Cart" : "Add to Cart"}
-                      </button>
-                      <button
-                        onClick={() => removeFromWishlist(item.id)}
-                        className="rounded-md border-2 border-[#74202D] bg-white px-3 py-2 text-xs font-semibold text-[#74202D] uppercase hover:bg-[#74202D] hover:text-white transition cursor-pointer"
-                      >
-                        Remove
-                      </button>
+                    <div className="p-4 space-y-3">
+                      <Link to={`/shop/${item.id}`} className="block text-base font-semibold uppercase text-gray-800 hover:text-[#74202D] transition truncate">
+                        {item.title}
+                      </Link>
+                      <div className="flex items-center gap-2">
+                        <span className="text-[#74202D] font-bold">₹{item.discountPrice}</span>
+                        <span className="line-through text-xs text-gray-400">₹{item.actualPrice}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Rating rating={item.rating} />
+                        <span className="text-xs text-gray-500">({item.ratings})</span>
+                      </div>
+                      <div className="flex gap-2 pt-2">
+                        <button
+                          onClick={() => addToCart(item)}
+                          disabled={cartIds.includes(item.id)}
+                          className={`flex-1 rounded-md py-2 text-xs font-semibold uppercase border-2 transition cursor-pointer ${
+                            cartIds.includes(item.id)
+                              ? "border-gray-200 bg-gray-200 text-gray-500 cursor-not-allowed"
+                              : "border-[#74202D] bg-[#74202D] text-white hover:bg-transparent hover:text-[#74202D]"
+                          }`}
+                        >
+                          {cartIds.includes(item.id) ? "In Cart" : "Add to Cart"}
+                        </button>
+                        <button
+                          onClick={() => removeFromWishlist(item.id)}
+                          className="rounded-md border-2 border-[#74202D] bg-white px-3 py-2 text-xs font-semibold text-[#74202D] uppercase hover:bg-[#74202D] hover:text-white transition cursor-pointer"
+                        >
+                          Remove
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            </>
           )}
         </div>
       </div>

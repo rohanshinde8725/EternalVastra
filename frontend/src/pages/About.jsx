@@ -53,7 +53,7 @@ const About = () => {
             every woman who wears it.
           </p>
 
-          <button className='bg-[#74202D] text-white uppercase py-1.5 px-3 md:py-2 md:px-8 rounded-lg
+          <button className='bg-[#74202D] text-white uppercase py-1.5 px-3 md:py-2 md:px-8 rounded
               hover:bg-white border-2 border-[#74202D] hover:text-[#74202D] cursor-pointer
               transition text-xs md:text-sm font-semibold mt-5'>
                 Our Story

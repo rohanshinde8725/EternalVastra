@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { FaTrash } from "react-icons/fa";
 import { MdGridView, MdViewList } from "react-icons/md";
 import { useToast } from "../context/ToastContext";
@@ -90,7 +91,8 @@ const Cart = () => {
         <div className="w-full lg:w-[70%] space-y-5">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <h2 className="text-xl font-semibold">Cart Items</h2>
-            <div className="flex flex-wrap items-center gap-2">
+            {/* View Switcher: Hidden on mobile devices */}
+            <div className="hidden sm:flex flex-wrap items-center gap-2">
               {[
                 { id: "4", label: "4/4", icon: <MdGridView className="h-5 w-5" /> },
                 { id: "table", label: "List", icon: <MdViewList className="h-5 w-5" /> },
@@ -113,85 +115,123 @@ const Cart = () => {
 
           {cart.length === 0 ? (
             <p>Your cart is empty</p>
-          ) : viewMode === "table" ? (
-            <div className="overflow-x-auto rounded-lg border border-gray-200 bg-white shadow-sm">
-              <table className="min-w-full text-sm text-left">
-                <thead className="bg-[#FEFAF8] text-gray-600">
-                  <tr>
-                    <th className="px-4 py-3">Product</th>
-                    <th className="px-4 py-3">Price</th>
-                    <th className="px-4 py-3">Quantity</th>
-                    <th className="px-4 py-3">Total</th>
-                    <th className="px-4 py-3">Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {cart.map((item) => (
-                    <tr key={item.id} className="border-b border-gray-200 hover:bg-gray-50 transition">
-                      <td className="px-4 py-4 align-top">
-                        <div className="flex items-start gap-3">
-                          <img src={item.img} alt={item.title} className="w-20 h-20 object-cover rounded" />
-                          <div>
-                            <p className="font-semibold">{item.title}</p>
-                            <p className="text-sm text-gray-500">{item.category?.join(", ") || ""}</p>
-                          </div>
-                        </div>
-                      </td>
-                      <td className="px-4 py-4 align-top font-semibold text-[#74202D]">₹{item.discountPrice}</td>
-                      <td className="px-4 py-4 align-top">
-                        <div className="flex items-center gap-2">
-                          <button onClick={() => updateQuantity(item.id, "dec")}
-                            className="px-3 py-1 border rounded-sm bg-[#74202D] text-white hover:bg-transparent hover:text-[#74202D] transition-all duration-300 cursor-pointer">
-                            -
-                          </button>
-                          <span>{item.quantity}</span>
-                          <button onClick={() => updateQuantity(item.id, "inc")}
-                            className="px-3 py-1 border rounded-sm bg-[#74202D] text-white hover:bg-transparent hover:text-[#74202D] transition-all duration-300 cursor-pointer">
-                            +
-                          </button>
-                        </div>
-                      </td>
-                      <td className="px-4 py-4 align-top font-bold text-[#74202D]">₹{item.discountPrice * item.quantity}</td>
-                      <td className="px-4 py-4 align-top">
-                        <button onClick={() => removeItem(item.id)} className="text-[#74202D] hover:text-[#5c1b2b] transition-colors cursor-pointer">
-                          <FaTrash className="text-xl" />
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-              {cart.map((item) => (
-                <div key={item.id} className="rounded-lg border border-gray-300 bg-white p-4 shadow-lg">
-                  <img loading="lazy" decoding="async" src={item.img} alt={item.title} className="w-full h-44 object-cover rounded" />
-                  <div className="mt-4 space-y-3">
-                    <h2 className="font-semibold text-base truncate">{item.title}</h2>
-                    <p className="text-[#74202D] font-bold">₹{item.discountPrice}</p>
-                    <div className="flex items-center gap-2">
-                      <button onClick={() => updateQuantity(item.id, "dec")}
-                        className="px-3 py-1 border rounded-sm bg-[#74202D] text-white hover:bg-transparent hover:text-[#74202D] transition-all duration-300 cursor-pointer">
-                        -
-                      </button>
-                      <span>{item.quantity}</span>
-                      <button onClick={() => updateQuantity(item.id, "inc")}
-                        className="px-3 py-1 border rounded-sm bg-[#74202D] text-white hover:bg-transparent hover:text-[#74202D] transition-all duration-300 cursor-pointer">
-                        +
-                      </button>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <span className="font-semibold">Total</span>
-                      <span className="font-bold text-[#74202D]">₹{item.discountPrice * item.quantity}</span>
-                    </div>
-                    <button onClick={() => removeItem(item.id)} className="w-full rounded-md border border-[#74202D] py-2 text-sm font-semibold text-[#74202D] hover:bg-[#74202D] hover:text-white transition cursor-pointer">
-                      Remove
-                    </button>
-                  </div>
+            <>
+              {/* Desktop Table View (Only visible on desktop/tablet when List mode is selected) */}
+              {viewMode === "table" && (
+                <div className="hidden sm:block overflow-x-auto rounded-lg border border-gray-200 bg-white shadow-sm">
+                  <table className="min-w-full text-sm text-left">
+                    <thead className="bg-[#FEFAF8] text-gray-600">
+                      <tr>
+                        <th className="px-4 py-3">Product</th>
+                        <th className="px-4 py-3">Price</th>
+                        <th className="px-4 py-3">Quantity</th>
+                        <th className="px-4 py-3">Total</th>
+                        <th className="px-4 py-3">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {cart.map((item) => (
+                        <tr key={item.id} className="border-b border-gray-200 hover:bg-gray-50 transition">
+                          <td className="px-4 py-4 align-top">
+                            <div className="flex items-start gap-3">
+                              <Link to={`/shop/${item.id}`} className="shrink-0 group">
+                                <img
+                                  src={item.img}
+                                  alt={item.title}
+                                  onError={(e) => {
+                                    e.currentTarget.onerror = null;
+                                    e.currentTarget.src = "/images/silk/silk-1.jpg";
+                                  }}
+                                  className="w-20 h-20 object-cover rounded group-hover:opacity-90 transition cursor-pointer"
+                                />
+                              </Link>
+                              <div>
+                                <Link
+                                  to={`/shop/${item.id}`}
+                                  className="font-semibold hover:text-[#74202D] transition block"
+                                >
+                                  {item.title}
+                                </Link>
+                                <p className="text-sm text-gray-500">{item.category?.join(", ") || ""}</p>
+                              </div>
+                            </div>
+                          </td>
+                          <td className="px-4 py-4 align-top font-semibold text-[#74202D]">₹{item.discountPrice}</td>
+                          <td className="px-4 py-4 align-top">
+                            <div className="flex items-center gap-2">
+                              <button onClick={() => updateQuantity(item.id, "dec")}
+                                className="px-3 py-1 border rounded-sm bg-[#74202D] text-white hover:bg-transparent hover:text-[#74202D] transition-all duration-300 cursor-pointer">
+                                -
+                              </button>
+                              <span>{item.quantity}</span>
+                              <button onClick={() => updateQuantity(item.id, "inc")}
+                                className="px-3 py-1 border rounded-sm bg-[#74202D] text-white hover:bg-transparent hover:text-[#74202D] transition-all duration-300 cursor-pointer">
+                                +
+                              </button>
+                            </div>
+                          </td>
+                          <td className="px-4 py-4 align-top font-bold text-[#74202D]">₹{item.discountPrice * item.quantity}</td>
+                          <td className="px-4 py-4 align-top">
+                            <button onClick={() => removeItem(item.id)} className="text-[#74202D] hover:text-[#5c1b2b] transition-colors cursor-pointer">
+                              <FaTrash className="text-xl" />
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
                 </div>
-              ))}
-            </div>
+              )}
+
+              {/* Grid View (Always active on mobile, and active on desktop when Grid mode is selected) */}
+              <div className={`${viewMode === "table" ? "block sm:hidden" : "grid"} grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5`}>
+                {cart.map((item) => (
+                  <div key={item.id} className="rounded-lg border border-gray-300 bg-white p-4 shadow-lg group">
+                    <Link to={`/shop/${item.id}`} className="block overflow-hidden rounded">
+                      <img
+                        loading="lazy"
+                        decoding="async"
+                        src={item.img}
+                        alt={item.title}
+                        onError={(e) => {
+                          e.currentTarget.onerror = null;
+                          e.currentTarget.src = "/images/silk/silk-1.jpg";
+                        }}
+                        className="w-full h-44 object-cover rounded transition-transform duration-300 group-hover:scale-105 cursor-pointer"
+                      />
+                    </Link>
+                    <div className="mt-4 space-y-3">
+                      <Link
+                        to={`/shop/${item.id}`}
+                        className="font-semibold text-base truncate block hover:text-[#74202D] transition"
+                      >
+                        {item.title}
+                      </Link>
+                      <p className="text-[#74202D] font-bold">₹{item.discountPrice}</p>
+                      <div className="flex items-center gap-2">
+                        <button onClick={() => updateQuantity(item.id, "dec")}
+                          className="px-3 py-1 border rounded-sm bg-[#74202D] text-white hover:bg-transparent hover:text-[#74202D] transition-all duration-300 cursor-pointer">
+                          -
+                        </button>
+                        <span>{item.quantity}</span>
+                        <button onClick={() => updateQuantity(item.id, "inc")}
+                          className="px-3 py-1 border rounded-sm bg-[#74202D] text-white hover:bg-transparent hover:text-[#74202D] transition-all duration-300 cursor-pointer">
+                          +
+                        </button>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="font-semibold">Total</span>
+                        <span className="font-bold text-[#74202D]">₹{item.discountPrice * item.quantity}</span>
+                      </div>
+                      <button onClick={() => removeItem(item.id)} className="w-full rounded-md border border-[#74202D] py-2 text-sm font-semibold text-[#74202D] hover:bg-[#74202D] hover:text-white transition cursor-pointer">
+                        Remove
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </>
           )}
 
           {/* Clear Cart */}

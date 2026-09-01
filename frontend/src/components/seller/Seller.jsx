@@ -101,7 +101,7 @@ const Seller = () => {
                       e.currentTarget.onerror = null;
                       e.currentTarget.src = "/images/silk/silk-1.jpg";
                     }}
-                    className="sm:h-auto lg:h-auto 2xl:h-75 w-full rounded-t-lg object-cover object-top transition duration-300 group-hover:scale-[1.05]"
+                    className="h-60 sm:h-auto lg:h-auto 2xl:h-75 w-full rounded-t-lg object-cover object-top transition duration-300 group-hover:scale-[1.05]"
                     whileHover={{ scale: 1.05 }}
                     transition={{ duration: 0.3 }}
                   />
@@ -176,7 +176,7 @@ const Seller = () => {
                 <button
                   onClick={() => addToCart(saree)}
                   disabled={cartIds.includes(saree.id)}
-                  className={`w-full mt-4 rounded-md py-2 text-sm font-semibold transition-all duration-300
+                  className={`w-full mt-4 rounded py-2 text-sm font-semibold transition-all duration-300
                     ${cartIds.includes(saree.id)
                       ? "border border-gray-200 bg-gray-200 text-gray-500 cursor-not-allowed"
                       : "border border-[#74202D] text-[#74202D] hover:bg-[#74202D] hover:text-white cursor-pointer"

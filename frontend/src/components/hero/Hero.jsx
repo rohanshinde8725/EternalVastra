@@ -5,6 +5,7 @@ import 'swiper/css/pagination'
 import { Pagination, Autoplay } from 'swiper/modules'
 import FadeUp from "../animations/FadeUp";
 import FadeImage from "../animations/FadeImage";
+import { Link } from 'react-router-dom'
 
 const Hero = () => {
   return (
@@ -47,12 +48,13 @@ const Hero = () => {
                 </p>
               </FadeUp>
               <FadeUp delay={0.8} viewport={{ once: false }}>
-                <button
-                  className="bg-[#74202D] text-white uppercase py-2 px-4 md:px-8 rounded-lg
-                  hover:bg-white border-2 border-[#74202D] hover:text-[#74202D]
-                  cursor-pointer transition text-xs font-semibold">
-                  Shop Now
-                </button>
+                <Link to="/shop">
+                  <button
+                    className="bg-[#74202D] text-white uppercase py-2 px-4 md:px-8 rounded hover:bg-white border-2 border-[#74202D] hover:text-[#74202D]
+                    cursor-pointer transition text-xs font-semibold">
+                    Shop Now
+                  </button>
+                </Link>
               </FadeUp>
             </div>
           </div>

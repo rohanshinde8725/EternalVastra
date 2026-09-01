@@ -228,7 +228,7 @@ const Shop = () => {
       <div className="container mx-auto py-10">
 
         {/* Mobile Filter */}
-        <div className="lg:hidden flex justify-between items-center mb-5">
+        <div className="lg:hidden flex justify-between items-center mb-5 px-5">
           <button  onClick={() => setShowFilter(true)}
             className="flex items-center gap-2 border px-4 py-2 rounded-md" >
             <MdMenuOpen />
