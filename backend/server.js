@@ -58,6 +58,10 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads"), staticOption
 app.use("/images", express.static(path.join(__dirname, "uploads", "images"), staticOptions));
 app.use("/uploads/admin", express.static(path.join(__dirname, "uploads", "admin"), staticOptions));
 
+app.get("/", (_req, res) => {
+	res.send("EternalVastra API is running successfully!");
+});
+
 app.get("/api/health", (_req, res) => {
 	res.json({ status: "ok", service: "EternalVastra API" });
 });
