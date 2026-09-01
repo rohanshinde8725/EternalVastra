@@ -333,19 +333,15 @@ const Header = () => {
                   if (!currentUser) navigate("/signin");
                   else setIsUserMenuOpen((prev) => !prev);
                 }}
-                className={`flex items-center gap-2 p-2 rounded-full transition cursor-pointer ${
+                className={`p-2.5 rounded-full transition cursor-pointer flex items-center justify-center ${
                   currentUser
-                    ? "bg-rose-50 text-[#6B1527] ring-1 ring-rose-200"
-                    : "text-slate-700 hover:text-[#6B1527] hover:bg-rose-50/60"
+                    ? "bg-rose-50 text-[#74202D] ring-1 ring-rose-200 hover:bg-rose-100/70"
+                    : "text-slate-700 hover:text-[#74202D] hover:bg-rose-50/60"
                 }`}
                 title={currentUser ? currentUser.name : "Sign In"}
+                aria-label={currentUser ? "Account Profile" : "Sign In"}
               >
                 <FiUser className="text-xl" />
-                {currentUser && (
-                  <span className="text-xs font-bold max-w-[90px] truncate pr-1">
-                    {currentUser.name?.split(" ")[0]}
-                  </span>
-                )}
               </button>
 
               {/* User Dropdown */}
