@@ -333,11 +333,7 @@ const Header = () => {
                   if (!currentUser) navigate("/signin");
                   else setIsUserMenuOpen((prev) => !prev);
                 }}
-                className={`p-2.5 rounded-full transition cursor-pointer flex items-center justify-center ${
-                  currentUser
-                    ? "bg-rose-50 text-[#74202D] ring-1 ring-rose-200 hover:bg-rose-100/70"
-                    : "text-slate-700 hover:text-[#74202D] hover:bg-rose-50/60"
-                }`}
+                className="p-2.5 rounded-full text-slate-700 hover:text-[#74202D] hover:bg-rose-50/60 transition cursor-pointer flex items-center justify-center"
                 title={currentUser ? currentUser.name : "Sign In"}
                 aria-label={currentUser ? "Account Profile" : "Sign In"}
               >
