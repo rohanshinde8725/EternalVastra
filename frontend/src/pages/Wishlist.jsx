@@ -2,8 +2,10 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Rating from "../components/rating/Rating";
 import { HiOutlineArrowLeft } from "react-icons/hi";
+import { useToast } from "../context/ToastContext";
 
 const Wishlist = () => {
+  const { showToast } = useToast();
   const [wishlist, setWishlist] = useState([]);
 
   useEffect(() => {
@@ -12,10 +14,12 @@ const Wishlist = () => {
   }, []);
 
   const removeFromWishlist = (productId) => {
+    const itemToRemove = wishlist.find((item) => item.id === productId);
     const updatedWishlist = wishlist.filter((item) => item.id !== productId);
     setWishlist(updatedWishlist);
     localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
     window.dispatchEvent(new Event("wishlistUpdated"));
+    showToast.info(`Removed "${itemToRemove?.title || "Item"}" from wishlist.`);
   };
 
   const addToCart = (product) => {
@@ -31,6 +35,7 @@ const Wishlist = () => {
 
     localStorage.setItem("cart", JSON.stringify(updatedCart));
     window.dispatchEvent(new Event("cartUpdated"));
+    showToast.success(`Added "${product.title}" to cart!`);
   };
 
   return (

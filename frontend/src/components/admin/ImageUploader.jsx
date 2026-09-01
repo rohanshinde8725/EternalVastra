@@ -54,10 +54,10 @@ const ImageUploader = ({ value, onChange, label = "Image" }) => {
       const data = await res.json();
       const serverUrl = `${API_BASE_URL}${data.url}`;
       setPreview(serverUrl);
-      onChange(serverUrl);
+      onChange(data.url);
       showToast.success(`"${file.name}" uploaded successfully!`);
     } catch {
-      // Fallback: keep local blob URL (will not persist on refresh)
+      // Fallback: keep local blob URL
       onChange(localUrl);
       showToast.warning("Using local preview — could not save to server.");
     } finally {

@@ -7,8 +7,10 @@ import Rating from "../rating/Rating";
 import useProducts from "../../hooks/useProducts";
 import FadeImage from "../animations/FadeImage";
 import FadeUp from "../animations/FadeUp";
+import { useToast } from "../../context/ToastContext";
 
 const Seller = () => {
+  const { showToast } = useToast();
   const { products: sarees } = useProducts();
 
   const [cartIds, setCartIds] = useState([]);
@@ -49,6 +51,12 @@ const Seller = () => {
     localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
     setWishlistIds(updatedWishlist.map((item) => item.id));
     window.dispatchEvent(new Event("wishlistUpdated"));
+
+    if (!isInWishlist) {
+      showToast.success(`Saved "${product.title}" to wishlist!`);
+    } else {
+      showToast.info(`Removed "${product.title}" from wishlist.`);
+    }
   };
 
   const addToCart = (product) => {
@@ -60,6 +68,7 @@ const Seller = () => {
     localStorage.setItem("cart", JSON.stringify(updatedCart));
     setCartIds(updatedCart.map((item) => item.id));
     window.dispatchEvent(new Event("cartUpdated"));
+    showToast.success(`Added "${product.title}" to cart!`);
   };
 
   return (
@@ -88,6 +97,10 @@ const Seller = () => {
                     alt={saree.title}
                     loading="lazy"
                     decoding="async"
+                    onError={(e) => {
+                      e.currentTarget.onerror = null;
+                      e.currentTarget.src = "/images/silk/silk-1.jpg";
+                    }}
                     className="sm:h-auto lg:h-auto 2xl:h-75 w-full rounded-t-lg object-cover object-top transition duration-300 group-hover:scale-[1.05]"
                     whileHover={{ scale: 1.05 }}
                     transition={{ duration: 0.3 }}

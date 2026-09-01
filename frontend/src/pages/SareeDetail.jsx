@@ -110,27 +110,33 @@ const SareeDetail = () => {
     showToast.success(`Added "${productItem.title}" to cart!`);
   };
 
-  const toggleWishlist = (targetProduct = product) => {
-    if (!targetProduct) return;
-    if (targetProduct.id === product?.id) {
-      setSelectedImage(product.img);
-    }
-    const existingWishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
-    const isInWishlist = existingWishlist.some((item) => item.id === targetProduct.id);
+  const toggleWishlist = (targetProduct) => {
+    // If targetProduct is a React Click Event or null, default to current product
+    const itemToToggle = (targetProduct && typeof targetProduct.id === "number") ? targetProduct : product;
+    if (!itemToToggle || !itemToToggle.id) return;
+
+    const rawWishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+    // Sanitize any malformed entries
+    const existingWishlist = Array.isArray(rawWishlist) ? rawWishlist.filter((item) => item && item.id) : [];
+
+    const isInWishlist = existingWishlist.some((item) => item.id === itemToToggle.id);
     const updatedWishlist = isInWishlist
-      ? existingWishlist.filter((item) => item.id !== targetProduct.id)
-      : [...existingWishlist, targetProduct];
+      ? existingWishlist.filter((item) => item.id !== itemToToggle.id)
+      : [...existingWishlist, itemToToggle];
 
     localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
     setWishlistIds(updatedWishlist.map((item) => item.id));
-    if (targetProduct.id === product?.id) {
+
+    if (itemToToggle.id === product?.id) {
       setIsWishlisted(!isInWishlist);
     }
+
     window.dispatchEvent(new Event("wishlistUpdated"));
+
     if (!isInWishlist) {
-      showToast.success(`Saved "${targetProduct.title}" to wishlist!`);
+      showToast.success(`Saved "${itemToToggle.title}" to wishlist!`);
     } else {
-      showToast.info(`Removed "${targetProduct.title}" from wishlist.`);
+      showToast.info(`Removed "${itemToToggle.title}" from wishlist.`);
     }
   };
 
@@ -246,6 +252,10 @@ const SareeDetail = () => {
                 key={selectedImage || product.img}
                 src={selectedImage || product.img}
                 alt={product.title}
+                onError={(e) => {
+                  e.currentTarget.onerror = null;
+                  e.currentTarget.src = "/images/silk/silk-1.jpg";
+                }}
                 initial={{ opacity: 0.6, scale: 1.02 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
@@ -259,9 +269,9 @@ const SareeDetail = () => {
 
               {/* Wishlist Button */}
               <button
-                onClick={toggleWishlist}
+                onClick={() => toggleWishlist(product)}
                 aria-label={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
-                className={`absolute right-3 top-3 sm:right-4 sm:top-4 rounded-lg p-2.5 sm:p-3 transition-all duration-300 shadow-xs cursor-pointer ${
+                className={`absolute rounded-full right-3 top-3 sm:right-4 sm:top-4 rounded p-2.5 sm:p-2 transition-all duration-300 shadow-xs cursor-pointer ${
                   isWishlisted
                     ? "bg-[#75212e] text-white"
                     : "bg-white/95 text-[#75212e] hover:bg-[#75212e] hover:text-white"
@@ -295,6 +305,10 @@ const SareeDetail = () => {
                   <img
                     src={thumb}
                     alt={`${product.title} thumbnail ${idx + 1}`}
+                    onError={(e) => {
+                      e.currentTarget.onerror = null;
+                      e.currentTarget.src = "/images/silk/silk-1.jpg";
+                    }}
                     className="h-16 sm:h-20 w-full object-cover object-top rounded-lg"
                   />
                 </button>
@@ -355,7 +369,7 @@ const SareeDetail = () => {
               <button
                 onClick={handleAddToCart}
                 disabled={cartIds.includes(product.id)}
-                className={`py-3 sm:py-3.5 px-4 text-xs sm:text-sm rounded-lg font-bold uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2 shadow-xs cursor-pointer ${
+                className={`py-2.5 px-4 text-xs sm:text-sm rounded font-bold uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2 shadow-xs cursor-pointer ${
                   cartIds.includes(product.id)
                     ? "bg-gray-200 text-gray-500 border border-gray-300 cursor-not-allowed"
                     : "bg-[#75212e] text-white border-2 border-[#75212e] hover:bg-white hover:text-[#75212e]"
@@ -368,7 +382,7 @@ const SareeDetail = () => {
                 href={`https://wa.me/?text=${whatsappMessage}`}
                 target="_blank"
                 rel="noreferrer"
-                className="bg-[#20c968] border-2 border-[#20c968] py-3 sm:py-3.5 px-4 text-center text-xs sm:text-sm font-bold text-white rounded-lg hover:bg-white hover:text-[#20c968] transition-all duration-300 flex items-center justify-center gap-2 shadow-xs"
+                className="bg-[#20c968] border-2 border-[#20c968] py-2.5 px-4 text-center text-xs sm:text-sm font-bold text-white rounded hover:bg-white hover:text-[#20c968] transition-all duration-300 flex items-center justify-center gap-2 shadow-xs"
               >
                 <FaWhatsapp className="text-base sm:text-lg" />
                 <span>Buy on WhatsApp</span>
@@ -376,10 +390,10 @@ const SareeDetail = () => {
 
               <a
                 href="tel:+919820087250"
-                className="bg-white border-2 border-[#75212e] py-3 sm:py-3.5 px-4 text-center text-xs sm:text-sm font-bold text-[#75212e] rounded-lg hover:bg-[#75212e] hover:text-white transition-all duration-300 flex items-center justify-center gap-2 shadow-xs"
+                className="bg-white border-2 border-[#75212e] py-2.5 px-4 text-center text-xs sm:text-sm font-bold text-[#75212e] rounded hover:bg-[#75212e] hover:text-white transition-all duration-300 flex items-center justify-center gap-2 shadow-xs"
               >
                 <FaPhoneAlt className="text-xs sm:text-sm" />
-                <span>Call Concierge</span>
+                <span>Call Now</span>
               </a>
             </div>
 
@@ -432,21 +446,21 @@ const SareeDetail = () => {
                 <button
                   onClick={shareProduct}
                   aria-label="Share product on WhatsApp"
-                  className="rounded-lg border border-[#20b86a] p-2 text-[#20b86a] cursor-pointer hover:bg-[#20b86a] hover:text-white transition-all duration-300"
+                  className="rounded border border-[#20b86a] p-2 text-[#20b86a] cursor-pointer hover:bg-[#20b86a] hover:text-white transition-all duration-300"
                 >
                   <FaWhatsapp className="text-sm" />
                 </button>
                 <button
                   aria-label="Share on Instagram"
                   onClick={shareProduct}
-                  className="rounded-lg border border-[#e9829a] p-2 text-[#e9829a] cursor-pointer hover:bg-[#e9829a] hover:text-white transition-all duration-300"
+                  className="rounded border border-[#e9829a] p-2 text-[#e9829a] cursor-pointer hover:bg-[#e9829a] hover:text-white transition-all duration-300"
                 >
                   <FaInstagram className="text-sm" />
                 </button>
                 <button
                   aria-label="Share on Facebook"
                   onClick={shareProduct}
-                  className="rounded-lg border border-[#4285d4] p-2 text-[#4285d4] cursor-pointer hover:bg-[#4285d4] hover:text-white transition-all duration-300"
+                  className="rounded border border-[#4285d4] p-2 text-[#4285d4] cursor-pointer hover:bg-[#4285d4] hover:text-white transition-all duration-300"
                 >
                   <FaFacebookF className="text-sm" />
                 </button>
@@ -482,7 +496,11 @@ const SareeDetail = () => {
                         loading="lazy"
                         src={item.img}
                         alt={item.title}
-                        className="w-full h-80 sm:h-90 2xl:object-center object-cover object-top transition duration-300 group-hover:scale-[1.05]"
+                        onError={(e) => {
+                          e.currentTarget.onerror = null;
+                          e.currentTarget.src = "/images/silk/silk-1.jpg";
+                        }}
+                        className="w-full h-85 2xl:object-top object-cover object-top transition duration-300 group-hover:scale-[1.05]"
                       />
                     </Link>
                     
@@ -542,7 +560,7 @@ const SareeDetail = () => {
 
                     <Link
                       to={`/shop/${item.id}`}
-                      className="w-full mt-4 block text-center rounded-lg py-2 text-sm font-medium border border-[#74202D] text-[#74202D] hover:bg-[#74202D] hover:text-white transition cursor-pointer"
+                      className="w-full mt-4 block text-center rounded py-2 text-sm font-medium border border-[#74202D] text-[#74202D] hover:bg-[#74202D] hover:text-white transition cursor-pointer"
                     >
                       View Saree
                     </Link>

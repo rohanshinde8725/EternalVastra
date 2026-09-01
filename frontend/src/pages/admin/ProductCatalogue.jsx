@@ -28,6 +28,7 @@ const ProductCatalogue = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [editingProduct, setEditingProduct] = useState(null);
+  const [productToDelete, setProductToDelete] = useState(null);
 
   // New product form state
   const [formData, setFormData] = useState({
@@ -452,9 +453,9 @@ const ProductCatalogue = () => {
                           <FiEdit3 className="text-base" />
                         </button>
                         <button
-                          onClick={() => handleDeleteToRecycleBin(product)}
+                          onClick={() => setProductToDelete(product)}
                           className="p-2 rounded-lg text-slate-500 hover:text-rose-600 hover:bg-rose-50 transition cursor-pointer"
-                          title="Move to Recycle Bin"
+                          title="Delete Product"
                         >
                           <FiTrash2 className="text-base" />
                         </button>
@@ -854,6 +855,65 @@ const ProductCatalogue = () => {
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* Delete Confirmation Modal */}
+      {productToDelete && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 border border-slate-200 text-center animate-in fade-in zoom-in-95">
+            <div className="w-14 h-14 rounded-full bg-rose-50 text-rose-600 flex items-center justify-center mx-auto mb-4 border border-rose-100 shadow-xs">
+              <FiTrash2 className="text-2xl" />
+            </div>
+
+            <h3 className="text-xl font-bold text-slate-900 mb-2">Delete Saree Product?</h3>
+            <p className="text-sm text-slate-500 mb-5 leading-relaxed">
+              Are you sure you want to delete <span className="font-semibold text-slate-800">"{productToDelete.title}"</span>? This item will be moved to the Recycle Bin.
+            </p>
+
+            {/* Saree Preview Card */}
+            <div className="flex items-center gap-3.5 p-3 rounded-xl bg-slate-50 border border-slate-200 mb-6 text-left">
+              <img
+                src={productToDelete.img}
+                alt={productToDelete.title}
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = "/images/silk/silk-1.jpg";
+                }}
+                className="w-12 h-12 rounded-lg object-cover bg-white border border-slate-200 flex-shrink-0"
+              />
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-bold text-slate-900 truncate">{productToDelete.title}</p>
+                <div className="flex items-center gap-2 mt-0.5 text-xs text-slate-500 font-medium">
+                  <span>ID #{productToDelete.id}</span>
+                  <span>•</span>
+                  <span className="text-[#75212e] font-semibold">₹{productToDelete.discountPrice}</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Buttons */}
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                onClick={() => setProductToDelete(null)}
+                className="flex-1 py-2.5 px-4 rounded-xl border border-slate-200 text-slate-700 font-semibold hover:bg-slate-50 transition cursor-pointer text-sm"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  handleDeleteToRecycleBin(productToDelete);
+                  setProductToDelete(null);
+                }}
+                className="flex-1 py-2.5 px-4 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-semibold shadow-xs transition flex items-center justify-center gap-2 cursor-pointer text-sm"
+              >
+                <FiTrash2 className="text-base" />
+                <span>Yes, Delete</span>
+              </button>
+            </div>
           </div>
         </div>
       )}

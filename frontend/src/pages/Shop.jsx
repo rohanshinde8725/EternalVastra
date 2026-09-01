@@ -6,6 +6,7 @@ import { FiEye } from "react-icons/fi";
 import Rating from "../components/rating/Rating";
 import useProducts from "../hooks/useProducts";
 import { API_BASE_URL } from "../api/products";
+import { useToast } from "../context/ToastContext";
 
 const DEFAULT_CATEGORIES = [
   "Silk Sarees",
@@ -16,6 +17,7 @@ const DEFAULT_CATEGORIES = [
 ];
 
 const Shop = () => {
+  const { showToast } = useToast();
   const { products: sarees, loading, error } = useProducts();
   const [categoryList, setCategoryList] = useState(["All", ...DEFAULT_CATEGORIES]);
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -101,6 +103,7 @@ const Shop = () => {
     localStorage.setItem("cart", JSON.stringify(updatedCart));
     setCartIds(updatedCart.map((item) => item.id));
     window.dispatchEvent(new Event("cartUpdated"));
+    showToast.success(`Added "${product.title}" to cart!`);
   };
 
   const toggleWishlist = (product) => {
@@ -113,6 +116,12 @@ const Shop = () => {
     localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
     setWishlistIds(updatedWishlist.map((item) => item.id));
     window.dispatchEvent(new Event("wishlistUpdated"));
+
+    if (!isWishlisted) {
+      showToast.success(`Saved "${product.title}" to wishlist!`);
+    } else {
+      showToast.info(`Removed "${product.title}" from wishlist.`);
+    }
   };
 
   const handleCategoryChange = (cat) => {
@@ -416,7 +425,16 @@ const Shop = () => {
                 >
                   <div className="relative overflow-hidden">
                     <Link to={`/shop/${item.id}`} className="block">
-                    <img loading="lazy" src={item.img} alt={item.title} className="w-full h-90 2xl:object-center object-cover object-top transition duration-300 group-hover:scale-[1.05]"/>
+                      <img
+                        loading="lazy"
+                        src={item.img}
+                        alt={item.title}
+                        onError={(e) => {
+                          e.currentTarget.onerror = null;
+                          e.currentTarget.src = "/images/silk/silk-1.jpg";
+                        }}
+                        className="w-full h-90 2xl:object-center object-cover object-top transition duration-300 group-hover:scale-[1.05]"
+                      />
                     </Link>
                     <div className="pointer-events-none absolute inset-0 flex items-start justify-between bg-black/10 p-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                       <span className="rounded-full bg-[#e9829a] px-2.5 py-1 text-[10px] font-bold uppercase text-white shadow-sm">

@@ -399,25 +399,27 @@ const BlogDetail = () => {
             {relatedStories.map((rel) => (
               <article
                 key={rel._id || rel.id}
-                className="bg-white rounded-2xl border border-slate-200/90 shadow-sm overflow-hidden flex flex-col justify-between hover:shadow-lg transition group"
+                className="bg-white rounded-lg border border-slate-200/90 shadow-sm overflow-hidden flex flex-col justify-between transition group"
               >
                 <div>
-                  <div className="relative h-44 bg-slate-100 overflow-hidden">
-                    <img
-                      src={
-                        rel.cover?.startsWith("http")
-                          ? rel.cover
-                          : rel.cover
-                          ? `${API_BASE_URL}${rel.cover}`
-                          : "/images/silk/silk-2.jpg"
-                      }
-                      alt={rel.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <span className="absolute bottom-3 left-3 bg-[#F6E6D8]/95 text-[#6B1527] text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-sm shadow-xs border border-[#E9D1BE]">
-                      {rel.category || "Style Guide"}
-                    </span>
-                  </div>
+                  <Link to={`/blog/${rel._id || rel.id}`}>
+                    <div className="relative h-80 bg-slate-100 overflow-hidden">
+                      <img
+                        src={
+                          rel.cover?.startsWith("http")
+                            ? rel.cover
+                            : rel.cover
+                            ? `${API_BASE_URL}${rel.cover}`
+                            : "/images/silk/silk-2.jpg"
+                        }
+                        alt={rel.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 cursor-pointer"
+                      />
+                      <span className="absolute bottom-3 left-3 bg-[#F6E6D8]/95 text-[#6B1527] text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-sm shadow-xs border border-[#E9D1BE]">
+                        {rel.category || "Style Guide"}
+                      </span>
+                    </div>
+                  </Link>
 
                   <div className="p-4 sm:p-5">
                     <div className="flex items-center justify-between text-xs text-slate-400 mb-2 font-medium">
