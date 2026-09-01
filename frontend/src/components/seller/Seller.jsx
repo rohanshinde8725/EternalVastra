@@ -107,8 +107,8 @@ const Seller = () => {
                       type="button"
                       onClick={() => toggleSellerWishlist(saree)}
                       aria-label={wishlistIds.includes(saree.id) ? "Remove from wishlist" : "Add to wishlist"}
-                      className={`flex h-9 w-9 items-center justify-center rounded-full bg-white shadow-sm transition hover:bg-[#6C2C12] hover:text-white ${
-                        wishlistIds.includes(saree.id) ? "text-[#6C2C12]" : "text-[#6C2C12]"
+                      className={`flex h-9 w-9 items-center justify-center rounded-full bg-white shadow-sm transition hover:bg-[#75212e] hover:text-white ${
+                        wishlistIds.includes(saree.id) ? "text-[#75212e]" : "text-[#75212e]"
                       }`}
                     >
                       <CiHeart className="text-xl" />
@@ -117,7 +117,7 @@ const Seller = () => {
                     <Link
                       to={`/shop/${saree.id}`}
                       aria-label={`View ${saree.title}`}
-                      className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-[#6C2C12] shadow-sm transition hover:bg-[#6C2C12] hover:text-white"
+                      className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-[#75212e] shadow-sm transition hover:bg-[#75212e] hover:text-white"
                     >
                       <FiEye className="text-lg" />
                     </Link>

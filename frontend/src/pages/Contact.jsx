@@ -73,7 +73,7 @@ const Contact = () => {
     <div>
       {/* Banner Start */}
       <div
-        className="bg-[url('/images/banner/contact-banner.png')] bg-cover bg-center h-75 sm:h-100 md:h-125 lg:h-162.5 2xl:h-200 w-full 
+        className="bg-[url('/images/banner/contact-banner.png')] bg-cover bg-center h-60 w-full 
         flex items-center px-5 md:px-16 lg:px-24 relative overflow-hidden"
       >
         <div className="w-full lg:w-[70%] lg:ml-10 absolute">
@@ -100,7 +100,7 @@ const Contact = () => {
       {/* TrustBar Start here */}
       <div
         className="container grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 bg-[#FEFAF8] mt-20 mx-auto 
-        rounded-xl overflow-hidden shadow-sm border border-gray-200">
+        rounded-lg overflow-hidden shadow-sm border border-gray-200">
         {info.map((item, index) => (
           <div
             key={index}
@@ -126,7 +126,7 @@ const Contact = () => {
       {/* Form Start here */}
       <div className="container flex flex-col lg:flex-row gap-10 mx-auto mt-20 mb-0">
         {/* Form */}
-        <div className="lg:w-1/2 border border-gray-300 rounded-sm p-10 px-5">
+        <div className="lg:w-1/2 border border-gray-300 rounded-lg p-10 px-5">
           <h1 className="uppercase text-center text-2xl font-semibold mb-6 text-[#8f3f50]">
             Send Us A Message
           </h1>
@@ -141,7 +141,7 @@ const Contact = () => {
                   value={formData.firstName}
                   onChange={handleChange}
                   id="firstName"
-                  className="w-full py-2 px-4 border border-gray-300 rounded-sm outline-none focus:border-[#74202D]"
+                  className="w-full py-2 px-4 border border-gray-300 rounded-lg outline-none focus:border-[#74202D]"
                   type="text"
                   placeholder="Enter Your First Name"
                 />
@@ -154,7 +154,7 @@ const Contact = () => {
                   value={formData.lastName}
                   onChange={handleChange}
                   id="lastName"
-                  className="w-full py-2 px-4 border border-gray-300 rounded-sm outline-none focus:border-[#74202D]"
+                  className="w-full py-2 px-4 border border-gray-300 rounded-lg outline-none focus:border-[#74202D]"
                   type="text"
                   placeholder="Enter Your Last Name"
                 />
@@ -170,7 +170,7 @@ const Contact = () => {
                   value={formData.phoneNo}
                   onChange={handleChange}
                   id="phone"
-                  className="w-full py-2 px-4 border border-gray-300 rounded-sm outline-none focus:border-[#74202D]"
+                  className="w-full py-2 px-4 border border-gray-300 rounded-lg outline-none focus:border-[#74202D]"
                   type="tel"
                   placeholder="Enter your Phone No"
                 />
@@ -183,7 +183,7 @@ const Contact = () => {
                   value={formData.email}
                   onChange={handleChange}
                   id="email"
-                  className="w-full py-2 px-4 border border-gray-300 rounded-sm outline-none focus:border-[#74202D]"
+                  className="w-full py-2 px-4 border border-gray-300 rounded-lg outline-none focus:border-[#74202D]"
                   type="email"
                   placeholder="Enter Your Email"
                 />
@@ -198,7 +198,7 @@ const Contact = () => {
                 value={formData.subject}
                 onChange={handleChange}
                 id="subject"
-                className="w-full py-2 px-4 border border-gray-300 rounded-sm outline-none focus:border-[#74202D]"
+                className="w-full py-2 px-4 border border-gray-300 rounded-lg outline-none focus:border-[#74202D]"
                 type="text"
                 placeholder="Write Your Subject"
               />
@@ -214,7 +214,7 @@ const Contact = () => {
                 onChange={handleChange}
                 id="message"
                 rows="5"
-                className="w-full py-2 px-4 border border-gray-300 rounded-sm outline-none resize-none focus:border-[#74202D]"
+                className="w-full py-2 px-4 border border-gray-300 rounded-lg outline-none resize-none focus:border-[#74202D]"
                 placeholder="Write Your Message"
               />
             </div>
@@ -224,7 +224,7 @@ const Contact = () => {
             onClick={handleSubmit}
               type="submit"
               className="
-                bg-[#74202D] text-white uppercase py-2 px-8 rounded-sm
+                bg-[#74202D] text-white uppercase py-2 px-8 rounded-lg
                 hover:bg-white border-2 border-[#74202D]
                 hover:text-[#74202D] cursor-pointer
                 transition text-sm font-semibold"
@@ -235,11 +235,11 @@ const Contact = () => {
         </div>
 
         {/* Our Store */}
-        <div className="lg:w-1/2 border border-gray-300 rounded-sm p-10 px-5">
+        <div className="lg:w-1/2 border border-gray-300 rounded-lg p-10 px-5">
         <h2 className="text-2xl font-semibold tracking-wide">
             OUR STORE
         </h2>
-          <div className="max-w-6xl mx-auto rounded-xl overflow-hidden">
+          <div className="max-w-6xl mx-auto rounded-lg overflow-hidden">
             <div className="grid grid-cols-1 md:grid-cols-2 items-center">
               {/* Left Content */}
               <div className="">
@@ -275,7 +275,7 @@ const Contact = () => {
                 </div>
 
                 <button
-                    className="bg-white text-[#74202D] uppercase py-1.5 px-4 rounded-sm cursor-pointer 
+                    className="bg-white text-[#74202D] uppercase py-1.5 px-4 rounded-lg cursor-pointer 
                     hover:bg-[#74202D] border-2 border-[#74202D] hover:text-white transition-all 
                     duration-300 font-semibold text-sm mt-5 flex items-center gap-3"
                 >
@@ -290,7 +290,7 @@ const Contact = () => {
                   decoding="async"
                   src="/images/store.jpg"
                   alt="store"
-                  className=" w-full h-102.5 object-cover rounded-xl" />
+                  className=" w-full h-102.5 object-cover rounded-lg" />
               </div>
             </div>
           </div>

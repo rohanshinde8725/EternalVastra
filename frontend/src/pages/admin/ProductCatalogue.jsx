@@ -37,6 +37,8 @@ const ProductCatalogue = () => {
     actualPrice: "",
     tag: "New",
     stock: "20",
+    material: "",
+    description: "",
     img: `${API_BASE_URL}/images/silk/silk-1.jpg`,
   });
 
@@ -49,6 +51,8 @@ const ProductCatalogue = () => {
     tag: "",
     stock: "",
     rating: 5,
+    material: "",
+    description: "",
     img: "",
   });
 
@@ -134,8 +138,10 @@ const ProductCatalogue = () => {
       discountPrice: product.discountPrice || "",
       actualPrice: product.actualPrice || product.discountPrice || "",
       tag: product.tag || "New",
-      stock: product.stock || 15,
+      stock: product.stock || product.inventory || 15,
       rating: product.rating || 5,
+      material: product.details?.material || product.material || "",
+      description: product.details?.description || product.description || "",
       img: product.img || `${API_BASE_URL}/images/silk/silk-1.jpg`,
     });
   };
@@ -155,6 +161,13 @@ const ProductCatalogue = () => {
       inventory: Number(editFormData.stock),
       rating: Number(editFormData.rating),
       img: editFormData.img,
+      material: editFormData.material?.trim() || "",
+      description: editFormData.description?.trim() || "",
+      details: {
+        ...(editingProduct.details || {}),
+        material: editFormData.material?.trim() || "",
+        description: editFormData.description?.trim() || "",
+      },
     };
 
     try {
@@ -213,48 +226,67 @@ const ProductCatalogue = () => {
 
   const handleAddProduct = async (e) => {
     e.preventDefault();
-    const newProduct = {
-      id: Date.now(),
-      title: formData.title,
+    if (!formData.title?.trim() || !formData.discountPrice) {
+      showToast.error("Please enter a saree title and sale price.");
+      return;
+    }
+
+    const payload = {
+      title: formData.title.trim(),
       category: [formData.category],
       discountPrice: Number(formData.discountPrice),
       actualPrice: Number(formData.actualPrice || formData.discountPrice),
-      tag: formData.tag,
+      tag: formData.tag?.trim() || "New",
       rating: 5.0,
-      stock: Number(formData.stock),
-      inventory: Number(formData.stock),
-      img: formData.img,
+      ratings: "24",
+      stock: Number(formData.stock || 20),
+      inventory: Number(formData.stock || 20),
+      material: formData.material?.trim() || "",
+      description: formData.description?.trim() || "",
+      details: {
+        material: formData.material?.trim() || "",
+        description: formData.description?.trim() || "",
+      },
+      img: formData.img || `${API_BASE_URL}/images/silk/silk-1.jpg`,
     };
 
     try {
       const res = await fetch(`${API_BASE_URL}/api/products`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newProduct),
+        body: JSON.stringify(payload),
       });
-      if (res.ok) {
-        const saved = await res.json();
-        setProducts([saved, ...products]);
-        showToast.success(`"${newProduct.title}" added to MongoDB database!`);
-      } else {
-        setProducts([newProduct, ...products]);
-        showToast.success(`"${newProduct.title}" added to catalogue.`);
-      }
-    } catch {
-      setProducts([newProduct, ...products]);
-      showToast.info(`"${newProduct.title}" added locally.`);
-    }
 
-    setIsAddModalOpen(false);
-    setFormData({
-      title: "",
-      category: "Silk Sarees",
-      discountPrice: "",
-      actualPrice: "",
-      tag: "New",
-      stock: "20",
-      img: `${API_BASE_URL}/images/silk/silk-1.jpg`,
-    });
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}));
+        throw new Error(errorData.message || `Server responded with ${res.status}`);
+      }
+
+      const saved = await res.json();
+      const formatted = {
+        ...saved,
+        img: saved.img?.startsWith("http") ? saved.img : `${API_BASE_URL}${saved.img}`,
+        stock: saved.inventory || payload.inventory,
+      };
+
+      setProducts((prev) => [formatted, ...prev]);
+      showToast.success(`"${payload.title}" saved permanently to MongoDB!`);
+      setIsAddModalOpen(false);
+      setFormData({
+        title: "",
+        category: "Silk Sarees",
+        discountPrice: "",
+        actualPrice: "",
+        tag: "New",
+        stock: "20",
+        material: "",
+        description: "",
+        img: `${API_BASE_URL}/images/silk/silk-1.jpg`,
+      });
+    } catch (err) {
+      console.error("Failed to add product:", err);
+      showToast.error(`Could not save product to database: ${err.message}`);
+    }
   };
 
   const { pages, start, end } = getPageNumbers();
@@ -635,6 +667,29 @@ const ProductCatalogue = () => {
                 </div>
               </div>
 
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="font-semibold text-slate-800 block mb-1.5">Material (Fabric)</label>
+                  <input
+                    type="text"
+                    placeholder="e.g. Delicate Organza, Pure Mulberry Silk"
+                    value={editFormData.material}
+                    onChange={(e) => setEditFormData({ ...editFormData, material: e.target.value })}
+                    className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 text-sm focus:outline-none focus:border-[#6B1527]"
+                  />
+                </div>
+                <div>
+                  <label className="font-semibold text-slate-800 block mb-1.5">Description (Optional)</label>
+                  <input
+                    type="text"
+                    placeholder="Custom saree summary or leave blank"
+                    value={editFormData.description}
+                    onChange={(e) => setEditFormData({ ...editFormData, description: e.target.value })}
+                    className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 text-sm focus:outline-none focus:border-[#6B1527]"
+                  />
+                </div>
+              </div>
+
               <ImageUploader
                 label="Product Image"
                 value={editFormData.img}
@@ -749,6 +804,29 @@ const ProductCatalogue = () => {
                     min="1"
                     value={formData.stock}
                     onChange={(e) => setFormData({ ...formData, stock: e.target.value })}
+                    className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 text-sm focus:outline-none focus:border-[#6B1527]"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="font-semibold text-slate-800 block mb-1.5">Material (Fabric)</label>
+                  <input
+                    type="text"
+                    placeholder="e.g. Delicate Organza, Pure Paithani Silk"
+                    value={formData.material}
+                    onChange={(e) => setFormData({ ...formData, material: e.target.value })}
+                    className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 text-sm focus:outline-none focus:border-[#6B1527]"
+                  />
+                </div>
+                <div>
+                  <label className="font-semibold text-slate-800 block mb-1.5">Description (Optional)</label>
+                  <input
+                    type="text"
+                    placeholder="Custom saree description or leave blank"
+                    value={formData.description}
+                    onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                     className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 text-sm focus:outline-none focus:border-[#6B1527]"
                   />
                 </div>

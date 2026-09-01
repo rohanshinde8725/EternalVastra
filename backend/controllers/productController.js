@@ -50,7 +50,13 @@ const getProducts = async (_req, res, next) => {
       },
       {
         $set: {
-          details: { $ifNull: [{ $arrayElemAt: ["$detailRecords", 0] }, {}] },
+          details: {
+            $cond: {
+              if: { $gt: [{ $size: "$detailRecords" }, 0] },
+              then: { $arrayElemAt: ["$detailRecords", 0] },
+              else: { $ifNull: ["$details", {}] },
+            },
+          },
         },
       },
       { $unset: "detailRecords" },
@@ -63,8 +69,11 @@ const getProducts = async (_req, res, next) => {
 
 const getProduct = async (req, res, next) => {
   try {
+    const requestedId = Number(req.params.id);
+    const filter = Number.isInteger(requestedId) ? { id: requestedId } : { _id: req.params.id };
+
     const product = await Product.aggregate([
-      { $match: { id: Number(req.params.id) } },
+      { $match: filter },
       {
         $lookup: {
           from: "ProductsDetail",
@@ -75,11 +84,18 @@ const getProduct = async (req, res, next) => {
       },
       {
         $set: {
-          details: { $ifNull: [{ $arrayElemAt: ["$detailRecords", 0] }, {}] },
+          details: {
+            $cond: {
+              if: { $gt: [{ $size: "$detailRecords" }, 0] },
+              then: { $arrayElemAt: ["$detailRecords", 0] },
+              else: { $ifNull: ["$details", {}] },
+            },
+          },
         },
       },
       { $unset: "detailRecords" },
     ]).then((items) => items[0]);
+
     if (!product) return res.status(404).json({ message: "Product not found" });
     res.json(product);
   } catch (error) {
@@ -89,20 +105,46 @@ const getProduct = async (req, res, next) => {
 
 const createProduct = async (req, res, next) => {
   try {
-    const imageUrl = req.file ? `/uploads/${req.file.filename}` : req.body.img;
+    let imageUrl = req.file ? `/uploads/${req.file.filename}` : req.body.img;
     if (!imageUrl) return res.status(400).json({ message: "Product image is required" });
+
+    // Normalize category array
+    const categoryList = parseArray(req.body.category);
+    if (categoryList.length === 0) {
+      categoryList.push("Silk Sarees");
+    }
+
+    // Determine sequential or provided ID
     const requestedId = Number(req.body.id);
-    const latestProduct = await Product.findOne().sort({ id: -1 }).select("id").lean();
+    const latestProduct = await Product.findOne({ id: { $lt: 1000000000 } }).sort({ id: -1 }).select("id").lean();
+    const newId = Number.isInteger(requestedId) && requestedId > 0 && requestedId < 1000000000
+      ? requestedId
+      : ((latestProduct?.id || 0) + 1);
+
+    const productDetails = parseDetails(req.body);
 
     const product = await Product.create({
       ...req.body,
-      id: Number.isInteger(requestedId) && requestedId > 0
-        ? requestedId
-        : (latestProduct?.id || 0) + 1,
-      category: parseArray(req.body.category),
-      details: parseDetails(req.body),
+      id: newId,
+      title: req.body.title?.trim() || "Untitled Saree",
+      category: categoryList,
+      discountPrice: Number(req.body.discountPrice),
+      actualPrice: Number(req.body.actualPrice || req.body.discountPrice),
+      inventory: Number(req.body.inventory || req.body.stock || 20),
+      tag: req.body.tag?.trim() || "New",
+      rating: Number(req.body.rating || 5.0),
+      ratings: String(req.body.ratings || "24"),
+      details: productDetails,
       img: imageUrl,
     });
+
+    // Also persist in ProductsDetail collection so standalone lookups match
+    await ProductDetail.findOneAndUpdate(
+      { productId: newId },
+      { productId: newId, ...productDetails },
+      { upsert: true, new: true }
+    ).catch(() => {});
+
     res.status(201).json(product);
   } catch (error) {
     if (req.file) await removeStoredImage(`/uploads/${req.file.filename}`);
@@ -112,21 +154,29 @@ const createProduct = async (req, res, next) => {
 
 const updateProduct = async (req, res, next) => {
   try {
-    const product = await Product.findOne({ id: Number(req.params.id) });
+    const numericId = Number(req.params.id);
+    const product = Number.isInteger(numericId)
+      ? await Product.findOne({ id: numericId })
+      : await Product.findById(req.params.id);
+
     if (!product) return res.status(404).json({ message: "Product not found" });
 
     const previousImage = product.img;
+    const parsedDetails = parseDetails(req.body);
+
     const updates = {
       ...req.body,
       category: req.body.category ? parseArray(req.body.category) : product.category,
-      details: Object.keys(req.body).some((key) =>
-        ["details", "description", "material", "occasion", "care", "highlights"].includes(key)
-      )
-        ? parseDetails(req)
-        : product.details,
+      details: parsedDetails,
     };
 
+    if (req.body.discountPrice !== undefined) updates.discountPrice = Number(req.body.discountPrice);
+    if (req.body.actualPrice !== undefined) updates.actualPrice = Number(req.body.actualPrice);
+    if (req.body.stock !== undefined || req.body.inventory !== undefined) {
+      updates.inventory = Number(req.body.inventory || req.body.stock);
+    }
     if (req.file) updates.img = `/uploads/${req.file.filename}`;
+
     delete updates.id;
     delete updates._id;
     delete updates.createdAt;
@@ -134,6 +184,14 @@ const updateProduct = async (req, res, next) => {
 
     Object.assign(product, updates);
     await product.save();
+
+    // Also update ProductsDetail collection
+    await ProductDetail.findOneAndUpdate(
+      { productId: product.id },
+      { productId: product.id, ...parsedDetails },
+      { upsert: true, new: true }
+    ).catch(() => {});
+
     if (req.file && previousImage !== product.img) await removeStoredImage(previousImage);
     res.json(product);
   } catch (error) {
@@ -144,8 +202,14 @@ const updateProduct = async (req, res, next) => {
 
 const deleteProduct = async (req, res, next) => {
   try {
-    const product = await Product.findOneAndDelete({ id: Number(req.params.id) });
+    const numericId = Number(req.params.id);
+    const product = Number.isInteger(numericId)
+      ? await Product.findOneAndDelete({ id: numericId })
+      : await Product.findByIdAndDelete(req.params.id);
+
     if (!product) return res.status(404).json({ message: "Product not found" });
+
+    await ProductDetail.findOneAndDelete({ productId: product.id }).catch(() => {});
     await removeStoredImage(product.img);
     res.status(204).send();
   } catch (error) {

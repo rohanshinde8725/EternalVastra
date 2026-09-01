@@ -149,7 +149,7 @@ const Blog = () => {
       {/* 1. HERO BANNER SECTION (MATCHING SCREENSHOT) */}
       {/* ========================================================================= */}
       <section className="bg-[url('/images/banner/banner-4.png')] bg-cover bg-center h-60 w-full 
-      flex items-center px-5 md:px-16 lg:px-24 relative overflow-hidden">
+        flex items-center px-5 md:px-16 lg:px-24 relative overflow-hidden">
         <div className="container max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
 
@@ -293,24 +293,26 @@ const Blog = () => {
             {paginatedPosts.map((post) => (
               <article
                 key={post.id}
-                className="bg-white rounded-2xl border border-slate-200/90 shadow-sm overflow-hidden flex flex-col justify-between transition-all duration-300 group"
+                className="bg-white rounded-lg border border-slate-200/90 shadow-sm overflow-hidden flex flex-col justify-between transition-all duration-300 group"
               >
                 {/* Card Top: Image + Category Pill */}
                 <div>
-                  <div className="relative h-48 sm:h-52 bg-slate-100 overflow-hidden cursor-pointer">
-                    <img
-                      src={post.cover}
-                      alt={post.title}
-                      onError={(e) => {
-                        e.target.onerror = null;
-                        e.target.src = "https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=500&auto=format&fit=crop&q=80";
-                      }}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <span className="absolute bottom-3 left-3 bg-[#F6E6D8]/95 text-[#6B1527] text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-sm shadow-xs border border-[#E9D1BE]">
-                      {post.category}
-                    </span>
-                  </div>
+                  <Link to={`/blog/${post.id}`}>
+                    <div className="relative h-48 sm:h-52 bg-slate-100 overflow-hidden cursor-pointer">
+                      <img
+                        src={post.cover}
+                        alt={post.title}
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.src = "https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=500&auto=format&fit=crop&q=80";
+                        }}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                      <span className="absolute bottom-3 left-3 bg-[#F6E6D8]/95 text-[#6B1527] text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-sm shadow-xs border border-[#E9D1BE]">
+                        {post.category}
+                      </span>
+                    </div>
+                  </Link>
 
                   {/* Card Body */}
                   <div className="p-4 sm:p-5">
@@ -368,9 +370,9 @@ const Blog = () => {
             {paginatedPosts.map((post) => (
               <article
                 key={post.id}
-                className="bg-white rounded-2xl border border-slate-200/90 shadow-sm overflow-hidden flex flex-col md:flex-row hover:shadow-md transition-all duration-300 group"
+                className="bg-white rounded-lg border border-slate-200/90 shadow-sm overflow-hidden flex flex-col md:flex-row hover:shadow-md transition-all duration-300 group"
               >
-                <div className="md:w-72 relative h-48 md:h-auto bg-slate-100 flex-shrink-0 overflow-hidden">
+                <div className="md:w-72 relative h-48 bg-slate-100 flex-shrink-0 overflow-hidden">
                   <img
                     src={post.cover}
                     alt={post.title}
