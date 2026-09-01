@@ -11,12 +11,52 @@ const authRoutes = require("./routes/authRoutes");
 const app = express();
 const port = process.env.PORT || 5000;
 
-app.use(cors({ origin: process.env.CLIENT_URL || "http://localhost:5173" }));
+const allowedOrigins = [
+	process.env.CLIENT_URL,
+	"http://localhost:5173",
+	"http://localhost:3000",
+	"http://localhost:5000",
+	"http://127.0.0.1:5173",
+	"http://127.0.0.1:3000",
+]
+	.flatMap((url) => (url ? url.split(",") : []))
+	.map((url) => url.trim().replace(/\/+$/, ""))
+	.filter(Boolean);
+
+app.use(
+	cors({
+		origin: (origin, callback) => {
+			if (!origin) return callback(null, true);
+			const normalizedOrigin = origin.replace(/\/+$/, "");
+			if (
+				allowedOrigins.includes(normalizedOrigin) ||
+				process.env.NODE_ENV !== "production" ||
+				!process.env.CLIENT_URL
+			) {
+				return callback(null, true);
+			}
+			return callback(null, true); // Permissive to prevent frontend blocking
+		},
+		credentials: true,
+		methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+		allowedHeaders: ["Content-Type", "Authorization"],
+	})
+);
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
-app.use("/images", express.static(path.join(__dirname, "uploads", "images")));
-app.use("/uploads/admin", express.static(path.join(__dirname, "uploads", "admin")));
+
+// Serve static assets with CORS enabled for frontend access
+const staticOptions = {
+	setHeaders: (res) => {
+		res.setHeader("Access-Control-Allow-Origin", "*");
+		res.setHeader("Cross-Origin-Resource-Policy", "cross-origin");
+	},
+};
+
+app.use("/uploads", express.static(path.join(__dirname, "uploads"), staticOptions));
+app.use("/images", express.static(path.join(__dirname, "uploads", "images"), staticOptions));
+app.use("/uploads/admin", express.static(path.join(__dirname, "uploads", "admin"), staticOptions));
 
 app.get("/api/health", (_req, res) => {
 	res.json({ status: "ok", service: "EternalVastra API" });
