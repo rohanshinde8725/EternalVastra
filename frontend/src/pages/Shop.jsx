@@ -170,9 +170,6 @@ const Shop = () => {
   return (
     <div className="w-full bg-[#FEFAF8]">
 
-      {loading && <p className="px-5 py-8 text-center">Loading products...</p>}
-      {error && <p className="px-5 py-8 text-center text-red-700">{error}</p>}
-
       {/* Banner */}
       <div className="h-70 w-full bg-center bg-[url('/images/banner/banner-1.png')] flex items-center px-5 md:px-16 lg:px-24">
         <div className="flex items-baseline gap-3">
@@ -319,8 +316,23 @@ const Shop = () => {
             </div>
           </div>
 
-          {filteredProducts.length === 0 ? (
-            <p>No products found</p>
+          {loading ? (
+            <div className="flex flex-col items-center justify-center py-24 gap-4 text-center">
+              <div className="w-12 h-12 border-4 border-[#74202D] border-t-transparent rounded-full animate-spin"></div>
+              <p className="text-base font-medium text-[#74202D]">Loading sarees collection...</p>
+              <p className="text-xs text-gray-500">Fetching handpicked weaves just for you</p>
+            </div>
+          ) : error ? (
+            <div className="flex flex-col items-center justify-center py-20 gap-3 text-center">
+              <div className="w-12 h-12 rounded-full bg-red-50 text-red-600 flex items-center justify-center text-xl font-bold">!</div>
+              <p className="text-base font-semibold text-red-700">{error}</p>
+              <p className="text-xs text-gray-500">Please check your internet connection or backend status.</p>
+            </div>
+          ) : filteredProducts.length === 0 ? (
+            <div className="flex flex-col items-center justify-center py-20 text-center text-gray-500">
+              <p className="text-base font-medium text-gray-700">No products found</p>
+              <p className="text-xs text-gray-400 mt-1">Try selecting a different category or clearing search filters.</p>
+            </div>
           ) : viewMode === "table" ? (
             <div className="overflow-x-auto">
               <table className="min-w-full border-collapse text-left">
@@ -437,41 +449,43 @@ const Shop = () => {
           )}
 
           {/* Pagination */}
-          <div className="flex justify-center items-center gap-2 mt-10 flex-wrap">
-            <button onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-              disabled={currentPage === 1}
-              className={`px-4 py-2 border rounded ${
-                currentPage === 1
-                  ? "opacity-50 cursor-not-allowed"
-                  : "hover:bg-[#74202D] hover:text-white cursor-pointer"
-              }`}
-            >
-              Prev
-            </button>
-
-            {pageButtons().map((page) => (
-              <button key={page} onClick={() => setCurrentPage(page)}
-                className={`px-4 py-2 border rounded transition ${
-                  safeCurrentPage === page
-                    ? "bg-[#74202D] text-white border-[#74202D] scale-105"
-                    : "bg-white text-[#3b3737] border-gray-300 opacity-70 hover:opacity-100 hover:bg-[#74202D] hover:text-white cursor-pointer"
+          {!loading && !error && filteredProducts.length > 0 && (
+            <div className="flex justify-center items-center gap-2 mt-10 flex-wrap">
+              <button onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                disabled={currentPage === 1}
+                className={`px-4 py-2 border rounded ${
+                  currentPage === 1
+                    ? "opacity-50 cursor-not-allowed"
+                    : "hover:bg-[#74202D] hover:text-white cursor-pointer"
                 }`}
               >
-                {page}
+                Prev
               </button>
-            ))}
 
-            <button onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
-              disabled={currentPage === totalPages}
-              className={`px-4 py-2 border rounded ${
-                currentPage === totalPages
-                  ? "opacity-50 cursor-not-allowed"
-                  : "hover:bg-[#74202D] hover:text-white cursor-pointer"
-              }`}
-            >
-              Next
-            </button>
-          </div>
+              {pageButtons().map((page) => (
+                <button key={page} onClick={() => setCurrentPage(page)}
+                  className={`px-4 py-2 border rounded transition ${
+                    safeCurrentPage === page
+                      ? "bg-[#74202D] text-white border-[#74202D] scale-105"
+                      : "bg-white text-[#3b3737] border-gray-300 opacity-70 hover:opacity-100 hover:bg-[#74202D] hover:text-white cursor-pointer"
+                  }`}
+                >
+                  {page}
+                </button>
+              ))}
+
+              <button onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+                disabled={currentPage === totalPages}
+                className={`px-4 py-2 border rounded ${
+                  currentPage === totalPages
+                    ? "opacity-50 cursor-not-allowed"
+                    : "hover:bg-[#74202D] hover:text-white cursor-pointer"
+                }`}
+              >
+                Next
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>
