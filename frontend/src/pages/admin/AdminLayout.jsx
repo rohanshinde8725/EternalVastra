@@ -84,22 +84,17 @@ const AdminLayout = () => {
         <div className="relative z-20 p-6 pb-2">
           {/* Logo Header */}
           <div className="flex items-center justify-between">
-            <div className="flex flex-col items-center mx-auto text-center">
-              {/* Gold Mandala Emblem */}
-              <div className="w-10 h-10 mb-1.5 flex items-center justify-center text-amber-300">
-                <svg viewBox="0 0 24 24" fill="currentColor" className="w-9 h-9 opacity-90 drop-shadow-sm">
-                  <path d="M12 2L13.5 6.5L18 8L13.5 9.5L12 14L10.5 9.5L6 8L10.5 6.5L12 2Z" />
-                  <path d="M12 14L13 17.5L16.5 18.5L13 19.5L12 23L11 19.5L7.5 18.5L11 17.5L12 14Z" opacity="0.6" />
-                  <circle cx="12" cy="12" r="2" fill="white" />
-                </svg>
-              </div>
-              <h1 className="text-2xl font-serif font-bold tracking-[0.22em] text-white uppercase drop-shadow-sm">
-                SAREE
-              </h1>
-              <p className="text-[11px] tracking-[0.25em] text-amber-200/90 uppercase font-medium mt-0.5">
-                — ELEGANCE ETERNAL —
-              </p>
-            </div>
+            <Link
+              to="/"
+              className="flex items-center justify-center mx-auto bg-white/95 px-4 py-2.5 rounded-2xl shadow-sm border border-white/20 hover:bg-white hover:scale-105 transition-all duration-300 group cursor-pointer"
+              title="Return to Eternal Vastra Home Page"
+            >
+              <img
+                src="/images/navImg2.png"
+                alt="Eternal Vastra Logo"
+                className="h-10 sm:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+              />
+            </Link>
             <button
               onClick={() => setSidebarOpen(false)}
               className="lg:hidden text-white/70 hover:text-white p-1.5 rounded-md"
