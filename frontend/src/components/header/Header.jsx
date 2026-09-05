@@ -15,6 +15,7 @@ import {
 import { HiOutlineShoppingBag, HiMenu, HiX } from "react-icons/hi";
 import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { useToast } from "../../context/ToastContext";
+import Logo from "../common/Logo";
 
 const Header = () => {
   const { showToast } = useToast();
@@ -141,6 +142,26 @@ const Header = () => {
     }
   };
 
+  const handleWishlistClick = (e) => {
+    e.preventDefault();
+    if (!currentUser) {
+      showToast.warning("Please sign in to view your wishlist.");
+      navigate("/signin", { state: { from: location } });
+    } else {
+      navigate("/wishlist");
+    }
+  };
+
+  const handleCartClick = (e) => {
+    e.preventDefault();
+    if (!currentUser) {
+      showToast.warning("Please sign in to view your cart.");
+      navigate("/signin", { state: { from: location } });
+    } else {
+      navigate("/cart");
+    }
+  };
+
   // Check active paths
   const isActivePath = (path) => {
     if (path === "/") return location.pathname === "/";
@@ -156,15 +177,7 @@ const Header = () => {
         <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 h-16 sm:h-20 flex items-center justify-between gap-4">
           
           {/* LEFT: BRAND LOGO */}
-          <Link to="/" className="flex items-center flex-shrink-0 group">
-            <img
-              src="/images/navImg2.png"
-              alt="Eternal Vastra"
-              loading="eager"
-              decoding="async"
-              className="h-11 sm:h-14 lg:h-16 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
-            />
-          </Link>
+          <Logo className="h-10 sm:h-12 lg:h-14" />
 
           {/* CENTER: DESKTOP NAVIGATION MENU (PROPERLY ALIGNED WITH BLOG PAGE) */}
           <nav className="hidden lg:flex items-center justify-center flex-1 mx-4">
@@ -295,8 +308,9 @@ const Header = () => {
             </div>
 
             {/* Desktop Wishlist Icon */}
-            <Link
-              to="/wishlist"
+            <button
+              type="button"
+              onClick={handleWishlistClick}
               className="hidden lg:flex p-2.5 rounded-full text-slate-700 hover:text-[#6B1527] hover:bg-rose-50/60 transition cursor-pointer"
               title="Saved Sarees"
             >
@@ -308,11 +322,12 @@ const Header = () => {
                   </span>
                 )}
               </div>
-            </Link>
+            </button>
 
             {/* Desktop Cart Icon */}
-            <Link
-              to="/cart"
+            <button
+              type="button"
+              onClick={handleCartClick}
               className="hidden lg:flex p-2.5 rounded-full text-slate-700 hover:text-[#6B1527] hover:bg-rose-50/60 transition cursor-pointer"
               title="Shopping Cart"
             >
@@ -324,7 +339,7 @@ const Header = () => {
                   </span>
                 )}
               </div>
-            </Link>
+            </button>
 
             {/* Desktop User Profile Button & Dropdown */}
             <div className="hidden lg:block relative" ref={userMenuRef}>
@@ -465,9 +480,10 @@ const Header = () => {
           </button>
 
           {/* 3. WISHLIST */}
-          <Link
-            to="/wishlist"
-            className={`relative flex flex-col items-center justify-center py-1 transition-all duration-200 ${
+          <button
+            type="button"
+            onClick={handleWishlistClick}
+            className={`relative flex flex-col items-center justify-center py-1 transition-all duration-200 cursor-pointer ${
               isActivePath("/wishlist")
                 ? "text-[#6B1527] font-bold"
                 : "text-slate-600 hover:text-[#6B1527]"
@@ -484,12 +500,13 @@ const Header = () => {
             <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider mt-1">
               Wishlist
             </span>
-          </Link>
+          </button>
 
           {/* 4. CART */}
-          <Link
-            to="/cart"
-            className={`relative flex flex-col items-center justify-center py-1 transition-all duration-200 ${
+          <button
+            type="button"
+            onClick={handleCartClick}
+            className={`relative flex flex-col items-center justify-center py-1 transition-all duration-200 cursor-pointer ${
               isActivePath("/cart")
                 ? "text-[#6B1527] font-bold"
                 : "text-slate-600 hover:text-[#6B1527]"
@@ -506,7 +523,7 @@ const Header = () => {
             <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider mt-1">
               Cart
             </span>
-          </Link>
+          </button>
 
           {/* 5. ACCOUNT */}
           <button

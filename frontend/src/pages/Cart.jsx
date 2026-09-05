@@ -1,13 +1,24 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { FaTrash } from "react-icons/fa";
 import { MdGridView, MdViewList } from "react-icons/md";
 import { useToast } from "../context/ToastContext";
+import { isAuthenticated } from "../utils/auth";
+import FadeUp from "../components/animations/FadeUp";
 
 const Cart = () => {
   const { showToast } = useToast();
+  const navigate = useNavigate();
+  const location = useLocation();
   const [cart, setCart] = useState([]);
   const [viewMode, setViewMode] = useState("4");
+
+  useEffect(() => {
+    if (!isAuthenticated()) {
+      showToast.warning("Please sign in to view your cart.");
+      navigate("/signin", { state: { from: location } });
+    }
+  }, [navigate, location, showToast]);
 
   useEffect(() => {
     const savedViewMode = localStorage.getItem("cartViewMode");
@@ -79,9 +90,11 @@ const Cart = () => {
       {/* Banner */}
       <div className="h-60 bg-[url(/images/banner/banner-3.png)] bg-cover bg-center">
         <div className="py-20 px-5 sm:px-8 md:px-10 lg:px-12">
-          <h1 className="text-4xl font-semibold text-[#74202D]">
-            Your Cart
-          </h1>
+          <FadeUp delay={0.1}>
+            <h1 className="text-4xl font-semibold text-[#74202D]">
+              Your Cart
+            </h1>
+          </FadeUp>
         </div>
       </div>
 
@@ -89,146 +102,158 @@ const Cart = () => {
         
         {/* LEFT SIDE */}
         <div className="w-full lg:w-[70%] space-y-5">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <h2 className="text-xl font-semibold">Cart Items</h2>
-            {/* View Switcher: Hidden on mobile devices */}
-            <div className="hidden sm:flex flex-wrap items-center gap-2">
-              {[
-                { id: "4", label: "4/4", icon: <MdGridView className="h-5 w-5" /> },
-                { id: "table", label: "List", icon: <MdViewList className="h-5 w-5" /> },
-              ].map((option) => (
-                <button
-                  key={option.id}
-                  onClick={() => handleViewModeChange(option.id)}
-                  aria-label={option.label}
-                  className={`flex h-10 w-10 items-center justify-center rounded-md border transition cursor-pointer ${
-                    viewMode === option.id
-                      ? "bg-[#74202D] text-white border-[#74202D]"
-                      : "bg-white text-[#3b3737] border-gray-300 hover:border-[#74202D] hover:text-[#74202D]"
-                  }`}
-                >
-                  {option.icon}
-                </button>
-              ))}
+          <FadeUp delay={0.1}>
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <h2 className="text-xl font-semibold">Cart Items</h2>
+              {/* View Switcher: Hidden on mobile devices */}
+              <div className="hidden sm:flex flex-wrap items-center gap-2">
+                {[
+                  { id: "4", label: "4/4", icon: <MdGridView className="h-5 w-5" /> },
+                  { id: "table", label: "List", icon: <MdViewList className="h-5 w-5" /> },
+                ].map((option) => (
+                  <button
+                    key={option.id}
+                    onClick={() => handleViewModeChange(option.id)}
+                    aria-label={option.label}
+                    className={`flex h-10 w-10 items-center justify-center rounded-md border transition cursor-pointer ${
+                      viewMode === option.id
+                        ? "bg-[#74202D] text-white border-[#74202D]"
+                        : "bg-white text-[#3b3737] border-gray-300 hover:border-[#74202D] hover:text-[#74202D]"
+                    }`}
+                  >
+                    {option.icon}
+                  </button>
+                ))}
+              </div>
             </div>
-          </div>
+          </FadeUp>
 
           {cart.length === 0 ? (
-            <p>Your cart is empty</p>
+            <FadeUp delay={0.15}>
+              <div className="rounded-2xl border border-dashed border-gray-300 bg-white p-10 text-center text-gray-500">
+                Your cart is empty. Explore our sarees collection and find your favorite drapes!
+              </div>
+            </FadeUp>
           ) : (
             <>
               {/* Desktop Table View (Only visible on desktop/tablet when List mode is selected) */}
               {viewMode === "table" && (
-                <div className="hidden sm:block overflow-x-auto rounded-lg border border-gray-200 bg-white shadow-sm">
-                  <table className="min-w-full text-sm text-left">
-                    <thead className="bg-[#FEFAF8] text-gray-600">
-                      <tr>
-                        <th className="px-4 py-3">Product</th>
-                        <th className="px-4 py-3">Price</th>
-                        <th className="px-4 py-3">Quantity</th>
-                        <th className="px-4 py-3">Total</th>
-                        <th className="px-4 py-3">Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {cart.map((item) => (
-                        <tr key={item.id} className="border-b border-gray-200 hover:bg-gray-50 transition">
-                          <td className="px-4 py-4 align-top">
-                            <div className="flex items-start gap-3">
-                              <Link to={`/shop/${item.id}`} className="shrink-0 group">
-                                <img
-                                  src={item.img}
-                                  alt={item.title}
-                                  onError={(e) => {
-                                    e.currentTarget.onerror = null;
-                                    e.currentTarget.src = "/images/silk/silk-1.jpg";
-                                  }}
-                                  className="w-20 h-20 object-cover rounded group-hover:opacity-90 transition cursor-pointer"
-                                />
-                              </Link>
-                              <div>
-                                <Link
-                                  to={`/shop/${item.id}`}
-                                  className="font-semibold hover:text-[#74202D] transition block"
-                                >
-                                  {item.title}
-                                </Link>
-                                <p className="text-sm text-gray-500">{item.category?.join(", ") || ""}</p>
-                              </div>
-                            </div>
-                          </td>
-                          <td className="px-4 py-4 align-top font-semibold text-[#74202D]">₹{item.discountPrice}</td>
-                          <td className="px-4 py-4 align-top">
-                            <div className="flex items-center gap-2">
-                              <button onClick={() => updateQuantity(item.id, "dec")}
-                                className="px-3 py-1 border rounded-sm bg-[#74202D] text-white hover:bg-transparent hover:text-[#74202D] transition-all duration-300 cursor-pointer">
-                                -
-                              </button>
-                              <span>{item.quantity}</span>
-                              <button onClick={() => updateQuantity(item.id, "inc")}
-                                className="px-3 py-1 border rounded-sm bg-[#74202D] text-white hover:bg-transparent hover:text-[#74202D] transition-all duration-300 cursor-pointer">
-                                +
-                              </button>
-                            </div>
-                          </td>
-                          <td className="px-4 py-4 align-top font-bold text-[#74202D]">₹{item.discountPrice * item.quantity}</td>
-                          <td className="px-4 py-4 align-top">
-                            <button onClick={() => removeItem(item.id)} className="text-[#74202D] hover:text-[#5c1b2b] transition-colors cursor-pointer">
-                              <FaTrash className="text-xl" />
-                            </button>
-                          </td>
+                <FadeUp delay={0.15}>
+                  <div className="hidden sm:block overflow-x-auto rounded-lg border border-gray-200 bg-white shadow-sm">
+                    <table className="min-w-full text-sm text-left">
+                      <thead className="bg-[#FEFAF8] text-gray-600">
+                        <tr>
+                          <th className="px-4 py-3">Product</th>
+                          <th className="px-4 py-3">Price</th>
+                          <th className="px-4 py-3">Quantity</th>
+                          <th className="px-4 py-3">Total</th>
+                          <th className="px-4 py-3">Action</th>
                         </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
+                      </thead>
+                      <tbody>
+                        {cart.map((item) => (
+                          <tr key={item.id} className="border-b border-gray-200 hover:bg-gray-50 transition">
+                            <td className="px-4 py-4 align-top">
+                              <div className="flex items-start gap-3">
+                                <Link to={`/shop/${item.id}`} className="shrink-0 group">
+                                  <img
+                                    src={item.img}
+                                    alt={item.title}
+                                    onError={(e) => {
+                                      e.currentTarget.onerror = null;
+                                      e.currentTarget.src = "/images/silk/silk-1.jpg";
+                                    }}
+                                    className="w-20 h-20 object-cover rounded group-hover:opacity-90 transition cursor-pointer"
+                                  />
+                                </Link>
+                                <div>
+                                  <Link
+                                    to={`/shop/${item.id}`}
+                                    className="font-semibold hover:text-[#74202D] transition block"
+                                  >
+                                    {item.title}
+                                  </Link>
+                                  <p className="text-sm text-gray-500">{item.category?.join(", ") || ""}</p>
+                                </div>
+                              </div>
+                            </td>
+                            <td className="px-4 py-4 align-top font-semibold text-[#74202D]">₹{item.discountPrice}</td>
+                            <td className="px-4 py-4 align-top">
+                              <div className="flex items-center gap-2">
+                                <button onClick={() => updateQuantity(item.id, "dec")}
+                                  className="px-3 py-1 border rounded-sm bg-[#74202D] text-white hover:bg-transparent hover:text-[#74202D] transition-all duration-300 cursor-pointer">
+                                  -
+                                </button>
+                                <span>{item.quantity}</span>
+                                <button onClick={() => updateQuantity(item.id, "inc")}
+                                  className="px-3 py-1 border rounded-sm bg-[#74202D] text-white hover:bg-transparent hover:text-[#74202D] transition-all duration-300 cursor-pointer">
+                                  +
+                                </button>
+                              </div>
+                            </td>
+                            <td className="px-4 py-4 align-top font-bold text-[#74202D]">₹{item.discountPrice * item.quantity}</td>
+                            <td className="px-4 py-4 align-top">
+                              <button onClick={() => removeItem(item.id)} className="text-[#74202D] hover:text-[#5c1b2b] transition-colors cursor-pointer">
+                                <FaTrash className="text-xl" />
+                              </button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </FadeUp>
               )}
 
               {/* Grid View (Always active on mobile, and active on desktop when Grid mode is selected) */}
               <div className={`${viewMode === "table" ? "block sm:hidden" : "grid"} grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5`}>
-                {cart.map((item) => (
-                  <div key={item.id} className="rounded-lg border border-gray-300 bg-white p-4 shadow-lg group">
-                    <Link to={`/shop/${item.id}`} className="block overflow-hidden rounded">
-                      <img
-                        loading="lazy"
-                        decoding="async"
-                        src={item.img}
-                        alt={item.title}
-                        onError={(e) => {
-                          e.currentTarget.onerror = null;
-                          e.currentTarget.src = "/images/silk/silk-1.jpg";
-                        }}
-                        className="w-full h-44 object-cover rounded transition-transform duration-300 group-hover:scale-105 cursor-pointer"
-                      />
-                    </Link>
-                    <div className="mt-4 space-y-3">
-                      <Link
-                        to={`/shop/${item.id}`}
-                        className="font-semibold text-base truncate block hover:text-[#74202D] transition"
-                      >
-                        {item.title}
-                      </Link>
-                      <p className="text-[#74202D] font-bold">₹{item.discountPrice}</p>
-                      <div className="flex items-center gap-2">
-                        <button onClick={() => updateQuantity(item.id, "dec")}
-                          className="px-3 py-1 border rounded-sm bg-[#74202D] text-white hover:bg-transparent hover:text-[#74202D] transition-all duration-300 cursor-pointer">
-                          -
-                        </button>
-                        <span>{item.quantity}</span>
-                        <button onClick={() => updateQuantity(item.id, "inc")}
-                          className="px-3 py-1 border rounded-sm bg-[#74202D] text-white hover:bg-transparent hover:text-[#74202D] transition-all duration-300 cursor-pointer">
-                          +
-                        </button>
+                {cart.map((item, index) => (
+                  <FadeUp key={item.id} delay={0.05 + (index % 3) * 0.07}>
+                    <div className="rounded-lg border border-gray-300 bg-white p-4 shadow-lg group h-full flex flex-col justify-between">
+                      <div>
+                        <Link to={`/shop/${item.id}`} className="block overflow-hidden rounded">
+                          <img
+                            loading="lazy"
+                            decoding="async"
+                            src={item.img}
+                            alt={item.title}
+                            onError={(e) => {
+                              e.currentTarget.onerror = null;
+                              e.currentTarget.src = "/images/silk/silk-1.jpg";
+                            }}
+                            className="w-full h-44 object-cover rounded transition-transform duration-300 group-hover:scale-105 cursor-pointer"
+                          />
+                        </Link>
+                        <div className="mt-4 space-y-3">
+                          <Link
+                            to={`/shop/${item.id}`}
+                            className="font-semibold text-base truncate block hover:text-[#74202D] transition"
+                          >
+                            {item.title}
+                          </Link>
+                          <p className="text-[#74202D] font-bold">₹{item.discountPrice}</p>
+                          <div className="flex items-center gap-2">
+                            <button onClick={() => updateQuantity(item.id, "dec")}
+                              className="px-3 py-1 border rounded-sm bg-[#74202D] text-white hover:bg-transparent hover:text-[#74202D] transition-all duration-300 cursor-pointer">
+                              -
+                            </button>
+                            <span>{item.quantity}</span>
+                            <button onClick={() => updateQuantity(item.id, "inc")}
+                              className="px-3 py-1 border rounded-sm bg-[#74202D] text-white hover:bg-transparent hover:text-[#74202D] transition-all duration-300 cursor-pointer">
+                              +
+                            </button>
+                          </div>
+                          <div className="flex items-center justify-between">
+                            <span className="font-semibold">Total</span>
+                            <span className="font-bold text-[#74202D]">₹{item.discountPrice * item.quantity}</span>
+                          </div>
+                        </div>
                       </div>
-                      <div className="flex items-center justify-between">
-                        <span className="font-semibold">Total</span>
-                        <span className="font-bold text-[#74202D]">₹{item.discountPrice * item.quantity}</span>
-                      </div>
-                      <button onClick={() => removeItem(item.id)} className="w-full rounded-md border border-[#74202D] py-2 text-sm font-semibold text-[#74202D] hover:bg-[#74202D] hover:text-white transition cursor-pointer">
+                      <button onClick={() => removeItem(item.id)} className="w-full mt-4 rounded-md border border-[#74202D] py-2 text-sm font-semibold text-[#74202D] hover:bg-[#74202D] hover:text-white transition cursor-pointer">
                         Remove
                       </button>
                     </div>
-                  </div>
+                  </FadeUp>
                 ))}
               </div>
             </>
@@ -236,50 +261,63 @@ const Cart = () => {
 
           {/* Clear Cart */}
           {cart.length > 0 && (
-            <button
-              onClick={clearCart}
-              className="text-[#74202D] font-semibold cursor-pointer transition-all duration-300"
-            >
-              CLEAR CART
-            </button>
+            <FadeUp delay={0.1}>
+              <button
+                onClick={clearCart}
+                className="text-[#74202D] font-semibold cursor-pointer transition-all duration-300 hover:underline"
+              >
+                CLEAR CART
+              </button>
+            </FadeUp>
           )}
         </div>
 
         {/* RIGHT SIDE (SUMMARY) */}
-        <div className="w-full lg:w-[30%] bg-white border border-gray-200 shadow-xl p-5 rounded-lg h-fit scroll-mt-24">
-          <h2 className="text-xl font-semibold mb-5">Order Summary</h2>
+        <div className="w-full lg:w-[30%]">
+          <FadeUp delay={0.2}>
+            <div className="bg-white border border-gray-200 shadow-xl p-5 rounded-lg h-fit">
+              <h2 className="text-xl font-semibold mb-5">Order Summary</h2>
 
-          <div className="space-y-3 text-sm">
-            <div className="flex justify-between">
-              <span>Subtotal</span>
-              <span>₹{subtotal}</span>
+              <div className="space-y-3 text-sm">
+                <div className="flex justify-between">
+                  <span>Subtotal</span>
+                  <span>₹{subtotal}</span>
+                </div>
+
+                <div className="flex justify-between text-green-600">
+                  <span>Discount</span>
+                  <span>- ₹{discount}</span>
+                </div>
+
+                <div className="flex justify-between">
+                  <span>Shipping</span>
+                  <span className="text-green-600">FREE</span>
+                </div>
+              </div>
+
+              <hr className="my-4" />
+
+              <div className="flex justify-between font-bold text-lg">
+                <span>Total</span>
+                <span className="text-[#74202D]">₹{total}</span>
+              </div>
+
+              <button
+                onClick={() => {
+                  if (!isAuthenticated()) {
+                    showToast.warning("Please sign in to proceed to checkout.");
+                    navigate("/signin", { state: { from: location } });
+                    return;
+                  }
+                  showToast.info("Proceeding to secure checkout...");
+                }}
+                className='uppercase bg-[#74202D] text-white py-2 px-4 text-xs sm:text-sm font-semibold
+                border-2 border-[#74202D] hover:text-[#74202D] rounded-sm hover:bg-transparent cursor-pointer
+                transition duration-300 mt-4 w-full text-center'>
+                PROCEED TO CHECKOUT
+              </button>
             </div>
-
-            <div className="flex justify-between text-green-600">
-              <span>Discount</span>
-              <span>- ₹{discount}</span>
-            </div>
-
-            <div className="flex justify-between">
-              <span>Shipping</span>
-              <span className="text-green-600">FREE</span>
-            </div>
-          </div>
-
-          <hr className="my-4" />
-
-          <div className="flex justify-between font-bold text-lg">
-            <span>Total</span>
-            <span className="text-[#74202D]">₹{total}</span>
-          </div>
-
-          <button
-            onClick={() => showToast.info("Proceeding to secure checkout...")}
-            className='uppercase bg-[#74202D] text-white py-2 px-4 text-xs sm:text-sm font-semibold
-            border-2 border-[#74202D] hover:text-[#74202D] rounded-sm hover:bg-transparent cursor-pointer
-            transition duration-300 mt-2 w-full text-center'>
-            PROCEED TO CHECKOUT
-          </button>
+          </FadeUp>
         </div>
       </div>
     </div>

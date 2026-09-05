@@ -11,6 +11,7 @@ import {
   FiRotateCw,
 } from "react-icons/fi";
 import { API_BASE_URL } from "../api/products";
+import FadeUp from "../components/animations/FadeUp";
 
 const categories = [
   "All Stories",
@@ -155,15 +156,17 @@ const Blog = () => {
 
             {/* Left Content */}
             <div className="lg:col-span-6 spaxe-y-5 text-center lg:text-left">
-              <div className="inline-flex items-center mb-3 gap-2 text-xs md:text-sm font-bold uppercase tracking-[0.25em] text-[#6B1527]">
-                <span>🌸</span>
-                <span>SAREE STORIES</span>
-              </div>
+              <FadeUp delay={0.1}>
+                <div className="inline-flex items-center mb-3 gap-2 text-xs md:text-sm font-bold uppercase tracking-[0.25em] text-[#6B1527]">
+                  <span>🌸</span>
+                  <span>SAREE STORIES</span>
+                </div>
 
-              <h1 className="text-2xl lg:text-3xl font-serif font-bold text-slate-900 leading-[1.15] tracking-tight">
-                Timeless Weaves, <br />
-                <span className="text-[#6B1527] font-serif">Stories That Inspire</span>
-              </h1>
+                <h1 className="text-2xl lg:text-3xl font-serif font-bold text-slate-900 leading-[1.15] tracking-tight">
+                  Timeless Weaves, <br />
+                  <span className="text-[#6B1527] font-serif">Stories That Inspire</span>
+                </h1>
+              </FadeUp>
             </div>
           </div>
         </div>
@@ -173,93 +176,95 @@ const Blog = () => {
       {/* 2. SEARCH & FILTER CONTROLS (MATCHING SCREENSHOT) */}
       {/* ========================================================================= */}
       <section id="stories-section" className="container max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 pt-10">
-        <div className="bg-white rounded-2xl border border-slate-200/90 shadow-sm p-4 sm:p-5 space-y-4">
+        <FadeUp delay={0.15}>
+          <div className="bg-white rounded-2xl border border-slate-200/90 shadow-sm p-4 sm:p-5 space-y-4">
 
-          {/* Top Row: Search Input + Sort Dropdown + Grid/List Toggle */}
-          <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
+            {/* Top Row: Search Input + Sort Dropdown + Grid/List Toggle */}
+            <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
 
-            {/* Search Box */}
-            <div className="relative flex-1 max-w-xl">
-              <FiSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-base" />
-              <input
-                type="text"
-                value={search}
-                onChange={handleSearchChange}
-                placeholder="Search articles, tips, patterns..."
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-[#6B1527] focus:bg-white transition"
-              />
+              {/* Search Box */}
+              <div className="relative flex-1 max-w-xl">
+                <FiSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-base" />
+                <input
+                  type="text"
+                  value={search}
+                  onChange={handleSearchChange}
+                  placeholder="Search articles, tips, patterns..."
+                  className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-[#6B1527] focus:bg-white transition"
+                />
+              </div>
+
+              {/* Controls Right */}
+              <div className="flex items-center justify-between md:justify-end gap-3 flex-wrap">
+
+                {/* Sort By Dropdown */}
+                <div className="flex items-center gap-2 text-xs font-semibold text-slate-600">
+                  <span className="text-slate-500 whitespace-nowrap">Sort by:</span>
+                  <select
+                    value={sortBy}
+                    onChange={(e) => setSortBy(e.target.value)}
+                    className="px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs font-semibold text-slate-800 focus:outline-none focus:border-[#6B1527] cursor-pointer"
+                  >
+                    <option value="Latest">Latest</option>
+                    <option value="Most Popular">Most Popular</option>
+                    <option value="Oldest">Oldest</option>
+                  </select>
+                </div>
+
+                {/* View Switcher: Grid vs List */}
+                <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-xl border border-slate-200">
+                  <button
+                    type="button"
+                    onClick={() => setViewMode("grid")}
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer ${viewMode === "grid"
+                        ? "bg-[#6B1527] text-white shadow-xs"
+                        : "text-slate-600 hover:text-slate-900"
+                      }`}
+                    title="Grid View"
+                  >
+                    <FiGrid className="text-sm" />
+                    <span>Grid</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setViewMode("list")}
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer ${viewMode === "list"
+                        ? "bg-[#6B1527] text-white shadow-xs"
+                        : "text-slate-600 hover:text-slate-900"
+                      }`}
+                    title="List View"
+                  >
+                    <FiList className="text-sm" />
+                    <span>List</span>
+                  </button>
+                </div>
+
+              </div>
+
             </div>
 
-            {/* Controls Right */}
-            <div className="flex items-center justify-between md:justify-end gap-3 flex-wrap">
-
-              {/* Sort By Dropdown */}
-              <div className="flex items-center gap-2 text-xs font-semibold text-slate-600">
-                <span className="text-slate-500 whitespace-nowrap">Sort by:</span>
-                <select
-                  value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value)}
-                  className="px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs font-semibold text-slate-800 focus:outline-none focus:border-[#6B1527] cursor-pointer"
-                >
-                  <option value="Latest">Latest</option>
-                  <option value="Most Popular">Most Popular</option>
-                  <option value="Oldest">Oldest</option>
-                </select>
-              </div>
-
-              {/* View Switcher: Grid vs List */}
-              <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-xl border border-slate-200">
-                <button
-                  type="button"
-                  onClick={() => setViewMode("grid")}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer ${viewMode === "grid"
-                      ? "bg-[#6B1527] text-white shadow-xs"
-                      : "text-slate-600 hover:text-slate-900"
-                    }`}
-                  title="Grid View"
-                >
-                  <FiGrid className="text-sm" />
-                  <span>Grid</span>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setViewMode("list")}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer ${viewMode === "list"
-                      ? "bg-[#6B1527] text-white shadow-xs"
-                      : "text-slate-600 hover:text-slate-900"
-                    }`}
-                  title="List View"
-                >
-                  <FiList className="text-sm" />
-                  <span>List</span>
-                </button>
-              </div>
-
+            {/* Bottom Row: Category Pills (All Stories, Saree Guides, Styling Tips, ...) */}
+            <div className="pt-2 border-t border-slate-100 flex items-center gap-2 overflow-x-auto custom-admin-scroll pb-1">
+              {categories.map((category) => {
+                const isSelected = selectedCategory === category;
+                return (
+                  <button
+                    key={category}
+                    type="button"
+                    onClick={() => handleCategoryChange(category)}
+                    className={`px-4 py-2 rounded-lg text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${isSelected
+                        ? "bg-[#6B1527] text-white shadow-xs font-bold"
+                        : "bg-white text-slate-700 hover:bg-rose-50 hover:text-[#6B1527] border border-slate-200/90"
+                      }`}
+                  >
+                    {category}
+                  </button>
+                );
+              })}
             </div>
 
           </div>
-
-          {/* Bottom Row: Category Pills (All Stories, Saree Guides, Styling Tips, ...) */}
-          <div className="pt-2 border-t border-slate-100 flex items-center gap-2 overflow-x-auto custom-admin-scroll pb-1">
-            {categories.map((category) => {
-              const isSelected = selectedCategory === category;
-              return (
-                <button
-                  key={category}
-                  type="button"
-                  onClick={() => handleCategoryChange(category)}
-                  className={`px-4 py-2 rounded-lg text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${isSelected
-                      ? "bg-[#6B1527] text-white shadow-xs font-bold"
-                      : "bg-white text-slate-700 hover:bg-rose-50 hover:text-[#6B1527] border border-slate-200/90"
-                    }`}
-                >
-                  {category}
-                </button>
-              );
-            })}
-          </div>
-
-        </div>
+        </FadeUp>
       </section>
 
       {/* ========================================================================= */}
@@ -290,148 +295,150 @@ const Blog = () => {
         ) : viewMode === "grid" ? (
           /* 4-Column Grid View matching screenshot */
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {paginatedPosts.map((post) => (
-              <article
-                key={post.id}
-                className="bg-white rounded-lg border border-slate-200/90 shadow-sm overflow-hidden flex flex-col justify-between transition-all duration-300 group"
-              >
-                {/* Card Top: Image + Category Pill */}
-                <div>
-                  <Link to={`/blog/${post.id}`}>
-                    <div className="relative h-48 sm:h-52 bg-slate-100 overflow-hidden cursor-pointer">
-                      <img
-                        src={post.cover}
-                        alt={post.title}
-                        onError={(e) => {
-                          e.target.onerror = null;
-                          e.target.src = "https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=500&auto=format&fit=crop&q=80";
-                        }}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                      <span className="absolute bottom-3 left-3 bg-[#F6E6D8]/95 text-[#6B1527] text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-sm shadow-xs border border-[#E9D1BE]">
-                        {post.category}
-                      </span>
-                    </div>
-                  </Link>
-
-                  {/* Card Body */}
-                  <div className="p-4 sm:p-5">
-                    <div className="flex items-center justify-between text-xs text-slate-400 mb-2 font-medium">
-                      <span>{post.date}</span>
-                      <span className="flex items-center gap-1">
-                        <FiClock className="text-xs" />
-                        {post.readTime}
-                      </span>
-                    </div>
-
+            {paginatedPosts.map((post, index) => (
+              <FadeUp key={post.id} delay={0.05 + (index % 4) * 0.07}>
+                <article
+                  className="bg-white rounded-lg border border-slate-200/90 shadow-sm overflow-hidden flex flex-col justify-between transition-all duration-300 group h-full"
+                >
+                  {/* Card Top: Image + Category Pill */}
+                  <div>
                     <Link to={`/blog/${post.id}`}>
-                      <h3 className="font-serif font-bold text-slate-900 text-base leading-snug group-hover:text-[#6B1527] transition line-clamp-2">
-                        {post.title}
-                      </h3>
+                      <div className="relative h-48 sm:h-52 bg-slate-100 overflow-hidden cursor-pointer">
+                        <img
+                          src={post.cover}
+                          alt={post.title}
+                          onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = "https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=500&auto=format&fit=crop&q=80";
+                          }}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        />
+                        <span className="absolute bottom-3 left-3 bg-[#F6E6D8]/95 text-[#6B1527] text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-sm shadow-xs border border-[#E9D1BE]">
+                          {post.category}
+                        </span>
+                      </div>
                     </Link>
 
-                    <p className="text-xs sm:text-[13px] text-slate-500 line-clamp-2 leading-relaxed mt-2.5">
-                      {post.excerpt}
-                    </p>
-                  </div>
-                </div>
+                    {/* Card Body */}
+                    <div className="p-4 sm:p-5">
+                      <div className="flex items-center justify-between text-xs text-slate-400 mb-2 font-medium">
+                        <span>{post.date}</span>
+                        <span className="flex items-center gap-1">
+                          <FiClock className="text-xs" />
+                          {post.readTime}
+                        </span>
+                      </div>
 
-                {/* Card Bottom: Author & Read More */}
-                <div className="px-4 sm:px-5 pb-4 pt-3 border-t border-slate-100 flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <img
-                      src={post.authorAvatar}
-                      alt={post.author}
-                      onError={(e) => {
-                        e.target.onerror = null;
-                        e.target.src = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80";
-                      }}
-                      className="w-6 h-6 rounded-full object-cover border border-slate-200"
-                    />
-                    <span className="text-xs font-semibold text-slate-800 truncate max-w-[90px]">
-                      {post.author}
-                    </span>
+                      <Link to={`/blog/${post.id}`}>
+                        <h3 className="font-serif font-bold text-slate-900 text-base leading-snug group-hover:text-[#6B1527] transition line-clamp-2">
+                          {post.title}
+                        </h3>
+                      </Link>
+
+                      <p className="text-xs sm:text-[13px] text-slate-500 line-clamp-2 leading-relaxed mt-2.5">
+                        {post.excerpt}
+                      </p>
+                    </div>
                   </div>
 
-                  <Link
-                    to={`/blog/${post.id}`}
-                    className="inline-flex items-center gap-1 text-xs font-bold text-[#6B1527] group-hover:translate-x-1 transition"
-                  >
-                    <span>Read More</span>
-                    <FiArrowRight className="text-xs" />
-                  </Link>
-                </div>
-              </article>
+                  {/* Card Bottom: Author & Read More */}
+                  <div className="px-4 sm:px-5 pb-4 pt-3 border-t border-slate-100 flex items-center justify-between mt-auto">
+                    <div className="flex items-center gap-2">
+                      <img
+                        src={post.authorAvatar}
+                        alt={post.author}
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.src = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80";
+                        }}
+                        className="w-6 h-6 rounded-full object-cover border border-slate-200"
+                      />
+                      <span className="text-xs font-semibold text-slate-800 truncate max-w-[90px]">
+                        {post.author}
+                      </span>
+                    </div>
+
+                    <Link
+                      to={`/blog/${post.id}`}
+                      className="inline-flex items-center gap-1 text-xs font-bold text-[#6B1527] group-hover:translate-x-1 transition"
+                    >
+                      <span>Read More</span>
+                      <FiArrowRight className="text-xs" />
+                    </Link>
+                  </div>
+                </article>
+              </FadeUp>
             ))}
           </div>
         ) : (
           /* List View Mode */
           <div className="space-y-4">
-            {paginatedPosts.map((post) => (
-              <article
-                key={post.id}
-                className="bg-white rounded-lg border border-slate-200/90 shadow-sm overflow-hidden flex flex-col md:flex-row hover:shadow-md transition-all duration-300 group"
-              >
-                <div className="md:w-72 relative h-48 bg-slate-100 flex-shrink-0 overflow-hidden">
-                  <img
-                    src={post.cover}
-                    alt={post.title}
-                    onError={(e) => {
-                      e.target.onerror = null;
-                      e.target.src = "https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=500&auto=format&fit=crop&q=80";
-                    }}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <span className="absolute bottom-3 left-3 bg-[#F6E6D8]/95 text-[#6B1527] text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-sm shadow-xs border border-[#E9D1BE]">
-                    {post.category}
-                  </span>
-                </div>
-
-                <div className="p-5 flex-1 flex flex-col justify-between">
-                  <div>
-                    <div className="flex items-center gap-3 text-xs text-slate-400 mb-2 font-medium">
-                      <span>{post.date}</span>
-                      <span>•</span>
-                      <span className="flex items-center gap-1">
-                        <FiClock className="text-xs" />
-                        {post.readTime}
-                      </span>
-                    </div>
-
-                    <Link to={`/blog/${post.id}`}>
-                      <h3 className="font-serif font-bold text-slate-900 text-lg sm:text-xl leading-snug group-hover:text-[#6B1527] transition">
-                        {post.title}
-                      </h3>
-                    </Link>
-
-                    <p className="text-sm text-slate-600 mt-2 line-clamp-2 leading-relaxed">
-                      {post.excerpt}
-                    </p>
+            {paginatedPosts.map((post, index) => (
+              <FadeUp key={post.id} delay={0.05 + (index % 4) * 0.07}>
+                <article
+                  className="bg-white rounded-lg border border-slate-200/90 shadow-sm overflow-hidden flex flex-col md:flex-row hover:shadow-md transition-all duration-300 group"
+                >
+                  <div className="md:w-72 relative h-48 bg-slate-100 flex-shrink-0 overflow-hidden">
+                    <img
+                      src={post.cover}
+                      alt={post.title}
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = "https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=500&auto=format&fit=crop&q=80";
+                      }}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <span className="absolute bottom-3 left-3 bg-[#F6E6D8]/95 text-[#6B1527] text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-sm shadow-xs border border-[#E9D1BE]">
+                      {post.category}
+                    </span>
                   </div>
 
-                  <div className="pt-4 border-t border-slate-100 flex items-center justify-between mt-4">
-                    <div className="flex items-center gap-2.5">
-                      <img
-                        src={post.authorAvatar}
-                        alt={post.author}
-                        className="w-7 h-7 rounded-full object-cover border border-slate-200"
-                      />
-                      <div>
-                        <span className="text-xs font-bold text-slate-800 block leading-tight">{post.author}</span>
-                        <span className="text-[10px] text-slate-400">{post.authorRole}</span>
+                  <div className="p-5 flex-1 flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center gap-3 text-xs text-slate-400 mb-2 font-medium">
+                        <span>{post.date}</span>
+                        <span>•</span>
+                        <span className="flex items-center gap-1">
+                          <FiClock className="text-xs" />
+                          {post.readTime}
+                        </span>
                       </div>
+
+                      <Link to={`/blog/${post.id}`}>
+                        <h3 className="font-serif font-bold text-slate-900 text-lg sm:text-xl leading-snug group-hover:text-[#6B1527] transition">
+                          {post.title}
+                        </h3>
+                      </Link>
+
+                      <p className="text-sm text-slate-600 mt-2 line-clamp-2 leading-relaxed">
+                        {post.excerpt}
+                      </p>
                     </div>
 
-                    <Link
-                      to={`/blog/${post.id}`}
-                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-rose-50 text-xs font-bold text-[#6B1527] hover:bg-[#6B1527] hover:text-white transition"
-                    >
-                      <span>Read Story</span>
-                      <FiArrowRight className="text-xs" />
-                    </Link>
+                    <div className="pt-4 border-t border-slate-100 flex items-center justify-between mt-4">
+                      <div className="flex items-center gap-2.5">
+                        <img
+                          src={post.authorAvatar}
+                          alt={post.author}
+                          className="w-7 h-7 rounded-full object-cover border border-slate-200"
+                        />
+                        <div>
+                          <span className="text-xs font-bold text-slate-800 block leading-tight">{post.author}</span>
+                          <span className="text-[10px] text-slate-400">{post.authorRole}</span>
+                        </div>
+                      </div>
+
+                      <Link
+                        to={`/blog/${post.id}`}
+                        className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-rose-50 text-xs font-bold text-[#6B1527] hover:bg-[#6B1527] hover:text-white transition"
+                      >
+                        <span>Read Story</span>
+                        <FiArrowRight className="text-xs" />
+                      </Link>
+                    </div>
                   </div>
-                </div>
-              </article>
+                </article>
+              </FadeUp>
             ))}
           </div>
         )}

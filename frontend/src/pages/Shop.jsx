@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 import { MdMenuOpen, MdGridView, MdViewList } from "react-icons/md";
 import { CiHeart } from "react-icons/ci";
 import { FiEye } from "react-icons/fi";
@@ -7,6 +7,8 @@ import Rating from "../components/rating/Rating";
 import useProducts from "../hooks/useProducts";
 import { API_BASE_URL } from "../api/products";
 import { useToast } from "../context/ToastContext";
+import { isAuthenticated } from "../utils/auth";
+import FadeUp from "../components/animations/FadeUp";
 
 const DEFAULT_CATEGORIES = [
   "Silk Sarees",
@@ -18,6 +20,7 @@ const DEFAULT_CATEGORIES = [
 
 const Shop = () => {
   const { showToast } = useToast();
+  const navigate = useNavigate();
   const { products: sarees, loading, error } = useProducts();
   const [categoryList, setCategoryList] = useState(["All", ...DEFAULT_CATEGORIES]);
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -84,6 +87,12 @@ const Shop = () => {
 
   // ADD TO CART
   const addToCart = (product) => {
+    if (!isAuthenticated()) {
+      showToast.warning("Please sign in to add items to your cart.");
+      navigate("/signin", { state: { from: location } });
+      return;
+    }
+
     const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
 
     const found = existingCart.find((item) => item.id === product.id);
@@ -107,6 +116,12 @@ const Shop = () => {
   };
 
   const toggleWishlist = (product) => {
+    if (!isAuthenticated()) {
+      showToast.warning("Please sign in to save items to your wishlist.");
+      navigate("/signin", { state: { from: location } });
+      return;
+    }
+
     const existingWishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
     const isWishlisted = existingWishlist.some((item) => item.id === product.id);
     const updatedWishlist = isWishlisted
@@ -419,71 +434,75 @@ const Shop = () => {
             </div>
           ) : (
             <div className={`grid ${gridClassNames} gap-5`}>
-              {currentProducts.map((item) => (
-                <div key={item.id}
-                  className="group rounded-lg overflow-hidden border border-gray-200 bg-white transition"
-                >
-                  <div className="relative overflow-hidden">
-                    <Link to={`/shop/${item.id}`} className="block">
-                      <img
-                        loading="lazy"
-                        src={item.img}
-                        alt={item.title}
-                        onError={(e) => {
-                          e.currentTarget.onerror = null;
-                          e.currentTarget.src = "/images/silk/silk-1.jpg";
-                        }}
-                        className="w-full h-90 2xl:object-center object-cover object-top transition duration-300 group-hover:scale-[1.05]"
-                      />
-                    </Link>
-                    <div className="pointer-events-none absolute inset-0 flex items-start justify-between bg-black/10 p-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                      <span className="rounded-full bg-[#e9829a] px-2.5 py-1 text-[10px] font-bold uppercase text-white shadow-sm">
-                        {item.tag || "Handcrafted"}
-                      </span>
-                      <div className="pointer-events-auto flex flex-col gap-2">
-                        <button
-                          type="button"
-                          onClick={() => toggleWishlist(item)}
-                          aria-label={wishlistIds.includes(item.id) ? "Remove from wishlist" : "Add to wishlist"}
-                          className={`flex h-9 w-9 items-center justify-center cursor-pointer rounded-full bg-white shadow-sm transition hover:bg-[#75212E] hover:text-white ${wishlistIds.includes(item.id) ? "text-[#75212E]" : "text-[#75212E]"}`}
-                        >
-                          <CiHeart className="text-xl" />
-                        </button>
-                        <Link
-                          to={`/shop/${item.id}`}
-                          aria-label={`View ${item.title}`}
-                          className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-[#75212E] shadow-sm transition hover:bg-[#75212E] hover:text-white"
-                        >
-                          <FiEye className="text-lg" />
-                        </Link>
+              {currentProducts.map((item, index) => (
+                <FadeUp key={item.id} delay={Math.min(index * 0.05, 0.4)} className="h-full">
+                  <div
+                    className="group rounded-lg overflow-hidden border border-gray-200 bg-white transition h-full flex flex-col justify-between"
+                  >
+                    <div className="relative overflow-hidden">
+                      <Link to={`/shop/${item.id}`} className="block">
+                        <img
+                          loading="lazy"
+                          src={item.img}
+                          alt={item.title}
+                          onError={(e) => {
+                            e.currentTarget.onerror = null;
+                            e.currentTarget.src = "/images/silk/silk-1.jpg";
+                          }}
+                          className="w-full h-90 2xl:object-center object-cover object-top transition duration-300 group-hover:scale-[1.05]"
+                        />
+                      </Link>
+                      <div className="pointer-events-none absolute inset-0 flex items-start justify-between bg-black/10 p-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                        <span className="rounded-full bg-[#e9829a] px-2.5 py-1 text-[10px] font-bold uppercase text-white shadow-sm">
+                          {item.tag || "Handcrafted"}
+                        </span>
+                        <div className="pointer-events-auto flex flex-col gap-2">
+                          <button
+                            type="button"
+                            onClick={() => toggleWishlist(item)}
+                            aria-label={wishlistIds.includes(item.id) ? "Remove from wishlist" : "Add to wishlist"}
+                            className={`flex h-9 w-9 items-center justify-center cursor-pointer rounded-full bg-white shadow-sm transition hover:bg-[#75212E] hover:text-white ${wishlistIds.includes(item.id) ? "text-[#75212E]" : "text-[#75212E]"}`}
+                          >
+                            <CiHeart className="text-xl" />
+                          </button>
+                          <Link
+                            to={`/shop/${item.id}`}
+                            aria-label={`View ${item.title}`}
+                            className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-[#75212E] shadow-sm transition hover:bg-[#75212E] hover:text-white"
+                          >
+                            <FiEye className="text-lg" />
+                          </Link>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="p-4">
-                    <Link to={`/shop/${item.id}`} className="block font-medium text-sm line-clamp-2 hover:text-[#74202D] transition mb-2">
-                      {item.title}
-                    </Link>
-                    <div className="flex gap-2 mt-2">
-                      <span className="text-[#74202D] font-bold">₹{item.discountPrice}</span>
-                      <span className="line-through text-gray-400 text-sm">₹{item.actualPrice}</span>
+                    <div className="p-4 flex-1 flex flex-col justify-between">
+                      <div>
+                        <Link to={`/shop/${item.id}`} className="block font-medium text-sm line-clamp-2 hover:text-[#74202D] transition mb-2">
+                          {item.title}
+                        </Link>
+                        <div className="flex gap-2 mt-2">
+                          <span className="text-[#74202D] font-bold">₹{item.discountPrice}</span>
+                          <span className="line-through text-gray-400 text-sm">₹{item.actualPrice}</span>
+                        </div>
+                        <div className="flex items-center gap-2 mt-2">
+                          <Rating rating={item.rating} />
+                          <span className="text-xs text-gray-500">({item.ratings})</span>
+                        </div>
+                      </div>
+                      <button
+                        onClick={() => addToCart(item)}
+                        disabled={cartIds.includes(item.id)}
+                        className={`w-full mt-4 rounded-md py-2 text-sm transition cursor-pointer ${
+                          cartIds.includes(item.id)
+                            ? "border border-gray-200 bg-gray-200 text-gray-500 cursor-not-allowed"
+                            : "border border-[#74202D] text-[#74202D] hover:bg-[#74202D] hover:text-white"
+                        }`}
+                      >
+                        {cartIds.includes(item.id) ? "Already in Cart" : "Add To Cart"}
+                      </button>
                     </div>
-                    <div className="flex items-center gap-2 mt-2">
-                      <Rating rating={item.rating} />
-                      <span className="text-xs text-gray-500">({item.ratings})</span>
-                    </div>
-                    <button
-                      onClick={() => addToCart(item)}
-                      disabled={cartIds.includes(item.id)}
-                      className={`w-full mt-4 rounded-md py-2 text-sm transition cursor-pointer ${
-                        cartIds.includes(item.id)
-                          ? "border border-gray-200 bg-gray-200 text-gray-500 cursor-not-allowed"
-                          : "border border-[#74202D] text-[#74202D] hover:bg-[#74202D] hover:text-white"
-                      }`}
-                    >
-                      {cartIds.includes(item.id) ? "Already in Cart" : "Add To Cart"}
-                    </button>
                   </div>
-                </div>
+                </FadeUp>
               ))}
             </div>
           )}

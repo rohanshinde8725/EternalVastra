@@ -1,22 +1,19 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import {
   FiMail,
   FiLock,
   FiEye,
   FiEyeOff,
-  FiAward,
-  FiCheckCircle,
-  FiTruck,
 } from "react-icons/fi";
-import { FcGoogle } from "react-icons/fc";
-import { FaFacebook } from "react-icons/fa";
 import { API_BASE_URL } from "../api/products";
 import { useToast } from "../context/ToastContext";
+import FadeUp from "../components/animations/FadeUp";
 
 const SignIn = () => {
   const { showToast } = useToast();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -55,7 +52,8 @@ const SignIn = () => {
       if (data.user.role === "admin" || data.user.email === "rohanshinde8725@gmail.com") {
         navigate("/admin");
       } else {
-        navigate("/shop");
+        const from = location.state?.from || "/shop";
+        navigate(from, { replace: true });
       }
     } catch (err) {
       // Fallback demo account
@@ -73,157 +71,79 @@ const SignIn = () => {
     }
   };
 
-  const handleDemoFill = (role) => {
-    if (role === "admin") {
-      setFormData({
-        email: "rohanshinde8725@gmail.com",
-        password: "admin123",
-      });
-      showToast.info("Filled Admin credentials (rohanshinde8725@gmail.com).");
-    } else {
-      setFormData({
-        email: "ritika.sharma@example.com",
-        password: "patronpassword123",
-      });
-      showToast.info("Filled Patron credentials.");
-    }
-  };
-
   return (
-    <div className="min-h-screen bg-[#FBF8F5] flex items-center justify-center p-4 sm:p-6 lg:p-10 font-sans">
-      <div className="max-w-5xl w-full bg-[#FAF6F0] rounded-3xl shadow-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-12 border border-[#EFE5DC]">
+    <div className="min-h-[calc(100vh-140px)] bg-[#FBF8F5] flex items-center justify-center p-4 sm:p-6 lg:p-8 font-sans">
+      <FadeUp delay={0.1} className="max-w-4xl w-full bg-white rounded-3xl shadow-xl overflow-hidden grid grid-cols-1 md:grid-cols-2 border border-[#EFE5DC]">
         
-        {/* ================= LEFT COLUMN (HERO IMAGE + BRANDING) ================= */}
-        <div className="lg:col-span-6 flex flex-col justify-between bg-[#F8F2EA] relative">
-          
-          {/* Top Brand & Model Showcase */}
-          <div className="relative w-full h-[460px] sm:h-[500px] overflow-hidden flex flex-col justify-between p-6 sm:p-8 bg-[#F5ECE0]">
-            {/* Model in Crimson Silk Saree Image from Backend */}
-            <img
-              src={`${API_BASE_URL}/images/silk/silk-1.jpg`}
-              alt="Model in Royal Crimson Saree"
-              className="absolute inset-0 w-full h-full object-cover object-top"
-            />
-            {/* Subtle Gradient Overlay for Logo Readability */}
-            <div className="absolute inset-0 bg-gradient-to-b from-[#FAF4EC]/85 via-transparent to-black/40 pointer-events-none" />
-
-            {/* Logo Emblem Header */}
-            <div className="relative z-10 text-center">
-              <div className="flex justify-center mb-1 text-amber-700">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2L13.8 6.6L18.5 4.8L16.7 9.5L21.4 11.3L16.7 13.1L18.5 17.8L13.8 16L12 20.6L10.2 16L5.5 17.8L7.3 13.1L2.6 11.3L7.3 9.5L5.5 4.8L10.2 6.6L12 2Z" />
-                </svg>
-              </div>
-              <h1 className="text-2xl sm:text-3xl font-serif tracking-[0.2em] font-bold text-[#4A1521] uppercase drop-shadow-xs">
-                S A R E E
-              </h1>
-              <p className="text-[10px] tracking-[0.3em] font-semibold text-[#8C4B59] uppercase mt-0.5">
-                — ELEGANCE ETERNAL —
-              </p>
-            </div>
-
-            {/* Bottom empty div for spacing */}
-            <div className="relative z-10" />
-          </div>
-
-          {/* Middle Crimson Ribbon Bar */}
-          <div className="bg-[#701A2B] text-white py-5 px-4 sm:px-6 grid grid-cols-3 gap-2 text-center border-y border-[#5A1221]">
-            <div className="flex flex-col items-center justify-center space-y-1">
-              <div className="w-8 h-8 rounded-full border border-white/30 flex items-center justify-center text-amber-200">
-                <FiAward className="text-base" />
-              </div>
-              <h4 className="text-[11px] font-bold tracking-tight">Premium Quality</h4>
-              <p className="text-[9px] text-rose-100/80 leading-tight">Finest fabrics, crafted to perfection</p>
-            </div>
-
-            <div className="flex flex-col items-center justify-center space-y-1 border-x border-white/15 px-1">
-              <div className="w-8 h-8 rounded-full border border-white/30 flex items-center justify-center text-amber-200">
-                <FiCheckCircle className="text-base" />
-              </div>
-              <h4 className="text-[11px] font-bold tracking-tight">Secure Shopping</h4>
-              <p className="text-[9px] text-rose-100/80 leading-tight">100% safe & trusted</p>
-            </div>
-
-            <div className="flex flex-col items-center justify-center space-y-1">
-              <div className="w-8 h-8 rounded-full border border-white/30 flex items-center justify-center text-amber-200">
-                <FiTruck className="text-base" />
-              </div>
-              <h4 className="text-[11px] font-bold tracking-tight">Fast Delivery</h4>
-              <p className="text-[9px] text-rose-100/80 leading-tight">Quick & reliable shipping</p>
-            </div>
-          </div>
-
-          {/* Bottom Champagne Editorial Quote */}
-          <div className="py-6 px-6 sm:px-8 text-center bg-[#EFE8DF]">
-            <div className="text-3xl font-serif text-[#701A2B] leading-none mb-1">“</div>
-            <p className="text-sm font-serif italic text-[#3A2226] max-w-sm mx-auto leading-relaxed">
-              Drape yourself in timeless elegance crafted for the modern you.
-            </p>
-            <div className="flex items-center justify-center gap-3 mt-3 text-amber-800/60">
-              <span className="w-8 h-[1px] bg-amber-800/40" />
-              <span className="text-xs">🪷</span>
-              <span className="w-8 h-[1px] bg-amber-800/40" />
-            </div>
+        {/* ================= 1. IMAGE CARD ================= */}
+        <div className="relative h-48 md:h-full min-h-[200px] md:min-h-[460px] overflow-hidden bg-[#F5ECE0]">
+          <img
+            src="/images/silk/silk-1.jpg"
+            alt="Royal Silk Saree"
+            onError={(e) => {
+              e.currentTarget.onerror = null;
+              e.currentTarget.src = `${API_BASE_URL}/images/silk/silk-1.jpg`;
+            }}
+            className="w-full h-full object-cover object-top"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent flex flex-col justify-end p-6 md:p-8 text-white">
+            <h3 className="text-2xl sm:text-3xl font-serif font-bold drop-shadow">Eternal Vastra</h3>
+            <p className="text-sm text-rose-100/90 mt-1">Timeless Weaves, Handcrafted Elegance</p>
           </div>
         </div>
 
-        {/* ================= RIGHT COLUMN (SIGN IN CARD) ================= */}
-        <div className="lg:col-span-6 bg-[#FAF6F0] p-6 sm:p-10 lg:p-12 flex items-center justify-center">
-          <div className="bg-white rounded-3xl p-6 sm:p-10 w-full max-w-md shadow-lg border border-[#F0E6DD] space-y-6">
+        {/* ================= 2. FORM CARD ================= */}
+        <div className="p-6 sm:p-8 md:p-10 flex flex-col justify-center">
+          <div className="w-full max-w-sm mx-auto space-y-5">
             
             {/* Header */}
-            <div className="text-center space-y-1.5">
+            <div className="space-y-1.5 text-center md:text-left">
               <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#701A2B] tracking-tight">
                 Welcome Back
               </h2>
-              <div className="flex items-center justify-center gap-2 text-amber-800/50">
-                <span className="w-10 h-[1px] bg-[#D8C7B8]" />
-                <span className="text-xs text-amber-700">🪷</span>
-                <span className="w-10 h-[1px] bg-[#D8C7B8]" />
-              </div>
-              <p className="text-xs text-slate-500 font-medium pt-1">
-                Sign in to continue to Saree
+              <p className="text-sm text-slate-500 font-medium">
+                Sign in to continue to Eternal Vastra
               </p>
             </div>
 
             {/* Form */}
-            <form onSubmit={handleSubmit} className="space-y-4 text-xs">
+            <form onSubmit={handleSubmit} className="space-y-4">
               
               {/* Email Input */}
               <div className="space-y-1.5">
-                <label className="font-bold text-slate-700 block text-xs">Email Address</label>
+                <label className="font-semibold text-slate-700 block text-sm">Email Address</label>
                 <div className="relative">
-                  <FiMail className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-base" />
+                  <FiMail className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-lg" />
                   <input
                     type="email"
                     required
                     placeholder="Enter your email"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full pl-10 pr-4 py-3 rounded-lg bg-white border border-slate-200 text-xs text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-[#701A2B] focus:ring-1 focus:ring-[#701A2B] transition"
+                    className="w-full pl-11 pr-4 py-2.5 sm:py-3 rounded-lg bg-white border border-slate-200 text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-[#701A2B] focus:ring-1 focus:ring-[#701A2B] transition"
                   />
                 </div>
               </div>
 
               {/* Password Input */}
               <div className="space-y-1.5">
-                <label className="font-bold text-slate-700 block text-xs">Password</label>
+                <label className="font-semibold text-slate-700 block text-sm">Password</label>
                 <div className="relative">
-                  <FiLock className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-base" />
+                  <FiLock className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-lg" />
                   <input
                     type={showPassword ? "text" : "password"}
                     required
                     placeholder="Enter your password"
                     value={formData.password}
                     onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                    className="w-full pl-10 pr-10 py-3 rounded-lg bg-white border border-slate-200 text-xs text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-[#701A2B] focus:ring-1 focus:ring-[#701A2B] transition"
+                    className="w-full pl-11 pr-11 py-2.5 sm:py-3 rounded-lg bg-white border border-slate-200 text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-[#701A2B] focus:ring-1 focus:ring-[#701A2B] transition"
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
                     className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 cursor-pointer"
                   >
-                    {showPassword ? <FiEyeOff className="text-base" /> : <FiEye className="text-base" />}
+                    {showPassword ? <FiEyeOff className="text-lg" /> : <FiEye className="text-lg" />}
                   </button>
                 </div>
               </div>
@@ -233,7 +153,7 @@ const SignIn = () => {
                 <button
                   type="button"
                   onClick={() => showToast.info("Contact support or sign up to reset credentials.")}
-                  className="text-xs text-[#701A2B] font-semibold hover:underline cursor-pointer"
+                  className="text-sm text-[#701A2B] font-semibold hover:underline cursor-pointer"
                 >
                   Forgot Password?
                 </button>
@@ -243,45 +163,14 @@ const SignIn = () => {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3 rounded-md bg-[#701A2B] hover:bg-[#581321] text-white text-xs font-bold uppercase tracking-wider shadow-sm transition-all duration-300 cursor-pointer disabled:opacity-50 mt-2"
+                className="w-full py-3 sm:py-3.5 rounded-lg bg-[#701A2B] hover:bg-[#581321] text-white text-sm font-bold uppercase tracking-wider shadow-sm transition-all duration-300 cursor-pointer disabled:opacity-50"
               >
                 {loading ? "Signing in..." : "SIGN IN"}
               </button>
             </form>
 
-            {/* Divider */}
-            <div className="relative my-4 text-center">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-slate-200" />
-              </div>
-              <span className="relative px-3 bg-white text-[11px] text-slate-400 uppercase tracking-wider font-semibold">
-                OR
-              </span>
-            </div>
-
-            {/* Social Logins */}
-            <div className="space-y-2.5">
-              <button
-                type="button"
-                onClick={() => showToast.info("Google Authentication initialized.")}
-                className="w-full flex items-center justify-center gap-3 py-2.5 px-4 rounded-lg border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-semibold transition cursor-pointer"
-              >
-                <FcGoogle className="text-lg" />
-                <span>Continue with Google</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => showToast.info("Facebook Login initialized.")}
-                className="w-full flex items-center justify-center gap-3 py-2.5 px-4 rounded-lg border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-semibold transition cursor-pointer"
-              >
-                <FaFacebook className="text-lg text-[#1877F2]" />
-                <span>Continue with Facebook</span>
-              </button>
-            </div>
-
             {/* Footer Sign Up Link */}
-            <div className="text-center pt-2 border-t border-slate-100 text-xs text-slate-600">
+            <div className="text-center pt-3 border-t border-slate-100 text-sm text-slate-600">
               Don't have an account?{" "}
               <Link to="/signup" className="text-[#701A2B] font-bold hover:underline">
                 Sign Up
@@ -289,9 +178,10 @@ const SignIn = () => {
             </div>
           </div>
         </div>
-      </div>
+      </FadeUp>
     </div>
   );
 };
 
 export default SignIn;
+

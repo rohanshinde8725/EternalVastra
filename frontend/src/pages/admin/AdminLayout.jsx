@@ -19,6 +19,7 @@ import {
   FiCheck,
 } from "react-icons/fi";
 import { API_BASE_URL } from "../../api/products";
+import Logo from "../../components/common/Logo";
 
 const navItems = [
   { path: "/admin", label: "Dashboard", icon: FiGrid, exact: true },
@@ -84,17 +85,9 @@ const AdminLayout = () => {
         <div className="relative z-20 p-6 pb-2">
           {/* Logo Header */}
           <div className="flex items-center justify-between">
-            <Link
-              to="/"
-              className="flex items-center justify-center mx-auto bg-white/95 px-4 py-2.5 rounded-2xl shadow-sm border border-white/20 hover:bg-white hover:scale-105 transition-all duration-300 group cursor-pointer"
-              title="Return to Eternal Vastra Home Page"
-            >
-              <img
-                src="/images/navImg2.png"
-                alt="Eternal Vastra Logo"
-                className="h-10 sm:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
-              />
-            </Link>
+            <div className="flex items-center justify-center mx-auto bg-white/95 px-4 py-2 rounded-2xl shadow-sm border border-white/20 hover:bg-white hover:scale-105 transition-all duration-300">
+              <Logo className="h-8 sm:h-9 w-auto" to="/" />
+            </div>
             <button
               onClick={() => setSidebarOpen(false)}
               className="lg:hidden text-white/70 hover:text-white p-1.5 rounded-md"

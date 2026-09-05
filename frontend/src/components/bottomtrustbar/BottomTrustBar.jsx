@@ -11,7 +11,7 @@ const BottomTrustBar = () => {
         grid grid-cols-2 md:grid-cols-4 gap-15 md:gap-6 py-10 md:p-10 lg:p-10'>
 
         {/* Item */}
-        <FadeUp delay={0.2}>
+        <FadeUp delay={0.08}>
             <div className='flex flex-col md:flex-row items-center justify-center gap-4'>
                 <div>
                     <FaMedal className='text-4xl text-[#74202D]' />
@@ -23,7 +23,7 @@ const BottomTrustBar = () => {
             </div>
         </FadeUp>
 
-        <FadeUp delay={0.4}>
+        <FadeUp delay={0.16}>
             <div className='flex flex-col md:flex-row items-center justify-center gap-4'>
                 <FiRefreshCw className='text-4xl text-[#74202D]' />
                 <div>
@@ -33,7 +33,7 @@ const BottomTrustBar = () => {
             </div>
         </FadeUp>
 
-        <FadeUp delay={0.6}>
+        <FadeUp delay={0.24}>
             <div className='flex flex-col md:flex-row items-center justify-center gap-4'>
                 <LiaShippingFastSolid className='text-4xl text-[#74202D]' />
                 <div>
@@ -44,7 +44,7 @@ const BottomTrustBar = () => {
         </FadeUp>
         
 
-        <FadeUp delay={0.8}>
+        <FadeUp delay={0.32}>
             <div className='flex flex-col md:flex-row items-center justify-center gap-4'>
                 <GoShieldCheck className='text-4xl text-[#74202D]' />
                 <div>

@@ -1,15 +1,25 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Rating from "../rating/Rating";
 import { HiOutlineArrowLeft } from "react-icons/hi";
 import { MdGridView, MdViewList } from "react-icons/md";
 import { useToast } from "../../context/ToastContext";
+import { isAuthenticated } from "../../utils/auth";
 
 const Wishlist = () => {
   const { showToast } = useToast();
+  const navigate = useNavigate();
+  const location = useLocation();
   const [wishlist, setWishlist] = useState([]);
   const [viewMode, setViewMode] = useState("4");
   const [cartIds, setCartIds] = useState([]);
+
+  useEffect(() => {
+    if (!isAuthenticated()) {
+      showToast.warning("Please sign in to view your wishlist.");
+      navigate("/signin", { state: { from: location } });
+    }
+  }, [navigate, location, showToast]);
 
   useEffect(() => {
     const savedViewMode = localStorage.getItem("wishlistViewMode");
@@ -50,6 +60,12 @@ const Wishlist = () => {
   };
 
   const addToCart = (product) => {
+    if (!isAuthenticated()) {
+      showToast.warning("Please sign in to add items to your cart.");
+      navigate("/signin", { state: { from: location } });
+      return;
+    }
+
     const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
     const found = existingCart.find((item) => item.id === product.id);
     const updatedCart = found

@@ -19,7 +19,7 @@ const Hero = () => {
           clickable: true,
           el: ".custom-pagination",
         }}
-        autoplay={{ delay: 3000 }}
+        autoplay={{ delay: 3500, disableOnInteraction: false }}
         loop={true}
       >
 
@@ -32,22 +32,21 @@ const Hero = () => {
               alt="Banner"
               loading="eager"
               fetchPriority="high"
-              viewport={{ once: false }}
               className="absolute inset-0 w-full h-full object-cover -z-10" />
 
             <div className="w-full lg:w-[70%] lg:ml-10 relative z-10">
-              <FadeUp delay={0.2} viewport={{ once: false }}>
+              <FadeUp delay={0.1}>
                 <h1 className="text-2xl sm:text-3xl lg:text-5xl font-semibold text-[#74202D]">
                   Timeless Waves, <br /> Eternal Elegance
                 </h1>
               </FadeUp>
-              <FadeUp delay={0.5} viewport={{ once: false }}>
+              <FadeUp delay={0.25}>
                 <p className="banner-p w-full sm:w-[60%] md:w-[70%] my-4 text-[#3b3737] text-sm md:text-base xl:text-lg">
                   Discover our exquisite collection of sarees crafted with tradition,
                   quality & love.
                 </p>
               </FadeUp>
-              <FadeUp delay={0.8} viewport={{ once: false }}>
+              <FadeUp delay={0.4}>
                 <Link to="/shop">
                   <button
                     className="bg-[#74202D] text-white uppercase py-2 px-4 md:px-8 rounded hover:bg-white border-2 border-[#74202D] hover:text-[#74202D]
@@ -69,27 +68,28 @@ const Hero = () => {
               src="/images/banner/banner-2.png"
               alt="Banner 2"
               loading="lazy"
-              viewport={{ once: false }}
               className="absolute inset-0 w-full h-full object-cover -z-10"/>
             {/* Content */}
             <div className="w-full lg:w-[70%] lg:ml-20 relative z-10">
-              <FadeUp delay={0.2} viewport={{ once: false }}>
+              <FadeUp delay={0.1}>
                 <h1 className="text-2xl sm:text-3xl lg:text-5xl font-semibold text-[#74202D]">
                   Elegance for <br /> Every Celebration
                 </h1>
               </FadeUp>
-              <FadeUp delay={0.5} viewport={{ once: false }}>
+              <FadeUp delay={0.25}>
                 <p className="banner-p w-full sm:w-[80%] md:w-[70%] my-4 text-[#3b3737] text-sm md:text-base xl:text-lg">
                   From weddings to festive moments, explore sarees that make every occasion unforgettable.
                 </p>
               </FadeUp>
-              <FadeUp delay={0.8} viewport={{ once: false }}>
-                <button
-                  className="bg-[#74202D] text-white uppercase py-2 px-4 md:px-8 rounded-lg
-                  hover:bg-white border-2 border-[#74202D] hover:text-[#74202D]
-                  cursor-pointer transition text-xs md:text-base font-semibold">
-                  Shop Now
-                </button>
+              <FadeUp delay={0.4}>
+                <Link to="/shop">
+                  <button
+                    className="bg-[#74202D] text-white uppercase py-2 px-4 md:px-8 rounded-lg
+                    hover:bg-white border-2 border-[#74202D] hover:text-[#74202D]
+                    cursor-pointer transition text-xs md:text-base font-semibold">
+                    Shop Now
+                  </button>
+                </Link>
               </FadeUp>
             </div>
           </div>
@@ -104,29 +104,30 @@ const Hero = () => {
               src="/images/banner/banner-3.png"
               alt="Banner 3"
               loading="lazy"
-              viewport={{ once: false }}
               className="absolute inset-0 w-full h-full object-cover -z-10"/>
 
             {/* Content */}
             <div className="w-full lg:w-[70%] lg:ml-20 relative z-10">
-              <FadeUp delay={0.2} viewport={{ once: false }}>
+              <FadeUp delay={0.1}>
                 <h1 className="text-2xl sm:text-3xl lg:text-5xl font-semibold text-[#74202D]">
                   Designed for <br /> Modern Grace
                 </h1>
               </FadeUp>
-              <FadeUp delay={0.5} viewport={{ once: false }}>
+              <FadeUp delay={0.25}>
                 <p className="banner-p w-full sm:w-[80%] md:w-[70%] my-4 text-[#3b3737] text-sm 
                 md:text-base xl:text-lg">
                   Contemporary sarees crafted for the modern woman — effortless elegance for every day.
                 </p>
               </FadeUp>
-              <FadeUp delay={0.8} viewport={{ once: false }}>
-                <button
-                  className="bg-[#74202D] text-white uppercase py-2 px-4 md:px-8 rounded-lg
-                  hover:bg-white border-2 border-[#74202D] hover:text-[#74202D]
-                  cursor-pointer transition text-xs md:text-base font-semibold">
-                  Shop Now
-                </button>
+              <FadeUp delay={0.4}>
+                <Link to="/shop">
+                  <button
+                    className="bg-[#74202D] text-white uppercase py-2 px-4 md:px-8 rounded-lg
+                    hover:bg-white border-2 border-[#74202D] hover:text-[#74202D]
+                    cursor-pointer transition text-xs md:text-base font-semibold">
+                    Shop Now
+                  </button>
+                </Link>
               </FadeUp>
             </div>
           </div>

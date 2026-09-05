@@ -56,7 +56,7 @@ const Category = () => {
         <div className='mt-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-5 sm:gap-6 md:gap-8 lg:gap-10'>
         
         {categories.map((cat, index) => (
-          <FadeUp key={cat.title || index} delay={0.3}>
+          <FadeUp key={cat.title || index} delay={0.08 + (index % 5) * 0.07}>
             <div
               className="text-center group cursor-pointer"
               onClick={() => handleCategoryClick(cat.title)}

@@ -1,5 +1,7 @@
-import { Routes, Route, Outlet } from 'react-router-dom'
+import { Routes, Route, Outlet, useLocation } from 'react-router-dom'
 import { lazy, Suspense } from "react";
+import { motion } from "framer-motion";
+
 const Home = lazy(() => import("../pages/Home"));
 const About = lazy(() => import("../pages/About"));
 const Shop = lazy(() => import("../pages/Shop"));
@@ -26,16 +28,28 @@ const AdminBlog = lazy(() => import("../pages/admin/Blog"));
 const AdminProfile = lazy(() => import("../pages/admin/Profile"));
 const SignIn = lazy(() => import("../pages/SignIn"));
 const SignUp = lazy(() => import("../pages/SignUp"));
-const MainLayout = () => {
-  return (
-    <>
-        <Header />
-            <Outlet />
-        <Footer />
-    </>
-  )
 
-}
+const MainLayout = () => {
+  const location = useLocation();
+
+  return (
+    <div className="flex flex-col min-h-screen">
+      <Header />
+      <main className="flex-1 w-full">
+        <motion.div
+          key={location.pathname}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+          className="w-full"
+        >
+          <Outlet />
+        </motion.div>
+      </main>
+      <Footer />
+    </div>
+  );
+};
 
 const AppRoutes = () => {
     return (

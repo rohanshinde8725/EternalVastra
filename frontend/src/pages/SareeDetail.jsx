@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Rating from "../components/rating/Rating";
@@ -8,6 +8,8 @@ import { CiSearch, CiHeart } from "react-icons/ci";
 import { FaFacebookF, FaInstagram, FaPhoneAlt, FaShareAlt, FaWhatsapp } from "react-icons/fa";
 import { FiScissors, FiEye } from "react-icons/fi";
 import { useToast } from "../context/ToastContext";
+import { isAuthenticated } from "../utils/auth";
+import FadeUp from "../components/animations/FadeUp";
 
 const defaultDetails = {
   description:
@@ -82,6 +84,8 @@ const getResolvedDetails = (product) => {
 
 const SareeDetail = () => {
   const { showToast } = useToast();
+  const navigate = useNavigate();
+  const location = useLocation();
   const { productId } = useParams();
   const { products: sarees, loading, error } = useProducts();
   const product = sarees.find((item) => item.id === Number(productId));
@@ -95,6 +99,12 @@ const SareeDetail = () => {
   const [activeTab, setActiveTab] = useState("Care & Craft");
 
   const addToCart = (productItem) => {
+    if (!isAuthenticated()) {
+      showToast.warning("Please sign in to add items to your cart.");
+      navigate("/signin", { state: { from: location } });
+      return;
+    }
+
     const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
     const found = existingCart.find((item) => item.id === productItem.id);
     const updatedCart = found
@@ -111,6 +121,12 @@ const SareeDetail = () => {
   };
 
   const toggleWishlist = (targetProduct) => {
+    if (!isAuthenticated()) {
+      showToast.warning("Please sign in to save items to your wishlist.");
+      navigate("/signin", { state: { from: location } });
+      return;
+    }
+
     // If targetProduct is a React Click Event or null, default to current product
     const itemToToggle = (targetProduct && typeof targetProduct.id === "number") ? targetProduct : product;
     if (!itemToToggle || !itemToToggle.id) return;
@@ -210,17 +226,19 @@ const SareeDetail = () => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
             {/* Content */}
             <div className="lg:col-span-8 text-center sm:text-left">
-              <div className="inline-flex items-center mb-2 sm:mb-3 gap-2 text-xs sm:text-sm font-bold uppercase tracking-[0.25em] text-[#6B1527]">
-                <span>🌸</span>
-                <span>{product.category?.[0] || "HERITAGE SAREES"}</span>
-              </div>
+              <FadeUp delay={0.1}>
+                <div className="inline-flex items-center mb-2 sm:mb-3 gap-2 text-xs sm:text-sm font-bold uppercase tracking-[0.25em] text-[#6B1527]">
+                  <span>🌸</span>
+                  <span>{product.category?.[0] || "HERITAGE SAREES"}</span>
+                </div>
 
-              <h1 className="text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-slate-900 leading-tight tracking-tight">
-                {product.title}
-              </h1>
-              <p className="text-xs sm:text-sm text-slate-600 mt-1 sm:mt-2">
-                Handcrafted timeless elegance designed for celebrations
-              </p>
+                <h1 className="text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-slate-900 leading-tight tracking-tight">
+                  {product.title}
+                </h1>
+                <p className="text-xs sm:text-sm text-slate-600 mt-1 sm:mt-2">
+                  Handcrafted timeless elegance designed for celebrations
+                </p>
+              </FadeUp>
             </div>
           </div>
         </div>
@@ -232,13 +250,15 @@ const SareeDetail = () => {
       <div className="mx-auto max-w-[1440px] px-4 sm:px-6 md:px-8 lg:px-12 py-6 sm:py-10">
         
         {/* Back Link Breadcrumb */}
-        <Link
-          to="/shop"
-          className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-[#75212e] hover:text-[#5a1520] transition-colors py-1 mb-4 sm:mb-6 group cursor-pointer"
-        >
-          <HiOutlineArrowLeft className="text-base group-hover:-translate-x-1 transition-transform" />
-          <span>Back to Products</span>
-        </Link>
+        <FadeUp delay={0.05}>
+          <Link
+            to="/shop"
+            className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-[#75212e] hover:text-[#5a1520] transition-colors py-1 mb-4 sm:mb-6 group cursor-pointer"
+          >
+            <HiOutlineArrowLeft className="text-base group-hover:-translate-x-1 transition-transform" />
+            <span>Back to Products</span>
+          </Link>
+        </FadeUp>
 
         {/* Product Showcase Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 items-start">
@@ -247,225 +267,229 @@ const SareeDetail = () => {
           {/* Left Column: Image Gallery */}
           {/* ========================================== */}
           <section className="w-full lg:col-span-5 xl:col-span-5">
-            <div className="relative aspect-[4/4.5] sm:aspect-[4/4.2] w-full overflow-hidden rounded-lg border border-[#eaded7] bg-[#f8efe9] shadow-xs">
-              <motion.img
-                key={selectedImage || product.img}
-                src={selectedImage || product.img}
-                alt={product.title}
-                onError={(e) => {
-                  e.currentTarget.onerror = null;
-                  e.currentTarget.src = "/images/silk/silk-1.jpg";
-                }}
-                initial={{ opacity: 0.6, scale: 1.02 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                className="h-full w-full object-cover object-top"
-              />
-              
-              {/* Tag Badge */}
-              <span className="absolute left-3 top-3 sm:left-4 sm:top-4 rounded-lg bg-[#e9829a] px-3 py-1 text-[10px] sm:text-xs font-bold uppercase text-white shadow-xs">
-                {product.tag || "Handcrafted"}
-              </span>
+            <FadeUp delay={0.1}>
+              <div className="relative aspect-[4/4.5] sm:aspect-[4/4.2] w-full overflow-hidden rounded-lg border border-[#eaded7] bg-[#f8efe9] shadow-xs">
+                <motion.img
+                  key={selectedImage || product.img}
+                  src={selectedImage || product.img}
+                  alt={product.title}
+                  onError={(e) => {
+                    e.currentTarget.onerror = null;
+                    e.currentTarget.src = "/images/silk/silk-1.jpg";
+                  }}
+                  initial={{ opacity: 0.6, scale: 1.02 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                  className="h-full w-full object-cover object-top"
+                />
+                
+                {/* Tag Badge */}
+                <span className="absolute left-3 top-3 sm:left-4 sm:top-4 rounded-lg bg-[#e9829a] px-3 py-1 text-[10px] sm:text-xs font-bold uppercase text-white shadow-xs">
+                  {product.tag || "Handcrafted"}
+                </span>
 
-              {/* Wishlist Button */}
-              <button
-                onClick={() => toggleWishlist(product)}
-                aria-label={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
-                className={`absolute rounded-full right-3 top-3 sm:right-4 sm:top-4 rounded p-2.5 sm:p-2 transition-all duration-300 shadow-xs cursor-pointer ${
-                  isWishlisted
-                    ? "bg-[#75212e] text-white"
-                    : "bg-white/95 text-[#75212e] hover:bg-[#75212e] hover:text-white"
-                }`}
-              >
-                <CiHeart className={`text-xl sm:text-2xl ${isWishlisted ? "fill-current" : ""}`} />
-              </button>
-
-              {/* Search Zoom Icon */}
-              <button
-                aria-label="View product image"
-                onClick={() => window.open(selectedImage || product.img, "_blank")}
-                className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 rounded-lg bg-white/90 p-2 sm:p-2.5 text-[#75212e] shadow-xs hover:bg-white transition cursor-pointer"
-              >
-                <CiSearch className="text-xl" />
-              </button>
-            </div>
-
-            {/* Thumbnail Carousel / Grid */}
-            <div className="mt-3 sm:mt-4 grid grid-cols-4 gap-2 sm:gap-3">
-              {thumbnails.map((thumb, idx) => (
+                {/* Wishlist Button */}
                 <button
-                  key={`${thumb}-${idx}`}
-                  onClick={() => setSelectedImage(thumb)}
-                  className={`overflow-hidden rounded-lg border-2 bg-white p-1 transition-all cursor-pointer ${
-                    (selectedImage || product.img) === thumb && idx === 0
-                      ? "border-[#75212e] shadow-xs"
-                      : "border-[#eaded7] hover:border-[#75212e]/60"
+                  onClick={() => toggleWishlist(product)}
+                  aria-label={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
+                  className={`absolute rounded-full right-3 top-3 sm:right-4 sm:top-4 rounded p-2.5 sm:p-2 transition-all duration-300 shadow-xs cursor-pointer ${
+                    isWishlisted
+                      ? "bg-[#75212e] text-white"
+                      : "bg-white/95 text-[#75212e] hover:bg-[#75212e] hover:text-white"
                   }`}
                 >
-                  <img
-                    src={thumb}
-                    alt={`${product.title} thumbnail ${idx + 1}`}
-                    onError={(e) => {
-                      e.currentTarget.onerror = null;
-                      e.currentTarget.src = "/images/silk/silk-1.jpg";
-                    }}
-                    className="h-16 sm:h-20 w-full object-cover object-top rounded-lg"
-                  />
+                  <CiHeart className={`text-xl sm:text-2xl ${isWishlisted ? "fill-current" : ""}`} />
                 </button>
-              ))}
-            </div>
+
+                {/* Search Zoom Icon */}
+                <button
+                  aria-label="View product image"
+                  onClick={() => window.open(selectedImage || product.img, "_blank")}
+                  className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 rounded-lg bg-white/90 p-2 sm:p-2.5 text-[#75212e] shadow-xs hover:bg-white transition cursor-pointer"
+                >
+                  <CiSearch className="text-xl" />
+                </button>
+              </div>
+
+              {/* Thumbnail Carousel / Grid */}
+              <div className="mt-3 sm:mt-4 grid grid-cols-4 gap-2 sm:gap-3">
+                {thumbnails.map((thumb, idx) => (
+                  <button
+                    key={`${thumb}-${idx}`}
+                    onClick={() => setSelectedImage(thumb)}
+                    className={`overflow-hidden rounded-lg border-2 bg-white p-1 transition-all cursor-pointer ${
+                      (selectedImage || product.img) === thumb && idx === 0
+                        ? "border-[#75212e] shadow-xs"
+                        : "border-[#eaded7] hover:border-[#75212e]/60"
+                    }`}
+                  >
+                    <img
+                      src={thumb}
+                      alt={`${product.title} thumbnail ${idx + 1}`}
+                      onError={(e) => {
+                        e.currentTarget.onerror = null;
+                        e.currentTarget.src = "/images/silk/silk-1.jpg";
+                      }}
+                      className="h-16 sm:h-20 w-full object-cover object-top rounded-lg"
+                    />
+                  </button>
+                ))}
+              </div>
+            </FadeUp>
           </section>
 
           {/* ========================================== */}
           {/* Right Column: Product Information & Action */}
           {/* ========================================== */}
           <section className="w-full lg:col-span-7 xl:col-span-7 flex flex-col justify-start">
-            {/* Category Pill */}
-            <p className="text-[11px] sm:text-xs font-bold uppercase tracking-[0.22em] text-[#b35d54]">
-              {product.category?.[0] || "Saree Collection"}
-            </p>
+            <FadeUp delay={0.15}>
+              {/* Category Pill */}
+              <p className="text-[11px] sm:text-xs font-bold uppercase tracking-[0.22em] text-[#b35d54]">
+                {product.category?.[0] || "Saree Collection"}
+              </p>
 
-            {/* Title */}
-            <h1 className="mt-1.5 text-2xl sm:text-3xl lg:text-4xl font-semibold leading-tight text-[#75212e]">
-              {product.title?.toLowerCase().includes("saree") ? product.title : `${product.title} Saree`}
-            </h1>
+              {/* Title */}
+              <h1 className="mt-1.5 text-2xl sm:text-3xl lg:text-4xl font-semibold leading-tight text-[#75212e]">
+                {product.title?.toLowerCase().includes("saree") ? product.title : `${product.title} Saree`}
+              </h1>
 
-            {/* Rating & Reviews */}
-            <div className="mt-2.5 flex items-center gap-2.5 border-b border-[#eaded7]/80 pb-3.5">
-              <Rating rating={product.rating} />
-              <span className="text-xs sm:text-sm font-medium text-[#6b5149]">
-                {product.rating}.0 ({product.ratings || 24} verified customer reviews)
-              </span>
-            </div>
+              {/* Rating & Reviews */}
+              <div className="mt-2.5 flex items-center gap-2.5 border-b border-[#eaded7]/80 pb-3.5">
+                <Rating rating={product.rating} />
+                <span className="text-xs sm:text-sm font-medium text-[#6b5149]">
+                  {product.rating}.0 ({product.ratings || 24} verified customer reviews)
+                </span>
+              </div>
 
-            {/* Pricing Section */}
-            <div className="flex flex-wrap items-baseline gap-3 sm:gap-4 border-b border-[#eaded7]/80 py-3.5 sm:py-4">
-              <span className="text-2xl sm:text-3xl font-bold text-[#75212e]">
-                ₹{product.discountPrice?.toLocaleString("en-IN")}
-              </span>
-              <span className="text-base sm:text-lg text-gray-400 line-through">
-                ₹{product.actualPrice?.toLocaleString("en-IN")}
-              </span>
-              <span className="rounded-lg bg-[#d6f5e5] px-3 py-1 text-xs font-bold text-[#137747]">
-                In Stock & Ready to Ship
-              </span>
-            </div>
+              {/* Pricing Section */}
+              <div className="flex flex-wrap items-baseline gap-3 sm:gap-4 border-b border-[#eaded7]/80 py-3.5 sm:py-4">
+                <span className="text-2xl sm:text-3xl font-bold text-[#75212e]">
+                  ₹{product.discountPrice?.toLocaleString("en-IN")}
+                </span>
+                <span className="text-base sm:text-lg text-gray-400 line-through">
+                  ₹{product.actualPrice?.toLocaleString("en-IN")}
+                </span>
+                <span className="rounded-lg bg-[#d6f5e5] px-3 py-1 text-xs font-bold text-[#137747]">
+                  In Stock & Ready to Ship
+                </span>
+              </div>
 
-            {/* Material Highlight Badge */}
-            <div className="my-3.5 sm:my-4 flex items-center gap-2.5 rounded-lg border border-[#eaded7] bg-[#fffaf7] px-3.5 py-2.5 text-xs sm:text-sm">
-              <FiScissors className="text-[#75212e] text-base flex-shrink-0" />
-              <span>
-                <strong className="text-[#75212e]">Material:</strong> {content.material}
-              </span>
-            </div>
+              {/* Material Highlight Badge */}
+              <div className="my-3.5 sm:my-4 flex items-center gap-2.5 rounded-lg border border-[#eaded7] bg-[#fffaf7] px-3.5 py-2.5 text-xs sm:text-sm">
+                <FiScissors className="text-[#75212e] text-base flex-shrink-0" />
+                <span>
+                  <strong className="text-[#75212e]">Material:</strong> {content.material}
+                </span>
+              </div>
 
-            {/* Description */}
-            <p className="text-xs sm:text-sm md:text-base leading-relaxed text-[#5d4c46]">
-              {content.description}
-            </p>
+              {/* Description */}
+              <p className="text-xs sm:text-sm md:text-base leading-relaxed text-[#5d4c46]">
+                {content.description}
+              </p>
 
-            {/* Action Buttons: Responsive Grid */}
-            <div className="mt-5 sm:mt-6 grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3.5">
-              <button
-                onClick={handleAddToCart}
-                disabled={cartIds.includes(product.id)}
-                className={`py-2.5 px-4 text-xs sm:text-sm rounded font-bold uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2 shadow-xs cursor-pointer ${
-                  cartIds.includes(product.id)
-                    ? "bg-gray-200 text-gray-500 border border-gray-300 cursor-not-allowed"
-                    : "bg-[#75212e] text-white border-2 border-[#75212e] hover:bg-white hover:text-[#75212e]"
-                }`}
-              >
-                {cartIds.includes(product.id) ? "Already in Cart" : "Add to Cart"}
-              </button>
+              {/* Action Buttons: Responsive Grid */}
+              <div className="mt-5 sm:mt-6 grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3.5">
+                <button
+                  onClick={handleAddToCart}
+                  disabled={cartIds.includes(product.id)}
+                  className={`py-2.5 px-4 text-xs sm:text-sm rounded font-bold uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2 shadow-xs cursor-pointer ${
+                    cartIds.includes(product.id)
+                      ? "bg-gray-200 text-gray-500 border border-gray-300 cursor-not-allowed"
+                      : "bg-[#75212e] text-white border-2 border-[#75212e] hover:bg-white hover:text-[#75212e]"
+                  }`}
+                >
+                  {cartIds.includes(product.id) ? "Already in Cart" : "Add to Cart"}
+                </button>
 
-              <a
-                href={`https://wa.me/?text=${whatsappMessage}`}
-                target="_blank"
-                rel="noreferrer"
-                className="bg-[#20c968] border-2 border-[#20c968] py-2.5 px-4 text-center text-xs sm:text-sm font-bold text-white rounded hover:bg-white hover:text-[#20c968] transition-all duration-300 flex items-center justify-center gap-2 shadow-xs"
-              >
-                <FaWhatsapp className="text-base sm:text-lg" />
-                <span>Buy on WhatsApp</span>
-              </a>
+                <a
+                  href={`https://wa.me/?text=${whatsappMessage}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="bg-[#20c968] border-2 border-[#20c968] py-2.5 px-4 text-center text-xs sm:text-sm font-bold text-white rounded hover:bg-white hover:text-[#20c968] transition-all duration-300 flex items-center justify-center gap-2 shadow-xs"
+                >
+                  <FaWhatsapp className="text-base sm:text-lg" />
+                  <span>Buy on WhatsApp</span>
+                </a>
 
-              <a
-                href="tel:+919820087250"
-                className="bg-white border-2 border-[#75212e] py-2.5 px-4 text-center text-xs sm:text-sm font-bold text-[#75212e] rounded hover:bg-[#75212e] hover:text-white transition-all duration-300 flex items-center justify-center gap-2 shadow-xs"
-              >
-                <FaPhoneAlt className="text-xs sm:text-sm" />
-                <span>Call Now</span>
-              </a>
-            </div>
+                <a
+                  href="tel:+919820087250"
+                  className="bg-white border-2 border-[#75212e] py-2.5 px-4 text-center text-xs sm:text-sm font-bold text-[#75212e] rounded hover:bg-[#75212e] hover:text-white transition-all duration-300 flex items-center justify-center gap-2 shadow-xs"
+                >
+                  <FaPhoneAlt className="text-xs sm:text-sm" />
+                  <span>Call Now</span>
+                </a>
+              </div>
 
-            {/* Tabbed Specifications */}
-            <div className="mt-6 sm:mt-8 border-y border-[#eaded7]">
-              <div className="flex gap-4 sm:gap-8 overflow-x-auto text-sm sm:text-base font-semibold text-[#806a62] scrollbar-none py-1">
-                {["Care & Craft", "Shipping & Gifting", "Custom Orders"].map((tab) => (
+              {/* Tabbed Specifications */}
+              <div className="mt-6 sm:mt-8 border-y border-[#eaded7]">
+                <div className="flex gap-4 sm:gap-8 overflow-x-auto text-sm sm:text-base font-semibold text-[#806a62] scrollbar-none py-1">
+                  {["Care & Craft", "Shipping & Gifting", "Custom Orders"].map((tab) => (
+                    <button
+                      key={tab}
+                      onClick={() => setActiveTab(tab)}
+                      className={`whitespace-nowrap border-b-2 py-3 transition-colors cursor-pointer ${
+                        activeTab === tab
+                          ? "border-[#75212e] text-[#75212e] font-bold"
+                          : "border-transparent hover:text-[#75212e]"
+                      }`}
+                    >
+                      {tab}
+                    </button>
+                  ))}
+                </div>
+                
+                <div className="py-4 text-xs sm:text-sm leading-relaxed text-[#5d4c46]">
+                  {activeTab === "Care & Craft" && (
+                    <ul className="list-disc space-y-1.5 pl-4">
+                      {[content.care, ...(content.highlights || [])].slice(0, 5).map((item, idx) => (
+                        <li key={`${item}-${idx}`}>{item}</li>
+                      ))}
+                    </ul>
+                  )}
+                  {activeTab === "Shipping & Gifting" && (
+                    <p>
+                      Packed with archival silk paper and sent in a protective luxury gift box. Fast insured courier delivery with live tracking throughout India and worldwide.
+                    </p>
+                  )}
+                  {activeTab === "Custom Orders" && (
+                    <p>
+                      Looking for matching blouses, bridal customization, or group festive orders? Contact our design stylists directly via WhatsApp or phone.
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              {/* Social Share */}
+              <div className="mt-5 flex flex-wrap items-center gap-3 text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#9b5c51]">
+                <div className="flex items-center gap-1.5">
+                  <FaShareAlt />
+                  <span>Share Saree:</span>
+                </div>
+                <div className="flex items-center gap-2">
                   <button
-                    key={tab}
-                    onClick={() => setActiveTab(tab)}
-                    className={`whitespace-nowrap border-b-2 py-3 transition-colors cursor-pointer ${
-                      activeTab === tab
-                        ? "border-[#75212e] text-[#75212e] font-bold"
-                        : "border-transparent hover:text-[#75212e]"
-                    }`}
+                    onClick={shareProduct}
+                    aria-label="Share product on WhatsApp"
+                    className="rounded border border-[#20b86a] p-2 text-[#20b86a] cursor-pointer hover:bg-[#20b86a] hover:text-white transition-all duration-300"
                   >
-                    {tab}
+                    <FaWhatsapp className="text-sm" />
                   </button>
-                ))}
+                  <button
+                    aria-label="Share on Instagram"
+                    onClick={shareProduct}
+                    className="rounded border border-[#e9829a] p-2 text-[#e9829a] cursor-pointer hover:bg-[#e9829a] hover:text-white transition-all duration-300"
+                  >
+                    <FaInstagram className="text-sm" />
+                  </button>
+                  <button
+                    aria-label="Share on Facebook"
+                    onClick={shareProduct}
+                    className="rounded border border-[#4285d4] p-2 text-[#4285d4] cursor-pointer hover:bg-[#4285d4] hover:text-white transition-all duration-300"
+                  >
+                    <FaFacebookF className="text-sm" />
+                  </button>
+                </div>
               </div>
-              
-              <div className="py-4 text-xs sm:text-sm leading-relaxed text-[#5d4c46]">
-                {activeTab === "Care & Craft" && (
-                  <ul className="list-disc space-y-1.5 pl-4">
-                    {[content.care, ...(content.highlights || [])].slice(0, 5).map((item, idx) => (
-                      <li key={`${item}-${idx}`}>{item}</li>
-                    ))}
-                  </ul>
-                )}
-                {activeTab === "Shipping & Gifting" && (
-                  <p>
-                    Packed with archival silk paper and sent in a protective luxury gift box. Fast insured courier delivery with live tracking throughout India and worldwide.
-                  </p>
-                )}
-                {activeTab === "Custom Orders" && (
-                  <p>
-                    Looking for matching blouses, bridal customization, or group festive orders? Contact our design stylists directly via WhatsApp or phone.
-                  </p>
-                )}
-              </div>
-            </div>
-
-            {/* Social Share */}
-            <div className="mt-5 flex flex-wrap items-center gap-3 text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#9b5c51]">
-              <div className="flex items-center gap-1.5">
-                <FaShareAlt />
-                <span>Share Saree:</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={shareProduct}
-                  aria-label="Share product on WhatsApp"
-                  className="rounded border border-[#20b86a] p-2 text-[#20b86a] cursor-pointer hover:bg-[#20b86a] hover:text-white transition-all duration-300"
-                >
-                  <FaWhatsapp className="text-sm" />
-                </button>
-                <button
-                  aria-label="Share on Instagram"
-                  onClick={shareProduct}
-                  className="rounded border border-[#e9829a] p-2 text-[#e9829a] cursor-pointer hover:bg-[#e9829a] hover:text-white transition-all duration-300"
-                >
-                  <FaInstagram className="text-sm" />
-                </button>
-                <button
-                  aria-label="Share on Facebook"
-                  onClick={shareProduct}
-                  className="rounded border border-[#4285d4] p-2 text-[#4285d4] cursor-pointer hover:bg-[#4285d4] hover:text-white transition-all duration-300"
-                >
-                  <FaFacebookF className="text-sm" />
-                </button>
-              </div>
-            </div>
+            </FadeUp>
           </section>
         </div>
 
@@ -474,98 +498,106 @@ const SareeDetail = () => {
         {/* ========================================================================= */}
         {relatedSarees.length > 0 && (
           <div className="mt-16 sm:mt-24 pt-10 border-t border-[#eaded7]">
-            <div className="text-center mb-8 sm:mb-10">
-              <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#6B1527]">
-                🌸 Similar Collections
-              </span>
-              <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#75212e] mt-1">
-                You May Also Love
-              </h2>
-            </div>
+            <FadeUp delay={0.1}>
+              <div className="text-center mb-8 sm:mb-10">
+                <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#6B1527]">
+                  🌸 Similar Collections
+                </span>
+                <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#75212e] mt-1">
+                  You May Also Love
+                </h2>
+              </div>
+            </FadeUp>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-6">
-              {relatedSarees.map((item) => (
-                <div
-                  key={item.id}
-                  className="group rounded-lg overflow-hidden border border-gray-200 bg-white transition flex flex-col justify-between"
-                >
-                  {/* Card Image + Shop Page Hover Overlay */}
-                  <div className="relative overflow-hidden">
-                    <Link to={`/shop/${item.id}`} className="block">
-                      <img
-                        loading="lazy"
-                        src={item.img}
-                        alt={item.title}
-                        onError={(e) => {
-                          e.currentTarget.onerror = null;
-                          e.currentTarget.src = "/images/silk/silk-1.jpg";
-                        }}
-                        className="w-full h-85 2xl:object-top object-cover object-top transition duration-300 group-hover:scale-[1.05]"
-                      />
-                    </Link>
-                    
-                    {/* Hover Overlay: Tag + Action Icons (Wishlist & View Eye) */}
-                    <div className="pointer-events-none absolute inset-0 flex items-start justify-between bg-black/10 p-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                      <span className="rounded-full bg-[#e9829a] px-2.5 py-1 text-[10px] font-bold uppercase text-white shadow-xs">
-                        {item.tag || item.category?.[0] || "Handcrafted"}
-                      </span>
-                      
-                      <div className="pointer-events-auto flex flex-col gap-2">
-                        <button
-                          type="button"
-                          onClick={() => toggleWishlist(item)}
-                          aria-label={wishlistIds.includes(item.id) ? "Remove from wishlist" : "Add to wishlist"}
-                          className={`flex h-9 w-9 items-center justify-center cursor-pointer rounded-full bg-white shadow-xs transition hover:bg-[#75212E] hover:text-white ${
-                            wishlistIds.includes(item.id) ? "text-[#75212E]" : "text-[#75212E]"
-                          }`}
-                        >
-                          <CiHeart className={`text-xl ${wishlistIds.includes(item.id) ? "fill-current" : ""}`} />
-                        </button>
-                        
-                        <Link
-                          to={`/shop/${item.id}`}
-                          aria-label={`View ${item.title}`}
-                          className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-[#75212E] shadow-xs transition hover:bg-[#75212E] hover:text-white"
-                        >
-                          <FiEye className="text-lg" />
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Card Body matching Shop.jsx font size, family & layout */}
-                  <div className="p-4 flex flex-col flex-1 justify-between">
-                    <div>
-                      <Link
-                        to={`/shop/${item.id}`}
-                        className="block font-medium text-sm line-clamp-2 hover:text-[#74202D] transition mb-2"
-                      >
-                        {item.title}
+              {relatedSarees.map((item, index) => (
+                <FadeUp key={item.id} delay={0.05 + (index % 4) * 0.08}>
+                  <div
+                    className="group rounded-lg overflow-hidden border border-gray-200 bg-white transition flex flex-col justify-between h-full"
+                  >
+                    {/* Card Image + Shop Page Hover Overlay */}
+                    <div className="relative overflow-hidden">
+                      <Link to={`/shop/${item.id}`} className="block">
+                        <img
+                          loading="lazy"
+                          src={item.img}
+                          alt={item.title}
+                          onError={(e) => {
+                            e.currentTarget.onerror = null;
+                            e.currentTarget.src = "/images/silk/silk-1.jpg";
+                          }}
+                          className="w-full h-85 2xl:object-top object-cover object-top transition duration-300 group-hover:scale-[1.05]"
+                        />
                       </Link>
                       
-                      <div className="flex items-baseline gap-2 mt-2">
-                        <span className="text-[#74202D] font-bold text-sm sm:text-base">
-                          ₹{item.discountPrice?.toLocaleString("en-IN")}
+                      {/* Hover Overlay: Tag + Action Icons (Wishlist & View Eye) */}
+                      <div className="pointer-events-none absolute inset-0 flex items-start justify-between bg-black/10 p-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                        <span className="rounded-full bg-[#e9829a] px-2.5 py-1 text-[10px] font-bold uppercase text-white shadow-xs">
+                          {item.tag || item.category?.[0] || "Handcrafted"}
                         </span>
-                        <span className="line-through text-gray-400 text-sm">
-                          ₹{item.actualPrice?.toLocaleString("en-IN")}
-                        </span>
-                      </div>
-
-                      <div className="flex items-center gap-2 mt-2">
-                        <Rating rating={item.rating} />
-                        <span className="text-xs text-gray-500">({item.ratings || 24})</span>
+                        
+                        <div className="pointer-events-auto flex flex-col gap-2">
+                          <button
+                            type="button"
+                            onClick={() => toggleWishlist(item)}
+                            aria-label={wishlistIds.includes(item.id) ? "Remove from wishlist" : "Add to wishlist"}
+                            className={`flex h-9 w-9 items-center justify-center cursor-pointer rounded-full bg-white shadow-xs transition hover:bg-[#75212E] hover:text-white ${
+                              wishlistIds.includes(item.id) ? "text-[#75212E]" : "text-[#75212E]"
+                            }`}
+                          >
+                            <CiHeart className={`text-xl ${wishlistIds.includes(item.id) ? "fill-current" : ""}`} />
+                          </button>
+                          
+                          <Link
+                            to={`/shop/${item.id}`}
+                            aria-label={`View ${item.title}`}
+                            className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-[#75212E] shadow-xs transition hover:bg-[#75212E] hover:text-white"
+                          >
+                            <FiEye className="text-lg" />
+                          </Link>
+                        </div>
                       </div>
                     </div>
 
-                    <Link
-                      to={`/shop/${item.id}`}
-                      className="w-full mt-4 block text-center rounded py-2 text-sm font-medium border border-[#74202D] text-[#74202D] hover:bg-[#74202D] hover:text-white transition cursor-pointer"
-                    >
-                      View Saree
-                    </Link>
+                    {/* Card Body matching Shop.jsx font size, family & layout */}
+                    <div className="p-4 flex flex-col flex-1 justify-between">
+                      <div>
+                        <Link
+                          to={`/shop/${item.id}`}
+                          className="block font-medium text-sm line-clamp-2 hover:text-[#74202D] transition mb-2"
+                        >
+                          {item.title}
+                        </Link>
+                        
+                        <div className="flex items-baseline gap-2 mt-2">
+                          <span className="text-[#74202D] font-bold text-sm sm:text-base">
+                            ₹{item.discountPrice?.toLocaleString("en-IN")}
+                          </span>
+                          <span className="line-through text-gray-400 text-sm">
+                            ₹{item.actualPrice?.toLocaleString("en-IN")}
+                          </span>
+                        </div>
+
+                        <div className="flex items-center gap-2 mt-2">
+                          <Rating rating={item.rating} />
+                          <span className="text-xs text-gray-500">({item.ratings || 24})</span>
+                        </div>
+                      </div>
+
+                      <button
+                        onClick={() => addToCart(item)}
+                        disabled={cartIds.includes(item.id)}
+                        className={`w-full mt-4 rounded py-2 text-sm font-medium transition cursor-pointer ${
+                          cartIds.includes(item.id)
+                            ? "border border-gray-200 bg-gray-200 text-gray-500 cursor-not-allowed"
+                            : "border border-[#74202D] text-[#74202D] hover:bg-[#74202D] hover:text-white"
+                        }`}
+                      >
+                        {cartIds.includes(item.id) ? "Already in Cart" : "Add to Cart"}
+                      </button>
+                    </div>
                   </div>
-                </div>
+                </FadeUp>
               ))}
             </div>
           </div>

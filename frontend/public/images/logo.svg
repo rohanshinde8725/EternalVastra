@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 72" width="320" height="72" fill="none">
+  <defs>
+    <linearGradient id="evGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F5D77F"/>
+      <stop offset="35%" stop-color="#D4AF37"/>
+      <stop offset="70%" stop-color="#C59B27"/>
+      <stop offset="100%" stop-color="#9A7B1C"/>
+    </linearGradient>
+    <linearGradient id="evCrimson" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8E1F36"/>
+      <stop offset="50%" stop-color="#701A2B"/>
+      <stop offset="100%" stop-color="#4A0E1A"/>
+    </linearGradient>
+    <linearGradient id="evText" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#701A2B"/>
+      <stop offset="100%" stop-color="#4A1521"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ================= ROYAL EMBLEM ================= -->
+  <g transform="translate(6, 4)">
+    <circle cx="32" cy="32" r="30" stroke="url(#evGold)" stroke-width="1.2" stroke-dasharray="3 2" opacity="0.7" fill="none"/>
+    <circle cx="32" cy="32" r="26.5" stroke="url(#evCrimson)" stroke-width="1" opacity="0.3" fill="none"/>
+
+    <path d="M32 9 C29 17, 27 24, 32 33 C37 24, 35 17, 32 9 Z" fill="url(#evCrimson)"/>
+    <circle cx="32" cy="9" r="1.5" fill="url(#evGold)"/>
+
+    <path d="M32 33 C23 27, 17 21, 19 15 C23 17, 27 24, 32 33 Z" fill="url(#evGold)" opacity="0.9"/>
+    <path d="M32 33 C41 27, 47 21, 45 15 C41 17, 37 24, 32 33 Z" fill="url(#evGold)" opacity="0.9"/>
+
+    <path d="M32 33 C22 32, 11 31, 12 23 C17 24, 25 28, 32 33 Z" fill="url(#evCrimson)"/>
+    <path d="M32 33 C42 32, 53 31, 52 23 C47 24, 39 28, 32 33 Z" fill="url(#evCrimson)"/>
+
+    <path d="M20 40 C24 37, 28 35, 32 36 C36 35, 40 37, 44 40 C41 44, 36 46, 32 45 C28 46, 23 44, 20 40 Z" fill="url(#evGold)"/>
+
+    <circle cx="32" cy="33" r="3.5" fill="url(#evGold)"/>
+    <circle cx="32" cy="33" r="1.8" fill="#FFFFFF"/>
+    <circle cx="32" cy="50" r="1.8" fill="url(#evGold)"/>
+
+    <path d="M26 53 L32 49 L38 53" stroke="url(#evGold)" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+  </g>
+
+  <!-- ================= TYPOGRAPHY ================= -->
+  <text x="78" y="35" font-family="'Cinzel', 'Playfair Display', Georgia, serif" font-size="23" font-weight="800" letter-spacing="3" fill="url(#evText)">
+    ETERNAL
+  </text>
+  <text x="196" y="35" font-family="'Cinzel', 'Playfair Display', Georgia, serif" font-size="23" font-weight="400" letter-spacing="3" fill="#5A1624">
+    VASTRA
+  </text>
+
+  <line x1="80" y1="43" x2="310" y2="43" stroke="url(#evGold)" stroke-width="1" opacity="0.75"/>
+  <polygon points="195,40.5 198,43 195,45.5 192,43" fill="url(#evGold)"/>
+
+  <text x="195" y="56" text-anchor="middle" font-family="'Montserrat', 'Inter', sans-serif" font-size="8" font-weight="700" letter-spacing="4" fill="#8C4B59">
+    HERITAGE WEAVES &amp; COUTURE
+  </text>
+</svg>
