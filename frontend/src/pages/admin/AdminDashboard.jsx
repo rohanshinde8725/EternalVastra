@@ -96,12 +96,12 @@ const AdminDashboard = () => {
   ];
 
   return (
-    <div className="space-y-6 max-w-[1600px] mx-auto pb-12 text-slate-800">
+    <div className="space-y-4 sm:space-y-6 max-w-[1600px] mx-auto pb-12 text-slate-800">
       {/* 1. HEADER */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">Dashboard</h1>
-          <p className="text-sm text-slate-500 mt-1">
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-900 tracking-tight">Dashboard</h1>
+          <p className="text-xs sm:text-sm text-slate-500 mt-0.5 sm:mt-1">
             Welcome back, Admin! Here's what's happening with your store today.
           </p>
         </div>
@@ -110,9 +110,9 @@ const AdminDashboard = () => {
         <div className="relative self-start sm:self-auto">
           <button
             onClick={() => setShowGlobalDropdown(!showGlobalDropdown)}
-            className="flex items-center gap-2 px-3.5 py-1.5 bg-white border border-slate-200 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-50 transition shadow-2xs cursor-pointer"
+            className="flex items-center gap-2 px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-xs font-semibold text-slate-700 hover:bg-slate-50 transition shadow-2xs cursor-pointer"
           >
-            <FiCalendar className="text-slate-500 text-sm" />
+            <FiCalendar className="text-slate-500 text-xs sm:text-sm" />
             <span>{globalPeriod}</span>
             <FiChevronDown className="text-slate-400 text-xs" />
           </button>
@@ -137,87 +137,87 @@ const AdminDashboard = () => {
         </div>
       </div>
 
-      {/* 2. TOP METRIC CARDS (4-Column Grid) */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      {/* 2. TOP METRIC CARDS */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4 xl:gap-5">
         {/* Total Sales */}
-        <div className="bg-white rounded-2xl p-5 border border-slate-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] flex items-start gap-4">
-          <div className="w-12 h-12 rounded-xl bg-rose-50 flex items-center justify-center flex-shrink-0 text-rose-500">
-            <FiShoppingBag className="text-xl" />
+        <div className="bg-white rounded-xl xl:rounded-2xl p-3 sm:p-4 xl:p-5 border border-slate-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] flex items-start sm:items-center lg:items-start xl:items-center gap-2.5 sm:gap-3.5 xl:gap-4 min-w-0">
+          <div className="w-8 h-8 sm:w-10 sm:h-10 xl:w-12 xl:h-12 rounded-xl bg-rose-50 flex items-center justify-center shrink-0 text-rose-500">
+            <FiShoppingBag className="text-sm sm:text-lg xl:text-xl" />
           </div>
           <div className="flex-1 min-w-0">
-            <span className="text-xs font-medium text-slate-500 block">Total Sales</span>
-            <h3 className="text-2xl font-bold text-slate-900 tracking-tight mt-0.5">
+            <span className="text-[11px] sm:text-xs xl:text-sm font-medium text-slate-500 block truncate">Total Sales</span>
+            <h3 className="text-sm sm:text-lg lg:text-base xl:text-2xl font-bold text-slate-900 tracking-tight mt-0.5 whitespace-nowrap">
               ₹{Number(stats.totalSales).toLocaleString("en-IN")}
             </h3>
-            <div className="flex items-center gap-1 mt-1 text-emerald-600 text-xs font-semibold">
+            <div className="flex items-center gap-1 mt-0.5 text-emerald-600 text-[10px] xl:text-xs font-semibold flex-wrap">
               <span>↑ 18.6%</span>
-              <span className="text-slate-400 font-normal">vs last 7 days</span>
+              <span className="hidden xl:inline text-slate-400 font-normal">vs 7d</span>
             </div>
           </div>
         </div>
 
         {/* Orders */}
-        <div className="bg-white rounded-2xl p-5 border border-slate-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] flex items-start gap-4">
-          <div className="w-12 h-12 rounded-xl bg-amber-50 flex items-center justify-center flex-shrink-0 text-amber-500">
-            <FiBox className="text-xl" />
+        <div className="bg-white rounded-xl xl:rounded-2xl p-3 sm:p-4 xl:p-5 border border-slate-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] flex items-start sm:items-center lg:items-start xl:items-center gap-2.5 sm:gap-3.5 xl:gap-4 min-w-0">
+          <div className="w-8 h-8 sm:w-10 sm:h-10 xl:w-12 xl:h-12 rounded-xl bg-amber-50 flex items-center justify-center shrink-0 text-amber-500">
+            <FiBox className="text-sm sm:text-lg xl:text-xl" />
           </div>
           <div className="flex-1 min-w-0">
-            <span className="text-xs font-medium text-slate-500 block">Orders</span>
-            <h3 className="text-2xl font-bold text-slate-900 tracking-tight mt-0.5">
+            <span className="text-[11px] sm:text-xs xl:text-sm font-medium text-slate-500 block truncate">Orders</span>
+            <h3 className="text-sm sm:text-lg lg:text-base xl:text-2xl font-bold text-slate-900 tracking-tight mt-0.5 whitespace-nowrap">
               {stats.totalOrdersCount}
             </h3>
-            <div className="flex items-center gap-1 mt-1 text-emerald-600 text-xs font-semibold">
+            <div className="flex items-center gap-1 mt-0.5 text-emerald-600 text-[10px] xl:text-xs font-semibold flex-wrap">
               <span>↑ 15.3%</span>
-              <span className="text-slate-400 font-normal">vs last 7 days</span>
+              <span className="hidden xl:inline text-slate-400 font-normal">vs 7d</span>
             </div>
           </div>
         </div>
 
         {/* Customers */}
-        <div className="bg-white rounded-2xl p-5 border border-slate-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] flex items-start gap-4">
-          <div className="w-12 h-12 rounded-xl bg-emerald-50 flex items-center justify-center flex-shrink-0 text-emerald-500">
-            <FiUsers className="text-xl" />
+        <div className="bg-white rounded-xl xl:rounded-2xl p-3 sm:p-4 xl:p-5 border border-slate-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] flex items-start sm:items-center lg:items-start xl:items-center gap-2.5 sm:gap-3.5 xl:gap-4 min-w-0">
+          <div className="w-8 h-8 sm:w-10 sm:h-10 xl:w-12 xl:h-12 rounded-xl bg-emerald-50 flex items-center justify-center shrink-0 text-emerald-500">
+            <FiUsers className="text-sm sm:text-lg xl:text-xl" />
           </div>
           <div className="flex-1 min-w-0">
-            <span className="text-xs font-medium text-slate-500 block">Customers</span>
-            <h3 className="text-2xl font-bold text-slate-900 tracking-tight mt-0.5">
+            <span className="text-[11px] sm:text-xs xl:text-sm font-medium text-slate-500 block truncate">Customers</span>
+            <h3 className="text-sm sm:text-lg lg:text-base xl:text-2xl font-bold text-slate-900 tracking-tight mt-0.5 whitespace-nowrap">
               {stats.totalCustomersCount}
             </h3>
-            <div className="flex items-center gap-1 mt-1 text-emerald-600 text-xs font-semibold">
+            <div className="flex items-center gap-1 mt-0.5 text-emerald-600 text-[10px] xl:text-xs font-semibold flex-wrap">
               <span>↑ 11.8%</span>
-              <span className="text-slate-400 font-normal">vs last 7 days</span>
+              <span className="hidden xl:inline text-slate-400 font-normal">vs 7d</span>
             </div>
           </div>
         </div>
 
         {/* Products */}
-        <div className="bg-white rounded-2xl p-5 border border-slate-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] flex items-start gap-4">
-          <div className="w-12 h-12 rounded-xl bg-purple-50 flex items-center justify-center flex-shrink-0 text-purple-500">
-            <FiBox className="text-xl" />
+        <div className="bg-white rounded-xl xl:rounded-2xl p-3 sm:p-4 xl:p-5 border border-slate-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] flex items-start sm:items-center lg:items-start xl:items-center gap-2.5 sm:gap-3.5 xl:gap-4 min-w-0">
+          <div className="w-8 h-8 sm:w-10 sm:h-10 xl:w-12 xl:h-12 rounded-xl bg-purple-50 flex items-center justify-center shrink-0 text-purple-500">
+            <FiBox className="text-sm sm:text-lg xl:text-xl" />
           </div>
           <div className="flex-1 min-w-0">
-            <span className="text-xs font-medium text-slate-500 block">Products</span>
-            <h3 className="text-2xl font-bold text-slate-900 tracking-tight mt-0.5">
+            <span className="text-[11px] sm:text-xs xl:text-sm font-medium text-slate-500 block truncate">Products</span>
+            <h3 className="text-sm sm:text-lg lg:text-base xl:text-2xl font-bold text-slate-900 tracking-tight mt-0.5 whitespace-nowrap">
               {stats.totalProductsCount}
             </h3>
-            <div className="flex items-center gap-1 mt-1 text-emerald-600 text-xs font-semibold">
+            <div className="flex items-center gap-1 mt-0.5 text-emerald-600 text-[10px] xl:text-xs font-semibold flex-wrap">
               <span>↑ 8.2%</span>
-              <span className="text-slate-400 font-normal">vs last 7 days</span>
+              <span className="hidden xl:inline text-slate-400 font-normal">vs 7d</span>
             </div>
           </div>
         </div>
       </div>
 
       {/* 3. MIDDLE ROW (Sales Overview & Store Summary) */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-5">
         {/* Sales Overview Chart (7 Cols) */}
-        <div className="lg:col-span-7 bg-white rounded-2xl p-6 border border-slate-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] flex flex-col justify-between">
-          <div className="flex items-center justify-between mb-4">
-            <h4 className="text-base font-bold text-slate-900">Sales Overview</h4>
+        <div className="lg:col-span-7 bg-white rounded-xl xl:rounded-2xl p-4 sm:p-5 xl:p-6 border border-slate-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] flex flex-col justify-between">
+          <div className="flex items-center justify-between mb-3 sm:mb-4">
+            <h4 className="text-sm sm:text-base font-bold text-slate-900">Sales Overview</h4>
             <div className="relative">
               <button
                 onClick={() => setShowSalesDropdown(!showSalesDropdown)}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-medium text-slate-700 hover:bg-slate-50 transition cursor-pointer"
+                className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg border border-slate-200 text-xs font-medium text-slate-700 hover:bg-slate-50 transition cursor-pointer"
               >
                 <span>{salesPeriod}</span>
                 <FiChevronDown className="text-slate-400 text-xs" />
@@ -244,9 +244,9 @@ const AdminDashboard = () => {
           </div>
 
           {/* Smooth Curved Line & Area Graph */}
-          <div className="relative pt-6 pb-2">
+          <div className="relative pt-4 sm:pt-6 pb-2">
             {/* Y-Axis Labels */}
-            <div className="absolute left-0 top-6 bottom-10 flex flex-col justify-between text-[11px] font-medium text-slate-400 select-none">
+            <div className="absolute left-0 top-4 sm:top-6 bottom-8 sm:bottom-10 flex flex-col justify-between text-[10px] sm:text-[11px] font-medium text-slate-400 select-none">
               <span>20K</span>
               <span>15K</span>
               <span>10K</span>
@@ -255,7 +255,7 @@ const AdminDashboard = () => {
             </div>
 
             {/* SVG Graph Area */}
-            <div className="ml-8 relative h-48 sm:h-52">
+            <div className="ml-7 sm:ml-8 relative h-44 sm:h-52">
               <svg viewBox="0 0 500 180" className="w-full h-full overflow-visible">
                 <defs>
                   <linearGradient id="maroonChartFill" x1="0" y1="0" x2="0" y2="1">
@@ -300,16 +300,16 @@ const AdminDashboard = () => {
 
               {/* Tooltip Card */}
               <div
-                className="absolute right-0 -top-3 bg-[#75212e] text-white px-3 py-1.5 rounded-lg shadow-md text-xs text-center pointer-events-none transform translate-x-1"
+                className="absolute right-0 -top-3 bg-[#75212e] text-white px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg shadow-md text-xs text-center pointer-events-none transform translate-x-1"
               >
-                <div className="font-bold">₹21,794</div>
-                <div className="text-[10px] text-rose-200">28 Aug, 2025</div>
+                <div className="font-bold text-[11px] sm:text-xs">₹21,794</div>
+                <div className="text-[9px] sm:text-[10px] text-rose-200">28 Aug, 2025</div>
                 <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1 w-2 h-2 bg-[#75212e] rotate-45" />
               </div>
             </div>
 
             {/* X-Axis Date Labels */}
-            <div className="ml-8 mt-3 flex justify-between text-xs text-slate-400 font-medium">
+            <div className="ml-7 sm:ml-8 mt-3 flex justify-between text-[10px] sm:text-xs text-slate-400 font-medium">
               <span>22 Aug</span>
               <span>23 Aug</span>
               <span>24 Aug</span>
@@ -322,53 +322,53 @@ const AdminDashboard = () => {
         </div>
 
         {/* Store Summary (5 Cols) */}
-        <div className="lg:col-span-5 bg-white rounded-2xl p-6 border border-slate-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] flex flex-col justify-between">
+        <div className="lg:col-span-5 bg-white rounded-xl xl:rounded-2xl p-4 sm:p-5 xl:p-6 border border-slate-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] flex flex-col justify-between">
           <div>
-            <h4 className="text-base font-bold text-slate-900 mb-5">Store Summary</h4>
+            <h4 className="text-sm sm:text-base font-bold text-slate-900 mb-3 sm:mb-4">Store Summary</h4>
 
             {/* Performance Banner Box */}
-            <div className="flex items-center gap-4 p-4 rounded-xl bg-rose-50/40 border border-rose-100/60 mb-6">
-              <div className="w-13 h-13 rounded-full bg-rose-100/70 flex items-center justify-center flex-shrink-0 text-[#75212e]">
-                <FiShoppingBag className="text-2xl" />
+            <div className="flex items-center gap-3 p-3 sm:p-3.5 xl:p-4 rounded-xl bg-rose-50/40 border border-rose-100/60 mb-4 xl:mb-5">
+              <div className="w-10 h-10 sm:w-11 sm:h-11 xl:w-12 xl:h-12 rounded-full bg-rose-100/70 flex items-center justify-center shrink-0 text-[#75212e]">
+                <FiShoppingBag className="text-lg sm:text-xl" />
               </div>
-              <p className="text-sm font-semibold text-slate-800 leading-snug">
+              <p className="text-xs sm:text-sm font-semibold text-slate-800 leading-snug">
                 Excellent! Your store is performing great this week.
               </p>
             </div>
 
             {/* Metric Summary Rows */}
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-3.5">
               {/* Average Order Value */}
               <div className="flex items-center justify-between py-1">
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-rose-50 text-rose-500 flex items-center justify-center flex-shrink-0">
-                    <FiShoppingBag className="text-sm" />
+                <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-rose-50 text-rose-500 flex items-center justify-center shrink-0">
+                    <FiShoppingBag className="text-xs sm:text-sm" />
                   </div>
-                  <span className="text-xs sm:text-sm font-medium text-slate-600">Average Order Value</span>
+                  <span className="text-xs sm:text-sm font-medium text-slate-600 truncate">Average Order Value</span>
                 </div>
-                <span className="text-sm font-bold text-slate-900">₹3,632</span>
+                <span className="text-xs sm:text-sm font-bold text-slate-900 shrink-0 ml-2">₹3,632</span>
               </div>
 
               {/* Conversion Rate */}
               <div className="flex items-center justify-between py-1">
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-amber-50 text-amber-500 flex items-center justify-center flex-shrink-0">
-                    <FiPercent className="text-sm" />
+                <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-amber-50 text-amber-500 flex items-center justify-center shrink-0">
+                    <FiPercent className="text-xs sm:text-sm" />
                   </div>
-                  <span className="text-xs sm:text-sm font-medium text-slate-600">Conversion Rate</span>
+                  <span className="text-xs sm:text-sm font-medium text-slate-600 truncate">Conversion Rate</span>
                 </div>
-                <span className="text-sm font-bold text-slate-900">3.24%</span>
+                <span className="text-xs sm:text-sm font-bold text-slate-900 shrink-0 ml-2">3.24%</span>
               </div>
 
               {/* Repeat Customers */}
               <div className="flex items-center justify-between py-1">
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-500 flex items-center justify-center flex-shrink-0">
-                    <FiUserCheck className="text-sm" />
+                <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-emerald-50 text-emerald-500 flex items-center justify-center shrink-0">
+                    <FiUserCheck className="text-xs sm:text-sm" />
                   </div>
-                  <span className="text-xs sm:text-sm font-medium text-slate-600">Repeat Customers</span>
+                  <span className="text-xs sm:text-sm font-medium text-slate-600 truncate">Repeat Customers</span>
                 </div>
-                <span className="text-sm font-bold text-slate-900">23</span>
+                <span className="text-xs sm:text-sm font-bold text-slate-900 shrink-0 ml-2">23</span>
               </div>
             </div>
           </div>
@@ -376,14 +376,14 @@ const AdminDashboard = () => {
       </div>
 
       {/* 4. BOTTOM ROW (Orders by Status, Sales by Category, Store Activity) */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-5">
         {/* Orders by Status Donut */}
-        <div className="bg-white rounded-2xl p-6 border border-slate-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] flex flex-col justify-between">
-          <h4 className="text-base font-bold text-slate-900 mb-4">Orders by Status</h4>
+        <div className="bg-white rounded-xl xl:rounded-2xl p-4 sm:p-5 xl:p-6 border border-slate-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] flex flex-col justify-between">
+          <h4 className="text-sm sm:text-base font-bold text-slate-900 mb-3 sm:mb-4">Orders by Status</h4>
           
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-5 my-auto">
+          <div className="flex flex-col sm:flex-row lg:flex-col 2xl:flex-row items-center justify-between gap-4 xl:gap-5 my-auto">
             {/* SVG Donut */}
-            <div className="relative w-36 h-36 flex-shrink-0 flex items-center justify-center">
+            <div className="relative w-28 h-28 sm:w-32 sm:h-32 xl:w-34 xl:h-34 shrink-0 flex items-center justify-center">
               <svg viewBox="0 0 100 100" className="w-full h-full transform -rotate-90">
                 <circle cx="50" cy="50" r="38" fill="none" stroke="#f8fafc" strokeWidth="12" />
                 {/* Delivered - Green (37.7%) */}
@@ -444,63 +444,63 @@ const AdminDashboard = () => {
               </svg>
 
               <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-                <span className="text-xl font-bold text-slate-900 leading-tight">6</span>
-                <span className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">TOTAL</span>
+                <span className="text-lg xl:text-xl font-bold text-slate-900 leading-tight">6</span>
+                <span className="text-[9px] xl:text-[10px] text-slate-400 font-semibold uppercase tracking-wider">TOTAL</span>
               </div>
             </div>
 
             {/* Status Legend */}
-            <div className="flex-1 space-y-2 text-xs w-full">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#22C55E]" />
-                  <span className="text-slate-600 font-medium">Delivered</span>
+            <div className="flex-1 space-y-1.5 xl:space-y-2 text-xs w-full">
+              <div className="flex items-center justify-between gap-2">
+                <div className="flex items-center gap-1.5 min-w-0">
+                  <span className="w-2 h-2 xl:w-2.5 xl:h-2.5 rounded-full bg-[#22C55E] shrink-0" />
+                  <span className="text-slate-600 font-medium truncate">Delivered</span>
                 </div>
-                <span className="text-slate-700 font-semibold">320 (37.7%)</span>
+                <span className="text-slate-700 font-semibold shrink-0">320 (37.7%)</span>
               </div>
 
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#F59E0B]" />
-                  <span className="text-slate-600 font-medium">Processing</span>
+              <div className="flex items-center justify-between gap-2">
+                <div className="flex items-center gap-1.5 min-w-0">
+                  <span className="w-2 h-2 xl:w-2.5 xl:h-2.5 rounded-full bg-[#F59E0B] shrink-0" />
+                  <span className="text-slate-600 font-medium truncate">Processing</span>
                 </div>
-                <span className="text-slate-700 font-semibold">210 (24.8%)</span>
+                <span className="text-slate-700 font-semibold shrink-0">210 (24.8%)</span>
               </div>
 
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#3B82F6]" />
-                  <span className="text-slate-600 font-medium">Shipped</span>
+              <div className="flex items-center justify-between gap-2">
+                <div className="flex items-center gap-1.5 min-w-0">
+                  <span className="w-2 h-2 xl:w-2.5 xl:h-2.5 rounded-full bg-[#3B82F6] shrink-0" />
+                  <span className="text-slate-600 font-medium truncate">Shipped</span>
                 </div>
-                <span className="text-slate-700 font-semibold">180 (21.2%)</span>
+                <span className="text-slate-700 font-semibold shrink-0">180 (21.2%)</span>
               </div>
 
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#EF4444]" />
-                  <span className="text-slate-600 font-medium">Cancelled</span>
+              <div className="flex items-center justify-between gap-2">
+                <div className="flex items-center gap-1.5 min-w-0">
+                  <span className="w-2 h-2 xl:w-2.5 xl:h-2.5 rounded-full bg-[#EF4444] shrink-0" />
+                  <span className="text-slate-600 font-medium truncate">Cancelled</span>
                 </div>
-                <span className="text-slate-700 font-semibold">90 (10.6%)</span>
+                <span className="text-slate-700 font-semibold shrink-0">90 (10.6%)</span>
               </div>
 
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#8B5CF6]" />
-                  <span className="text-slate-600 font-medium">Pending</span>
+              <div className="flex items-center justify-between gap-2">
+                <div className="flex items-center gap-1.5 min-w-0">
+                  <span className="w-2 h-2 xl:w-2.5 xl:h-2.5 rounded-full bg-[#8B5CF6] shrink-0" />
+                  <span className="text-slate-600 font-medium truncate">Pending</span>
                 </div>
-                <span className="text-slate-700 font-semibold">48 (5.7%)</span>
+                <span className="text-slate-700 font-semibold shrink-0">48 (5.7%)</span>
               </div>
             </div>
           </div>
         </div>
 
         {/* Sales by Category Donut */}
-        <div className="bg-white rounded-2xl p-6 border border-slate-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] flex flex-col justify-between">
-          <h4 className="text-base font-bold text-slate-900 mb-4">Sales by Category</h4>
+        <div className="bg-white rounded-xl xl:rounded-2xl p-4 sm:p-5 xl:p-6 border border-slate-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] flex flex-col justify-between">
+          <h4 className="text-sm sm:text-base font-bold text-slate-900 mb-3 sm:mb-4">Sales by Category</h4>
 
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-5 my-auto">
+          <div className="flex flex-col sm:flex-row lg:flex-col 2xl:flex-row items-center justify-between gap-4 xl:gap-5 my-auto">
             {/* SVG Donut */}
-            <div className="relative w-36 h-36 flex-shrink-0 flex items-center justify-center">
+            <div className="relative w-28 h-28 sm:w-32 sm:h-32 xl:w-34 xl:h-34 shrink-0 flex items-center justify-center">
               <svg viewBox="0 0 100 100" className="w-full h-full transform -rotate-90">
                 <circle cx="50" cy="50" r="38" fill="none" stroke="#f8fafc" strokeWidth="12" />
                 {/* Silk Sarees - Maroon 45% */}
@@ -561,76 +561,78 @@ const AdminDashboard = () => {
               </svg>
 
               <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-1">
-                <span className="text-xs font-bold text-slate-900 leading-tight">₹21,794</span>
-                <span className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">TOTAL</span>
+                <span className="text-[11px] sm:text-xs font-bold text-slate-900 leading-tight">₹21,794</span>
+                <span className="text-[9px] xl:text-[10px] text-slate-400 font-semibold uppercase tracking-wider">TOTAL</span>
               </div>
             </div>
 
             {/* Category Legend */}
-            <div className="flex-1 space-y-2 text-xs w-full">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#75212e]" />
-                  <span className="text-slate-600 font-medium">Silk Sarees</span>
+            <div className="flex-1 space-y-1.5 xl:space-y-2 text-xs w-full">
+              <div className="flex items-center justify-between gap-2">
+                <div className="flex items-center gap-1.5 min-w-0">
+                  <span className="w-2 h-2 xl:w-2.5 xl:h-2.5 rounded-full bg-[#75212e] shrink-0" />
+                  <span className="text-slate-600 font-medium truncate">Silk Sarees</span>
                 </div>
-                <span className="text-slate-700 font-semibold">45%</span>
+                <span className="text-slate-700 font-semibold shrink-0">45%</span>
               </div>
 
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#F97316]" />
-                  <span className="text-slate-600 font-medium">Cotton Sarees</span>
+              <div className="flex items-center justify-between gap-2">
+                <div className="flex items-center gap-1.5 min-w-0">
+                  <span className="w-2 h-2 xl:w-2.5 xl:h-2.5 rounded-full bg-[#F97316] shrink-0" />
+                  <span className="text-slate-600 font-medium truncate">Cotton Sarees</span>
                 </div>
-                <span className="text-slate-700 font-semibold">25%</span>
+                <span className="text-slate-700 font-semibold shrink-0">25%</span>
               </div>
 
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#10B981]" />
-                  <span className="text-slate-600 font-medium">Paithani Sarees</span>
+              <div className="flex items-center justify-between gap-2">
+                <div className="flex items-center gap-1.5 min-w-0">
+                  <span className="w-2 h-2 xl:w-2.5 xl:h-2.5 rounded-full bg-[#10B981] shrink-0" />
+                  <span className="text-slate-600 font-medium truncate">Paithani Sarees</span>
                 </div>
-                <span className="text-slate-700 font-semibold">15%</span>
+                <span className="text-slate-700 font-semibold shrink-0">15%</span>
               </div>
 
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#0284C7]" />
-                  <span className="text-slate-600 font-medium">Georgette Sarees</span>
+              <div className="flex items-center justify-between gap-2">
+                <div className="flex items-center gap-1.5 min-w-0">
+                  <span className="w-2 h-2 xl:w-2.5 xl:h-2.5 rounded-full bg-[#0284C7] shrink-0" />
+                  <span className="text-slate-600 font-medium truncate">Georgette Sarees</span>
                 </div>
-                <span className="text-slate-700 font-semibold">10%</span>
+                <span className="text-slate-700 font-semibold shrink-0">10%</span>
               </div>
 
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#8B5CF6]" />
-                  <span className="text-slate-600 font-medium">Organza Sarees</span>
+              <div className="flex items-center justify-between gap-2">
+                <div className="flex items-center gap-1.5 min-w-0">
+                  <span className="w-2 h-2 xl:w-2.5 xl:h-2.5 rounded-full bg-[#8B5CF6] shrink-0" />
+                  <span className="text-slate-600 font-medium truncate">Organza Sarees</span>
                 </div>
-                <span className="text-slate-700 font-semibold">5%</span>
+                <span className="text-slate-700 font-semibold shrink-0">5%</span>
               </div>
             </div>
           </div>
         </div>
 
         {/* Store Activity Timeline */}
-        <div className="bg-white rounded-2xl p-6 border border-slate-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] flex flex-col justify-between">
-          <div className="flex items-center justify-between mb-4">
-            <h4 className="text-base font-bold text-slate-900">Store Activity</h4>
+        <div className="bg-white rounded-xl xl:rounded-2xl p-4 sm:p-5 xl:p-6 border border-slate-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] flex flex-col justify-between">
+          <div className="flex items-center justify-between mb-3 sm:mb-4">
+            <h4 className="text-sm sm:text-base font-bold text-slate-900">Store Activity</h4>
           </div>
 
-          <div className="space-y-3.5 my-auto">
+          <div className="space-y-2.5 sm:space-y-3 my-auto">
             {activities.map((act, index) => {
               const Icon = act.icon;
               return (
                 <div key={index} className="flex items-center justify-between gap-2">
-                  <div className="flex items-center gap-3 min-w-0">
+                  <div className="flex items-center gap-2.5 min-w-0">
                     <div
-                      className={`w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 ${act.iconBg}`}
+                      className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 ${act.iconBg}`}
                     >
                       <Icon className="text-xs" />
                     </div>
-                    <p className="text-xs text-slate-800 font-medium truncate">{act.title}</p>
+                    <p className="text-xs text-slate-800 font-medium truncate" title={act.title}>
+                      {act.title}
+                    </p>
                   </div>
-                  <span className="text-[11px] text-slate-400 whitespace-nowrap font-normal">
+                  <span className="text-[10px] xl:text-[11px] text-slate-400 whitespace-nowrap font-normal shrink-0 ml-1">
                     {act.time}
                   </span>
                 </div>

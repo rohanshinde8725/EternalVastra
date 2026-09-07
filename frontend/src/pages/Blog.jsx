@@ -10,6 +10,7 @@ import {
   FiChevronRight,
   FiRotateCw,
 } from "react-icons/fi";
+import { PiFlowerLotus } from "react-icons/pi";
 import { API_BASE_URL } from "../api/products";
 import FadeUp from "../components/animations/FadeUp";
 
@@ -145,24 +146,23 @@ const Blog = () => {
   };
 
   return (
-    <div className="bg-[#FEFAF8] min-h-screen text-slate-800 pb-20">
+    <div className="bg-[#FEFAF8] min-h-screen text-slate-800 pb-16 sm:pb-20">
       {/* ========================================================================= */}
       {/* 1. HERO BANNER SECTION (MATCHING SCREENSHOT) */}
       {/* ========================================================================= */}
-      <section className="bg-[url('/images/banner/banner-4.png')] bg-cover bg-center h-60 w-full 
-        flex items-center px-5 md:px-16 lg:px-24 relative overflow-hidden">
-        <div className="container max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12">
+      <section className="bg-[url('/images/banner/banner-4.png')] bg-cover bg-center h-44 sm:h-56 md:h-64 w-full flex items-center relative overflow-hidden">
+        <div className="max-w-[1600px] w-full mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
 
             {/* Left Content */}
-            <div className="lg:col-span-6 spaxe-y-5 text-center lg:text-left">
+            <div className="lg:col-span-8 text-center lg:text-left">
               <FadeUp delay={0.1}>
-                <div className="inline-flex items-center mb-3 gap-2 text-xs md:text-sm font-bold uppercase tracking-[0.25em] text-[#6B1527]">
-                  <span>🌸</span>
+                <div className="inline-flex items-center mb-2 gap-2 text-xs sm:text-sm font-bold uppercase tracking-wider text-[#6B1527]">
+                  <PiFlowerLotus className="text-base sm:text-lg text-[#6B1527]" />
                   <span>SAREE STORIES</span>
                 </div>
 
-                <h1 className="text-2xl lg:text-3xl font-serif font-bold text-slate-900 leading-[1.15] tracking-tight">
+                <h1 className="text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-slate-900 leading-[1.15] tracking-tight">
                   Timeless Weaves, <br />
                   <span className="text-[#6B1527] font-serif">Stories That Inspire</span>
                 </h1>
@@ -175,9 +175,9 @@ const Blog = () => {
       {/* ========================================================================= */}
       {/* 2. SEARCH & FILTER CONTROLS (MATCHING SCREENSHOT) */}
       {/* ========================================================================= */}
-      <section id="stories-section" className="container max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 pt-10">
+      <section id="stories-section" className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-10">
         <FadeUp delay={0.15}>
-          <div className="bg-white rounded-2xl border border-slate-200/90 shadow-sm p-4 sm:p-5 space-y-4">
+          <div className="bg-white rounded-xl border border-slate-200/90 shadow-xs p-4 sm:p-5 space-y-4">
 
             {/* Top Row: Search Input + Sort Dropdown + Grid/List Toggle */}
             <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
@@ -190,7 +190,7 @@ const Blog = () => {
                   value={search}
                   onChange={handleSearchChange}
                   placeholder="Search articles, tips, patterns..."
-                  className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-[#6B1527] focus:bg-white transition"
+                  className="w-full pl-10 pr-4 py-2.5 rounded-md bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-[#6B1527] focus:bg-white transition"
                 />
               </div>
 
@@ -203,7 +203,7 @@ const Blog = () => {
                   <select
                     value={sortBy}
                     onChange={(e) => setSortBy(e.target.value)}
-                    className="px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs font-semibold text-slate-800 focus:outline-none focus:border-[#6B1527] cursor-pointer"
+                    className="px-3 py-2 rounded-md bg-slate-50 border border-slate-200 text-xs font-semibold text-slate-800 focus:outline-none focus:border-[#6B1527] cursor-pointer"
                   >
                     <option value="Latest">Latest</option>
                     <option value="Most Popular">Most Popular</option>
@@ -212,11 +212,11 @@ const Blog = () => {
                 </div>
 
                 {/* View Switcher: Grid vs List */}
-                <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-xl border border-slate-200">
+                <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-md border border-slate-200">
                   <button
                     type="button"
                     onClick={() => setViewMode("grid")}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer ${viewMode === "grid"
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded text-xs font-semibold transition cursor-pointer ${viewMode === "grid"
                         ? "bg-[#6B1527] text-white shadow-xs"
                         : "text-slate-600 hover:text-slate-900"
                       }`}
@@ -228,7 +228,7 @@ const Blog = () => {
                   <button
                     type="button"
                     onClick={() => setViewMode("list")}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer ${viewMode === "list"
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded text-xs font-semibold transition cursor-pointer ${viewMode === "list"
                         ? "bg-[#6B1527] text-white shadow-xs"
                         : "text-slate-600 hover:text-slate-900"
                       }`}
@@ -252,9 +252,9 @@ const Blog = () => {
                     key={category}
                     type="button"
                     onClick={() => handleCategoryChange(category)}
-                    className={`px-4 py-2 rounded-lg text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${isSelected
-                        ? "bg-[#6B1527] text-white shadow-xs font-bold"
-                        : "bg-white text-slate-700 hover:bg-rose-50 hover:text-[#6B1527] border border-slate-200/90"
+                    className={`px-4 py-2 rounded-md border text-xs sm:text-sm font-semibold transition-all duration-300 cursor-pointer ${isSelected
+                        ? "bg-[#74202D] text-white border-[#74202D] shadow-xs"
+                        : "border-gray-200 bg-gray-50/50 text-slate-700 hover:border-[#74202D] hover:text-[#74202D]"
                       }`}
                   >
                     {category}
@@ -270,7 +270,7 @@ const Blog = () => {
       {/* ========================================================================= */}
       {/* 3. STORIES LISTING (GRID OR LIST VIEW) */}
       {/* ========================================================================= */}
-      <section className="container max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 pt-8">
+      <section className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
         {loading ? (
           <div className="py-24 text-center">
             <FiRotateCw className="animate-spin text-3xl text-[#6B1527] mx-auto mb-3" />
@@ -371,31 +371,33 @@ const Blog = () => {
             ))}
           </div>
         ) : (
-          /* List View Mode */
-          <div className="space-y-4">
+          /* List View Mode: 2/2 Grid on lg devices */
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
             {paginatedPosts.map((post, index) => (
-              <FadeUp key={post.id} delay={0.05 + (index % 4) * 0.07}>
+              <FadeUp key={post.id} delay={0.05 + (index % 4) * 0.07} className="h-full">
                 <article
-                  className="bg-white rounded-lg border border-slate-200/90 shadow-sm overflow-hidden flex flex-col md:flex-row hover:shadow-md transition-all duration-300 group"
+                  className="bg-white rounded-lg border border-slate-200/90 shadow-sm overflow-hidden flex flex-col md:flex-row hover:shadow-md transition-all duration-300 group h-full"
                 >
-                  <div className="md:w-72 relative h-48 bg-slate-100 flex-shrink-0 overflow-hidden">
-                    <img
-                      src={post.cover}
-                      alt={post.title}
-                      onError={(e) => {
-                        e.target.onerror = null;
-                        e.target.src = "https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=500&auto=format&fit=crop&q=80";
-                      }}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
+                  <div className="w-full md:w-56 lg:w-60 h-48 sm:h-52 md:h-52 shrink-0 relative overflow-hidden">
+                    <Link to={`/blog/${post.id}`} className="block w-full h-full">
+                      <img
+                        src={post.cover}
+                        alt={post.title}
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.src = "https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=500&auto=format&fit=crop&q=80";
+                        }}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                    </Link>
                     <span className="absolute bottom-3 left-3 bg-[#F6E6D8]/95 text-[#6B1527] text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-sm shadow-xs border border-[#E9D1BE]">
                       {post.category}
                     </span>
                   </div>
 
-                  <div className="p-5 flex-1 flex flex-col justify-between">
+                  <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between">
                     <div>
-                      <div className="flex items-center gap-3 text-xs text-slate-400 mb-2 font-medium">
+                      <div className="flex items-center gap-3 text-xs text-slate-400 mb-1.5 font-medium">
                         <span>{post.date}</span>
                         <span>•</span>
                         <span className="flex items-center gap-1">
@@ -405,22 +407,22 @@ const Blog = () => {
                       </div>
 
                       <Link to={`/blog/${post.id}`}>
-                        <h3 className="font-serif font-bold text-slate-900 text-lg sm:text-xl leading-snug group-hover:text-[#6B1527] transition">
+                        <h3 className="font-serif font-bold text-slate-900 text-base sm:text-lg leading-snug group-hover:text-[#6B1527] transition line-clamp-2">
                           {post.title}
                         </h3>
                       </Link>
 
-                      <p className="text-sm text-slate-600 mt-2 line-clamp-2 leading-relaxed">
+                      <p className="text-xs sm:text-[13px] text-slate-600 mt-1.5 line-clamp-2 leading-relaxed">
                         {post.excerpt}
                       </p>
                     </div>
 
-                    <div className="pt-4 border-t border-slate-100 flex items-center justify-between mt-4">
-                      <div className="flex items-center gap-2.5">
+                    <div className="pt-3 border-t border-slate-100 flex items-center justify-between mt-3">
+                      <div className="flex items-center gap-2">
                         <img
                           src={post.authorAvatar}
                           alt={post.author}
-                          className="w-7 h-7 rounded-full object-cover border border-slate-200"
+                          className="w-6 h-6 rounded-full object-cover border border-slate-200"
                         />
                         <div>
                           <span className="text-xs font-bold text-slate-800 block leading-tight">{post.author}</span>
@@ -430,7 +432,7 @@ const Blog = () => {
 
                       <Link
                         to={`/blog/${post.id}`}
-                        className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-rose-50 text-xs font-bold text-[#6B1527] hover:bg-[#6B1527] hover:text-white transition"
+                        className="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-lg bg-rose-50 text-xs font-bold text-[#6B1527] hover:bg-[#6B1527] hover:text-white transition cursor-pointer"
                       >
                         <span>Read Story</span>
                         <FiArrowRight className="text-xs" />

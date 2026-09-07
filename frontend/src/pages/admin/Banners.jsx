@@ -146,42 +146,42 @@ const Banners = () => {
   };
 
   return (
-    <div className="space-y-7 max-w-[1600px] mx-auto pb-12 text-slate-800">
+    <div className="space-y-6 sm:space-y-7 max-w-[1600px] mx-auto pb-12 text-slate-800">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
         <div>
-          <h3 className="text-2xl md:text-3xl font-bold text-slate-800 tracking-tight">Storefront Banners & Campaigns</h3>
-          <p className="text-sm md:text-base text-slate-500 mt-1">
+          <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-800 tracking-tight">Storefront Banners & Campaigns</h3>
+          <p className="text-xs sm:text-sm md:text-base text-slate-500 mt-1">
             Manage top hero sliders, festival offer promo strips, and category banners saved in MongoDB.
           </p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3 w-full sm:w-auto">
           <button
             onClick={fetchBanners}
-            className="p-3 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 transition cursor-pointer"
+            className="p-2.5 sm:p-3 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 transition cursor-pointer"
             title="Refresh Banners"
           >
-            <FiRotateCw className={`text-base ${loading ? "animate-spin" : ""}`} />
+            <FiRotateCw className={`text-sm sm:text-base ${loading ? "animate-spin" : ""}`} />
           </button>
           <button
             onClick={() => setIsModalOpen(true)}
-            className="flex items-center gap-2 px-5 py-3 rounded-xl bg-[#6B1527] hover:bg-white border-2 border-[#6B1527] text-white text-sm md:text-base font-semibold shadow-sm transition-all duration-300 hover:text-[#6B1527] cursor-pointer"
+            className="flex items-center gap-2 px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl bg-[#6B1527] hover:bg-white border-2 border-[#6B1527] text-white text-xs sm:text-sm md:text-base font-semibold shadow-sm transition-all duration-300 hover:text-[#6B1527] cursor-pointer"
           >
-            <FiPlus className="text-lg" />
+            <FiPlus className="text-base sm:text-lg" />
             <span>Add New Banner</span>
           </button>
         </div>
       </div>
 
       {/* Banner Cards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
         {banners.map((banner) => (
           <div
             key={banner._id || banner.id}
             className="bg-white rounded-2xl border border-slate-200/90 shadow-sm overflow-hidden flex flex-col justify-between"
           >
             {/* Banner Preview */}
-            <div className="relative h-56 bg-slate-900 overflow-hidden">
+            <div className="relative h-44 sm:h-56 bg-slate-900 overflow-hidden">
               <img
                 src={banner.image}
                 alt={banner.title}
@@ -191,25 +191,25 @@ const Banners = () => {
                 }}
                 className="w-full h-full object-cover opacity-80"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent p-6 flex flex-col justify-end text-white">
-                <span className="text-xs font-bold uppercase tracking-wider text-amber-300">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent p-4 sm:p-6 flex flex-col justify-end text-white">
+                <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-amber-300 block">
                   {banner.position}
                 </span>
-                <h4 className="text-xl font-bold drop-shadow-sm mt-1">{banner.title}</h4>
-                <p className="text-sm text-rose-100/95 font-medium mt-1">{banner.subtitle}</p>
+                <h4 className="text-base sm:text-xl font-bold drop-shadow-sm mt-1 truncate">{banner.title}</h4>
+                <p className="text-xs sm:text-sm text-rose-100/95 font-medium mt-1 line-clamp-1">{banner.subtitle}</p>
               </div>
             </div>
 
             {/* Controls */}
-            <div className="p-5 flex items-center justify-between border-t border-slate-100 text-sm">
-              <div className="flex items-center gap-2 text-slate-600">
-                <FiLink className="text-base text-slate-400" />
-                <span className="font-mono text-xs font-semibold">{banner.link}</span>
+            <div className="p-4 sm:p-5 flex flex-wrap items-center justify-between gap-2 border-t border-slate-100 text-xs sm:text-sm">
+              <div className="flex items-center gap-2 text-slate-600 min-w-0">
+                <FiLink className="text-sm sm:text-base text-slate-400 shrink-0" />
+                <span className="font-mono text-xs font-semibold truncate max-w-[150px] sm:max-w-xs">{banner.link}</span>
               </div>
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2 sm:gap-3 shrink-0">
                 <button
                   onClick={() => toggleActive(banner)}
-                  className={`text-xs font-bold px-3.5 py-1.5 rounded-full cursor-pointer ${
+                  className={`text-[11px] sm:text-xs font-bold px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full cursor-pointer ${
                     banner.active ? "bg-emerald-100 text-emerald-800" : "bg-slate-100 text-slate-600"
                   }`}
                 >
@@ -217,10 +217,10 @@ const Banners = () => {
                 </button>
                 <button
                   onClick={() => handleDelete(banner)}
-                  className="p-2 rounded-xl text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition cursor-pointer"
+                  className="p-1.5 sm:p-2 rounded-xl text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition cursor-pointer"
                   title="Move to Recycle Bin"
                 >
-                  <FiTrash2 className="text-base" />
+                  <FiTrash2 className="text-sm sm:text-base" />
                 </button>
               </div>
             </div>
@@ -230,45 +230,45 @@ const Banners = () => {
 
       {/* Add Banner Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs">
-          <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-7 border border-slate-200 animate-in fade-in zoom-in-95">
-            <div className="flex items-center justify-between border-b border-slate-200 pb-4 mb-5">
-              <h4 className="text-xl font-bold text-slate-900">Add Campaign Banner</h4>
-              <button onClick={() => setIsModalOpen(false)} className="p-2 text-slate-400 hover:text-slate-700 transition cursor-pointer">
-                <FiX className="text-xl" />
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/50 backdrop-blur-xs">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-4 sm:p-7 border border-slate-200 animate-in fade-in zoom-in-95 max-h-[90vh] overflow-y-auto custom-admin-scroll">
+            <div className="flex items-center justify-between border-b border-slate-200 pb-3 sm:pb-4 mb-4 sm:mb-5">
+              <h4 className="text-lg sm:text-xl font-bold text-slate-900">Add Campaign Banner</h4>
+              <button onClick={() => setIsModalOpen(false)} className="p-1.5 sm:p-2 text-slate-400 hover:text-slate-700 transition cursor-pointer">
+                <FiX className="text-lg sm:text-xl" />
               </button>
             </div>
 
-            <form onSubmit={handleAdd} className="space-y-4 text-sm">
+            <form onSubmit={handleAdd} className="space-y-3.5 sm:space-y-4 text-xs sm:text-sm">
               <div>
-                <label className="font-semibold text-slate-800 block mb-1.5">Headline</label>
+                <label className="font-semibold text-slate-800 block mb-1">Headline</label>
                 <input
                   type="text"
                   required
                   placeholder="e.g. Grand Festive Saree Sale"
                   value={formData.title}
                   onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                  className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-800 focus:border-[#6B1527] focus:outline-none"
+                  className="w-full px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-800 focus:border-[#6B1527] focus:outline-none"
                 />
               </div>
 
               <div>
-                <label className="font-semibold text-slate-800 block mb-1.5">Subtitle / Offer</label>
+                <label className="font-semibold text-slate-800 block mb-1">Subtitle / Offer</label>
                 <input
                   type="text"
                   placeholder="e.g. Flat 25% Off Across Pure Silks"
                   value={formData.subtitle}
                   onChange={(e) => setFormData({ ...formData, subtitle: e.target.value })}
-                  className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-800 focus:border-[#6B1527] focus:outline-none"
+                  className="w-full px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-800 focus:border-[#6B1527] focus:outline-none"
                 />
               </div>
 
               <div>
-                <label className="font-semibold text-slate-800 block mb-1.5">Placement</label>
+                <label className="font-semibold text-slate-800 block mb-1">Placement</label>
                 <select
                   value={formData.position}
                   onChange={(e) => setFormData({ ...formData, position: e.target.value })}
-                  className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-800 focus:border-[#6B1527] focus:outline-none"
+                  className="w-full px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-800 focus:border-[#6B1527] focus:outline-none"
                 >
                   <option value="Hero Main Banner">Hero Main Banner</option>
                   <option value="Homepage Mid Banner">Homepage Mid Banner</option>
@@ -282,19 +282,19 @@ const Banners = () => {
                 onChange={(url) => setFormData({ ...formData, image: url })}
               />
 
-              <div className="pt-3 flex items-center gap-3">
+              <div className="pt-3 sm:pt-4 flex items-center gap-2.5 sm:gap-3">
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="flex-1 py-3 rounded-xl border border-slate-200 font-semibold text-slate-700 hover:bg-slate-50 transition text-sm cursor-pointer"
+                  className="flex-1 py-2.5 sm:py-3 rounded-xl border border-slate-200 font-semibold text-slate-700 hover:bg-slate-50 transition text-xs sm:text-sm cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="flex-1 flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-[#6B1527] hover:bg-white border-2 border-[#6B1527] text-white text-sm font-semibold shadow-sm transition-all duration-300 hover:text-[#6B1527] cursor-pointer"
+                  className="flex-1 flex items-center justify-center gap-2 px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl bg-[#6B1527] hover:bg-white border-2 border-[#6B1527] text-white text-xs sm:text-sm font-semibold shadow-sm transition-all duration-300 hover:text-[#6B1527] cursor-pointer"
                 >
-                  Upload Banner to Database
+                  Upload Banner
                 </button>
               </div>
             </form>

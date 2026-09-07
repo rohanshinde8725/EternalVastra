@@ -10,6 +10,7 @@ import { BsFlower2 } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import FadeUp from "../components/animations/FadeUp";
 import FadeImage from "../components/animations/FadeImage";
+import Counter from "../components/animations/Counter";
 
 const About = () => {
 
@@ -44,83 +45,73 @@ const About = () => {
     <div className='w-full bg-[#FEFAF8]'>
 
       {/* Banner Start */}
-      <div className="bg-[url('/images/banner/banner-2.png')] bg-cover bg-center h-75 sm:h-100 md:h-125 lg:h-162.5 2xl:h-200 w-full 
-      flex items-center px-5 relative overflow-hidden">
-        <div className='w-full lg:w-[70%] lg:ml-10 absolute'>
+      <div className="bg-[url('/images/banner/banner-2.png')] bg-cover bg-center h-60 w-full 
+      flex items-center px-5 sm:px-8 md:px-12 lg:px-16 relative overflow-hidden">
+        <div className='max-w-[1600px] mx-auto w-full'>
           <FadeUp delay={0.1}>
-            <h3 className='text-xs md:text-sm text-[#74202D] font-bold uppercase'>About Us</h3>
-            <h1 className="text-lg sm:text-3xl lg:text-5xl font-semibold text-[#4A1F1C]">Celebrating Tradition, <br /> Embracing Elegance</h1>
-            <div className='w-[50%] border md:w-[35%] lg:w-[40%] text-[#74202D] rounded-lg my-2 md:my-4 lg:my-8'></div>
-            <p className='w-[60%] md:w-[50%] text-[#3b3737] text-xs md:text-base'>
-              At Saree, we believe a saree is more than just attire—it's a story woven with heritage, culture, and 
-              timeless beauty. Our collections are a tribute to the artistry of Indian weavers and the elegance of 
-              every woman who wears it.
-            </p>
-
-            <Link to="/shop">
-              <button className='bg-[#74202D] text-white uppercase py-1.5 px-3 md:py-2 md:px-8 rounded
-                  hover:bg-white border-2 border-[#74202D] hover:text-[#74202D] cursor-pointer
-                  transition text-xs md:text-sm font-semibold mt-5'>
-                    Explore Collection
-              </button>
-            </Link>
+            <span className='text-xs md:text-sm text-[#74202D] font-bold uppercase tracking-wider block mb-1'>About Us</span>
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-semibold text-[#4A1F1C] leading-tight">
+              Celebrating Tradition, <br /> Embracing Elegance
+            </h1>
           </FadeUp>
         </div>
       </div>
       {/* Banner End */}
 
       {/* Journey Start */}
-      <div className='container py-15 px-5 md:py-10 md:px-15 flex flex-col lg:flex-row gap-10 lg:gap-20 mx-auto items-center'>
-        <div className='w-full h-auto md:w-[80%] mx-auto lg:w-[40%] md:h-90 lg:h-100 2xl:h-120'>
+      <div className='max-w-[1600px] mx-auto py-10 sm:py-14 md:py-16 px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row gap-8 lg:gap-16 items-center'>
+        <div className='w-full md:w-[80%] mx-auto lg:w-[45%] h-72 sm:h-80 md:h-96 lg:h-[420px]'>
           <FadeImage 
             loading="lazy" 
             decoding="async" 
-            className='h-full w-full object-cover rounded-2xl shadow-lg' 
+            className='h-full w-full object-cover rounded-2xl shadow-md' 
             src="/images/aboutjourney.png" 
             alt="Our Weaving Journey" 
           />
         </div>
 
-        <div className='w-full lg:w-[60%] text-center lg:text-start'>
+        <div className='w-full lg:w-[55%] text-center lg:text-start space-y-4'>
           <FadeUp delay={0.1}>
-            <h3 className='text-[#74202D] font-semibold text-sm uppercase'>Our Journey</h3>
-            <h1 className="text-2xl sm:text-3xl lg:text-3xl font-semibold text-[#4A1F1C] my-4">From Looms to Loved <br /> By Generations</h1>
-            <p className='w-full md:w-[70%] mx-auto lg:mx-0 text-[#3b3737] text-sm md:text-base'>
+            <span className='text-[#74202D] font-bold text-xs sm:text-sm uppercase tracking-wider block'>Our Journey</span>
+            <h2 className="text-2xl sm:text-3xl font-semibold text-[#4A1F1C] mt-1 mb-3 leading-tight">
+              From Looms to Loved <br /> By Generations
+            </h2>
+            <p className='text-slate-700 text-xs sm:text-sm md:text-base leading-relaxed'>
               What began as a small passion for traditional weaves has grown into a brand trusted by thousands of Saree
               lovers across the country. We worked closely with skilled artisans and weavers to bring authentic sarees
-              that reflect india's rich textile legacy.
+              that reflect India's rich textile legacy.
             </p>
           </FadeUp>
 
-          <div className='w-full flex flex-col md:flex-row gap-10 mt-10 items-center'>
-            <FadeUp delay={0.2} className='flex flex-col items-center text-center'>
-              <GrGroup className='text-2xl md:text-3xl text-[#74202D]' />
-              <h1 className='uppercase text-sm font-bold mt-2 text-[#4A1F1C] '>
+          <div className='w-full grid grid-cols-1 sm:grid-cols-3 gap-6 pt-4'>
+            <FadeUp delay={0.2} className='flex flex-col items-center lg:items-start text-center lg:text-left'>
+              <GrGroup className='text-2xl sm:text-3xl text-[#74202D]' />
+              <h3 className='uppercase text-xs sm:text-sm font-bold mt-2 text-[#4A1F1C]'>
                 Rooted in Tradition
-              </h1>
-              <h2 className='text-xs sm:text-sm text-gray-600'>
-                Honoring age-old weaving technique and designs. 
-              </h2>
+              </h3>
+              <p className='text-xs text-slate-600 mt-1 leading-snug'>
+                Honoring age-old weaving techniques and designs. 
+              </p>
             </FadeUp>
           
-            <FadeUp delay={0.3} className='flex flex-col items-center text-center'>
-              <IoDiamondOutline className='text-2xl md:text-3xl text-[#74202D]' />
-              <h1 className='uppercase text-sm font-bold mt-2 text-[#4A1F1C]'>
+            <FadeUp delay={0.3} className='flex flex-col items-center lg:items-start text-center lg:text-left'>
+              <IoDiamondOutline className='text-2xl sm:text-3xl text-[#74202D]' />
+              <h3 className='uppercase text-xs sm:text-sm font-bold mt-2 text-[#4A1F1C]'>
                 Quality You Can Trust
-              </h1>
-              <h2 className='text-xs sm:text-sm text-gray-600'>
-                Carefully curated sarees with finest quality.
-              </h2>
+              </h3>
+              <p className='text-xs text-slate-600 mt-1 leading-snug'>
+                Carefully curated sarees with finest fabric quality.
+              </p>
             </FadeUp>
           
-            <FadeUp delay={0.4} className='flex flex-col items-center text-center'>
-              <FaRegHeart className='text-2xl md:text-3xl text-[#74202D]' />
-              <h1 className='uppercase text-sm font-bold mt-2 text-[#4A1F1C]'>
+            <FadeUp delay={0.4} className='flex flex-col items-center lg:items-start text-center lg:text-left'>
+              <FaRegHeart className='text-2xl sm:text-3xl text-[#74202D]' />
+              <h3 className='uppercase text-xs sm:text-sm font-bold mt-2 text-[#4A1F1C]'>
                 Loved by Thousands
-              </h1>
-              <h2 className='text-xs sm:text-sm text-gray-600'>
+              </h3>
+              <p className='text-xs text-slate-600 mt-1 leading-snug'>
                 Trusted by customers across the country.
-              </h2>
+              </p>
             </FadeUp>
           </div>
         </div>
@@ -128,29 +119,31 @@ const About = () => {
       {/* Journey End */}
 
       {/* Craftmanship Start */}
-      <div className='w-full bg-[#F4EFEA] py-16'>
-        <div className='container mx-auto px-4 md:px-20'>
-          <FadeUp delay={0.1} className='w-full md:w-[90%] lg:w-[50%] mx-auto text-center'>
-            <div className='flex justify-center items-center gap-2'>
-              <IoIosArrowRoundForward className='h-10 w-10 text-[#74202D]' />
-              <h1 className='uppercase md:text-2xl font-semibold'>The Art Of Craftmanship</h1>
-              <IoIosArrowRoundBack className='h-10 w-10 text-[#74202D]' />
+      <div className='w-full bg-[#F4EFEA] py-10 sm:py-14 md:py-16'>
+        <div className='max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8'>
+          <FadeUp delay={0.1} className='max-w-xl mx-auto text-center'>
+            <div className='flex justify-center items-center gap-2 sm:gap-3'>
+              <IoIosArrowRoundForward className='h-8 w-8 sm:h-10 sm:w-10 text-[#74202D]' />
+              <h2 className='uppercase text-xl sm:text-2xl md:text-3xl font-semibold text-[#4A1F1C] tracking-tight'>The Art Of Craftsmanship</h2>
+              <IoIosArrowRoundBack className='h-8 w-8 sm:h-10 sm:w-10 text-[#74202D]' />
             </div>
-            <h5 className='text-center text-sm mt-2 md:text-base text-gray-700'>Every Saree is a masterpiece, crafted with precision, passion and patience.</h5>
+            <p className='text-center text-xs sm:text-sm md:text-base mt-2 text-slate-700'>
+              Every Saree is a masterpiece, crafted with precision, passion, and patience.
+            </p>
           </FadeUp>
 
-          <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 mt-12'>
+          <div className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 sm:gap-8 mt-8 sm:mt-10 md:mt-12'>
             {crafts.map((craft, idx) => (
-              <FadeUp key={craft.title} delay={0.1 + idx * 0.08} className='text-center group'>
+              <FadeUp key={craft.title} delay={0.08 + idx * 0.06} className='text-center group'>
                 <img 
                   loading="lazy" decoding="async"
-                  className='h-36 w-36 mx-auto object-cover rounded-full border-4 border-white shadow-md group-hover:border-[#74202D] 
+                  className='h-28 w-28 sm:h-32 sm:w-32 md:h-36 md:w-36 mx-auto object-cover rounded-full border-4 border-white shadow-md group-hover:border-[#74202D] 
                   group-hover:scale-105 transition-all duration-300 cursor-pointer' 
                   src={craft.img} 
                   alt={craft.title}
                 />
-                <h1 className='mt-4 mb-2 font-semibold text-base text-[#4A1F1C]'>{craft.title}</h1>
-                <p className='text-xs text-gray-600 leading-relaxed px-2'>{craft.subTitle}</p>
+                <h3 className='mt-3 sm:mt-4 mb-1 font-semibold text-xs sm:text-sm md:text-base text-[#4A1F1C]'>{craft.title}</h3>
+                <p className='text-xs text-slate-600 leading-relaxed px-1'>{craft.subTitle}</p>
               </FadeUp>
             ))}
           </div>
@@ -158,31 +151,39 @@ const About = () => {
       </div>
 
       {/* Stats Counter Bar */}
-      <div className='bg-[#74202D] py-12'>
-        <div className='w-[90%] lg:w-[70%] grid grid-cols-2 md:grid-cols-4 gap-8 mx-auto text-center'>
+      <div className='bg-[#74202D] py-8 sm:py-10 md:py-12'>
+        <div className='max-w-6xl px-4 sm:px-6 grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 mx-auto text-center'>
           
           <FadeUp delay={0.1} className='flex flex-col items-center'>
-            <GrGroup className='text-[#E6C7A1] text-4xl' />
-            <h1 className='text-[#E6C7A1] text-2xl sm:text-3xl font-bold my-2'>50,000+</h1>
-            <h3 className='text-white text-xs sm:text-sm font-medium'>Happy Customers</h3>
+            <GrGroup className='text-[#E6C7A1] text-3xl sm:text-4xl' />
+            <h2 className='text-[#E6C7A1] text-2xl sm:text-3xl font-bold my-1 sm:my-2'>
+              <Counter target={50000} suffix="+" duration={2.2} />
+            </h2>
+            <p className='text-white text-xs sm:text-sm font-medium'>Happy Customers</p>
           </FadeUp>
 
           <FadeUp delay={0.2} className='flex flex-col items-center'>
-            <PiFlowerLotusLight className='text-[#E6C7A1] text-4xl' />
-            <h1 className='text-[#E6C7A1] text-2xl sm:text-3xl font-bold my-2'>10,000+</h1>
-            <h3 className='text-white text-xs sm:text-sm font-medium'>Sarees Sold</h3>
+            <PiFlowerLotusLight className='text-[#E6C7A1] text-3xl sm:text-4xl' />
+            <h2 className='text-[#E6C7A1] text-2xl sm:text-3xl font-bold my-1 sm:my-2'>
+              <Counter target={10000} suffix="+" duration={2.2} />
+            </h2>
+            <p className='text-white text-xs sm:text-sm font-medium'>Sarees Sold</p>
           </FadeUp>
 
           <FadeUp delay={0.3} className='flex flex-col items-center'>
-            <CiMedal className='text-[#E6C7A1] text-4xl' />
-            <h1 className='text-[#E6C7A1] text-2xl sm:text-3xl font-bold my-2'>4.8 / 5</h1>
-            <h3 className='text-white text-xs sm:text-sm font-medium'>Customer Rating</h3>
+            <CiMedal className='text-[#E6C7A1] text-3xl sm:text-4xl' />
+            <h2 className='text-[#E6C7A1] text-2xl sm:text-3xl font-bold my-1 sm:my-2'>
+              <Counter target={4.8} decimals={1} suffix=" / 5" duration={2.2} />
+            </h2>
+            <p className='text-white text-xs sm:text-sm font-medium'>Customer Rating</p>
           </FadeUp>
 
           <FadeUp delay={0.4} className='flex flex-col items-center'>
-            <TfiWorld className='text-[#E6C7A1] text-4xl' />
-            <h1 className='text-[#E6C7A1] text-2xl sm:text-3xl font-bold my-2'>Pan India</h1>
-            <h3 className='text-white text-xs sm:text-sm font-medium'>Express Delivery</h3>
+            <TfiWorld className='text-[#E6C7A1] text-3xl sm:text-4xl' />
+            <h2 className='text-[#E6C7A1] text-2xl sm:text-3xl font-bold my-1 sm:my-2'>
+              <Counter target={28} suffix="+ States" duration={2.2} />
+            </h2>
+            <p className='text-white text-xs sm:text-sm font-medium'>Pan India Express</p>
           </FadeUp>
 
         </div>
@@ -190,66 +191,66 @@ const About = () => {
       {/* Craftmanship End */}
 
       {/* Our Values Start */}
-      <div className='container bg-[#FEFAF8] py-16 px-4 mx-auto'>
-        <FadeUp delay={0.1} className='w-full md:w-[90%] lg:w-[50%] mx-auto text-center'>
-          <div className='flex justify-center items-center gap-2'>
-            <IoIosArrowRoundForward className='h-10 w-10 text-[#74202D]' />
-            <h1 className='uppercase md:text-2xl font-semibold'>Our Values</h1>
-            <IoIosArrowRoundBack className='h-10 w-10 text-[#74202D]' />
+      <div className='max-w-[1600px] mx-auto py-10 sm:py-14 md:py-16 px-4 sm:px-6 lg:px-8'>
+        <FadeUp delay={0.1} className='max-w-xl mx-auto text-center'>
+          <div className='flex justify-center items-center gap-2 sm:gap-3'>
+            <IoIosArrowRoundForward className='h-8 w-8 sm:h-10 sm:w-10 text-[#74202D]' />
+            <h2 className='uppercase text-xl sm:text-2xl md:text-3xl font-semibold text-[#4A1F1C] tracking-tight'>Our Values</h2>
+            <IoIosArrowRoundBack className='h-8 w-8 sm:h-10 sm:w-10 text-[#74202D]' />
           </div>
         </FadeUp>
 
-        <div className='w-[90%] mx-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 justify-between gap-6 mt-10'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 mt-8 sm:mt-10 md:mt-12'>
 
           {/* div 1 */}
-          <FadeUp delay={0.1} className='flex items-center gap-4 bg-white py-6 px-5 shadow-sm border rounded-2xl border-gray-200 hover:shadow-md transition'>
-            <div className='p-3 bg-[#F4EFEA] rounded-2xl flex-shrink-0'>
-              <PiCompassRoseThin className='text-3xl text-[#74202D]' />
+          <FadeUp delay={0.1} className='flex items-start gap-3.5 bg-white p-5 sm:p-6 shadow-xs border rounded-2xl border-gray-200 hover:shadow-md transition'>
+            <div className='p-2.5 sm:p-3 bg-[#F4EFEA] rounded-xl shrink-0'>
+              <PiCompassRoseThin className='text-2xl sm:text-3xl text-[#74202D]' />
             </div>
             <div>
-              <h2 className='font-bold mb-1 text-base text-[#4A1F1C]'>Authenticity</h2>
-              <h5 className='text-gray-600 text-xs leading-relaxed'>
+              <h3 className='font-bold mb-1 text-sm sm:text-base text-[#4A1F1C]'>Authenticity</h3>
+              <p className='text-slate-600 text-xs sm:text-sm leading-relaxed'>
                 We stay true to our roots and bring you genuine handloom sarees.
-              </h5>
+              </p>
             </div>
           </FadeUp>
 
           {/* div 2 */}
-          <FadeUp delay={0.2} className='flex items-center gap-4 bg-white py-6 px-5 shadow-sm border rounded-2xl border-gray-200 hover:shadow-md transition'>
-            <div className='p-3 bg-[#F4EFEA] rounded-2xl flex-shrink-0'>
-              <BiLeaf className='text-3xl text-[#74202D]' />
+          <FadeUp delay={0.2} className='flex items-start gap-3.5 bg-white p-5 sm:p-6 shadow-xs border rounded-2xl border-gray-200 hover:shadow-md transition'>
+            <div className='p-2.5 sm:p-3 bg-[#F4EFEA] rounded-xl shrink-0'>
+              <BiLeaf className='text-2xl sm:text-3xl text-[#74202D]' />
             </div>
             <div>
-              <h2 className='font-bold mb-1 text-base text-[#4A1F1C]'>Sustainability</h2>
-              <h5 className='text-gray-600 text-xs leading-relaxed'>
+              <h3 className='font-bold mb-1 text-sm sm:text-base text-[#4A1F1C]'>Sustainability</h3>
+              <p className='text-slate-600 text-xs sm:text-sm leading-relaxed'>
                 We support eco-friendly practices and empower local weavers.
-              </h5>
+              </p>
             </div>
           </FadeUp>
 
           {/* div 3 */}
-          <FadeUp delay={0.3} className='flex items-center gap-4 bg-white py-6 px-5 shadow-sm border rounded-2xl border-gray-200 hover:shadow-md transition'>
-            <div className='p-3 bg-[#F4EFEA] rounded-2xl flex-shrink-0'>
-              <FaRegHeart className='text-3xl text-[#74202D]' />
+          <FadeUp delay={0.3} className='flex items-start gap-3.5 bg-white p-5 sm:p-6 shadow-xs border rounded-2xl border-gray-200 hover:shadow-md transition'>
+            <div className='p-2.5 sm:p-3 bg-[#F4EFEA] rounded-xl shrink-0'>
+              <FaRegHeart className='text-2xl sm:text-3xl text-[#74202D]' />
             </div>
             <div>
-              <h2 className='font-bold mb-1 text-base text-[#4A1F1C]'>Customer First</h2>
-              <h5 className='text-gray-600 text-xs leading-relaxed'>
+              <h3 className='font-bold mb-1 text-sm sm:text-base text-[#4A1F1C]'>Customer First</h3>
+              <p className='text-slate-600 text-xs sm:text-sm leading-relaxed'>
                 Your satisfaction is our priority at every single touchpoint.
-              </h5>
+              </p>
             </div>
           </FadeUp>
 
           {/* div 4 */}
-          <FadeUp delay={0.4} className='flex items-center gap-4 bg-white py-6 px-5 shadow-sm border rounded-2xl border-gray-200 hover:shadow-md transition'>
-            <div className='p-3 bg-[#F4EFEA] rounded-2xl flex-shrink-0'>
-              <BsFlower2 className='text-3xl text-[#74202D]' />
+          <FadeUp delay={0.4} className='flex items-start gap-3.5 bg-white p-5 sm:p-6 shadow-xs border rounded-2xl border-gray-200 hover:shadow-md transition'>
+            <div className='p-2.5 sm:p-3 bg-[#F4EFEA] rounded-xl shrink-0'>
+              <BsFlower2 className='text-2xl sm:text-3xl text-[#74202D]' />
             </div>
             <div>
-              <h2 className='font-bold mb-1 text-base text-[#4A1F1C]'>Timeless Elegance</h2>
-              <h5 className='text-gray-600 text-xs leading-relaxed'>
+              <h3 className='font-bold mb-1 text-sm sm:text-base text-[#4A1F1C]'>Timeless Elegance</h3>
+              <p className='text-slate-600 text-xs sm:text-sm leading-relaxed'>
                 We believe every saree tells a story of grace that never fades.
-              </h5>
+              </p>
             </div>
           </FadeUp>
 

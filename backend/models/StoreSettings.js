@@ -4,8 +4,8 @@ const storeSettingsSchema = new mongoose.Schema(
   {
     storeName: { type: String, default: "Eternal Vastra" },
     tagline: { type: String, default: "Elegance Eternal — Handcrafted Indian Sarees" },
-    contactEmail: { type: String, default: "support@eternalvastra.com" },
-    contactPhone: { type: String, default: "+91 98200 12345" },
+    contactEmail: { type: String, default: "rohanshinde8725@gmail.com" },
+    contactPhone: { type: String, default: "+91 98564 75612" },
     currency: { type: String, default: "INR (₹)" },
     freeShippingAbove: { type: String, default: "1999" },
     standardShippingFee: { type: String, default: "150" },

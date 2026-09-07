@@ -7,6 +7,7 @@ const connectDB = require("./config/db");
 const productRoutes = require("./routes/productRoutes");
 const adminRoutes = require("./routes/adminRoutes");
 const authRoutes = require("./routes/authRoutes");
+const contactRoutes = require("./routes/contactRoutes");
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -69,6 +70,7 @@ app.get("/api/health", (_req, res) => {
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/admin", adminRoutes);
+app.use("/api/contact", contactRoutes);
 
 app.use((error, _req, res, _next) => {
 	if (error.name === "MulterError" || error.message === "Only image files are allowed") {

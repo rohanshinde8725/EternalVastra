@@ -7,7 +7,7 @@ const About = lazy(() => import("../pages/About"));
 const Shop = lazy(() => import("../pages/Shop"));
 const SareeDetail = lazy(() => import("../pages/SareeDetail"));
 const Cart = lazy(()=> import ('../pages/Cart'));
-const Wishlist = lazy(() => import('../components/wishlist/Wishlist'));
+const Wishlist = lazy(() => import('../pages/Wishlist'));
 const Header = lazy(()=> import ('../components/header/Header'));
 const Footer = lazy(()=> import ('../components/footer/Footer'));
 const Contact = lazy(() => import("../pages/Contact"));

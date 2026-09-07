@@ -42,79 +42,79 @@ const Testimonial = () => {
     ]
 
   return (
-    <div className='py-10 bg-[#FEFAF8] w-full'>
-      <div className='max-w-[1600px] mx-auto px-5'>
-        <div className='flex items-center justify-center gap-2 sm:gap-3 text-center px-4'>
-            <GiThreeLeaves className='text-[#74202D] text-lg sm:text-xl md:text-2xl' />
-            <h1 className='uppercase font-semibold text-lg sm:text-xl md:text-2xl lg:text-2xl leading-snug'>What Our Customer Says</h1>
-            <GiThreeLeaves className='text-[#74202D] text-lg sm:text-xl md:text-2xl' />
-        </div>
+    <div className='py-8 sm:py-12 md:py-14 bg-[#FEFAF8] w-full'>
+      <div className='max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8'>
+        <FadeUp delay={0.1}>
+          <div className='flex items-center justify-center gap-2 sm:gap-3 text-center'>
+              <GiThreeLeaves className='text-[#74202D] text-lg sm:text-xl md:text-2xl' />
+              <h2 className='uppercase font-semibold text-xl sm:text-2xl md:text-3xl text-slate-800 tracking-tight'>What Our Customers Say</h2>
+              <GiThreeLeaves className='text-[#74202D] text-lg sm:text-xl md:text-2xl' />
+          </div>
+        </FadeUp>
 
-
-        <Swiper
-            className='h-60 w-[90%] mt-5'
-            modules={[Pagination, Autoplay]}
-            spaceBetween={20}
-            slidesPerView={3}
-            autoplay={{ delay: 3000 }}
-            loop={true}
-            breakpoints={{
-                0: {
-                slidesPerView: 1, 
-                },
-                640: {
-                slidesPerView: 2, 
-                },
-                768: {
-                slidesPerView: 2, 
-                },
-                1024: {
-                slidesPerView: 3, 
-                },
-                1440: {
-                slidesPerView: 3, 
-                },
-            }}
-            >
-            {testimonial.map((testimonial, index) => (
-                <SwiperSlide key={index}>
-                    <div className='h-full bg-[#FEFAF8] backdrop-blur-md shadow-md rounded-xl py-10 px-10 flex flex-col justify-between'>
-                        {/* Review */}
-                        <FadeUp>
-                            <p className='text-gray-600 italic text-center'>
-                            “{testimonial.review}”
-                            </p>
-                        </FadeUp>
-                        {/* User */}
-                        <div className='flex items-center justify-center gap-5 mt-6'>
-                    
-                        <div>
+        <div className="mt-8 sm:mt-10 md:mt-12">
+          <Swiper
+              className='w-full py-2'
+              modules={[Pagination, Autoplay]}
+              spaceBetween={20}
+              slidesPerView={3}
+              autoplay={{ delay: 3500, disableOnInteraction: false }}
+              loop={true}
+              breakpoints={{
+                  0: {
+                    slidesPerView: 1, 
+                  },
+                  640: {
+                    slidesPerView: 2, 
+                  },
+                  768: {
+                    slidesPerView: 2, 
+                  },
+                  1024: {
+                    slidesPerView: 3, 
+                  },
+                  1440: {
+                    slidesPerView: 3, 
+                  },
+              }}
+              >
+              {testimonial.map((item, index) => (
+                  <SwiperSlide key={index} className="h-auto">
+                      <div className='h-full bg-white border border-gray-200 shadow-sm rounded-2xl p-6 sm:p-8 flex flex-col justify-between hover:shadow-md transition-shadow duration-300'>
+                          {/* Review */}
+                          <FadeUp delay={0.05 + index * 0.05}>
+                              <p className='text-slate-600 italic text-center text-xs sm:text-sm md:text-base leading-relaxed'>
+                              “{item.review}”
+                              </p>
+                          </FadeUp>
+                          {/* User */}
+                          <div className='flex items-center justify-center gap-3.5 sm:gap-4 mt-6 pt-4 border-t border-gray-100'>
                             <img
                                 loading="lazy"
                                 decoding="async"
-                                src={testimonial.img}
-                                alt={testimonial.name}
-                                className='w-25 h-25 rounded-full object-cover' 
+                                src={item.img}
+                                alt={item.name}
+                                className='w-11 h-11 sm:w-12 sm:h-12 rounded-full object-cover border-2 border-[#74202D]/30 shrink-0' 
                             />  
-                        </div>
-                        <FadeUp>
-                            <div>
-                                <h3 className='font-semibold mb-2'>{testimonial.name}</h3>
-                                <div className="text-sm text-gray-500">
-                                    <Rating rating={5}/>
+                            <FadeUp delay={0.1}>
+                                <div className="text-left">
+                                    <h3 className='font-semibold text-xs sm:text-sm text-slate-800'>{item.name}</h3>
+                                    <div className="text-xs text-gray-500 mt-0.5">
+                                        <Rating rating={item.rating || 5}/>
+                                    </div>
                                 </div>
-                            </div>
-                        </FadeUp>
-                        </div>
-                    </div>
-                </SwiperSlide>
-            ))}
-        </Swiper>
+                            </FadeUp>
+                          </div>
+                      </div>
+                  </SwiperSlide>
+              ))}
+          </Swiper>
+        </div>
 
         <BottomTrustBar />
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Testimonial

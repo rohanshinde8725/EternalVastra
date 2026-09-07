@@ -66,7 +66,7 @@ const AdminLayout = () => {
 
       {/* Left Sidebar */}
       <aside
-        className={`fixed lg:static inset-y-0 left-0 z-50 w-72 flex flex-col justify-between transition-transform duration-300 ease-in-out shadow-2xl lg:shadow-none ${
+        className={`fixed lg:static inset-y-0 left-0 z-50 w-64 xl:w-72 shrink-0 flex flex-col justify-between transition-transform duration-300 ease-in-out shadow-2xl lg:shadow-none ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         }`}
         style={{
@@ -197,10 +197,125 @@ const AdminLayout = () => {
 
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
+        {/* Top Header Bar for Mobile & Desktop */}
+        <header className="bg-white border-b border-slate-200 px-4 py-3 sm:px-6 sm:py-3.5 flex items-center justify-between shadow-xs shrink-0 z-30">
+          {/* Left: Mobile Hamburger & Page Title */}
+          <div className="flex items-center gap-3">
+            <button
+              type="button"
+              onClick={() => setSidebarOpen(true)}
+              aria-label="Open Admin Menu"
+              className="lg:hidden p-2 rounded-xl text-slate-700 hover:bg-slate-100 border border-slate-200 focus:outline-hidden cursor-pointer transition"
+            >
+              <FiMenu className="text-2xl text-[#6B1527]" />
+            </button>
+
+            <div className="flex items-center gap-2">
+              <span className="text-base sm:text-lg font-serif font-bold text-slate-900 tracking-tight">
+                {pageTitle}
+              </span>
+              <span className="hidden sm:inline-block px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-rose-50 text-[#6B1527] border border-rose-100">
+                Admin Console
+              </span>
+            </div>
+          </div>
+
+          {/* Right: Quick Store Link & Admin Avatar */}
+          <div className="flex items-center gap-2 sm:gap-4">
+            <Link
+              to="/"
+              target="_blank"
+              rel="noreferrer"
+              className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-[#6B1527] hover:text-white text-slate-700 text-xs font-bold transition duration-200"
+            >
+              <span>Live Store</span>
+              <span className="text-xs">↗</span>
+            </Link>
+
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setSidebarOpen(true)}
+                className="lg:hidden flex items-center gap-1.5 p-1 rounded-full border border-slate-200 hover:border-[#6B1527] transition cursor-pointer"
+              >
+                <img
+                  src={`${API_BASE_URL}/images/testimonial/testimonial-1.png`}
+                  alt="Admin Avatar"
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&auto=format&fit=crop&q=80";
+                  }}
+                  className="w-8 h-8 rounded-full object-cover"
+                />
+              </button>
+            </div>
+          </div>
+        </header>
+
         {/* Scrollable Page Outlet Content */}
-        <main className="flex-1 overflow-y-auto p-4 md:p-6 lg:p-8 bg-[#F8F9FA] custom-admin-scroll text-sm">
+        <main className="flex-1 overflow-y-auto p-3.5 sm:p-5 lg:p-5 xl:p-8 bg-[#F8F9FA] custom-admin-scroll text-sm pb-20 lg:pb-8">
           <Outlet />
         </main>
+
+        {/* Mobile Bottom Quick Navigation Bar (Sticky at bottom on small screens) */}
+        <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-30 bg-white/95 backdrop-blur-md border-t border-slate-200 px-2 py-1.5 flex items-center justify-around shadow-lg">
+          <NavLink
+            to="/admin"
+            end
+            className={({ isActive }) =>
+              `flex flex-col items-center justify-center py-1 px-2 rounded-lg text-xs font-semibold transition ${
+                isActive ? "text-[#6B1527] font-bold scale-105" : "text-slate-500 hover:text-slate-800"
+              }`
+            }
+          >
+            <FiGrid className="text-lg mb-0.5" />
+            <span className="text-[10px]">Dashboard</span>
+          </NavLink>
+
+          <NavLink
+            to="/admin/orders"
+            className={({ isActive }) =>
+              `flex flex-col items-center justify-center py-1 px-2 rounded-lg text-xs font-semibold transition ${
+                isActive ? "text-[#6B1527] font-bold scale-105" : "text-slate-500 hover:text-slate-800"
+              }`
+            }
+          >
+            <FiShoppingBag className="text-lg mb-0.5" />
+            <span className="text-[10px]">Orders</span>
+          </NavLink>
+
+          <NavLink
+            to="/admin/products"
+            className={({ isActive }) =>
+              `flex flex-col items-center justify-center py-1 px-2 rounded-lg text-xs font-semibold transition ${
+                isActive ? "text-[#6B1527] font-bold scale-105" : "text-slate-500 hover:text-slate-800"
+              }`
+            }
+          >
+            <FiBox className="text-lg mb-0.5" />
+            <span className="text-[10px]">Products</span>
+          </NavLink>
+
+          <NavLink
+            to="/admin/categories"
+            className={({ isActive }) =>
+              `flex flex-col items-center justify-center py-1 px-2 rounded-lg text-xs font-semibold transition ${
+                isActive ? "text-[#6B1527] font-bold scale-105" : "text-slate-500 hover:text-slate-800"
+              }`
+            }
+          >
+            <FiTag className="text-lg mb-0.5" />
+            <span className="text-[10px]">Categories</span>
+          </NavLink>
+
+          <button
+            type="button"
+            onClick={() => setSidebarOpen(true)}
+            className="flex flex-col items-center justify-center py-1 px-2 rounded-lg text-xs font-semibold text-slate-500 hover:text-[#6B1527] transition cursor-pointer"
+          >
+            <FiMenu className="text-lg mb-0.5 text-[#6B1527]" />
+            <span className="text-[10px]">Menu</span>
+          </button>
+        </nav>
       </div>
 
       {/* Logout Confirmation Modal */}

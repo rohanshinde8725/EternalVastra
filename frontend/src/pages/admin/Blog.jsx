@@ -108,41 +108,41 @@ const Blog = () => {
   };
 
   return (
-    <div className="space-y-7 max-w-[1600px] mx-auto pb-12 text-slate-800">
+    <div className="space-y-6 sm:space-y-7 max-w-[1600px] mx-auto pb-12 text-slate-800">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
         <div>
-          <h3 className="text-2xl md:text-3xl font-bold text-slate-800 tracking-tight">Editorial & Style Stories</h3>
-          <p className="text-sm md:text-base text-slate-500 mt-1">
+          <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-800 tracking-tight">Editorial & Style Stories</h3>
+          <p className="text-xs sm:text-sm md:text-base text-slate-500 mt-1">
             Publish saree drape tutorials, bridal guides, and weaving heritage articles stored in MongoDB.
           </p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3 w-full sm:w-auto">
           <button
             onClick={fetchBlog}
-            className="p-3 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 transition cursor-pointer"
+            className="p-2.5 sm:p-3 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 transition cursor-pointer"
             title="Refresh Articles"
           >
-            <FiRotateCw className={`text-base ${loading ? "animate-spin" : ""}`} />
+            <FiRotateCw className={`text-sm sm:text-base ${loading ? "animate-spin" : ""}`} />
           </button>
           <button
             onClick={() => setIsModalOpen(true)}
-            className="flex items-center gap-2 px-5 py-3 rounded-xl bg-[#6B1527] hover:bg-white border-2 border-[#6B1527] text-white text-sm md:text-base font-semibold shadow-sm transition-all duration-300 hover:text-[#6B1527] cursor-pointer"
+            className="flex items-center gap-2 px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl bg-[#6B1527] hover:bg-white border-2 border-[#6B1527] text-white text-xs sm:text-sm md:text-base font-semibold shadow-sm transition-all duration-300 hover:text-[#6B1527] cursor-pointer"
           >
-            <FiPlus className="text-lg" />
+            <FiPlus className="text-base sm:text-lg" />
             <span>Write New Article</span>
           </button>
         </div>
       </div>
 
       {/* Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         {posts.map((post) => (
           <div
             key={post._id || post.id}
             className="bg-white rounded-2xl border border-slate-200/90 shadow-sm overflow-hidden flex flex-col justify-between hover:shadow-md transition"
           >
-            <div className="relative h-52 bg-slate-100 overflow-hidden">
+            <div className="relative h-44 sm:h-52 bg-slate-100 overflow-hidden">
               <img
                 src={post.cover}
                 alt={post.title}
@@ -152,30 +152,30 @@ const Blog = () => {
                 }}
                 className="w-full h-full object-cover"
               />
-              <span className="absolute top-3.5 left-3.5 px-3 py-1 rounded-full bg-black/65 backdrop-blur-xs text-white text-xs font-bold">
+              <span className="absolute top-3 left-3 px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full bg-black/65 backdrop-blur-xs text-white text-[10px] sm:text-xs font-bold">
                 {post.category || "Editorial"}
               </span>
             </div>
 
-            <div className="p-5 flex-1 flex flex-col justify-between space-y-3.5">
+            <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-3 sm:space-y-3.5">
               <div>
-                <div className="flex items-center justify-between text-xs text-slate-500 mb-1.5 font-medium">
+                <div className="flex items-center justify-between text-[11px] sm:text-xs text-slate-500 mb-1.5 font-medium">
                   <span>{post.date || "24 Aug, 2026"}</span>
                   <span>{post.readTime || "4 min read"}</span>
                 </div>
-                <h4 className="font-bold text-slate-900 text-base leading-snug">{post.title}</h4>
-                <p className="text-sm text-slate-600 mt-2 line-clamp-2 leading-relaxed">
+                <h4 className="font-bold text-slate-900 text-sm sm:text-base leading-snug line-clamp-2">{post.title}</h4>
+                <p className="text-xs sm:text-sm text-slate-600 mt-1.5 sm:mt-2 line-clamp-2 leading-relaxed">
                   {post.summary}
                 </p>
               </div>
 
-              <div className="pt-3.5 border-t border-slate-100 flex items-center justify-end">
+              <div className="pt-3 sm:pt-3.5 border-t border-slate-100 flex items-center justify-end">
                 <button
                   onClick={() => handleDelete(post)}
-                  className="p-2 rounded-xl text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition cursor-pointer"
+                  className="p-1.5 sm:p-2 rounded-xl text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition cursor-pointer"
                   title="Delete Article"
                 >
-                  <FiTrash2 className="text-base" />
+                  <FiTrash2 className="text-sm sm:text-base" />
                 </button>
               </div>
             </div>
@@ -185,45 +185,45 @@ const Blog = () => {
 
       {/* Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs">
-          <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-7 border border-slate-200 animate-in fade-in zoom-in-95 max-h-[90vh] overflow-y-auto custom-admin-scroll">
-            <div className="flex items-center justify-between border-b border-slate-200 pb-4 mb-5">
-              <h4 className="text-xl font-bold text-slate-900">New Article</h4>
-              <button onClick={() => setIsModalOpen(false)} className="p-2 text-slate-400 hover:text-slate-700 transition cursor-pointer">
-                <FiX className="text-xl" />
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/50 backdrop-blur-xs">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-4 sm:p-7 border border-slate-200 animate-in fade-in zoom-in-95 max-h-[90vh] overflow-y-auto custom-admin-scroll">
+            <div className="flex items-center justify-between border-b border-slate-200 pb-3 sm:pb-4 mb-4 sm:mb-5">
+              <h4 className="text-lg sm:text-xl font-bold text-slate-900">New Article</h4>
+              <button onClick={() => setIsModalOpen(false)} className="p-1.5 sm:p-2 text-slate-400 hover:text-slate-700 transition cursor-pointer">
+                <FiX className="text-lg sm:text-xl" />
               </button>
             </div>
 
-            <form onSubmit={handleAdd} className="space-y-4 text-sm">
+            <form onSubmit={handleAdd} className="space-y-3.5 sm:space-y-4 text-xs sm:text-sm">
               <div>
-                <label className="font-semibold text-slate-800 block mb-1.5">Title</label>
+                <label className="font-semibold text-slate-800 block mb-1">Title</label>
                 <input
                   type="text"
                   required
                   placeholder="e.g. 5 Drapes for Festive Season"
                   value={formData.title}
                   onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                  className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-800 focus:border-[#6B1527] focus:outline-none"
+                  className="w-full px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-800 focus:border-[#6B1527] focus:outline-none"
                 />
               </div>
 
               <div>
-                <label className="font-semibold text-slate-800 block mb-1.5">Category</label>
+                <label className="font-semibold text-slate-800 block mb-1">Category</label>
                 <input
                   type="text"
                   value={formData.category}
                   onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                  className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-800 focus:border-[#6B1527] focus:outline-none"
+                  className="w-full px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-800 focus:border-[#6B1527] focus:outline-none"
                 />
               </div>
 
               <div>
-                <label className="font-semibold text-slate-800 block mb-1.5">Summary</label>
+                <label className="font-semibold text-slate-800 block mb-1">Summary</label>
                 <textarea
                   rows="3"
                   value={formData.summary}
                   onChange={(e) => setFormData({ ...formData, summary: e.target.value })}
-                  className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-800 focus:border-[#6B1527] focus:outline-none"
+                  className="w-full px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-800 focus:border-[#6B1527] focus:outline-none"
                 />
               </div>
 
@@ -233,17 +233,17 @@ const Blog = () => {
                 onChange={(url) => setFormData({ ...formData, cover: url })}
               />
 
-              <div className="pt-3 flex items-center gap-3">
+              <div className="pt-3 sm:pt-4 flex items-center gap-2.5 sm:gap-3">
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="flex-1 py-3 rounded-xl border border-slate-200 text-slate-700 font-semibold hover:bg-slate-50 transition text-sm cursor-pointer"
+                  className="flex-1 py-2.5 sm:py-3 rounded-xl border border-slate-200 text-slate-700 font-semibold hover:bg-slate-50 transition text-xs sm:text-sm cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="flex-1 flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-[#6B1527] hover:bg-white border-2 border-[#6B1527] text-white text-sm font-semibold shadow-sm transition-all duration-300 hover:text-[#6B1527] cursor-pointer"
+                  className="flex-1 flex items-center justify-center gap-2 px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl bg-[#6B1527] hover:bg-white border-2 border-[#6B1527] text-white text-xs sm:text-sm font-semibold shadow-sm transition-all duration-300 hover:text-[#6B1527] cursor-pointer"
                 >
                   Publish Article
                 </button>

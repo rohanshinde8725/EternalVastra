@@ -213,63 +213,53 @@ const Shop = () => {
     return [safeCurrentPage - 1, safeCurrentPage, safeCurrentPage + 1];
   };
 
-  const gridClassNames = "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4";
-
   return (
     <div className="w-full bg-[#FEFAF8]">
 
       {/* Banner */}
-      <div className="h-70 w-full bg-center bg-[url('/images/banner/banner-1.png')] flex items-center px-5 md:px-16 lg:px-24">
-        <div className="flex items-baseline gap-3">
-          <h3 className="text-xs md:text-sm text-[#74202D] font-bold uppercase">Shop</h3>
-          <span>/</span>
-          <h1 className="text-lg sm:text-2xl font-semibold text-[#74202D]">Our Saree Collection</h1>
+      <div className="h-44 sm:h-56 md:h-64 w-full bg-center bg-cover bg-[url('/images/banner/banner-1.png')] flex items-center">
+        <div className="max-w-[1600px] w-full mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-baseline gap-2 sm:gap-3">
+            <h3 className="text-xs sm:text-sm text-[#74202D] font-bold uppercase tracking-wider">Shop</h3>
+            <span className="text-slate-400">/</span>
+            <h1 className="text-xl sm:text-2xl md:text-3xl font-semibold text-[#74202D]">Our Saree Collection</h1>
+          </div>
+          <p className="text-xs sm:text-sm text-slate-600 mt-1 max-w-xl">
+            Explore authentic handwoven silks, pure chanderi cottons, and timeless heritage weaves.
+          </p>
         </div>
       </div>
 
-      {/* Mobile Top Bar */}
-      {/* <div className="flex justify-between items-center p-4 lg:hidden">
-        <button onClick={() => setShowFilter(true)} className="border px-3 py-1 rounded">
-          Filters
-        </button>
-
-        <select onChange={(e) => setSort(e.target.value)} className="border px-2 py-1 text-sm">
-          <option value="default">Sort</option>
-          <option value="low">Low → High</option>
-          <option value="high">High → Low</option>
-        </select>
-      </div> */}
-
-      <div className="container mx-auto py-10">
+      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 md:py-12">
 
         {/* Mobile Filter */}
-        <div className="lg:hidden flex justify-between items-center mb-5 px-5">
-          <button  onClick={() => setShowFilter(true)}
-            className="flex items-center gap-2 border px-4 py-2 rounded-md" >
-            <MdMenuOpen />
-            Filters
+        <div className="lg:hidden flex justify-between items-center mb-4 sm:mb-6">
+          <button onClick={() => setShowFilter(true)}
+            className="flex items-center gap-2 border border-gray-300 bg-white px-3.5 sm:px-4 py-2 rounded-md text-xs sm:text-sm font-semibold shadow-xs cursor-pointer hover:border-[#74202D]" >
+            <MdMenuOpen className="text-base sm:text-lg" />
+            <span>Filters</span>
           </button>
 
-          <select onChange={(e) => handleSortChange(e.target.value)} className="border px-3 py-2 rounded-md text-sm">
-            <option value="default">Sort By</option>
+          <select onChange={(e) => handleSortChange(e.target.value)} className="border border-gray-300 bg-white px-3 py-2 rounded-md text-xs sm:text-sm font-semibold shadow-xs focus:outline-none focus:border-[#74202D]">
+            <option value="default">Sort By: Default</option>
             <option value="low">Price: Low → High</option>
             <option value="high">Price: High → Low</option>
           </select>
         </div>
 
         {/* Desktop Filter Bar */}
-        <div className="hidden lg:flex justify-between items-center bg-white border border-gray-300 rounded-xl shadow-sm px-6 py-5 mb-6">
-          <div className="flex items-center gap-3 flex-wrap">
-            <h3 className="text-[#74202D] font-semibold mr-2">
-              Filter By Category
+        <div className="hidden lg:flex justify-between items-center bg-white border border-gray-200/90 rounded-xl shadow-xs px-6 py-4 mb-8">
+          <div className="flex items-center gap-2.5 flex-wrap">
+            <h3 className="text-xs sm:text-sm text-[#74202D] font-bold uppercase tracking-wider mr-2">
+              Filter By Category:
             </h3>
 
             {categoryList.map((cat) => (
               <button key={cat} onClick={() => handleCategoryChange(cat)}
-                className={`px-5 py-2 rounded-md border text-sm transition-all duration-300 cursor-pointer
+                className={`px-4 py-2 rounded-md border text-xs sm:text-sm font-semibold transition-all duration-300 cursor-pointer
                   ${ selectedCategory === cat
-                      ? "bg-[#74202D] text-white border-[#74202D]"
-                      : "border-gray-300 hover:border-[#74202D] hover:text-[#74202D]"
+                      ? "bg-[#74202D] text-white border-[#74202D] shadow-xs"
+                      : "border-gray-200 bg-gray-50/50 text-slate-700 hover:border-[#74202D] hover:text-[#74202D]"
                   }`}>
                 {cat}
               </button>
@@ -309,36 +299,36 @@ const Shop = () => {
         </div>
 
         {showFilter && (
-          <div className="fixed inset-0 bg-black/40 lg:hidden" onClick={() => setShowFilter(false)}/>
+          <div className="fixed inset-0 bg-black/40 lg:hidden z-40" onClick={() => setShowFilter(false)}/>
         )}
 
         {/* Products */}
-        <div className="bg-white border border-gray-300 rounded-xl shadow-sm p-6">
+        <div className="bg-white border border-gray-300 rounded-xl shadow-sm p-3 sm:p-5 md:p-6">
 
-          <div className="flex flex-col gap-3 justify-between items-start mb-6 sm:flex-row sm:items-center">
+          <div className="flex flex-col gap-3 justify-between items-start mb-4 sm:mb-6 sm:flex-row sm:items-center">
             <div>
-              <p className="text-sm text-gray-600">
+              <p className="text-xs sm:text-sm text-gray-600">
                 Showing {filteredProducts.length === 0 ? 0 : indexOfFirstProduct + 1} -
                 {Math.min(indexOfLastProduct, filteredProducts.length)} of {filteredProducts.length} products
               </p>
               {searchQuery && (
-                <p className="text-sm text-[#74202D] mt-1">
+                <p className="text-xs sm:text-sm text-[#74202D] mt-1">
                   Search results for "{searchQuery}"
                 </p>
               )}
             </div>
 
             <div className="flex flex-wrap items-center gap-2">
-              <span className="text-sm text-gray-600">View</span>
+              <span className="text-xs sm:text-sm text-gray-600">View</span>
               {[
-                { id: "4", label: "4/4", icon: <MdGridView className="h-5 w-5" /> },
-                { id: "table", label: "List", icon: <MdViewList className="h-5 w-5" /> },
+                { id: "4", label: "4/4", icon: <MdGridView className="h-4 w-4 sm:h-5 sm:w-5" /> },
+                { id: "table", label: "List", icon: <MdViewList className="h-4 w-4 sm:h-5 sm:w-5" /> },
               ].map((option) => (
                 <button
                   key={option.id}
                   onClick={() => handleViewModeChange(option.id)}
                   aria-label={option.label}
-                  className={`flex h-10 w-10 items-center justify-center rounded-md border transition ${
+                  className={`flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-md border transition cursor-pointer ${
                     viewMode === option.id
                       ? "bg-[#74202D] text-white border-[#74202D]"
                       : "bg-white text-[#3b3737] border-gray-300 hover:border-[#74202D] hover:text-[#74202D]"
@@ -348,11 +338,11 @@ const Shop = () => {
                 </button>
               ))}
               <div className="flex items-center gap-2">
-                <span className="text-sm text-gray-600">Sort</span>
+                <span className="text-xs sm:text-sm text-gray-600">Sort</span>
                 <select
                   value={sort}
                   onChange={(e) => handleSortChange(e.target.value)}
-                  className="border border-gray-300 rounded-md px-3 py-2 text-sm text-[#3b3737]"
+                  className="border border-gray-300 rounded-md px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm text-[#3b3737]"
                 >
                   <option value="default">Default</option>
                   <option value="low">Price: Low → High</option>
@@ -380,66 +370,69 @@ const Shop = () => {
               <p className="text-xs text-gray-400 mt-1">Try selecting a different category or clearing search filters.</p>
             </div>
           ) : viewMode === "table" ? (
-            <div className="overflow-x-auto">
-              <table className="min-w-full border-collapse text-left">
-                <thead>
-                  <tr className="border-b border-gray-200 text-sm text-gray-500">
-                    <th className="py-3 pr-4">Product</th>
-                    <th className="py-3 pr-4">Price</th>
-                    <th className="py-3 pr-4">Rating</th>
-                    <th className="py-3 pr-4">Add</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {currentProducts.map((item) => (
-                    <tr key={item.id} className="border-b border-gray-200 hover:bg-gray-50 transition">
-                      <td className="py-4 pr-4 align-top">
-                        <div className="flex items-center gap-3">
-                          <img src={item.img} alt={item.title} className="w-20 h-20 object-cover rounded" />
-                          <div>
-                            <Link to={`/shop/${item.id}`} className="font-medium text-sm hover:text-[#74202D] transition">
-                              {item.title}
-                            </Link>
-                            <p className="text-xs text-gray-500 mt-1">{item.category.join(", ")}</p>
-                          </div>
+            /* List View Mode: 2/2 Grid for lg devices with original w-20 h-20 image size */
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+              {currentProducts.map((item, index) => (
+                <FadeUp key={item.id} delay={Math.min(index * 0.05, 0.4)} className="h-full">
+                  <div className="group flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3.5 sm:p-4 rounded-lg border border-gray-200 bg-white transition h-full shadow-xs">
+                    {/* Left: Thumbnail Image (w-20 h-20) + Info */}
+                    <div className="flex items-center gap-3.5 min-w-0 flex-1">
+                      <Link to={`/shop/${item.id}`} className="shrink-0 overflow-hidden rounded block">
+                        <img
+                          src={item.img}
+                          alt={item.title}
+                          onError={(e) => {
+                            e.currentTarget.onerror = null;
+                            e.currentTarget.src = "/images/silk/silk-1.jpg";
+                          }}
+                          className="w-20 h-20 object-cover rounded shrink-0 transition-transform duration-300 ease-out group-hover:scale-110"
+                        />
+                      </Link>
+                      <div className="min-w-0 flex-1">
+                        <Link to={`/shop/${item.id}`} className="font-medium text-sm hover:text-[#74202D] transition line-clamp-1 block">
+                          {item.title}
+                        </Link>
+                        <p className="text-xs text-gray-500 mt-0.5 truncate">{Array.isArray(item.category) ? item.category.join(", ") : item.category}</p>
+
+                        <div className="flex items-baseline gap-2 mt-1">
+                          <span className="text-[#74202D] font-semibold text-sm">₹{item.discountPrice}</span>
+                          <span className="text-xs text-gray-400 line-through">₹{item.actualPrice}</span>
                         </div>
-                      </td>
-                      <td className="py-4 pr-4 align-top">
-                        <span className="text-[#74202D] font-semibold">₹{item.discountPrice}</span>
-                        <div className="text-xs text-gray-400 line-through">₹{item.actualPrice}</div>
-                      </td>
-                      <td className="py-4 pr-4 align-top">
-                        <div className="flex items-center gap-2">
+
+                        <div className="flex items-center gap-1.5 mt-1">
                           <Rating rating={item.rating} />
                           <span className="text-xs text-gray-500">({item.ratings})</span>
                         </div>
-                      </td>
-                      <td className="py-4 pr-4 align-top">
-                        <button
-                          onClick={() => addToCart(item)}
-                          disabled={cartIds.includes(item.id)}
-                          className={`rounded-md border px-3 py-2 text-sm font-semibold transition ${
-                            cartIds.includes(item.id)
-                              ? "border-gray-200 bg-gray-200 text-gray-500 cursor-not-allowed"
-                              : "border-[#74202D] bg-white text-[#74202D] hover:bg-[#74202D] hover:text-white"
-                          }`}
-                        >
-                          {cartIds.includes(item.id) ? "Already in Cart" : "Add To Cart"}
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+                      </div>
+                    </div>
+
+                    {/* Right: Add To Cart Button */}
+                    <div className="shrink-0 sm:self-center">
+                      <button
+                        onClick={() => addToCart(item)}
+                        disabled={cartIds.includes(item.id)}
+                        className={`w-full sm:w-auto rounded-md border px-3.5 py-2 text-xs sm:text-sm font-semibold transition cursor-pointer whitespace-nowrap ${
+                          cartIds.includes(item.id)
+                            ? "border-gray-200 bg-gray-200 text-gray-500 cursor-not-allowed"
+                            : "border-[#74202D] bg-white text-[#74202D] hover:bg-[#74202D] hover:text-white"
+                        }`}
+                      >
+                        {cartIds.includes(item.id) ? "Already in Cart" : "Add To Cart"}
+                      </button>
+                    </div>
+                  </div>
+                </FadeUp>
+              ))}
             </div>
           ) : (
-            <div className={`grid ${gridClassNames} gap-5`}>
+            /* 4/4 Grid View */
+            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-3 sm:gap-4 md:gap-5">
               {currentProducts.map((item, index) => (
                 <FadeUp key={item.id} delay={Math.min(index * 0.05, 0.4)} className="h-full">
                   <div
-                    className="group rounded-lg overflow-hidden border border-gray-200 bg-white transition h-full flex flex-col justify-between"
+                    className="group rounded-lg overflow-hidden border border-gray-200 bg-white transition h-full flex flex-col justify-between shadow-xs hover:shadow-md"
                   >
-                    <div className="relative overflow-hidden">
+                    <div className="relative overflow-hidden bg-[#f8efe9]">
                       <Link to={`/shop/${item.id}`} className="block">
                         <img
                           loading="lazy"
@@ -449,50 +442,55 @@ const Shop = () => {
                             e.currentTarget.onerror = null;
                             e.currentTarget.src = "/images/silk/silk-1.jpg";
                           }}
-                          className="w-full h-90 2xl:object-center object-cover object-top transition duration-300 group-hover:scale-[1.05]"
+                          className="w-full h-48 sm:h-56 md:h-56 lg:h-64 xl:h-72 object-cover object-top transition duration-300 group-hover:scale-[1.05]"
                         />
                       </Link>
-                      <div className="pointer-events-none absolute inset-0 flex items-start justify-between bg-black/10 p-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                        <span className="rounded-full bg-[#e9829a] px-2.5 py-1 text-[10px] font-bold uppercase text-white shadow-sm">
+                      {/* Hover Overlay: Tag + Action Icons (Wishlist & View Eye) */}
+                      <div className="pointer-events-none absolute inset-0 flex items-start justify-between bg-transparent md:bg-black/15 p-2.5 sm:p-3 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-300 ease-out">
+                        <span className="rounded-full bg-[#e9829a] px-2 sm:px-2.5 py-0.5 sm:py-1 text-[9px] sm:text-[10px] font-bold uppercase text-white shadow-xs transform translate-y-0 opacity-100 md:-translate-y-2 md:opacity-0 transition-all duration-300 ease-out md:group-hover:translate-y-0 md:group-hover:opacity-100">
                           {item.tag || "Handcrafted"}
                         </span>
-                        <div className="pointer-events-auto flex flex-col gap-2">
+                        <div className="pointer-events-auto flex flex-col gap-1.5 sm:gap-2">
                           <button
                             type="button"
                             onClick={() => toggleWishlist(item)}
                             aria-label={wishlistIds.includes(item.id) ? "Remove from wishlist" : "Add to wishlist"}
-                            className={`flex h-9 w-9 items-center justify-center cursor-pointer rounded-full bg-white shadow-sm transition hover:bg-[#75212E] hover:text-white ${wishlistIds.includes(item.id) ? "text-[#75212E]" : "text-[#75212E]"}`}
+                            className={`flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center cursor-pointer rounded-full shadow-md backdrop-blur-xs transform translate-x-0 opacity-100 md:translate-x-4 md:opacity-0 transition-all duration-300 ease-out md:group-hover:translate-x-0 md:group-hover:opacity-100 hover:scale-110 active:scale-95 delay-75 ${
+                              wishlistIds.includes(item.id)
+                                ? "bg-[#75212E] text-white"
+                                : "bg-white/95 text-[#75212E] hover:bg-[#75212E] hover:text-white"
+                            }`}
                           >
-                            <CiHeart className="text-xl" />
+                            <CiHeart className={`text-lg sm:text-xl transition-transform duration-200 ${wishlistIds.includes(item.id) ? "fill-current scale-110" : ""}`} />
                           </button>
                           <Link
                             to={`/shop/${item.id}`}
                             aria-label={`View ${item.title}`}
-                            className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-[#75212E] shadow-sm transition hover:bg-[#75212E] hover:text-white"
+                            className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-white/95 text-[#75212E] shadow-md backdrop-blur-xs transform translate-x-0 opacity-100 md:translate-x-4 md:opacity-0 transition-all duration-300 ease-out md:group-hover:translate-x-0 md:group-hover:opacity-100 hover:bg-[#75212E] hover:text-white hover:scale-110 active:scale-95 delay-150"
                           >
-                            <FiEye className="text-lg" />
+                            <FiEye className="text-base sm:text-lg" />
                           </Link>
                         </div>
                       </div>
                     </div>
-                    <div className="p-4 flex-1 flex flex-col justify-between">
+                    <div className="p-3 sm:p-4 flex-1 flex flex-col justify-between">
                       <div>
-                        <Link to={`/shop/${item.id}`} className="block font-medium text-sm line-clamp-2 hover:text-[#74202D] transition mb-2">
+                        <Link to={`/shop/${item.id}`} className="block font-medium text-xs sm:text-sm line-clamp-2 hover:text-[#74202D] transition mb-1 sm:mb-2">
                           {item.title}
                         </Link>
-                        <div className="flex gap-2 mt-2">
-                          <span className="text-[#74202D] font-bold">₹{item.discountPrice}</span>
-                          <span className="line-through text-gray-400 text-sm">₹{item.actualPrice}</span>
+                        <div className="flex flex-wrap items-baseline gap-1.5 sm:gap-2 mt-1 sm:mt-2">
+                          <span className="text-[#74202D] font-bold text-xs sm:text-sm md:text-base">₹{item.discountPrice?.toLocaleString("en-IN")}</span>
+                          <span className="line-through text-gray-400 text-[10px] sm:text-xs md:text-sm">₹{item.actualPrice?.toLocaleString("en-IN")}</span>
                         </div>
-                        <div className="flex items-center gap-2 mt-2">
+                        <div className="flex items-center gap-1.5 sm:gap-2 mt-1 sm:mt-2">
                           <Rating rating={item.rating} />
-                          <span className="text-xs text-gray-500">({item.ratings})</span>
+                          <span className="text-[10px] sm:text-xs text-gray-500">({item.ratings || 24})</span>
                         </div>
                       </div>
                       <button
                         onClick={() => addToCart(item)}
                         disabled={cartIds.includes(item.id)}
-                        className={`w-full mt-4 rounded-md py-2 text-sm transition cursor-pointer ${
+                        className={`w-full mt-2.5 sm:mt-4 rounded-md py-1.5 sm:py-2 text-xs sm:text-sm font-medium transition cursor-pointer ${
                           cartIds.includes(item.id)
                             ? "border border-gray-200 bg-gray-200 text-gray-500 cursor-not-allowed"
                             : "border border-[#74202D] text-[#74202D] hover:bg-[#74202D] hover:text-white"
@@ -512,10 +510,10 @@ const Shop = () => {
             <div className="flex justify-center items-center gap-2 mt-10 flex-wrap">
               <button onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
                 disabled={currentPage === 1}
-                className={`px-4 py-2 border rounded ${
+                className={`px-3.5 py-2 border rounded-md text-xs sm:text-sm font-semibold transition ${
                   currentPage === 1
-                    ? "opacity-50 cursor-not-allowed"
-                    : "hover:bg-[#74202D] hover:text-white cursor-pointer"
+                    ? "opacity-40 cursor-not-allowed border-gray-200 text-gray-400"
+                    : "border-gray-300 text-slate-700 hover:bg-[#74202D] hover:text-white hover:border-[#74202D] cursor-pointer"
                 }`}
               >
                 Prev
@@ -523,10 +521,10 @@ const Shop = () => {
 
               {pageButtons().map((page) => (
                 <button key={page} onClick={() => setCurrentPage(page)}
-                  className={`px-4 py-2 border rounded transition ${
+                  className={`min-w-9 px-3.5 py-2 border rounded-md text-xs sm:text-sm font-semibold transition ${
                     safeCurrentPage === page
-                      ? "bg-[#74202D] text-white border-[#74202D] scale-105"
-                      : "bg-white text-[#3b3737] border-gray-300 opacity-70 hover:opacity-100 hover:bg-[#74202D] hover:text-white cursor-pointer"
+                      ? "bg-[#74202D] text-white border-[#74202D] shadow-xs"
+                      : "bg-white text-slate-700 border-gray-300 hover:bg-[#74202D] hover:text-white hover:border-[#74202D] cursor-pointer"
                   }`}
                 >
                   {page}
@@ -535,10 +533,10 @@ const Shop = () => {
 
               <button onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
                 disabled={currentPage === totalPages}
-                className={`px-4 py-2 border rounded ${
+                className={`px-3.5 py-2 border rounded-md text-xs sm:text-sm font-semibold transition ${
                   currentPage === totalPages
-                    ? "opacity-50 cursor-not-allowed"
-                    : "hover:bg-[#74202D] hover:text-white cursor-pointer"
+                    ? "opacity-40 cursor-not-allowed border-gray-200 text-gray-400"
+                    : "border-gray-300 text-slate-700 hover:bg-[#74202D] hover:text-white hover:border-[#74202D] cursor-pointer"
                 }`}
               >
                 Next

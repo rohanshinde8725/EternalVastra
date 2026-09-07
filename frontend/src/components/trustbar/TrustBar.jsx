@@ -7,49 +7,49 @@ import FadeUp from "../animations/FadeUp";
 
 const TrustBar = () => {
   return (
-    <div className='w-full py-10 bg-[#FEFAF8]'>
+    <div className='w-full py-8 sm:py-10 md:py-12 bg-[#FEFAF8]'>
         <FadeUp delay={0.2}>
-          <div className="max-w-[1600px] mx-auto px-5">
-            <div className='w-full py-10 gap-5 mx-auto shadow-md bg-white rounded-lg 
-                grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 px-5'>
+          <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
+            <div className='w-full py-6 sm:py-8 px-4 sm:px-6 gap-6 sm:gap-4 lg:gap-4 mx-auto shadow-xs border border-gray-200 bg-white rounded-xl 
+                grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5'>
                 {/* Item */}
-                <div className='flex flex-col sm:flex-row gap-4 items-center text-center sm:text-left'>
-                    <FaMedal className='text-4xl text-[#74202D]' />
+                <div className='flex flex-col sm:flex-row gap-3 sm:gap-3.5 items-center text-center sm:text-left'>
+                    <FaMedal className='text-2xl sm:text-3xl lg:text-3xl text-[#74202D] shrink-0' />
                     <div>
-                        <h1 className='uppercase font-semibold text-base'>Premium Quality</h1>
-                        <p className='text-sm mt-2'>Finest Fabrics, Crafted to Perfection</p>
+                        <h2 className='uppercase font-semibold text-xs sm:text-sm lg:text-sm xl:text-base leading-tight text-slate-800'>Premium Quality</h2>
+                        <p className='text-xs lg:text-xs xl:text-sm text-slate-500 mt-0.5'>Finest Fabrics, Crafted to Perfection</p>
                     </div>
                 </div>
 
-                <div className='flex flex-col sm:flex-row gap-4 items-center text-center sm:text-left'>
-                    <LiaShippingFastSolid className='text-4xl text-[#74202D]' />
+                <div className='flex flex-col sm:flex-row gap-3 sm:gap-3.5 items-center text-center sm:text-left'>
+                    <LiaShippingFastSolid className='text-2xl sm:text-3xl lg:text-3xl text-[#74202D] shrink-0' />
                     <div>
-                        <h1 className='uppercase font-semibold text-base'>Free Shipping</h1>
-                        <p className='text-sm mt-2'>On Orders Above ₹1499</p>
+                        <h2 className='uppercase font-semibold text-xs sm:text-sm lg:text-sm xl:text-base leading-tight text-slate-800'>Free Shipping</h2>
+                        <p className='text-xs lg:text-xs xl:text-sm text-slate-500 mt-0.5'>On Orders Above ₹1499</p>
                     </div>
                 </div>
 
-                <div className='flex flex-col sm:flex-row gap-4 items-center text-center sm:text-left'>
-                    <FiRefreshCw className='text-4xl text-[#74202D]' />
+                <div className='flex flex-col sm:flex-row gap-3 sm:gap-3.5 items-center text-center sm:text-left'>
+                    <FiRefreshCw className='text-2xl sm:text-3xl lg:text-3xl text-[#74202D] shrink-0' />
                     <div>
-                        <h1 className='uppercase font-semibold text-base'>Easy Returns</h1>
-                        <p className='text-sm mt-2'>Hassle-free within 7 days</p>
+                        <h2 className='uppercase font-semibold text-xs sm:text-sm lg:text-sm xl:text-base leading-tight text-slate-800'>Easy Returns</h2>
+                        <p className='text-xs lg:text-xs xl:text-sm text-slate-500 mt-0.5'>Hassle-free within 7 days</p>
                     </div>
                 </div>
 
-                <div className='flex flex-col sm:flex-row gap-4 items-center text-center sm:text-left'>
-                    <GoShieldCheck className='text-4xl text-[#74202D]' />
+                <div className='flex flex-col sm:flex-row gap-3 sm:gap-3.5 items-center text-center sm:text-left'>
+                    <GoShieldCheck className='text-2xl sm:text-3xl lg:text-3xl text-[#74202D] shrink-0' />
                     <div>
-                        <h1 className='uppercase font-semibold text-base'>Secure Payments</h1>
-                        <p className='text-sm mt-2'>100% Safe & Trusted</p>
+                        <h2 className='uppercase font-semibold text-xs sm:text-sm lg:text-sm xl:text-base leading-tight text-slate-800'>Secure Payments</h2>
+                        <p className='text-xs lg:text-xs xl:text-sm text-slate-500 mt-0.5'>100% Safe & Trusted</p>
                     </div>
                 </div>
 
-                <div className='flex flex-col sm:flex-row gap-4 items-center text-center sm:text-left'>
-                    <CiHeadphones className='text-4xl text-[#74202D]' />
+                <div className='flex flex-col sm:flex-row gap-3 sm:gap-3.5 items-center text-center sm:text-left'>
+                    <CiHeadphones className='text-2xl sm:text-3xl lg:text-3xl text-[#74202D] shrink-0' />
                     <div>
-                        <h1 className='uppercase font-semibold text-base'>Customer Support</h1>
-                        <p className='text-sm mt-2'>Available Anytime</p>
+                        <h2 className='uppercase font-semibold text-xs sm:text-sm lg:text-sm xl:text-base leading-tight text-slate-800'>Customer Support</h2>
+                        <p className='text-xs lg:text-xs xl:text-sm text-slate-500 mt-0.5'>Available Anytime</p>
                     </div>
                 </div>
             </div>

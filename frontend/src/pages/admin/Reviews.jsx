@@ -69,32 +69,32 @@ const Reviews = () => {
   };
 
   return (
-    <div className="space-y-7 max-w-[1600px] mx-auto pb-12 text-slate-800">
+    <div className="space-y-6 sm:space-y-7 max-w-[1600px] mx-auto pb-12 text-slate-800">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
         <div>
-          <h3 className="text-2xl md:text-3xl font-bold text-slate-800 tracking-tight">Customer Ratings & Reviews</h3>
-          <p className="text-sm md:text-base text-slate-500 mt-1">
+          <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-800 tracking-tight">Customer Ratings & Reviews</h3>
+          <p className="text-xs sm:text-sm md:text-base text-slate-500 mt-1">
             Moderate verified buyer feedback, ratings, and customer stories in MongoDB.
           </p>
         </div>
         <button
           onClick={fetchReviews}
-          className="p-3 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 transition cursor-pointer"
+          className="p-2.5 sm:p-3 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 transition cursor-pointer self-start sm:self-auto shrink-0"
           title="Refresh Reviews"
         >
-          <FiRotateCw className={`text-base ${loading ? "animate-spin" : ""}`} />
+          <FiRotateCw className={`text-sm sm:text-base ${loading ? "animate-spin" : ""}`} />
         </button>
       </div>
 
       {/* Review List */}
-      <div className="space-y-5">
+      <div className="space-y-4 sm:space-y-5">
         {reviews.map((rev) => (
           <div
             key={rev._id || rev.id}
-            className="bg-white rounded-2xl p-6 border border-slate-200/90 shadow-sm hover:shadow-md transition flex flex-col md:flex-row items-start justify-between gap-5"
+            className="bg-white rounded-2xl p-4 sm:p-6 border border-slate-200/90 shadow-sm hover:shadow-md transition flex flex-col md:flex-row items-start justify-between gap-4 sm:gap-5"
           >
-            <div className="flex items-start gap-4">
+            <div className="flex items-start gap-3 sm:gap-4 min-w-0">
               <img
                 src={rev.avatar}
                 alt={rev.reviewer}
@@ -102,56 +102,56 @@ const Reviews = () => {
                   e.target.onerror = null;
                   e.target.src = "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&auto=format&fit=crop&q=80";
                 }}
-                className="w-13 h-13 rounded-full object-cover border border-slate-200 flex-shrink-0"
+                className="w-11 h-11 sm:w-13 sm:h-13 rounded-full object-cover border border-slate-200 shrink-0"
               />
-              <div className="space-y-1.5">
-                <div className="flex items-center gap-2.5">
-                  <h4 className="font-bold text-slate-900 text-base">{rev.reviewer}</h4>
+              <div className="space-y-1 sm:space-y-1.5 min-w-0">
+                <div className="flex flex-wrap items-center gap-2 sm:gap-2.5">
+                  <h4 className="font-bold text-slate-900 text-sm sm:text-base">{rev.reviewer}</h4>
                   {rev.verified && (
-                    <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-100">
+                    <span className="text-[10px] sm:text-xs font-bold px-2 sm:px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-100">
                       Verified Buyer
                     </span>
                   )}
                   <span
-                    className={`text-xs font-bold px-2.5 py-0.5 rounded-full ${
+                    className={`text-[10px] sm:text-xs font-bold px-2 sm:px-2.5 py-0.5 rounded-full ${
                       rev.status === "Approved" ? "bg-emerald-100 text-emerald-800" : "bg-slate-100 text-slate-700"
                     }`}
                   >
                     {rev.status || "Approved"}
                   </span>
                 </div>
-                <div className="text-sm font-bold text-[#8B1C2C]">{rev.product}</div>
+                <div className="text-xs sm:text-sm font-bold text-[#8B1C2C] truncate">{rev.product}</div>
 
-                <div className="flex items-center gap-1.5 text-amber-500 my-1">
+                <div className="flex items-center gap-1 sm:gap-1.5 text-amber-500 my-0.5 sm:my-1">
                   {[...Array(rev.rating || 5)].map((_, i) => (
-                    <FiStar key={i} className="fill-amber-400 text-sm" />
+                    <FiStar key={i} className="fill-amber-400 text-xs sm:text-sm" />
                   ))}
-                  <span className="text-sm font-bold text-slate-800 ml-1">
+                  <span className="text-xs sm:text-sm font-bold text-slate-800 ml-1">
                     {Number(rev.rating || 5).toFixed(1)}
                   </span>
                 </div>
 
-                <p className="text-sm text-slate-700 leading-relaxed max-w-4xl pt-1">
+                <p className="text-xs sm:text-sm text-slate-700 leading-relaxed max-w-4xl pt-0.5 sm:pt-1">
                   "{rev.comment}"
                 </p>
               </div>
             </div>
 
-            <div className="flex md:flex-col items-end justify-between gap-3 w-full md:w-auto border-t md:border-t-0 pt-3 md:pt-0 border-slate-100">
-              <span className="text-xs text-slate-400 font-medium">{rev.date}</span>
-              <div className="flex items-center gap-2">
+            <div className="flex md:flex-col items-center md:items-end justify-between gap-2.5 sm:gap-3 w-full md:w-auto border-t md:border-t-0 pt-3 md:pt-0 border-slate-100 shrink-0">
+              <span className="text-[11px] sm:text-xs text-slate-400 font-medium">{rev.date}</span>
+              <div className="flex items-center gap-1.5 sm:gap-2">
                 <button
                   onClick={() => handleToggleStatus(rev)}
-                  className="px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-sm font-semibold transition cursor-pointer"
+                  className="px-3 sm:px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs sm:text-sm font-semibold transition cursor-pointer"
                 >
                   {rev.status === "Approved" ? "Hide" : "Approve"}
                 </button>
                 <button
                   onClick={() => handleDelete(rev)}
-                  className="p-2 rounded-xl text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition cursor-pointer"
+                  className="p-1.5 sm:p-2 rounded-xl text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition cursor-pointer"
                   title="Delete Review"
                 >
-                  <FiTrash2 className="text-base" />
+                  <FiTrash2 className="text-sm sm:text-base" />
                 </button>
               </div>
             </div>

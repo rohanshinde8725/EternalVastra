@@ -8,6 +8,7 @@ const Banner = require("../models/Banner");
 const Review = require("../models/Review");
 const StoreSettings = require("../models/StoreSettings");
 const RecycleBin = require("../models/RecycleBin");
+const ContactMessage = require("../models/ContactMessage");
 
 const resources = {
   products: Product,
@@ -19,6 +20,8 @@ const resources = {
   reviews: Review,
   recyclebin: RecycleBin,
   settings: StoreSettings,
+  messages: ContactMessage,
+  "contact-messages": ContactMessage,
 };
 
 const list = (Model) => async (_req, res, next) => {

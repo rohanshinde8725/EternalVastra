@@ -11,7 +11,7 @@ const Cart = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [cart, setCart] = useState([]);
-  const [viewMode, setViewMode] = useState("4");
+  const [viewMode, setViewMode] = useState("table");
 
   useEffect(() => {
     if (!isAuthenticated()) {
@@ -24,6 +24,8 @@ const Cart = () => {
     const savedViewMode = localStorage.getItem("cartViewMode");
     if (savedViewMode === "4" || savedViewMode === "table") {
       setViewMode(savedViewMode);
+    } else {
+      setViewMode("table");
     }
   }, []);
 
@@ -98,18 +100,18 @@ const Cart = () => {
         </div>
       </div>
 
-      <div className="container p-5 md:p-10 flex flex-col lg:flex-row gap-10 max-w-7xl mx-auto">
+      <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 md:py-12 flex flex-col lg:flex-row items-start gap-8 lg:gap-10">
         
         {/* LEFT SIDE */}
         <div className="w-full lg:w-[70%] space-y-5">
           <FadeUp delay={0.1}>
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-              <h2 className="text-xl font-semibold">Cart Items</h2>
+              <h2 className="text-xl sm:text-2xl font-semibold text-slate-800">Cart Items</h2>
               {/* View Switcher: Hidden on mobile devices */}
               <div className="hidden sm:flex flex-wrap items-center gap-2">
                 {[
-                  { id: "4", label: "4/4", icon: <MdGridView className="h-5 w-5" /> },
                   { id: "table", label: "List", icon: <MdViewList className="h-5 w-5" /> },
+                  { id: "4", label: "4/4", icon: <MdGridView className="h-5 w-5" /> },
                 ].map((option) => (
                   <button
                     key={option.id}
@@ -130,8 +132,18 @@ const Cart = () => {
 
           {cart.length === 0 ? (
             <FadeUp delay={0.15}>
-              <div className="rounded-2xl border border-dashed border-gray-300 bg-white p-10 text-center text-gray-500">
-                Your cart is empty. Explore our sarees collection and find your favorite drapes!
+              <div className="rounded-2xl border border-dashed border-[#d1b5ae] bg-[#fff6f2] p-10 text-center space-y-4">
+                <p className="text-sm md:text-base font-medium text-slate-700">
+                  Your cart is empty. Explore our sarees collection and find your favorite drapes!
+                </p>
+                <div>
+                  <Link
+                    to="/shop"
+                    className="inline-flex items-center gap-2 rounded-md bg-[#74202D] px-6 py-2.5 text-xs sm:text-sm font-semibold uppercase text-white hover:bg-transparent border-2 border-[#74202D] hover:text-[#74202D] transition-all duration-300 shadow-xs cursor-pointer"
+                  >
+                    Explore Shop
+                  </Link>
+                </div>
               </div>
             </FadeUp>
           ) : (
@@ -273,7 +285,7 @@ const Cart = () => {
         </div>
 
         {/* RIGHT SIDE (SUMMARY) */}
-        <div className="w-full lg:w-[30%]">
+        <div className="w-full lg:w-[30%] lg:sticky lg:top-24 scroll-mt-24">
           <FadeUp delay={0.2}>
             <div className="bg-white border border-gray-200 shadow-xl p-5 rounded-lg h-fit">
               <h2 className="text-xl font-semibold mb-5">Order Summary</h2>

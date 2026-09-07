@@ -38,22 +38,22 @@ const Category = () => {
   };
 
   return (
-    <div className='py-10 bg-[#FEFAF8] w-full'>
-      <div className='max-w-[1600px] mx-auto px-5'>
+    <div className='py-8 sm:py-12 md:py-14 bg-[#FEFAF8] w-full'>
+      <div className='max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8'>
 
         {/* Heading */}
         <FadeUp delay={0.2}>
-          <div className='flex items-center justify-center gap-2'>
-            <GiThreeLeaves className='text-lg sm:text-xl md:text-2xl' />
-            <h1 className='uppercase font-semibold text-lg sm:text-xl md:text-2xl lg:text-2xl'>
+          <div className='flex items-center justify-center gap-2 sm:gap-3 text-center'>
+            <GiThreeLeaves className='text-[#74202D] text-lg sm:text-xl md:text-2xl' />
+            <h2 className='uppercase font-semibold text-xl sm:text-2xl md:text-3xl text-slate-800 tracking-tight'>
               Shop By Category
-            </h1>
-            <GiThreeLeaves className='text-lg sm:text-xl md:text-2xl' />
+            </h2>
+            <GiThreeLeaves className='text-[#74202D] text-lg sm:text-xl md:text-2xl' />
           </div>
         </FadeUp>
 
         {/* Grid */}
-        <div className='mt-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-5 sm:gap-6 md:gap-8 lg:gap-10'>
+        <div className='mt-8 sm:mt-10 md:mt-12 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-5 sm:gap-6 md:gap-8 lg:gap-10'>
         
         {categories.map((cat, index) => (
           <FadeUp key={cat.title || index} delay={0.08 + (index % 5) * 0.07}>
@@ -68,16 +68,16 @@ const Category = () => {
               {/* Image */}
               <img loading="lazy" decoding="async"
                 className='h-32 w-32 sm:h-36 sm:w-36 md:h-40 md:w-40 lg:h-44 lg:w-44 2xl:h-48 2xl:w-48
-                object-cover rounded-full border-4 border-white group-hover:border-[#74202D] group-hover:scale-105 
+                object-cover rounded-full border-4 border-white shadow-md group-hover:border-[#74202D] group-hover:scale-105 
                 transition-all duration-300 mx-auto'
                 src={cat.img}
                 alt={cat.title}
               />
 
               {/* Title */}
-              <h1 className='uppercase font-semibold mt-4 text-xs sm:text-sm md:text-base'>
+              <h3 className='uppercase font-semibold mt-3 sm:mt-4 text-xs sm:text-sm md:text-base text-slate-800 group-hover:text-[#74202D] transition'>
                 {cat.title}
-              </h1>
+              </h3>
 
             </div>
           </FadeUp>
@@ -85,8 +85,8 @@ const Category = () => {
       </div>
       </div>
     </div>
-    )
-  }
+  );
+};
 
 export default Category
 

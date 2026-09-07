@@ -119,7 +119,7 @@ const BlogDetail = () => {
       {/* 1. TOP BREADCRUMB & HEADER */}
       {/* ========================================================================= */}
       <div className="bg-gradient-to-b from-[#F9EFE8] to-[#FEFAF8] border-b border-rose-100/60 pt-6 pb-12">
-        <div className="container max-w-4xl mx-auto px-4 sm:px-6">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
           
           {/* Back link + Breadcrumb */}
           <FadeUp delay={0.05}>
@@ -202,7 +202,7 @@ const BlogDetail = () => {
       {/* 2. HERO COVER IMAGE */}
       {/* ========================================================================= */}
       <FadeUp delay={0.15}>
-        <div className="container max-w-4xl mx-auto px-4 sm:px-6 -mt-4 mb-12">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 -mt-4 mb-12">
           <div className="rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-slate-900">
             <img
               src={
@@ -226,7 +226,7 @@ const BlogDetail = () => {
       {/* ========================================================================= */}
       {/* 3. MAIN ARTICLE CONTENT */}
       {/* ========================================================================= */}
-      <div className="container max-w-3xl mx-auto px-4 sm:px-6 space-y-10 text-slate-700 leading-relaxed">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 space-y-10 text-slate-700 leading-relaxed">
         
         {/* Quote Block if available */}
         {post.quote && (
@@ -378,7 +378,7 @@ const BlogDetail = () => {
       {/* ========================================================================= */}
       {/* 4. SHOP THE STORY / RELATED SAREES BANNER */}
       {/* ========================================================================= */}
-      <div className="container max-w-4xl mx-auto px-4 sm:px-6 mt-16">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 mt-16">
         <FadeUp delay={0.15}>
           <div className="bg-gradient-to-r from-[#6B1527] to-[#450C16] rounded-3xl p-8 sm:p-10 text-white shadow-xl flex flex-col sm:flex-row items-center justify-between gap-6">
             <div className="space-y-2 text-center sm:text-left">
@@ -408,7 +408,7 @@ const BlogDetail = () => {
       {/* 5. RELATED STORIES CAROUSEL / GRID */}
       {/* ========================================================================= */}
       {relatedStories.length > 0 && (
-        <div className="container max-w-5xl mx-auto px-4 sm:px-6 mt-20">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 mt-20">
           <FadeUp delay={0.1}>
             <div className="flex items-center justify-between pb-4 border-b border-slate-200 mb-8">
               <h3 className="text-2xl font-serif font-bold text-slate-900">More Inspiring Stories</h3>
