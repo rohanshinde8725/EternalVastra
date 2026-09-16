@@ -9,6 +9,7 @@ import {
 import { API_BASE_URL } from "../api/products";
 import { useToast } from "../context/ToastContext";
 import FadeUp from "../components/animations/FadeUp";
+import { loginUserSession } from "../utils/auth";
 
 const SignIn = () => {
   const { showToast } = useToast();
@@ -45,24 +46,26 @@ const SignIn = () => {
         throw new Error(data.message || "Invalid email or password");
       }
 
-      localStorage.setItem("eternal_user", JSON.stringify(data.user));
-      window.dispatchEvent(new Event("userUpdated"));
+      loginUserSession(data.user);
       showToast.success(`Welcome back, ${data.user.name || "Patron"}!`);
 
+      const rawFrom = location.state?.from;
+      const destination = typeof rawFrom === "object" ? (rawFrom.pathname || "/") : (rawFrom || "/shop");
+
       if (data.user.role === "admin" || data.user.email === "rohanshinde8725@gmail.com") {
-        navigate("/admin");
+        navigate(destination.startsWith("/admin") ? destination : "/admin", { replace: true });
       } else {
-        const from = location.state?.from || "/shop";
-        navigate(from, { replace: true });
+        navigate(destination.startsWith("/admin") ? "/shop" : destination, { replace: true });
       }
     } catch (err) {
       // Fallback demo account
       if (formData.email === "rohanshinde8725@gmail.com" && formData.password === "admin123") {
         const adminUser = { name: "Rohan Shinde", email: "rohanshinde8725@gmail.com", role: "admin" };
-        localStorage.setItem("eternal_user", JSON.stringify(adminUser));
-        window.dispatchEvent(new Event("userUpdated"));
+        loginUserSession(adminUser);
         showToast.success("Signed in as Super Admin");
-        navigate("/admin");
+        const rawFrom = location.state?.from;
+        const destination = typeof rawFrom === "object" ? (rawFrom.pathname || "/admin") : (rawFrom || "/admin");
+        navigate(destination.startsWith("/admin") ? destination : "/admin", { replace: true });
       } else {
         showToast.error(err.message || "Invalid email or password credentials.");
       }

@@ -38,9 +38,13 @@ const Seller = () => {
 
     window.addEventListener("wishlistUpdated", syncWishlist);
     window.addEventListener("cartUpdated", syncCart);
+    window.addEventListener("userUpdated", syncWishlist);
+    window.addEventListener("userUpdated", syncCart);
     return () => {
       window.removeEventListener("wishlistUpdated", syncWishlist);
       window.removeEventListener("cartUpdated", syncCart);
+      window.removeEventListener("userUpdated", syncWishlist);
+      window.removeEventListener("userUpdated", syncCart);
     };
   }, []);
 

@@ -38,9 +38,12 @@ const Wishlist = () => {
     };
 
     loadCartIds();
-    const handleCartUpdated = () => loadCartIds();
-    window.addEventListener("cartUpdated", handleCartUpdated);
-    return () => window.removeEventListener("cartUpdated", handleCartUpdated);
+    window.addEventListener("cartUpdated", loadCartIds);
+    window.addEventListener("userUpdated", loadCartIds);
+    return () => {
+      window.removeEventListener("cartUpdated", loadCartIds);
+      window.removeEventListener("userUpdated", loadCartIds);
+    };
   }, []);
 
   const handleViewModeChange = (mode) => {
@@ -49,8 +52,17 @@ const Wishlist = () => {
   };
 
   useEffect(() => {
-    const storedWishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
-    setWishlist(storedWishlist);
+    const loadWishlist = () => {
+      const storedWishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+      setWishlist(storedWishlist);
+    };
+    loadWishlist();
+    window.addEventListener("wishlistUpdated", loadWishlist);
+    window.addEventListener("userUpdated", loadWishlist);
+    return () => {
+      window.removeEventListener("wishlistUpdated", loadWishlist);
+      window.removeEventListener("userUpdated", loadWishlist);
+    };
   }, []);
 
   const removeFromWishlist = (productId) => {

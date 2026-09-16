@@ -1,6 +1,7 @@
 import { Routes, Route, Outlet, useLocation } from 'react-router-dom'
 import { lazy, Suspense } from "react";
 import { motion } from "framer-motion";
+import AdminRoute from "./AdminRoute";
 
 const Home = lazy(() => import("../pages/Home"));
 const About = lazy(() => import("../pages/About"));
@@ -56,19 +57,21 @@ const AppRoutes = () => {
         <>
             <Suspense fallback={<div className='flex justify-center items-center h-screen'>Loading...</div>}>
                 <Routes>
-                    <Route path='admin' element={<AdminLayout />}>
-                        <Route index element={<AdminDashboard />} />
-                        <Route path='orders' element={<AdminOrders />} />
-                        <Route path='products' element={<AdminProducts />} />
-                        <Route path='customers' element={<AdminCustomers />} />
-                        <Route path='categories' element={<AdminCategories />} />
-                        <Route path='coupons' element={<AdminCoupons />} />
-                        <Route path='reviews' element={<AdminReviews />} />
-                        <Route path='banners' element={<AdminBanners />} />
-                        <Route path='recycle-bin' element={<AdminRecycleBin />} />
-                        <Route path='settings' element={<AdminSettings />} />
-                        <Route path='blog' element={<AdminBlog />} />
-                        <Route path='profile' element={<AdminProfile />} />
+                    <Route element={<AdminRoute />}>
+                        <Route path='admin' element={<AdminLayout />}>
+                            <Route index element={<AdminDashboard />} />
+                            <Route path='orders' element={<AdminOrders />} />
+                            <Route path='products' element={<AdminProducts />} />
+                            <Route path='customers' element={<AdminCustomers />} />
+                            <Route path='categories' element={<AdminCategories />} />
+                            <Route path='coupons' element={<AdminCoupons />} />
+                            <Route path='reviews' element={<AdminReviews />} />
+                            <Route path='banners' element={<AdminBanners />} />
+                            <Route path='recycle-bin' element={<AdminRecycleBin />} />
+                            <Route path='settings' element={<AdminSettings />} />
+                            <Route path='blog' element={<AdminBlog />} />
+                            <Route path='profile' element={<AdminProfile />} />
+                        </Route>
                     </Route>
                     <Route path='/' element={<MainLayout />}>
                         <Route index element={<Home />} />

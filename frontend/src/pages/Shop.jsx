@@ -64,9 +64,12 @@ const Shop = () => {
     };
 
     loadCartIds();
-    const handleCartUpdated = () => loadCartIds();
-    window.addEventListener("cartUpdated", handleCartUpdated);
-    return () => window.removeEventListener("cartUpdated", handleCartUpdated);
+    window.addEventListener("cartUpdated", loadCartIds);
+    window.addEventListener("userUpdated", loadCartIds);
+    return () => {
+      window.removeEventListener("cartUpdated", loadCartIds);
+      window.removeEventListener("userUpdated", loadCartIds);
+    };
   }, []);
 
   useEffect(() => {
@@ -77,7 +80,11 @@ const Shop = () => {
 
     loadWishlistIds();
     window.addEventListener("wishlistUpdated", loadWishlistIds);
-    return () => window.removeEventListener("wishlistUpdated", loadWishlistIds);
+    window.addEventListener("userUpdated", loadWishlistIds);
+    return () => {
+      window.removeEventListener("wishlistUpdated", loadWishlistIds);
+      window.removeEventListener("userUpdated", loadWishlistIds);
+    };
   }, []);
 
   const handleViewModeChange = (mode) => {

@@ -175,9 +175,11 @@ const SareeDetail = () => {
     updateLocalStates();
     window.addEventListener("cartUpdated", updateLocalStates);
     window.addEventListener("wishlistUpdated", updateLocalStates);
+    window.addEventListener("userUpdated", updateLocalStates);
     return () => {
       window.removeEventListener("cartUpdated", updateLocalStates);
       window.removeEventListener("wishlistUpdated", updateLocalStates);
+      window.removeEventListener("userUpdated", updateLocalStates);
     };
   }, [product]);
 

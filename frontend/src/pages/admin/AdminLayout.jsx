@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import {
   FiGrid,
@@ -20,6 +20,8 @@ import {
 } from "react-icons/fi";
 import { API_BASE_URL } from "../../api/products";
 import Logo from "../../components/common/Logo";
+import { getStoredUser, logout } from "../../utils/auth";
+import { useToast } from "../../context/ToastContext";
 
 const navItems = [
   { path: "/admin", label: "Dashboard", icon: FiGrid, exact: true },
@@ -34,14 +36,28 @@ const navItems = [
 ];
 
 const AdminLayout = () => {
+  const { showToast } = useToast();
   const location = useLocation();
   const navigate = useNavigate();
+  const [currentUser, setCurrentUser] = useState(() => getStoredUser());
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [dateRange, setDateRange] = useState("28 Aug, 2026");
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [showAddMenu, setShowAddMenu] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
+
+  useEffect(() => {
+    const handleUserChange = () => {
+      setCurrentUser(getStoredUser());
+    };
+    window.addEventListener("userUpdated", handleUserChange);
+    window.addEventListener("storage", handleUserChange);
+    return () => {
+      window.removeEventListener("userUpdated", handleUserChange);
+      window.removeEventListener("storage", handleUserChange);
+    };
+  }, []);
 
   // Determine current page title
   const currentNavItem = navItems.find((item) =>
@@ -51,7 +67,9 @@ const AdminLayout = () => {
 
   const handleLogout = () => {
     setShowLogoutModal(false);
-    navigate("/");
+    logout();
+    showToast.success("Admin signed out successfully.");
+    navigate("/signin");
   };
 
   return (
@@ -105,8 +123,8 @@ const AdminLayout = () => {
               <div className="flex items-center gap-3">
                 <div className="relative">
                   <img
-                    src={`${API_BASE_URL}/images/testimonial/testimonial-1.png`}
-                    alt="Admin Avatar"
+                    src={currentUser?.avatar || `${API_BASE_URL}/images/testimonial/testimonial-1.png`}
+                    alt={currentUser?.name || "Admin Avatar"}
                     onError={(e) => {
                       e.target.onerror = null;
                       e.target.src = "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&auto=format&fit=crop&q=80";
@@ -115,12 +133,14 @@ const AdminLayout = () => {
                   />
                   <span className="absolute bottom-0 right-0 w-3 h-3 bg-emerald-400 border-2 border-[#540F1D] rounded-full" />
                 </div>
-                <div>
+                <div className="min-w-0 flex-1">
                   <div className="flex items-center gap-1.5">
-                    <span className="text-base font-bold text-white">Admin</span>
-                    <FiChevronDown className="text-sm text-amber-200/90" />
+                    <span className="text-base font-bold text-white truncate">{currentUser?.name || "Admin"}</span>
+                    <FiChevronDown className="text-sm text-amber-200/90 shrink-0" />
                   </div>
-                  <span className="text-xs text-amber-200/80 font-medium block">Super Admin</span>
+                  <span className="text-xs text-amber-200/80 font-medium block truncate">
+                    {currentUser?.role === "admin" ? "Super Admin" : "Administrator"}
+                  </span>
                 </div>
               </div>
             </div>

@@ -16,6 +16,7 @@ import { HiOutlineShoppingBag, HiMenu, HiX } from "react-icons/hi";
 import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { useToast } from "../../context/ToastContext";
 import Logo from "../common/Logo";
+import { isAdmin, logout } from "../../utils/auth";
 
 const Header = () => {
   const { showToast } = useToast();
@@ -38,41 +39,59 @@ const Header = () => {
   const [searchParams] = useSearchParams();
 
   // Load authenticated user & cart/wishlist
-  const loadUser = () => {
+  const loadUserAndCounts = () => {
     try {
       const user = JSON.parse(localStorage.getItem("eternal_user"));
       setCurrentUser(user);
+      if (user && (user.email || user.id || user._id || user.name)) {
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+        setCartCount(cart.length);
+        setWishlistCount(wishlist.length);
+      } else {
+        setCartCount(0);
+        setWishlistCount(0);
+      }
     } catch {
       setCurrentUser(null);
+      setCartCount(0);
+      setWishlistCount(0);
     }
   };
 
   useEffect(() => {
-    loadUser();
+    loadUserAndCounts();
 
     const updateCartCount = () => {
+      const rawUser = localStorage.getItem("eternal_user");
+      if (!rawUser) {
+        setCartCount(0);
+        return;
+      }
       const cart = JSON.parse(localStorage.getItem("cart")) || [];
       setCartCount(cart.length);
     };
 
     const updateWishlistCount = () => {
+      const rawUser = localStorage.getItem("eternal_user");
+      if (!rawUser) {
+        setWishlistCount(0);
+        return;
+      }
       const wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
       setWishlistCount(wishlist.length);
     };
 
-    updateCartCount();
-    updateWishlistCount();
-
     window.addEventListener("cartUpdated", updateCartCount);
     window.addEventListener("wishlistUpdated", updateWishlistCount);
-    window.addEventListener("userUpdated", loadUser);
-    window.addEventListener("storage", loadUser);
+    window.addEventListener("userUpdated", loadUserAndCounts);
+    window.addEventListener("storage", loadUserAndCounts);
 
     return () => {
       window.removeEventListener("cartUpdated", updateCartCount);
       window.removeEventListener("wishlistUpdated", updateWishlistCount);
-      window.removeEventListener("userUpdated", loadUser);
-      window.removeEventListener("storage", loadUser);
+      window.removeEventListener("userUpdated", loadUserAndCounts);
+      window.removeEventListener("storage", loadUserAndCounts);
     };
   }, []);
 
@@ -126,11 +145,10 @@ const Header = () => {
   };
 
   const handleSignOut = () => {
-    localStorage.removeItem("eternal_user");
+    logout();
     setCurrentUser(null);
     setIsUserMenuOpen(false);
     showToast.info("Signed out of your account successfully.");
-    window.dispatchEvent(new Event("userUpdated"));
     navigate("/");
   };
 
@@ -366,7 +384,7 @@ const Header = () => {
                       <div className="min-w-0 flex-1">
                         <div className="flex items-center gap-1.5">
                           <h4 className="font-bold text-sm truncate leading-tight">{currentUser.name}</h4>
-                          {currentUser.role === "admin" && (
+                          {isAdmin(currentUser) && (
                             <span className="text-[9px] bg-amber-400/25 text-amber-200 border border-amber-300/40 px-1.5 py-0.5 rounded font-semibold uppercase tracking-wider">
                               Admin
                             </span>
@@ -392,7 +410,7 @@ const Header = () => {
                       <span className="text-slate-300 group-hover:text-[#74202D] text-xs">→</span>
                     </button>
 
-                    {currentUser.role === "admin" && (
+                    {isAdmin(currentUser) && (
                       <Link
                         to="/admin"
                         onClick={() => setIsUserMenuOpen(false)}
@@ -728,7 +746,7 @@ const Header = () => {
                   Contact Us
                 </Link>
               </li>
-              {currentUser?.role === "admin" && (
+              {isAdmin(currentUser) && (
                 <li>
                   <Link
                     to="/admin"
@@ -781,7 +799,7 @@ const Header = () => {
                 <div>
                   <h5 className="font-bold text-slate-800 text-sm">{currentUser.name}</h5>
                   <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#6B1527] text-white">
-                    {currentUser.role === "admin" ? "Super Admin" : "Verified Customer"}
+                    {isAdmin(currentUser) ? "Super Admin" : "Verified Customer"}
                   </span>
                 </div>
               </div>

@@ -36,8 +36,17 @@ const Cart = () => {
 
   // Load cart
   useEffect(() => {
-    const data = JSON.parse(localStorage.getItem("cart")) || [];
-    setCart(data);
+    const loadCart = () => {
+      const data = JSON.parse(localStorage.getItem("cart")) || [];
+      setCart(data);
+    };
+    loadCart();
+    window.addEventListener("cartUpdated", loadCart);
+    window.addEventListener("userUpdated", loadCart);
+    return () => {
+      window.removeEventListener("cartUpdated", loadCart);
+      window.removeEventListener("userUpdated", loadCart);
+    };
   }, []);
 
   // Update localStorage

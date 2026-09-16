@@ -13,6 +13,7 @@ import {
 import { API_BASE_URL } from "../api/products";
 import { useToast } from "../context/ToastContext";
 import FadeUp from "../components/animations/FadeUp";
+import { loginUserSession } from "../utils/auth";
 
 const SignUp = () => {
   const { showToast } = useToast();
@@ -112,8 +113,7 @@ const SignUp = () => {
         throw new Error(data.message || "Invalid OTP code");
       }
 
-      localStorage.setItem("eternal_user", JSON.stringify(data.user));
-      window.dispatchEvent(new Event("userUpdated"));
+      loginUserSession(data.user);
       showToast.success(`Welcome to Eternal Vastra, ${data.user.name}!`);
 
       if (data.user.role === "admin") {
