@@ -23,10 +23,13 @@ const AdminDashboard = () => {
   const [showSalesDropdown, setShowSalesDropdown] = useState(false);
 
   const [stats, setStats] = useState({
-    totalSales: 21794,
-    totalOrdersCount: 6,
-    totalCustomersCount: 6,
-    totalProductsCount: 61,
+    totalSales: 0,
+    totalOrdersCount: 0,
+    totalCustomersCount: 0,
+    totalProductsCount: 0,
+    ordersByStatus: { Delivered: 0, Processing: 0, Shipped: 0, Cancelled: 0, Pending: 0 },
+    salesByCategory: [],
+    activities: []
   });
 
   // Fetch live stats from backend
@@ -39,61 +42,44 @@ const AdminDashboard = () => {
       .then((data) => {
         if (data) {
           setStats({
-            totalSales: data.totalSales || 21794,
-            totalOrdersCount: data.totalOrdersCount || 6,
-            totalCustomersCount: data.totalCustomersCount || 6,
-            totalProductsCount: data.totalProductsCount || 61,
+            totalSales: data.totalSales || 0,
+            totalOrdersCount: data.totalOrdersCount || 0,
+            totalCustomersCount: data.totalCustomersCount || 0,
+            totalProductsCount: data.totalProductsCount || 0,
+            ordersByStatus: data.ordersByStatus || { Delivered: 0, Processing: 0, Shipped: 0, Cancelled: 0, Pending: 0 },
+            salesByCategory: data.salesByCategory || [],
+            activities: data.activities || []
           });
         }
       })
-      .catch(() => {});
-
-    fetch(`${API_BASE_URL}/api/products`)
-      .then((r) => (r.ok ? r.json() : []))
-      .then((prods) => {
-        if (Array.isArray(prods) && prods.length > 0) {
-          setStats((prev) => ({
-            ...prev,
-            totalProductsCount: prods.length,
-          }));
-        }
-      })
-      .catch(() => {});
+      .catch((err) => console.error(err));
   }, []);
 
-  // Store Activity events
-  const activities = [
-    {
-      icon: FiCalendar,
-      iconBg: "bg-rose-50 text-rose-500",
-      title: "New order #ORD12345 received",
-      time: "2 mins ago",
-    },
-    {
-      icon: FiTag,
-      iconBg: "bg-emerald-50 text-emerald-500",
-      title: 'Product "Mysore Silk Saree" added',
-      time: "15 mins ago",
-    },
-    {
-      icon: FiUsers,
-      iconBg: "bg-amber-50 text-amber-500",
-      title: "Customer Priya Verma registered",
-      time: "1 hr ago",
-    },
-    {
-      icon: FiTruck,
-      iconBg: "bg-blue-50 text-blue-500",
-      title: "Order #ORD12343 shipped",
-      time: "3 hrs ago",
-    },
-    {
-      icon: FiImage,
-      iconBg: "bg-purple-50 text-purple-500",
-      title: 'Banner "Festival Offer" updated',
-      time: "5 hrs ago",
-    },
-  ];
+  const circumference = 2 * Math.PI * 38; // ~238.76
+
+  const renderDonutSlices = (dataItems, total, colors) => {
+    let currentOffset = 0;
+    return dataItems.map((item, i) => {
+      const percentage = total > 0 ? (item.value / total) : 0;
+      const strokeLength = percentage * circumference;
+      const strokeGap = circumference - strokeLength;
+      
+      const slice = (
+        <circle
+          key={item.name}
+          cx="50" cy="50" r="38"
+          fill="none"
+          stroke={colors[i % colors.length]}
+          strokeWidth="12"
+          strokeDasharray={`${strokeLength} ${strokeGap}`}
+          strokeDashoffset={-currentOffset}
+          className="transition-all duration-1000 ease-out"
+        />
+      );
+      currentOffset += strokeLength;
+      return slice;
+    });
+  };
 
   return (
     <div className="space-y-4 sm:space-y-6 max-w-[1600px] mx-auto pb-12 text-slate-800">
@@ -386,110 +372,47 @@ const AdminDashboard = () => {
             <div className="relative w-28 h-28 sm:w-32 sm:h-32 xl:w-34 xl:h-34 shrink-0 flex items-center justify-center">
               <svg viewBox="0 0 100 100" className="w-full h-full transform -rotate-90">
                 <circle cx="50" cy="50" r="38" fill="none" stroke="#f8fafc" strokeWidth="12" />
-                {/* Delivered - Green (37.7%) */}
-                <circle
-                  cx="50"
-                  cy="50"
-                  r="38"
-                  fill="none"
-                  stroke="#22C55E"
-                  strokeWidth="12"
-                  strokeDasharray="90 149"
-                  strokeDashoffset="0"
-                />
-                {/* Processing - Amber (24.8%) */}
-                <circle
-                  cx="50"
-                  cy="50"
-                  r="38"
-                  fill="none"
-                  stroke="#F59E0B"
-                  strokeWidth="12"
-                  strokeDasharray="59 180"
-                  strokeDashoffset="-90"
-                />
-                {/* Shipped - Blue (21.2%) */}
-                <circle
-                  cx="50"
-                  cy="50"
-                  r="38"
-                  fill="none"
-                  stroke="#3B82F6"
-                  strokeWidth="12"
-                  strokeDasharray="51 188"
-                  strokeDashoffset="-149"
-                />
-                {/* Cancelled - Red (10.6%) */}
-                <circle
-                  cx="50"
-                  cy="50"
-                  r="38"
-                  fill="none"
-                  stroke="#EF4444"
-                  strokeWidth="12"
-                  strokeDasharray="25 214"
-                  strokeDashoffset="-200"
-                />
-                {/* Pending - Purple (5.7%) */}
-                <circle
-                  cx="50"
-                  cy="50"
-                  r="38"
-                  fill="none"
-                  stroke="#8B5CF6"
-                  strokeWidth="12"
-                  strokeDasharray="14 225"
-                  strokeDashoffset="-225"
-                />
+                {(() => {
+                  const items = [
+                    { name: "Delivered", value: stats.ordersByStatus.Delivered || 0 },
+                    { name: "Processing", value: stats.ordersByStatus.Processing || 0 },
+                    { name: "Shipped", value: stats.ordersByStatus.Shipped || 0 },
+                    { name: "Cancelled", value: stats.ordersByStatus.Cancelled || 0 },
+                    { name: "Pending", value: stats.ordersByStatus.Pending || 0 }
+                  ];
+                  const total = stats.totalOrdersCount;
+                  const colors = ["#22C55E", "#F59E0B", "#3B82F6", "#EF4444", "#8B5CF6"];
+                  return renderDonutSlices(items, total, colors);
+                })()}
               </svg>
 
               <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-                <span className="text-lg xl:text-xl font-bold text-slate-900 leading-tight">6</span>
+                <span className="text-lg xl:text-xl font-bold text-slate-900 leading-tight">{stats.totalOrdersCount}</span>
                 <span className="text-[9px] xl:text-[10px] text-slate-400 font-semibold uppercase tracking-wider">TOTAL</span>
               </div>
             </div>
 
             {/* Status Legend */}
             <div className="flex-1 space-y-1.5 xl:space-y-2 text-xs w-full">
-              <div className="flex items-center justify-between gap-2">
-                <div className="flex items-center gap-1.5 min-w-0">
-                  <span className="w-2 h-2 xl:w-2.5 xl:h-2.5 rounded-full bg-[#22C55E] shrink-0" />
-                  <span className="text-slate-600 font-medium truncate">Delivered</span>
-                </div>
-                <span className="text-slate-700 font-semibold shrink-0">320 (37.7%)</span>
-              </div>
-
-              <div className="flex items-center justify-between gap-2">
-                <div className="flex items-center gap-1.5 min-w-0">
-                  <span className="w-2 h-2 xl:w-2.5 xl:h-2.5 rounded-full bg-[#F59E0B] shrink-0" />
-                  <span className="text-slate-600 font-medium truncate">Processing</span>
-                </div>
-                <span className="text-slate-700 font-semibold shrink-0">210 (24.8%)</span>
-              </div>
-
-              <div className="flex items-center justify-between gap-2">
-                <div className="flex items-center gap-1.5 min-w-0">
-                  <span className="w-2 h-2 xl:w-2.5 xl:h-2.5 rounded-full bg-[#3B82F6] shrink-0" />
-                  <span className="text-slate-600 font-medium truncate">Shipped</span>
-                </div>
-                <span className="text-slate-700 font-semibold shrink-0">180 (21.2%)</span>
-              </div>
-
-              <div className="flex items-center justify-between gap-2">
-                <div className="flex items-center gap-1.5 min-w-0">
-                  <span className="w-2 h-2 xl:w-2.5 xl:h-2.5 rounded-full bg-[#EF4444] shrink-0" />
-                  <span className="text-slate-600 font-medium truncate">Cancelled</span>
-                </div>
-                <span className="text-slate-700 font-semibold shrink-0">90 (10.6%)</span>
-              </div>
-
-              <div className="flex items-center justify-between gap-2">
-                <div className="flex items-center gap-1.5 min-w-0">
-                  <span className="w-2 h-2 xl:w-2.5 xl:h-2.5 rounded-full bg-[#8B5CF6] shrink-0" />
-                  <span className="text-slate-600 font-medium truncate">Pending</span>
-                </div>
-                <span className="text-slate-700 font-semibold shrink-0">48 (5.7%)</span>
-              </div>
+              {[
+                { label: "Delivered", color: "bg-[#22C55E]", key: "Delivered" },
+                { label: "Processing", color: "bg-[#F59E0B]", key: "Processing" },
+                { label: "Shipped", color: "bg-[#3B82F6]", key: "Shipped" },
+                { label: "Cancelled", color: "bg-[#EF4444]", key: "Cancelled" },
+                { label: "Pending", color: "bg-[#8B5CF6]", key: "Pending" }
+              ].map((status) => {
+                const count = stats.ordersByStatus[status.key] || 0;
+                const percentage = stats.totalOrdersCount > 0 ? ((count / stats.totalOrdersCount) * 100).toFixed(1) : 0;
+                return (
+                  <div key={status.key} className="flex items-center justify-between gap-2">
+                    <div className="flex items-center gap-1.5 min-w-0">
+                      <span className={`w-2 h-2 xl:w-2.5 xl:h-2.5 rounded-full ${status.color} shrink-0`} />
+                      <span className="text-slate-600 font-medium truncate">{status.label}</span>
+                    </div>
+                    <span className="text-slate-700 font-semibold shrink-0">{count} ({percentage}%)</span>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -503,110 +426,39 @@ const AdminDashboard = () => {
             <div className="relative w-28 h-28 sm:w-32 sm:h-32 xl:w-34 xl:h-34 shrink-0 flex items-center justify-center">
               <svg viewBox="0 0 100 100" className="w-full h-full transform -rotate-90">
                 <circle cx="50" cy="50" r="38" fill="none" stroke="#f8fafc" strokeWidth="12" />
-                {/* Silk Sarees - Maroon 45% */}
-                <circle
-                  cx="50"
-                  cy="50"
-                  r="38"
-                  fill="none"
-                  stroke="#75212e"
-                  strokeWidth="12"
-                  strokeDasharray="107 132"
-                  strokeDashoffset="0"
-                />
-                {/* Cotton Sarees - Orange 25% */}
-                <circle
-                  cx="50"
-                  cy="50"
-                  r="38"
-                  fill="none"
-                  stroke="#F97316"
-                  strokeWidth="12"
-                  strokeDasharray="60 179"
-                  strokeDashoffset="-107"
-                />
-                {/* Paithani Sarees - Green 15% */}
-                <circle
-                  cx="50"
-                  cy="50"
-                  r="38"
-                  fill="none"
-                  stroke="#10B981"
-                  strokeWidth="12"
-                  strokeDasharray="36 203"
-                  strokeDashoffset="-167"
-                />
-                {/* Georgette Sarees - Blue 10% */}
-                <circle
-                  cx="50"
-                  cy="50"
-                  r="38"
-                  fill="none"
-                  stroke="#0284C7"
-                  strokeWidth="12"
-                  strokeDasharray="24 215"
-                  strokeDashoffset="-203"
-                />
-                {/* Organza Sarees - Purple 5% */}
-                <circle
-                  cx="50"
-                  cy="50"
-                  r="38"
-                  fill="none"
-                  stroke="#8B5CF6"
-                  strokeWidth="12"
-                  strokeDasharray="12 227"
-                  strokeDashoffset="-227"
-                />
+                {(() => {
+                  const colors = ["#75212e", "#F97316", "#10B981", "#0284C7", "#8B5CF6"];
+                  // total in category slice is total of all values since totalSales might not match item totals exactly
+                  const totalCategorySales = stats.salesByCategory.reduce((sum, item) => sum + item.value, 0);
+                  return renderDonutSlices(stats.salesByCategory, totalCategorySales, colors);
+                })()}
               </svg>
 
               <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-1">
-                <span className="text-[11px] sm:text-xs font-bold text-slate-900 leading-tight">₹21,794</span>
+                <span className="text-[11px] sm:text-xs font-bold text-slate-900 leading-tight">₹{Number(stats.totalSales).toLocaleString()}</span>
                 <span className="text-[9px] xl:text-[10px] text-slate-400 font-semibold uppercase tracking-wider">TOTAL</span>
               </div>
             </div>
 
             {/* Category Legend */}
             <div className="flex-1 space-y-1.5 xl:space-y-2 text-xs w-full">
-              <div className="flex items-center justify-between gap-2">
-                <div className="flex items-center gap-1.5 min-w-0">
-                  <span className="w-2 h-2 xl:w-2.5 xl:h-2.5 rounded-full bg-[#75212e] shrink-0" />
-                  <span className="text-slate-600 font-medium truncate">Silk Sarees</span>
-                </div>
-                <span className="text-slate-700 font-semibold shrink-0">45%</span>
-              </div>
-
-              <div className="flex items-center justify-between gap-2">
-                <div className="flex items-center gap-1.5 min-w-0">
-                  <span className="w-2 h-2 xl:w-2.5 xl:h-2.5 rounded-full bg-[#F97316] shrink-0" />
-                  <span className="text-slate-600 font-medium truncate">Cotton Sarees</span>
-                </div>
-                <span className="text-slate-700 font-semibold shrink-0">25%</span>
-              </div>
-
-              <div className="flex items-center justify-between gap-2">
-                <div className="flex items-center gap-1.5 min-w-0">
-                  <span className="w-2 h-2 xl:w-2.5 xl:h-2.5 rounded-full bg-[#10B981] shrink-0" />
-                  <span className="text-slate-600 font-medium truncate">Paithani Sarees</span>
-                </div>
-                <span className="text-slate-700 font-semibold shrink-0">15%</span>
-              </div>
-
-              <div className="flex items-center justify-between gap-2">
-                <div className="flex items-center gap-1.5 min-w-0">
-                  <span className="w-2 h-2 xl:w-2.5 xl:h-2.5 rounded-full bg-[#0284C7] shrink-0" />
-                  <span className="text-slate-600 font-medium truncate">Georgette Sarees</span>
-                </div>
-                <span className="text-slate-700 font-semibold shrink-0">10%</span>
-              </div>
-
-              <div className="flex items-center justify-between gap-2">
-                <div className="flex items-center gap-1.5 min-w-0">
-                  <span className="w-2 h-2 xl:w-2.5 xl:h-2.5 rounded-full bg-[#8B5CF6] shrink-0" />
-                  <span className="text-slate-600 font-medium truncate">Organza Sarees</span>
-                </div>
-                <span className="text-slate-700 font-semibold shrink-0">5%</span>
-              </div>
+              {stats.salesByCategory.map((cat, idx) => {
+                const colors = ["bg-[#75212e]", "bg-[#F97316]", "bg-[#10B981]", "bg-[#0284C7]", "bg-[#8B5CF6]"];
+                const totalCategorySales = stats.salesByCategory.reduce((sum, item) => sum + item.value, 0);
+                const percentage = totalCategorySales > 0 ? ((cat.value / totalCategorySales) * 100).toFixed(1) : 0;
+                return (
+                  <div key={cat.name} className="flex items-center justify-between gap-2">
+                    <div className="flex items-center gap-1.5 min-w-0">
+                      <span className={`w-2 h-2 xl:w-2.5 xl:h-2.5 rounded-full ${colors[idx % colors.length]} shrink-0`} />
+                      <span className="text-slate-600 font-medium truncate">{cat.name}</span>
+                    </div>
+                    <span className="text-slate-700 font-semibold shrink-0">{percentage}%</span>
+                  </div>
+                );
+              })}
+              {stats.salesByCategory.length === 0 && (
+                <div className="text-slate-400 text-center py-4 font-medium text-xs">No sales data found</div>
+              )}
             </div>
           </div>
         </div>
@@ -618,8 +470,12 @@ const AdminDashboard = () => {
           </div>
 
           <div className="space-y-2.5 sm:space-y-3 my-auto">
-            {activities.map((act, index) => {
-              const Icon = act.icon;
+            {stats.activities.length === 0 && (
+              <div className="text-slate-400 text-center py-4 font-medium text-xs">No recent activity</div>
+            )}
+            {stats.activities.map((act, index) => {
+              const Icon = act.type === "order" ? FiTruck : FiTag;
+              const timeString = new Date(act.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) + " " + new Date(act.time).toLocaleDateString([], { month: 'short', day: 'numeric' });
               return (
                 <div key={index} className="flex items-center justify-between gap-2">
                   <div className="flex items-center gap-2.5 min-w-0">
@@ -633,7 +489,7 @@ const AdminDashboard = () => {
                     </p>
                   </div>
                   <span className="text-[10px] xl:text-[11px] text-slate-400 whitespace-nowrap font-normal shrink-0 ml-1">
-                    {act.time}
+                    {timeString}
                   </span>
                 </div>
               );

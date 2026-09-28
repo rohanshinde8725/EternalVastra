@@ -4,11 +4,11 @@ import { FiRefreshCw } from "react-icons/fi";
 import { GoShieldCheck } from "react-icons/go";
 import FadeUp from '../animations/FadeUp';
 
-const BottomTrustBar = () => {
+const BottomTrustBar = ({ className = "mt-10", cardClassName = "bg-white" }) => {
   return (
-    <div className='w-full mt-10'>
-      <div className='max-w-[1600px] mx-auto bg-white rounded-xl shadow-xs border border-gray-200 
-          grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 md:gap-4 lg:gap-6 py-6 sm:py-8'>
+    <div className={`w-full ${className}`}>
+      <div className={`max-w-[1600px] mx-auto rounded-xl shadow-xs border border-gray-200 
+          grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 md:gap-4 lg:gap-6 py-6 sm:py-8 ${cardClassName}`}>
 
         {/* Item */}
         <FadeUp delay={0.08}>

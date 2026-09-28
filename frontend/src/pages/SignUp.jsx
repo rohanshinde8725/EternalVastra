@@ -214,6 +214,21 @@ const SignUp = () => {
                     </div>
                   </div>
 
+                  {/* Phone Number */}
+                  <div className="space-y-1.5">
+                    <label className="font-semibold text-slate-700 block text-sm">Phone Number (Optional)</label>
+                    <div className="relative">
+                      <FiPhone className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-lg" />
+                      <input
+                        type="tel"
+                        placeholder="e.g. +91 98765 43210"
+                        value={formData.phone}
+                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                        className="w-full pl-11 pr-4 py-2.5 sm:py-3 rounded-lg bg-white border border-slate-200 text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-[#701A2B] focus:ring-1 focus:ring-[#701A2B] transition"
+                      />
+                    </div>
+                  </div>
+
                   {/* Password */}
                   <div className="space-y-1.5">
                     <label className="font-semibold text-slate-700 block text-sm">Create Password</label>

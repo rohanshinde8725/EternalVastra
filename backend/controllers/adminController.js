@@ -147,23 +147,86 @@ const saveSettings = async (req, res, next) => {
 // Dashboard Stats Live Aggregation
 const getDashboardStats = async (_req, res, next) => {
   try {
-    const [orders, products, customers, categories] = await Promise.all([
+    const [orders, products, customers, categories, users] = await Promise.all([
       Order.find().sort({ createdAt: -1 }).lean(),
       Product.find().sort({ createdAt: -1 }).lean(),
       Customer.find().sort({ createdAt: -1 }).lean(),
       Category.find().lean(),
+      require("../models/User").find().sort({ createdAt: -1 }).lean()
     ]);
 
-    const totalSales = orders.reduce((sum, o) => sum + Number(o.total || 0), 0) || 1245890;
-    const totalOrdersCount = orders.length || 848;
-    const totalCustomersCount = customers.length || 1246;
-    const totalProductsCount = products.length || 152;
+    const totalSales = orders.reduce((sum, o) => sum + Number(o.total || 0), 0) || 0;
+    const totalOrdersCount = orders.length || 0;
+    const totalCustomersCount = (customers.length + users.length) || 0;
+    const totalProductsCount = products.length || 0;
+
+    // Aggregate Orders by Status
+    const ordersByStatus = {
+      Delivered: 0,
+      Processing: 0,
+      Shipped: 0,
+      Cancelled: 0,
+      Pending: 0
+    };
+    orders.forEach(o => {
+      const st = o.status || "Pending";
+      if (ordersByStatus[st] !== undefined) {
+        ordersByStatus[st]++;
+      }
+    });
+
+    // Aggregate Sales by Category
+    const salesByCategory = {};
+    const productMap = {}; // name -> category
+    products.forEach(p => {
+      if (p.title && p.category && p.category.length > 0) {
+        productMap[p.title] = p.category[0];
+      }
+    });
+
+    orders.forEach(o => {
+      (o.items || []).forEach(item => {
+        const cat = productMap[item.name] || "Other";
+        const itemTotal = (item.price || 0) * (item.qty || 1);
+        salesByCategory[cat] = (salesByCategory[cat] || 0) + itemTotal;
+      });
+    });
+
+    // Format salesByCategory for the frontend donut chart
+    const formattedSalesByCategory = Object.keys(salesByCategory).map(key => ({
+      name: key,
+      value: salesByCategory[key]
+    })).sort((a, b) => b.value - a.value).slice(0, 5); // Top 5 categories
+
+    // Generate Store Activity (mix of recent orders and products)
+    const activities = [];
+    orders.slice(0, 5).forEach(o => {
+      activities.push({
+        type: "order",
+        iconBg: "bg-rose-50 text-rose-500",
+        title: `New order #${o.orderId} received`,
+        time: o.createdAt,
+      });
+    });
+    products.slice(0, 3).forEach(p => {
+      activities.push({
+        type: "product",
+        iconBg: "bg-emerald-50 text-emerald-500",
+        title: `Product "${p.title}" added`,
+        time: p.createdAt,
+      });
+    });
+    // Sort activities by time descending
+    activities.sort((a, b) => new Date(b.time) - new Date(a.time));
 
     res.json({
       totalSales,
       totalOrdersCount,
       totalCustomersCount,
       totalProductsCount,
+      ordersByStatus,
+      salesByCategory: formattedSalesByCategory,
+      activities: activities.slice(0, 5),
       recentOrders: orders.slice(0, 5),
       categories,
     });

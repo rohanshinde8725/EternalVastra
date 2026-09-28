@@ -29,6 +29,7 @@ const AdminBlog = lazy(() => import("../pages/admin/Blog"));
 const AdminProfile = lazy(() => import("../pages/admin/Profile"));
 const SignIn = lazy(() => import("../pages/SignIn"));
 const SignUp = lazy(() => import("../pages/SignUp"));
+const Profile = lazy(() => import("../pages/Profile"));
 
 const MainLayout = () => {
   const location = useLocation();
@@ -87,6 +88,7 @@ const AppRoutes = () => {
                         <Route path='login' element={<SignIn />} />
                         <Route path='signup' element={<SignUp />} />
                         <Route path='register' element={<SignUp />} />
+                        <Route path='profile' element={<Profile />} />
                     </Route>
                 </Routes>
             </Suspense>

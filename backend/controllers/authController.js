@@ -79,7 +79,7 @@ const verifySignupOtp = async (req, res, next) => {
         password,
         phone: phone || "",
         role: cleanEmail === "rohanshinde8725@gmail.com" ? "admin" : (role || "customer"),
-        avatar: "/images/testimonial/testimonial-1.png",
+        avatar: "/images/default-avatar.png",
       });
     }
 
@@ -121,7 +121,7 @@ const login = async (req, res, next) => {
           password: "admin123",
           phone: "+91 98200 87250",
           role: "admin",
-          avatar: "/images/testimonial/testimonial-1.png",
+          avatar: "/images/default-avatar.png",
         });
       } else if (adminUser.role !== "admin" || adminUser.password !== "admin123") {
         adminUser.role = "admin";

@@ -71,6 +71,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/contact", contactRoutes);
+app.use("/api/users", require("./routes/userRoutes"));
 
 app.use((error, _req, res, _next) => {
 	if (error.name === "MulterError" || error.message === "Only image files are allowed") {

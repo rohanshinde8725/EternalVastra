@@ -6,6 +6,7 @@ import { MdGridView, MdViewList } from "react-icons/md";
 import { useToast } from "../context/ToastContext";
 import { isAuthenticated } from "../utils/auth";
 import FadeUp from "../components/animations/FadeUp";
+import { resolveImageUrl } from "../api/products";
 
 const Wishlist = () => {
   const { showToast } = useToast();
@@ -187,7 +188,7 @@ const Wishlist = () => {
                   <div className="flex items-center gap-3.5 min-w-0 flex-1">
                     <Link to={`/shop/${item.id}`} className="shrink-0 overflow-hidden rounded block">
                       <img
-                        src={item.img}
+                        src={resolveImageUrl(item.img)}
                         alt={item.title}
                         onError={(e) => {
                           e.currentTarget.onerror = null;
@@ -251,7 +252,7 @@ const Wishlist = () => {
                       <img
                         loading="lazy"
                         decoding="async"
-                        src={item.img}
+                        src={resolveImageUrl(item.img)}
                         alt={item.title}
                         onError={(e) => {
                           e.currentTarget.onerror = null;

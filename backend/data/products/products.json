@@ -18,7 +18,7 @@
     "category": [
       "Cotton Sarees"
     ],
-    "title": "Temple Silk",
+    "title": "Temple Cotton",
     "tag": "-20%",
     "discountPrice": 3299,
     "actualPrice": 4199,
@@ -31,7 +31,7 @@
     "category": [
       "Paithani Sarees"
     ],
-    "title": "Crimson Silk",
+    "title": "Crimson Paithani",
     "tag": "-10%",
     "discountPrice": 2999,
     "actualPrice": 3799,
@@ -44,7 +44,7 @@
     "category": [
       "Georgette Sarees"
     ],
-    "title": "Emerald Silk",
+    "title": "Emerald Georgette",
     "tag": "New",
     "discountPrice": 1499,
     "actualPrice": 1999,
@@ -57,7 +57,7 @@
     "category": [
       "Organza Sarees"
     ],
-    "title": "Pearl Silk",
+    "title": "Pearl Organza",
     "tag": "New",
     "discountPrice": 1299,
     "actualPrice": 1999,
@@ -83,7 +83,7 @@
     "category": [
       "Cotton Sarees"
     ],
-    "title": "Ivory Silk",
+    "title": "Ivory Cotton",
     "tag": "-15%",
     "discountPrice": 1799,
     "actualPrice": 2399,
@@ -96,7 +96,7 @@
     "category": [
       "Organza Sarees"
     ],
-    "title": "Lotus Silk",
+    "title": "Lotus Organza",
     "tag": "New",
     "discountPrice": 2199,
     "actualPrice": 2899,
@@ -109,7 +109,7 @@
     "category": [
       "Georgette Sarees"
     ],
-    "title": "Moonlit Silk",
+    "title": "Moonlit Georgette",
     "tag": "-10%",
     "discountPrice": 1699,
     "actualPrice": 2299,
@@ -122,7 +122,7 @@
     "category": [
       "Paithani Sarees"
     ],
-    "title": "Velvet Silk",
+    "title": "Velvet Paithani",
     "tag": "sale",
     "discountPrice": 5499,
     "actualPrice": 6999,
@@ -135,7 +135,7 @@
     "category": [
       "Cotton Sarees"
     ],
-    "title": "Golden Silk",
+    "title": "Golden Cotton",
     "tag": "New",
     "discountPrice": 1899,
     "actualPrice": 2499,
@@ -162,7 +162,7 @@
     "category": [
       "Georgette Sarees"
     ],
-    "title": "Meera Silk",
+    "title": "Meera Georgette",
     "tag": "New",
     "discountPrice": 1699,
     "actualPrice": 2199,
@@ -176,7 +176,7 @@
       "Paithani Sarees",
       "Silk Sarees"
     ],
-    "title": "Aurora Silk",
+    "title": "Aurora Paithani",
     "tag": "sale",
     "discountPrice": 5999,
     "actualPrice": 7599,
@@ -189,7 +189,7 @@
     "category": [
       "Organza Sarees"
     ],
-    "title": "Floral Silk",
+    "title": "Floral Organza",
     "tag": "sale",
     "discountPrice": 2399,
     "actualPrice": 3099,
@@ -216,7 +216,7 @@
       "Georgette Sarees",
       "Organza Sarees"
     ],
-    "title": "Twilight Silk",
+    "title": "Twilight Georgette",
     "tag": "-10%",
     "discountPrice": 1799,
     "actualPrice": 2399,
@@ -230,7 +230,7 @@
       "Cotton Sarees",
       "Silk Sarees"
     ],
-    "title": "Cherry Silk",
+    "title": "Cherry Cotton",
     "tag": "New",
     "discountPrice": 2199,
     "actualPrice": 2899,
@@ -243,7 +243,7 @@
     "category": [
       "Paithani Sarees"
     ],
-    "title": "Radiant Silk",
+    "title": "Radiant Paithani",
     "tag": "-25%",
     "discountPrice": 6299,
     "actualPrice": 8199,
@@ -257,7 +257,7 @@
       "Organza Sarees",
       "Silk Sarees"
     ],
-    "title": "Dewdrop Silk",
+    "title": "Dewdrop Organza",
     "tag": "New",
     "discountPrice": 2699,
     "actualPrice": 3499,
@@ -284,7 +284,7 @@
       "Cotton Sarees",
       "Organza Sarees"
     ],
-    "title": "Royal Silk",
+    "title": "Royal Cotton",
     "tag": "-15%",
     "discountPrice": 2099,
     "actualPrice": 2699,
@@ -297,7 +297,7 @@
     "category": [
       "Georgette Sarees"
     ],
-    "title": "Mysore Silk",
+    "title": "Mysore Georgette",
     "tag": "New",
     "discountPrice": 1899,
     "actualPrice": 2499,
@@ -311,7 +311,7 @@
       "Paithani Sarees",
       "Silk Sarees"
     ],
-    "title": "Temple Silk",
+    "title": "Temple Paithani",
     "tag": "Bestseller",
     "discountPrice": 6599,
     "actualPrice": 8399,
@@ -324,7 +324,7 @@
     "category": [
       "Organza Sarees"
     ],
-    "title": "Crimson Silk",
+    "title": "Crimson Organza",
     "tag": "New",
     "discountPrice": 2499,
     "actualPrice": 3199,
@@ -352,7 +352,7 @@
       "Georgette Sarees",
       "Organza Sarees"
     ],
-    "title": "Pearl Silk",
+    "title": "Pearl Georgette",
     "tag": "New",
     "discountPrice": 1999,
     "actualPrice": 2599,
@@ -365,7 +365,7 @@
     "category": [
       "Cotton Sarees"
     ],
-    "title": "Ocean Silk",
+    "title": "Ocean Cotton",
     "tag": "-10%",
     "discountPrice": 2299,
     "actualPrice": 2899,
@@ -378,7 +378,7 @@
     "category": [
       "Paithani Sarees"
     ],
-    "title": "Ivory Silk",
+    "title": "Ivory Paithani",
     "tag": "New",
     "discountPrice": 6899,
     "actualPrice": 8799,
@@ -392,7 +392,7 @@
       "Organza Sarees",
       "Silk Sarees"
     ],
-    "title": "Lotus Silk",
+    "title": "Lotus Organza",
     "tag": "-25%",
     "discountPrice": 2799,
     "actualPrice": 3599,
@@ -419,7 +419,7 @@
       "Cotton Sarees",
       "Georgette Sarees"
     ],
-    "title": "Velvet Silk",
+    "title": "Velvet Cotton",
     "tag": "-20%",
     "discountPrice": 2399,
     "actualPrice": 3099,
@@ -432,7 +432,7 @@
     "category": [
       "Georgette Sarees"
     ],
-    "title": "Golden Silk",
+    "title": "Golden Georgette",
     "tag": "New",
     "discountPrice": 2099,
     "actualPrice": 2799,
@@ -446,7 +446,7 @@
       "Paithani Sarees",
       "Silk Sarees"
     ],
-    "title": "Saffron Silk",
+    "title": "Saffron Paithani",
     "tag": "Bestseller",
     "discountPrice": 7299,
     "actualPrice": 9299,
@@ -459,7 +459,7 @@
     "category": [
       "Organza Sarees"
     ],
-    "title": "Meera Silk",
+    "title": "Meera Organza",
     "tag": "New",
     "discountPrice": 2899,
     "actualPrice": 3699,
@@ -487,7 +487,7 @@
       "Georgette Sarees",
       "Organza Sarees"
     ],
-    "title": "Floral Silk",
+    "title": "Floral Georgette",
     "tag": "-15%",
     "discountPrice": 2299,
     "actualPrice": 2999,
@@ -500,7 +500,7 @@
     "category": [
       "Cotton Sarees"
     ],
-    "title": "Dusk Silk",
+    "title": "Dusk Cotton",
     "tag": "New",
     "discountPrice": 2599,
     "actualPrice": 3299,
@@ -514,7 +514,7 @@
       "Paithani Sarees",
       "Silk Sarees"
     ],
-    "title": "Twilight Silk",
+    "title": "Twilight Paithani",
     "tag": "-25%",
     "discountPrice": 7599,
     "actualPrice": 9699,
@@ -528,7 +528,7 @@
       "Organza Sarees",
       "Georgette Sarees"
     ],
-    "title": "Cherry Silk",
+    "title": "Cherry Organza",
     "tag": "New",
     "discountPrice": 3099,
     "actualPrice": 3899,
@@ -555,7 +555,7 @@
       "Cotton Sarees",
       "Silk Sarees"
     ],
-    "title": "Dewdrop Silk",
+    "title": "Dewdrop Cotton",
     "tag": "-15%",
     "discountPrice": 2199,
     "actualPrice": 2899,
@@ -568,7 +568,7 @@
     "category": [
       "Georgette Sarees"
     ],
-    "title": "Harmony Silk",
+    "title": "Harmony Georgette",
     "tag": "New",
     "discountPrice": 1799,
     "actualPrice": 2399,
@@ -582,7 +582,7 @@
       "Paithani Sarees",
       "Silk Sarees"
     ],
-    "title": "Royal Silk",
+    "title": "Royal Paithani",
     "tag": "Bestseller",
     "discountPrice": 7999,
     "actualPrice": 9999,
@@ -595,7 +595,7 @@
     "category": [
       "Organza Sarees"
     ],
-    "title": "Mysore Silk",
+    "title": "Mysore Organza",
     "tag": "New",
     "discountPrice": 3199,
     "actualPrice": 3999,
@@ -622,7 +622,7 @@
     "category": [
       "Cotton Sarees"
     ],
-    "title": "Crimson Silk",
+    "title": "Crimson Cotton",
     "tag": "New",
     "discountPrice": 2099,
     "actualPrice": 2699,
@@ -636,7 +636,7 @@
       "Georgette Sarees",
       "Organza Sarees"
     ],
-    "title": "Emerald Silk",
+    "title": "Emerald Georgette",
     "tag": "-10%",
     "discountPrice": 1999,
     "actualPrice": 2599,
@@ -649,7 +649,7 @@
     "category": [
       "Paithani Sarees"
     ],
-    "title": "Pearl Silk",
+    "title": "Pearl Paithani",
     "tag": "New",
     "discountPrice": 6199,
     "actualPrice": 7899,
@@ -663,7 +663,7 @@
       "Organza Sarees",
       "Silk Sarees"
     ],
-    "title": "Ocean Silk",
+    "title": "Ocean Organza",
     "tag": "-25%",
     "discountPrice": 2699,
     "actualPrice": 3499,
@@ -690,7 +690,7 @@
       "Cotton Sarees",
       "Georgette Sarees"
     ],
-    "title": "Lotus Silk",
+    "title": "Lotus Cotton",
     "tag": "Trending",
     "discountPrice": 2399,
     "actualPrice": 3099,
@@ -703,7 +703,7 @@
     "category": [
       "Georgette Sarees"
     ],
-    "title": "Moonlit Silk",
+    "title": "Moonlit Georgette",
     "tag": "New",
     "discountPrice": 2199,
     "actualPrice": 2899,
@@ -717,7 +717,7 @@
       "Paithani Sarees",
       "Silk Sarees"
     ],
-    "title": "Velvet Silk",
+    "title": "Velvet Paithani",
     "tag": "Premium",
     "discountPrice": 6999,
     "actualPrice": 8999,
@@ -730,7 +730,7 @@
     "category": [
       "Organza Sarees"
     ],
-    "title": "Golden Silk",
+    "title": "Golden Organza",
     "tag": "New",
     "discountPrice": 2999,
     "actualPrice": 3799,
@@ -757,7 +757,7 @@
     "category": [
       "Cotton Sarees"
     ],
-    "title": "Meera Silk",
+    "title": "Meera Cotton",
     "tag": "-15%",
     "discountPrice": 2499,
     "actualPrice": 3199,
@@ -771,7 +771,7 @@
       "Georgette Sarees",
       "Organza Sarees"
     ],
-    "title": "Aurora Silk",
+    "title": "Aurora Georgette",
     "tag": "New",
     "discountPrice": 2399,
     "actualPrice": 3099,
@@ -784,7 +784,7 @@
     "category": [
       "Paithani Sarees"
     ],
-    "title": "Floral Silk",
+    "title": "Floral Paithani",
     "tag": "Premium",
     "discountPrice": 6599,
     "actualPrice": 8499,
@@ -798,7 +798,7 @@
       "Organza Sarees",
       "Georgette Sarees"
     ],
-    "title": "Dusk Silk",
+    "title": "Dusk Organza",
     "tag": "New",
     "discountPrice": 3299,
     "actualPrice": 4199,

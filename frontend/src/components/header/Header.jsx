@@ -28,7 +28,6 @@ const Header = () => {
   const [isDesktopSearchOpen, setIsDesktopSearchOpen] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
-  const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
 
   const userMenuRef = useRef(null);
   const desktopSearchContainerRef = useRef(null);
@@ -156,7 +155,7 @@ const Header = () => {
     if (!currentUser) {
       navigate("/signin");
     } else {
-      setIsProfileModalOpen(true);
+      navigate("/profile");
     }
   };
 
@@ -398,7 +397,7 @@ const Header = () => {
                   <div className="space-y-1">
                     <button
                       onClick={() => {
-                        setIsProfileModalOpen(true);
+                        navigate("/profile");
                         setIsUserMenuOpen(false);
                       }}
                       className="w-full text-left flex items-center justify-between px-3.5 py-2.5 rounded-xl text-slate-700 hover:bg-rose-50 hover:text-[#74202D] transition cursor-pointer font-medium group"
@@ -666,7 +665,7 @@ const Header = () => {
                   <button
                     onClick={() => {
                       setIsOpen(false);
-                      setIsProfileModalOpen(true);
+                      navigate("/profile");
                     }}
                     className="text-xs font-semibold text-amber-200 hover:underline cursor-pointer"
                   >
@@ -776,70 +775,8 @@ const Header = () => {
       )}
 
       {/* ========================================================================= */}
-      {/* 5. PATRON PROFILE DETAILS MODAL */}
+      {/* 5. PATRON PROFILE DETAILS MODAL (Removed in favor of /profile page) */}
       {/* ========================================================================= */}
-      {isProfileModalOpen && currentUser && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs">
-          <div className="bg-white rounded-3xl shadow-2xl max-w-sm w-full p-6 border border-slate-200 animate-in fade-in zoom-in-95">
-            <div className="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
-              <h4 className="text-base font-bold text-slate-800">My Patron Profile</h4>
-              <button
-                onClick={() => setIsProfileModalOpen(false)}
-                className="p-1 rounded-lg text-slate-400 hover:text-slate-700 cursor-pointer"
-              >
-                <FiX className="text-lg" />
-              </button>
-            </div>
-
-            <div className="space-y-3.5 text-xs">
-              <div className="flex items-center gap-3 p-3 bg-rose-50 rounded-2xl">
-                <div className="w-12 h-12 rounded-full bg-[#6B1527] text-amber-300 font-bold text-lg flex items-center justify-center flex-shrink-0">
-                  {currentUser.name?.charAt(0) || "P"}
-                </div>
-                <div>
-                  <h5 className="font-bold text-slate-800 text-sm">{currentUser.name}</h5>
-                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#6B1527] text-white">
-                    {isAdmin(currentUser) ? "Super Admin" : "Verified Customer"}
-                  </span>
-                </div>
-              </div>
-
-              <div className="space-y-2 pt-1">
-                <div className="flex items-center gap-2 p-2.5 rounded-xl bg-slate-50 border border-slate-100 text-slate-700">
-                  <FiMail className="text-[#6B1527] text-sm" />
-                  <span className="font-medium truncate">{currentUser.email}</span>
-                </div>
-                {currentUser.phone && (
-                  <div className="flex items-center gap-2 p-2.5 rounded-xl bg-slate-50 border border-slate-100 text-slate-700">
-                    <FiPhone className="text-[#6B1527] text-sm" />
-                    <span className="font-medium">{currentUser.phone}</span>
-                  </div>
-                )}
-              </div>
-
-              <div className="pt-2 flex items-center gap-3">
-                <button
-                  type="button"
-                  onClick={() => setIsProfileModalOpen(false)}
-                  className="flex-1 py-2.5 rounded-xl border border-slate-200 font-semibold text-slate-600 hover:bg-slate-50 transition cursor-pointer"
-                >
-                  Close
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setIsProfileModalOpen(false);
-                    handleSignOut();
-                  }}
-                  className="flex-1 py-2.5 rounded-xl bg-rose-600 text-white font-semibold hover:bg-rose-700 transition cursor-pointer"
-                >
-                  Sign Out
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
     </>
   );
 };

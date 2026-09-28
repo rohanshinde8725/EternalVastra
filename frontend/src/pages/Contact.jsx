@@ -307,8 +307,8 @@ const Contact = () => {
       </div>
       {/* Form End here */}
 
-      <div className="mb-20">
-        <BottomTrustBar />
+      <div className="bg-[#FEFAF8] py-10 sm:py-14 lg:py-16 px-4 sm:px-6 lg:px-8 mx-auto max-w-[1600px]">
+        <BottomTrustBar className="mt-0" cardClassName="bg-[#FEFAF8] lg:bg-white" />
       </div>
     </div>
   );

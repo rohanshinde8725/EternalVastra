@@ -122,7 +122,7 @@ const Seller = () => {
                         e.currentTarget.onerror = null;
                         e.currentTarget.src = "/images/silk/silk-1.jpg";
                       }}
-                      className="h-48 sm:h-56 md:h-56 lg:h-64 xl:h-72 w-full rounded-t-xl object-cover object-top transition duration-300 group-hover:scale-[1.05]"
+                      className="h-[230px] sm:h-[300px] w-full rounded-t-xl object-cover object-top transition duration-300 group-hover:scale-[1.05]"
                     />
                   </Link>
 
@@ -139,11 +139,10 @@ const Seller = () => {
                         type="button"
                         onClick={() => toggleSellerWishlist(saree)}
                         aria-label={wishlistIds.includes(saree.id) ? "Remove from wishlist" : "Add to wishlist"}
-                        className={`flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center cursor-pointer rounded-full shadow-md backdrop-blur-xs transform translate-x-0 opacity-100 md:translate-x-4 md:opacity-0 transition-all duration-300 ease-out md:group-hover:translate-x-0 md:group-hover:opacity-100 hover:scale-110 active:scale-95 delay-75 ${
-                          wishlistIds.includes(saree.id)
+                        className={`flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center cursor-pointer rounded-full shadow-md backdrop-blur-xs transform translate-x-0 opacity-100 md:translate-x-4 md:opacity-0 transition-all duration-300 ease-out md:group-hover:translate-x-0 md:group-hover:opacity-100 hover:scale-110 active:scale-95 delay-75 ${wishlistIds.includes(saree.id)
                             ? "bg-[#74202D] text-white"
                             : "bg-white/95 text-[#74202D] hover:bg-[#74202D] hover:text-white"
-                        }`}
+                          }`}
                       >
                         <CiHeart className={`text-lg sm:text-xl transition-transform duration-200 ${wishlistIds.includes(saree.id) ? "fill-current scale-110" : ""}`} />
                       </button>

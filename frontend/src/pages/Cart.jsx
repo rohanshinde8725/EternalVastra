@@ -5,6 +5,7 @@ import { MdGridView, MdViewList } from "react-icons/md";
 import { useToast } from "../context/ToastContext";
 import { isAuthenticated } from "../utils/auth";
 import FadeUp from "../components/animations/FadeUp";
+import { resolveImageUrl } from "../api/products";
 
 const Cart = () => {
   const { showToast } = useToast();
@@ -178,7 +179,7 @@ const Cart = () => {
                               <div className="flex items-start gap-3">
                                 <Link to={`/shop/${item.id}`} className="shrink-0 group">
                                   <img
-                                    src={item.img}
+                                    src={resolveImageUrl(item.img)}
                                     alt={item.title}
                                     onError={(e) => {
                                       e.currentTarget.onerror = null;
@@ -236,7 +237,7 @@ const Cart = () => {
                           <img
                             loading="lazy"
                             decoding="async"
-                            src={item.img}
+                            src={resolveImageUrl(item.img)}
                             alt={item.title}
                             onError={(e) => {
                               e.currentTarget.onerror = null;

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import { MdMenuOpen, MdGridView, MdViewList } from "react-icons/md";
 import { CiHeart } from "react-icons/ci";
-import { FiEye } from "react-icons/fi";
+import { FiEye, FiSearch, FiGrid, FiList } from "react-icons/fi";
 import Rating from "../components/rating/Rating";
 import useProducts from "../hooks/useProducts";
 import { API_BASE_URL } from "../api/products";
@@ -26,7 +26,6 @@ const Shop = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const maxPrice = 25000;
   const [sort, setSort] = useState("default");
-  const [showFilter, setShowFilter] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 12;
   const [viewMode, setViewMode] = useState("4");
@@ -35,6 +34,11 @@ const Shop = () => {
   const location = useLocation();
   const searchQuery = (new URLSearchParams(location.search).get("search") || "").trim().toLowerCase();
   const categoryQuery = new URLSearchParams(location.search).get("category") || "";
+  const [search, setSearch] = useState(searchQuery);
+
+  useEffect(() => {
+    setSearch(searchQuery);
+  }, [searchQuery]);
 
   useEffect(() => {
     fetch(`${API_BASE_URL}/api/admin/categories`)
@@ -165,6 +169,11 @@ const Shop = () => {
     setCurrentPage(1);
   };
 
+  const handleSearchChange = (e) => {
+    setSearch(e.target.value);
+    setCurrentPage(1);
+  };
+
   useEffect(() => {
     setCurrentPage(1);
   }, [searchQuery]);
@@ -176,10 +185,10 @@ const Shop = () => {
         (selectedCategory === "All" ||
         item.category.includes(selectedCategory)) &&
         item.discountPrice <= maxPrice &&
-        (searchQuery === "" ||
-          item.title?.toLowerCase().includes(searchQuery) ||
+        (search.trim() === "" ||
+          item.title?.toLowerCase().includes(search.toLowerCase().trim()) ||
           item.category.some((cat) =>
-            cat.toLowerCase().includes(searchQuery)
+            cat.toLowerCase().includes(search.toLowerCase().trim())
           ))
     )
     .sort((a, b) => {
@@ -239,78 +248,101 @@ const Shop = () => {
 
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 md:py-12">
 
-        {/* Mobile Filter */}
-        <div className="lg:hidden flex justify-between items-center mb-4 sm:mb-6">
-          <button onClick={() => setShowFilter(true)}
-            className="flex items-center gap-2 border border-gray-300 bg-white px-3.5 sm:px-4 py-2 rounded-md text-xs sm:text-sm font-semibold shadow-xs cursor-pointer hover:border-[#74202D]" >
-            <MdMenuOpen className="text-base sm:text-lg" />
-            <span>Filters</span>
-          </button>
+        {/* ========================================================================= */}
+        {/* UNIFIED SEARCH & FILTER CONTROLS (Blog Style) */}
+        {/* ========================================================================= */}
+        <FadeUp delay={0.15}>
+          <div className="bg-white rounded-xl border border-slate-200/90 shadow-xs p-4 sm:p-5 space-y-4 mb-8">
 
-          <select onChange={(e) => handleSortChange(e.target.value)} className="border border-gray-300 bg-white px-3 py-2 rounded-md text-xs sm:text-sm font-semibold shadow-xs focus:outline-none focus:border-[#74202D]">
-            <option value="default">Sort By: Default</option>
-            <option value="low">Price: Low → High</option>
-            <option value="high">Price: High → Low</option>
-          </select>
-        </div>
+            {/* Top Row: Search Input + Sort Dropdown + Grid/List Toggle */}
+            <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
 
-        {/* Desktop Filter Bar */}
-        <div className="hidden lg:flex justify-between items-center bg-white border border-gray-200/90 rounded-xl shadow-xs px-6 py-4 mb-8">
-          <div className="flex items-center gap-2.5 flex-wrap">
-            <h3 className="text-xs sm:text-sm text-[#74202D] font-bold uppercase tracking-wider mr-2">
-              Filter By Category:
-            </h3>
+              {/* Search Box */}
+              <div className="relative flex-1 max-w-xl">
+                <FiSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-base" />
+                <input
+                  type="text"
+                  value={search}
+                  onChange={handleSearchChange}
+                  placeholder="Search sarees by name, type, or occasion..."
+                  className="w-full pl-10 pr-4 py-2.5 rounded-md bg-slate-50 border border-slate-200 text-xs sm:text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-[#74202D] focus:bg-white transition"
+                />
+              </div>
 
-            {categoryList.map((cat) => (
-              <button key={cat} onClick={() => handleCategoryChange(cat)}
-                className={`px-4 py-2 rounded-md border text-xs sm:text-sm font-semibold transition-all duration-300 cursor-pointer
-                  ${ selectedCategory === cat
-                      ? "bg-[#74202D] text-white border-[#74202D] shadow-xs"
-                      : "border-gray-200 bg-gray-50/50 text-slate-700 hover:border-[#74202D] hover:text-[#74202D]"
-                  }`}>
-                {cat}
-              </button>
-            ))}
+              {/* Controls Right */}
+              <div className="flex items-center justify-between md:justify-end gap-3 flex-wrap">
+
+                {/* Sort By Dropdown */}
+                <div className="flex items-center gap-2 text-xs font-semibold text-slate-600">
+                  <span className="text-slate-500 whitespace-nowrap">Sort by:</span>
+                  <select
+                    value={sort}
+                    onChange={(e) => handleSortChange(e.target.value)}
+                    className="px-3 py-2 rounded-md bg-slate-50 border border-slate-200 text-xs font-semibold text-slate-800 focus:outline-none focus:border-[#74202D] cursor-pointer"
+                  >
+                    <option value="default">Default</option>
+                    <option value="low">Price: Low → High</option>
+                    <option value="high">Price: High → Low</option>
+                  </select>
+                </div>
+
+                {/* View Switcher: Grid vs List */}
+                <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-md border border-slate-200">
+                  <button
+                    type="button"
+                    onClick={() => handleViewModeChange("4")}
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded text-xs font-semibold transition cursor-pointer ${viewMode === "4"
+                        ? "bg-[#74202D] text-white shadow-xs"
+                        : "text-slate-600 hover:text-slate-900"
+                      }`}
+                    title="Grid View"
+                  >
+                    <FiGrid className="text-sm" />
+                    <span className="hidden sm:inline">Grid</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => handleViewModeChange("table")}
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded text-xs font-semibold transition cursor-pointer ${viewMode === "table"
+                        ? "bg-[#74202D] text-white shadow-xs"
+                        : "text-slate-600 hover:text-slate-900"
+                      }`}
+                    title="List View"
+                  >
+                    <FiList className="text-sm" />
+                    <span className="hidden sm:inline">List</span>
+                  </button>
+                </div>
+
+              </div>
+
+            </div>
+
+            {/* Bottom Row: Category Pills */}
+            <div className="pt-2 border-t border-slate-100 flex items-center gap-2 overflow-x-auto custom-admin-scroll pb-1">
+              {categoryList.map((cat) => {
+                const isSelected = selectedCategory === cat;
+                return (
+                  <button
+                    key={cat}
+                    type="button"
+                    onClick={() => handleCategoryChange(cat)}
+                    className={`px-4 py-2 rounded-md border text-xs sm:text-sm font-semibold transition-all duration-300 cursor-pointer whitespace-nowrap ${isSelected
+                        ? "bg-[#74202D] text-white border-[#74202D] shadow-xs"
+                        : "border-gray-200 bg-gray-50/50 text-slate-700 hover:border-[#74202D] hover:text-[#74202D]"
+                      }`}
+                  >
+                    {cat}
+                  </button>
+                );
+              })}
+            </div>
+
           </div>
-
-        </div>
-
-        {/* Mobile Sidebar */}
-        <div className={`fixed top-0 left-0 h-full w-72 bg-white z-50 p-5 shadow-lg transition-transform 
-        duration-300 lg:hidden ${ showFilter ? "translate-x-0" : "-translate-x-full" }`}>
-          <div className="flex justify-between items-center">
-            <h3 className="font-semibold text-[#74202D] text-lg"> Filter By </h3>
-            <MdMenuOpen
-              className="text-2xl cursor-pointer"
-              onClick={() => setShowFilter(false)}
-            />
-          </div>
-
-          <h4 className="mt-8 mb-3 font-semibold text-[#74202D]">
-            Categories
-          </h4>
-
-          {categoryList.map((cat) => (
-            <button key={cat} onClick={() => {
-                handleCategoryChange(cat);
-                setShowFilter(false);
-              }}
-              className={`block w-full text-left py-2 text-sm ${
-                selectedCategory === cat
-                  ? "text-[#74202D] font-semibold"
-                  : ""
-              }`}>
-              {cat}
-            </button>
-          ))}
-        </div>
-
-        {showFilter && (
-          <div className="fixed inset-0 bg-black/40 lg:hidden z-40" onClick={() => setShowFilter(false)}/>
-        )}
+        </FadeUp>
 
         {/* Products */}
-        <div className="bg-white border border-gray-300 rounded-xl shadow-sm p-3 sm:p-5 md:p-6">
+        <div className="">
 
           <div className="flex flex-col gap-3 justify-between items-start mb-4 sm:mb-6 sm:flex-row sm:items-center">
             <div>
@@ -449,7 +481,7 @@ const Shop = () => {
                             e.currentTarget.onerror = null;
                             e.currentTarget.src = "/images/silk/silk-1.jpg";
                           }}
-                          className="w-full h-48 sm:h-56 md:h-56 lg:h-64 xl:h-72 object-cover object-top transition duration-300 group-hover:scale-[1.05]"
+                          className="w-full h-[230px] sm:h-[300px] 2xl:h-[360px] object-cover object-top transition duration-300 group-hover:scale-[1.05]"
                         />
                       </Link>
                       {/* Hover Overlay: Tag + Action Icons (Wishlist & View Eye) */}
