@@ -11,7 +11,7 @@ const Categories = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [banner, setBanner] = useState(`${API_BASE_URL}/images/silk/silkCategory.png`);
+  const [banner, setBanner] = useState(`${API_BASE_URL}/images/silk/silkCategory.webp`);
 
   const fetchCategories = () => {
     setLoading(true);
@@ -25,7 +25,7 @@ const Categories = () => {
           setCategories(
             data.map((c) => ({
               ...c,
-              banner: c.banner?.startsWith("http") ? c.banner : `${API_BASE_URL}${c.banner || "/images/silk/silkCategory.png"}`,
+              banner: c.banner?.startsWith("http") ? c.banner : `${API_BASE_URL}${c.banner || "/images/silk/silkCategory.webp"}`,
             }))
           );
         }
@@ -125,7 +125,7 @@ const Categories = () => {
   };
 
   return (
-    <div className="space-y-6 sm:space-y-7 max-w-[1600px] mx-auto pb-12 text-slate-800">
+    <div className="space-y-6 sm:space-y-7 max-w-[1600px] mx-auto text-slate-800">
       {/* Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
         <div>

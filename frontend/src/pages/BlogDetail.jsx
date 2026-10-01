@@ -14,9 +14,51 @@ import {
   FiEye,
 } from "react-icons/fi";
 import { FaFacebookF, FaTwitter, FaWhatsapp, FaPinterestP } from "react-icons/fa";
-import { API_BASE_URL } from "../api/products";
+import { API_BASE_URL, resolveImageUrl } from "../api/products";
 import { useToast } from "../context/ToastContext";
 import FadeUp from "../components/animations/FadeUp";
+
+const BLOG_CURATED_COVERS = {
+  "ultimate-guide-choosing-perfect-saree": "/images/silk/silkCategory.webp",
+  "10-elegant-ways-to-drape-saree-perfectly": "/images/paithani/paithani-1.webp",
+  "guide-to-indian-saree-weaves": "/images/paithani/paithaniCategory.webp",
+  "how-to-care-for-sarees-last-forever": "/images/cotton/cotton-2.webp",
+  "art-behind-every-handwoven-saree": "/images/craft/craft-3.webp",
+  "sarees-and-celebrations-indian-traditions": "/images/organza/organzaCategory.webp",
+  "saree-styling-ideas-for-every-occasion": "/images/georgette/georgetteCategory.webp",
+  "cotton-silk-georgette-which-saree-is-for-you": "/images/cotton/cottonCategory.webp",
+};
+
+const BLOG_ROTATING_COVERS = [
+  "/images/silk/silkCategory.webp",
+  "/images/paithani/paithani-1.webp",
+  "/images/paithani/paithaniCategory.webp",
+  "/images/cotton/cotton-2.webp",
+  "/images/craft/craft-3.webp",
+  "/images/organza/organzaCategory.webp",
+  "/images/georgette/georgetteCategory.webp",
+  "/images/cotton/cottonCategory.webp",
+];
+
+const getBlogCover = (p, idx = 0) => {
+  if (p?.slug && BLOG_CURATED_COVERS[p.slug]) {
+    return resolveImageUrl(BLOG_CURATED_COVERS[p.slug]);
+  }
+  const title = (p?.title || "").toLowerCase();
+  if (title.includes("ultimate guide") || title.includes("perfect saree")) return resolveImageUrl("/images/silk/silkCategory.webp");
+  if (title.includes("drape") || title.includes("ways to drape")) return resolveImageUrl("/images/paithani/paithani-1.webp");
+  if (title.includes("weaves") || title.includes("heritage")) return resolveImageUrl("/images/paithani/paithaniCategory.webp");
+  if (title.includes("care") || title.includes("last forever")) return resolveImageUrl("/images/cotton/cotton-2.webp");
+  if (title.includes("art behind") || title.includes("handwoven")) return resolveImageUrl("/images/craft/craft-3.webp");
+  if (title.includes("celebration") || title.includes("tradition")) return resolveImageUrl("/images/organza/organzaCategory.webp");
+  if (title.includes("styling ideas") || title.includes("occasion")) return resolveImageUrl("/images/georgette/georgetteCategory.webp");
+  if (title.includes("cotton, silk or georgette") || title.includes("which saree")) return resolveImageUrl("/images/cotton/cottonCategory.webp");
+
+  if (p?.cover && !p.cover.includes("silk-1.") && !p.cover.includes("testimonial-1.")) {
+    return resolveImageUrl(p.cover);
+  }
+  return resolveImageUrl(BLOG_ROTATING_COVERS[idx % BLOG_ROTATING_COVERS.length]);
+};
 
 const BlogDetail = () => {
   const { id } = useParams();
@@ -118,8 +160,8 @@ const BlogDetail = () => {
       {/* ========================================================================= */}
       {/* 1. TOP BREADCRUMB & HEADER */}
       {/* ========================================================================= */}
-      <div className="bg-gradient-to-b from-[#F9EFE8] to-[#FEFAF8] border-b border-rose-100/60 pt-6 pb-12">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+      <div className="bg-gradient-to-b from-[#F9EFE8]  to-[#FEFAF8] border-b border-rose-100/60 pt-6 pb-12">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10">
           
           {/* Back link + Breadcrumb */}
           <FadeUp delay={0.05}>
@@ -202,20 +244,14 @@ const BlogDetail = () => {
       {/* 2. HERO COVER IMAGE */}
       {/* ========================================================================= */}
       <FadeUp delay={0.15}>
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 -mt-4 mb-12">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10 -mt-4 mb-12">
           <div className="rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-slate-900">
             <img
-              src={
-                post.cover?.startsWith("http")
-                  ? post.cover
-                  : post.cover
-                  ? `${API_BASE_URL}${post.cover}`
-                  : "/images/silk/silk-1.jpg"
-              }
+              src={getBlogCover(post)}
               alt={post.title}
               onError={(e) => {
                 e.target.onerror = null;
-                e.target.src = "https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=1000&auto=format&fit=crop&q=80";
+                e.target.src = getBlogCover(post);
               }}
               className="w-full h-80 sm:h-[450px] object-cover object-center"
             />
@@ -226,7 +262,7 @@ const BlogDetail = () => {
       {/* ========================================================================= */}
       {/* 3. MAIN ARTICLE CONTENT */}
       {/* ========================================================================= */}
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 space-y-10 text-slate-700 leading-relaxed">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10 space-y-10 text-slate-700 leading-relaxed">
         
         {/* Quote Block if available */}
         {post.quote && (
@@ -378,7 +414,7 @@ const BlogDetail = () => {
       {/* ========================================================================= */}
       {/* 4. SHOP THE STORY / RELATED SAREES BANNER */}
       {/* ========================================================================= */}
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 mt-16">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10 mt-16">
         <FadeUp delay={0.15}>
           <div className="bg-gradient-to-r from-[#6B1527] to-[#450C16] rounded-3xl p-8 sm:p-10 text-white shadow-xl flex flex-col sm:flex-row items-center justify-between gap-6">
             <div className="space-y-2 text-center sm:text-left">
@@ -408,7 +444,7 @@ const BlogDetail = () => {
       {/* 5. RELATED STORIES CAROUSEL / GRID */}
       {/* ========================================================================= */}
       {relatedStories.length > 0 && (
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 mt-20">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10 mt-20">
           <FadeUp delay={0.1}>
             <div className="flex items-center justify-between pb-4 border-b border-slate-200 mb-8">
               <h3 className="text-2xl font-serif font-bold text-slate-900">More Inspiring Stories</h3>
@@ -428,14 +464,12 @@ const BlogDetail = () => {
                     <Link to={`/blog/${rel._id || rel.id}`}>
                       <div className="relative h-80 bg-slate-100 overflow-hidden">
                         <img
-                          src={
-                            rel.cover?.startsWith("http")
-                              ? rel.cover
-                              : rel.cover
-                              ? `${API_BASE_URL}${rel.cover}`
-                              : "/images/silk/silk-2.jpg"
-                          }
+                          src={getBlogCover(rel, index)}
                           alt={rel.title}
+                          onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = getBlogCover(rel, index);
+                          }}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 cursor-pointer"
                         />
                         <span className="absolute bottom-3 left-3 bg-[#F6E6D8]/95 text-[#6B1527] text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-sm shadow-xs border border-[#E9D1BE]">

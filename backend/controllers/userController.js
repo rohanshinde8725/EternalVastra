@@ -75,9 +75,21 @@ exports.updateAvatar = async (req, res) => {
     user.avatar = avatarUrl;
     await user.save();
 
+    if (user.role === "admin" || user.email === "rohanshinde8725@gmail.com") {
+      await require("../models/AdminProfile").findOneAndUpdate({}, { avatar: avatarUrl }, { upsert: true });
+    }
+
     res.json({
       message: "Avatar updated successfully",
-      avatar: avatarUrl
+      avatar: avatarUrl,
+      user: {
+        id: user._id,
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        avatar: user.avatar,
+        role: user.role,
+      }
     });
   } catch (error) {
     console.error("Error updating avatar:", error);

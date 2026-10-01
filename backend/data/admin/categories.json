@@ -4,7 +4,7 @@
     "slug": "silk-sarees",
     "count": 48,
     "share": "45%",
-    "banner": "/images/silk/silkCategory.png",
+    "banner": "/images/silk/silkCategory.webp",
     "description": "Lustrous pure mulberry and tussar silks woven with zari borders."
   },
   {
@@ -12,7 +12,7 @@
     "slug": "cotton-sarees",
     "count": 36,
     "share": "25%",
-    "banner": "/images/cotton/cottonCategory.png",
+    "banner": "/images/cotton/cottonCategory.webp",
     "description": "Breathable handloom cottons, Chanderi, and linen daily drapes."
   },
   {
@@ -20,7 +20,7 @@
     "slug": "paithani-sarees",
     "count": 24,
     "share": "15%",
-    "banner": "/images/paithani/paithaniCategory.png",
+    "banner": "/images/paithani/paithaniCategory.webp",
     "description": "Royal Maharashtrian weaves with distinctive peacock motifs & rich pallu."
   },
   {
@@ -28,7 +28,7 @@
     "slug": "georgette-sarees",
     "count": 20,
     "share": "10%",
-    "banner": "/images/silk/silk-6.jpg",
+    "banner": "/images/georgette/georgetteCategory.webp",
     "description": "Lightweight, flowy, and modern partywear georgettes with sequins."
   },
   {
@@ -36,7 +36,7 @@
     "slug": "organza-sarees",
     "count": 14,
     "share": "5%",
-    "banner": "/images/categoryImg-5.png",
+    "banner": "/images/organza/organzaCategory.webp",
     "description": "Sheer, crisp, pastel floral organza sarees with delicate embroidery."
   }
 ]

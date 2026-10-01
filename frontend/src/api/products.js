@@ -1,7 +1,7 @@
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
 const resolveImageUrl = (imagePath) => {
-  if (!imagePath || typeof imagePath !== "string") return "/images/silk/silk-1.jpg";
+  if (!imagePath || typeof imagePath !== "string") return "/images/silk/silk-1.webp";
 
   // Strip hardcoded production URLs if present
   let cleanPath = imagePath;
@@ -15,7 +15,17 @@ const resolveImageUrl = (imagePath) => {
     return `${API_BASE_URL}${relativePath.startsWith("/") ? "" : "/"}${relativePath}`;
   }
 
+  // Convert any legacy raster extensions (.jpg, .jpeg, .png) to .webp EXCEPT for uploaded files under /uploads/
+  if (!cleanPath.startsWith("/uploads/")) {
+    cleanPath = cleanPath.replace(/\.(png|jpg|jpeg)$/i, ".webp");
+  }
+
   if (cleanPath.startsWith("http://") || cleanPath.startsWith("https://")) {
+    return cleanPath;
+  }
+
+  // Bundled static images under /images/ can load directly from frontend CDN for maximum speed
+  if (cleanPath.startsWith("/images/")) {
     return cleanPath;
   }
 

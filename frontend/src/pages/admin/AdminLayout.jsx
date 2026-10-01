@@ -1,24 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link, NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
-import {
-  FiGrid,
-  FiShoppingBag,
-  FiBox,
-  FiTag,
-  FiUsers,
-  FiStar,
-  FiImage,
-  FiTrash2,
-  FiSettings,
-  FiLogOut,
-  FiMenu,
-  FiX,
-  FiPlus,
-  FiCalendar,
-  FiChevronDown,
-  FiCheck,
-} from "react-icons/fi";
-import { API_BASE_URL } from "../../api/products";
+import { FiGrid, FiShoppingBag, FiBox, FiTag, FiUsers, FiStar, FiImage, FiTrash2, FiSettings, FiLogOut, FiMenu,
+  FiUserCheck, FiX, FiChevronDown, } from "react-icons/fi";
+import { API_BASE_URL, resolveImageUrl } from "../../api/products";
 import Logo from "../../components/common/Logo";
 import { getStoredUser, logout } from "../../utils/auth";
 import { useToast } from "../../context/ToastContext";
@@ -29,6 +13,7 @@ const navItems = [
   { path: "/admin/products", label: "Products", icon: FiBox },
   { path: "/admin/categories", label: "Categories", icon: FiTag },
   { path: "/admin/customers", label: "Customers", icon: FiUsers },
+  { path: "/admin/users", label: "Users & Access", icon: FiUserCheck },
   { path: "/admin/reviews", label: "Reviews", icon: FiStar },
   { path: "/admin/banners", label: "Banners", icon: FiImage },
   { path: "/admin/recycle-bin", label: "Recycle Bin", icon: FiTrash2 },
@@ -51,6 +36,17 @@ const AdminLayout = () => {
     const handleUserChange = () => {
       setCurrentUser(getStoredUser());
     };
+
+    // Also fetch latest admin profile from API to sync avatar
+    fetch(`${API_BASE_URL}/api/admin/profile`)
+      .then((res) => res.ok ? res.json() : null)
+      .then((data) => {
+        if (data && data.avatar) {
+          setCurrentUser((prev) => ({ ...prev, avatar: data.avatar, name: data.name || prev?.name }));
+        }
+      })
+      .catch(() => {});
+
     window.addEventListener("userUpdated", handleUserChange);
     window.addEventListener("storage", handleUserChange);
     return () => {
@@ -110,7 +106,7 @@ const AdminLayout = () => {
               onClick={() => setSidebarOpen(false)}
               className="lg:hidden text-white/70 hover:text-white p-1.5 rounded-md"
             >
-              <FiX className="text-2xl" />
+              <FiX className="text-2xl text-white" />
             </button>
           </div>
 
@@ -123,11 +119,11 @@ const AdminLayout = () => {
               <div className="flex items-center gap-3">
                 <div className="relative">
                   <img
-                    src={currentUser?.avatar || `${API_BASE_URL}/images/testimonial/testimonial-1.png`}
+                    src={resolveImageUrl(currentUser?.avatar || "/images/testimonial/testimonial-1.webp")}
                     alt={currentUser?.name || "Admin Avatar"}
                     onError={(e) => {
                       e.target.onerror = null;
-                      e.target.src = "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&auto=format&fit=crop&q=80";
+                      e.target.src = "/images/default-avatar.webp";
                     }}
                     className="w-11 h-11 rounded-full object-cover border-2 border-amber-300/50 shadow-sm"
                   />
@@ -136,7 +132,7 @@ const AdminLayout = () => {
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center gap-1.5">
                     <span className="text-base font-bold text-white truncate">{currentUser?.name || "Admin"}</span>
-                    <FiChevronDown className="text-sm text-amber-200/90 shrink-0" />
+                    <FiChevronDown className="text-sm text-white shrink-0" />
                   </div>
                   <span className="text-xs text-amber-200/80 font-medium block truncate">
                     {currentUser?.role === "admin" ? "Super Admin" : "Administrator"}
@@ -196,7 +192,7 @@ const AdminLayout = () => {
                     : "text-rose-100/80 hover:text-white hover:bg-white/10"
                 }`}
               >
-                <Icon className={`text-xl shrink-0 ${isActive ? "text-amber-300" : "text-rose-200/80"}`} />
+                <Icon className="text-xl shrink-0 text-white" />
                 <span>{item.label}</span>
               </NavLink>
             );
@@ -209,7 +205,7 @@ const AdminLayout = () => {
             onClick={() => setShowLogoutModal(true)}
             className="flex items-center gap-3.5 w-full px-4 py-3 rounded-xl text-[15px] font-semibold text-rose-100/80 hover:text-white hover:bg-white/10 transition duration-200 cursor-pointer"
           >
-            <FiLogOut className="text-xl text-rose-300" />
+            <FiLogOut className="text-xl text-white" />
             <span>Logout</span>
           </button>
         </div>
@@ -258,11 +254,11 @@ const AdminLayout = () => {
                 className="lg:hidden flex items-center gap-1.5 p-1 rounded-full border border-slate-200 hover:border-[#6B1527] transition cursor-pointer"
               >
                 <img
-                  src={`${API_BASE_URL}/images/testimonial/testimonial-1.png`}
+                  src={resolveImageUrl(currentUser?.avatar || "/images/testimonial/testimonial-1.webp")}
                   alt="Admin Avatar"
                   onError={(e) => {
                     e.target.onerror = null;
-                    e.target.src = "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&auto=format&fit=crop&q=80";
+                    e.target.src = "/images/default-avatar.webp";
                   }}
                   className="w-8 h-8 rounded-full object-cover"
                 />

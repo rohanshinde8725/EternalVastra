@@ -1,26 +1,32 @@
 [
   {
-    "title": "Festival Saree Showcase 2026",
-    "subtitle": "Up to 30% Off On Handloom Silk & Royal Paithanis",
-    "image": "/images/banner/banner-1.png",
+    "title": "Timeless Waves,",
+    "subtitle": "Eternal Elegance",
+    "description": "Discover our exquisite collection of sarees crafted with tradition, quality & love.",
+    "buttonText": "Shop Now",
+    "image": "/images/banner/banner-1.webp",
     "link": "/shop",
     "position": "Hero Main Banner",
     "active": true
   },
   {
-    "title": "The Regal Wedding Collection",
-    "subtitle": "Handcrafted Pure Zari Weaves for Brides & Bridesmaids",
-    "image": "/images/banner/banner-2.png",
+    "title": "Elegance for",
+    "subtitle": "Every Celebration",
+    "description": "From weddings to festive moments, explore sarees that make every occasion unforgettable.",
+    "buttonText": "Shop Now",
+    "image": "/images/banner/banner-2.webp",
     "link": "/shop",
-    "position": "Homepage Mid Banner",
+    "position": "Hero Main Banner",
     "active": true
   },
   {
-    "title": "Lightweight Chanderi & Summer Cottons",
-    "subtitle": "Daily Drapes with Artisanal Comfort",
-    "image": "/images/banner/banner-3.png",
+    "title": "Designed for",
+    "subtitle": "Modern Grace",
+    "description": "Contemporary sarees crafted for the modern woman — effortless elegance for every day.",
+    "buttonText": "Shop Now",
+    "image": "/images/banner/banner-3.webp",
     "link": "/shop",
-    "position": "Category Top Banner",
+    "position": "Hero Main Banner",
     "active": true
   }
 ]

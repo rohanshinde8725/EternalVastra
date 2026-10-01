@@ -14,7 +14,7 @@
         "name": "Mysore Silk Saree - Crimson Gold",
         "qty": 1,
         "price": 3299,
-        "img": "/images/silk/silk-1.jpg"
+        "img": "/images/silk/silk-1.webp"
       }
     ]
   },
@@ -33,7 +33,7 @@
         "name": "Temple Border Silk Saree",
         "qty": 1,
         "price": 2899,
-        "img": "/images/cotton/cotton-1.jpg"
+        "img": "/images/cotton/cotton-1.webp"
       }
     ]
   },
@@ -52,7 +52,7 @@
         "name": "Royal Blue Paithani Saree",
         "qty": 1,
         "price": 4199,
-        "img": "/images/silk/silk-2.jpg"
+        "img": "/images/silk/silk-2.webp"
       }
     ]
   },
@@ -71,7 +71,7 @@
         "name": "Emerald Kanjeevaram Saree",
         "qty": 1,
         "price": 3699,
-        "img": "/images/cotton/cotton-2.jpg"
+        "img": "/images/cotton/cotton-2.webp"
       }
     ]
   },
@@ -90,7 +90,7 @@
         "name": "Pearl White Chanderi Saree",
         "qty": 1,
         "price": 2199,
-        "img": "/images/silk/silk-3.jpg"
+        "img": "/images/silk/silk-3.webp"
       }
     ]
   },
@@ -109,7 +109,7 @@
         "name": "Banarasi Georgette Saree",
         "qty": 1,
         "price": 5499,
-        "img": "/images/silk/silk-6.jpg"
+        "img": "/images/silk/silk-6.webp"
       }
     ]
   }

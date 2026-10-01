@@ -40,7 +40,7 @@ const ProductCatalogue = () => {
     stock: "20",
     material: "",
     description: "",
-    img: `${API_BASE_URL}/images/silk/silk-1.jpg`,
+    img: `${API_BASE_URL}/images/silk/silk-1.webp`,
   });
 
   // Edit form state
@@ -143,7 +143,7 @@ const ProductCatalogue = () => {
       rating: product.rating || 5,
       material: product.details?.material || product.material || "",
       description: product.details?.description || product.description || "",
-      img: product.img || `${API_BASE_URL}/images/silk/silk-1.jpg`,
+      img: product.img || `${API_BASE_URL}/images/silk/silk-1.webp`,
     });
   };
 
@@ -203,7 +203,7 @@ const ProductCatalogue = () => {
       });
 
       // Also remove from active products on backend
-      await fetch(`${API_BASE_URL}/api/products/${product.id}`, { method: "DELETE" }).catch(() => {});
+      await fetch(`${API_BASE_URL}/api/products/${product.id}`, { method: "DELETE" }).catch(() => { });
       showToast.success(`Moved "${product.title}" to Recycle Bin.`);
     } catch {
       showToast.info(`Moved "${product.title}" to Recycle Bin.`);
@@ -248,7 +248,7 @@ const ProductCatalogue = () => {
         material: formData.material?.trim() || "",
         description: formData.description?.trim() || "",
       },
-      img: formData.img || `${API_BASE_URL}/images/silk/silk-1.jpg`,
+      img: formData.img || `${API_BASE_URL}/images/silk/silk-1.webp`,
     };
 
     try {
@@ -282,7 +282,7 @@ const ProductCatalogue = () => {
         stock: "20",
         material: "",
         description: "",
-        img: `${API_BASE_URL}/images/silk/silk-1.jpg`,
+        img: `${API_BASE_URL}/images/silk/silk-1.webp`,
       });
     } catch (err) {
       console.error("Failed to add product:", err);
@@ -293,7 +293,7 @@ const ProductCatalogue = () => {
   const { pages, start, end } = getPageNumbers();
 
   return (
-    <div className="space-y-6 sm:space-y-7 max-w-[1600px] mx-auto pb-12 text-slate-800">
+    <div className="space-y-6 sm:space-y-7 max-w-[1600px] mx-auto text-slate-800">
       {/* Header with Quick Actions */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
         <div>
@@ -343,11 +343,10 @@ const ProductCatalogue = () => {
               <button
                 key={cat}
                 onClick={() => setCategoryFilter(cat)}
-                className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition cursor-pointer ${
-                  categoryFilter === cat
+                className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition cursor-pointer ${categoryFilter === cat
                     ? "bg-[#6B1527] text-white shadow-xs"
                     : "bg-slate-100 text-slate-700 hover:bg-slate-200"
-                }`}
+                  }`}
               >
                 {cat}
               </button>
@@ -430,9 +429,8 @@ const ProductCatalogue = () => {
                     </td>
                     <td className="py-3 sm:py-4 px-3 sm:px-6 whitespace-nowrap">
                       <span
-                        className={`font-bold text-xs sm:text-sm ${
-                          product.stock < 10 ? "text-rose-600" : "text-emerald-700"
-                        }`}
+                        className={`font-bold text-xs sm:text-sm ${product.stock < 10 ? "text-rose-600" : "text-emerald-700"
+                          }`}
                       >
                         {product.stock || 15} units
                       </span>
@@ -483,11 +481,10 @@ const ProductCatalogue = () => {
                 <button
                   onClick={() => handlePageChange(1)}
                   disabled={validCurrentPage === 1}
-                  className={`p-1.5 sm:p-2 rounded-lg border text-xs sm:text-sm font-medium transition ${
-                    validCurrentPage === 1
+                  className={`p-1.5 sm:p-2 rounded-lg border text-xs sm:text-sm font-medium transition ${validCurrentPage === 1
                       ? "border-slate-200 text-slate-300 cursor-not-allowed bg-slate-50"
                       : "border-slate-300 text-slate-700 hover:bg-white hover:border-[#6B1527] cursor-pointer"
-                  }`}
+                    }`}
                   title="First Page"
                 >
                   <FiChevronsLeft className="text-sm sm:text-base" />
@@ -497,11 +494,10 @@ const ProductCatalogue = () => {
                 <button
                   onClick={() => handlePageChange(validCurrentPage - 1)}
                   disabled={validCurrentPage === 1}
-                  className={`px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg border text-xs sm:text-sm font-semibold flex items-center gap-1 transition ${
-                    validCurrentPage === 1
+                  className={`px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg border text-xs sm:text-sm font-semibold flex items-center gap-1 transition ${validCurrentPage === 1
                       ? "border-slate-200 text-slate-300 cursor-not-allowed bg-slate-50"
                       : "border-slate-300 text-slate-700 hover:bg-white hover:border-[#6B1527] cursor-pointer"
-                  }`}
+                    }`}
                 >
                   <FiChevronLeft className="text-sm sm:text-base" />
                   <span className="hidden sm:inline">Prev</span>
@@ -524,11 +520,10 @@ const ProductCatalogue = () => {
                   <button
                     key={p}
                     onClick={() => handlePageChange(p)}
-                    className={`w-7 h-7 sm:w-9 sm:h-9 rounded-lg text-xs sm:text-sm font-bold transition cursor-pointer ${
-                      validCurrentPage === p
+                    className={`w-7 h-7 sm:w-9 sm:h-9 rounded-lg text-xs sm:text-sm font-bold transition cursor-pointer ${validCurrentPage === p
                         ? "bg-[#6B1527] text-white shadow-xs border border-[#6B1527]"
                         : "border border-slate-300 bg-white text-slate-700 hover:bg-slate-100"
-                    }`}
+                      }`}
                   >
                     {p}
                   </button>
@@ -550,11 +545,10 @@ const ProductCatalogue = () => {
                 <button
                   onClick={() => handlePageChange(validCurrentPage + 1)}
                   disabled={validCurrentPage === totalPages}
-                  className={`px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg border text-xs sm:text-sm font-semibold flex items-center gap-1 transition ${
-                    validCurrentPage === totalPages
+                  className={`px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg border text-xs sm:text-sm font-semibold flex items-center gap-1 transition ${validCurrentPage === totalPages
                       ? "border-slate-200 text-slate-300 cursor-not-allowed bg-slate-50"
                       : "border-slate-300 text-slate-700 hover:bg-white hover:border-[#6B1527] cursor-pointer"
-                  }`}
+                    }`}
                 >
                   <span className="hidden sm:inline">Next</span>
                   <FiChevronRight className="text-sm sm:text-base" />
@@ -564,11 +558,10 @@ const ProductCatalogue = () => {
                 <button
                   onClick={() => handlePageChange(totalPages)}
                   disabled={validCurrentPage === totalPages}
-                  className={`p-1.5 sm:p-2 rounded-lg border text-xs sm:text-sm font-medium transition ${
-                    validCurrentPage === totalPages
+                  className={`p-1.5 sm:p-2 rounded-lg border text-xs sm:text-sm font-medium transition ${validCurrentPage === totalPages
                       ? "border-slate-200 text-slate-300 cursor-not-allowed bg-slate-50"
                       : "border-slate-300 text-slate-700 hover:bg-white hover:border-[#6B1527] cursor-pointer"
-                  }`}
+                    }`}
                   title="Last Page"
                 >
                   <FiChevronsRight className="text-sm sm:text-base" />
@@ -879,7 +872,7 @@ const ProductCatalogue = () => {
                 alt={productToDelete.title}
                 onError={(e) => {
                   e.target.onerror = null;
-                  e.target.src = "/images/silk/silk-1.jpg";
+                  e.target.src = "/images/silk/silk-1.webp";
                 }}
                 className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg object-cover bg-white border border-slate-200 shrink-0"
               />

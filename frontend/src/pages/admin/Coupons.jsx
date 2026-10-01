@@ -81,7 +81,7 @@ const Coupons = () => {
   };
 
   return (
-    <div className="space-y-6 sm:space-y-7 max-w-[1600px] mx-auto pb-12 text-slate-800">
+    <div className="space-y-6 sm:space-y-7 max-w-[1600px] mx-auto text-slate-800">
       {/* Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
         <div>
@@ -104,9 +104,8 @@ const Coupons = () => {
         {coupons.map((coupon) => (
           <div
             key={coupon.id}
-            className={`bg-white rounded-2xl p-4 sm:p-6 border transition-all relative overflow-hidden flex flex-col justify-between ${
-              coupon.active ? "border-rose-100 shadow-sm" : "border-slate-200 opacity-60"
-            }`}
+            className={`bg-white rounded-2xl p-4 sm:p-6 border transition-all relative overflow-hidden flex flex-col justify-between ${coupon.active ? "border-rose-100 shadow-sm" : "border-slate-200 opacity-60"
+              }`}
           >
             {/* Top Badge */}
             <div className="flex items-center justify-between">
@@ -115,9 +114,8 @@ const Coupons = () => {
               </span>
               <button
                 onClick={() => toggleActive(coupon.id)}
-                className={`text-[11px] sm:text-xs font-bold px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full cursor-pointer ${
-                  coupon.active ? "bg-emerald-100 text-emerald-800" : "bg-slate-100 text-slate-600"
-                }`}
+                className={`text-[11px] sm:text-xs font-bold px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full cursor-pointer ${coupon.active ? "bg-emerald-100 text-emerald-800" : "bg-slate-100 text-slate-600"
+                  }`}
               >
                 {coupon.active ? "Active" : "Inactive"}
               </button>

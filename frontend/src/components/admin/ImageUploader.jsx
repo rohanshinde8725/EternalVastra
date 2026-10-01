@@ -105,7 +105,7 @@ const ImageUploader = ({ value, onChange, label = "Image" }) => {
           type="text"
           value={value || ""}
           onChange={handleUrlChange}
-          placeholder="https://... or /images/silk/silk-1.jpg"
+          placeholder="https://... or /images/silk/silk-1.webp"
           className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-800 focus:outline-none focus:border-[#6B1527]"
         />
       )}

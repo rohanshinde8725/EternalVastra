@@ -120,7 +120,7 @@ const Seller = () => {
                       decoding="async"
                       onError={(e) => {
                         e.currentTarget.onerror = null;
-                        e.currentTarget.src = "/images/silk/silk-1.jpg";
+                        e.currentTarget.src = "/images/silk/silk-1.webp";
                       }}
                       className="h-[230px] sm:h-[300px] w-full rounded-t-xl object-cover object-top transition duration-300 group-hover:scale-[1.05]"
                     />

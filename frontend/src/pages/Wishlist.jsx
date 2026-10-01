@@ -108,7 +108,7 @@ const Wishlist = () => {
   return (
     <div className="w-full bg-[#FEFAF8] pb-20">
       {/* Banner */}
-      <div className="h-60 bg-[url(/images/banner/banner-2.png)] bg-cover bg-center">
+      <div className="h-60 bg-[url(/images/banner/banner-2.webp)] bg-cover bg-center">
         <div className="py-20 px-5 sm:px-8 md:px-10 lg:px-12">
           <FadeUp delay={0.1}>
             <h1 className="text-4xl font-semibold text-[#74202D]">
@@ -192,7 +192,7 @@ const Wishlist = () => {
                         alt={item.title}
                         onError={(e) => {
                           e.currentTarget.onerror = null;
-                          e.currentTarget.src = "/images/silk/silk-1.jpg";
+                          e.currentTarget.src = "/images/silk/silk-1.webp";
                         }}
                         className="w-20 h-20 object-cover rounded shrink-0 transition-transform duration-300 ease-out group-hover:scale-110"
                       />
@@ -256,7 +256,7 @@ const Wishlist = () => {
                         alt={item.title}
                         onError={(e) => {
                           e.currentTarget.onerror = null;
-                          e.currentTarget.src = "/images/silk/silk-1.jpg";
+                          e.currentTarget.src = "/images/silk/silk-1.webp";
                         }}
                         className="w-full h-48 sm:h-56 md:h-56 lg:h-64 xl:h-72 object-cover object-top transition duration-300 group-hover:scale-[1.05]"
                       />

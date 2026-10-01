@@ -2,14 +2,22 @@ import { useEffect, useState } from "react";
 import { GiThreeLeaves } from "react-icons/gi";
 import { useNavigate } from "react-router-dom";
 import FadeUp from "../animations/FadeUp";
-import { API_BASE_URL } from "../../api/products";
+import { API_BASE_URL, resolveImageUrl } from "../../api/products";
+
+const DEFAULT_CATEGORY_IMAGES = {
+  "Silk Sarees": "/images/silk/silkCategory.webp",
+  "Cotton Sarees": "/images/cotton/cottonCategory.webp",
+  "Paithani Sarees": "/images/paithani/paithaniCategory.webp",
+  "Georgette Sarees": "/images/georgette/georgetteCategory.webp",
+  "Organza Sarees": "/images/organza/organzaCategory.webp",
+};
 
 const DEFAULT_CATEGORIES = [
-  { img: "/images/silk/silkCategory.png", title: "Silk Sarees" },
-  { img: "/images/cotton/cottonCategory.png", title: "Cotton Sarees" },
-  { img: "/images/paithani/paithaniCategory.png", title: "Paithani Sarees" },
-  { img: "/images/georgette/georgetteCategory.png", title: "Georgette Sarees" },
-  { img: "/images/organza/organzaCategory.png", title: "Organza Sarees" },
+  { img: "/images/silk/silkCategory.webp", title: "Silk Sarees" },
+  { img: "/images/cotton/cottonCategory.webp", title: "Cotton Sarees" },
+  { img: "/images/paithani/paithaniCategory.webp", title: "Paithani Sarees" },
+  { img: "/images/georgette/georgetteCategory.webp", title: "Georgette Sarees" },
+  { img: "/images/organza/organzaCategory.webp", title: "Organza Sarees" },
 ];
 
 const Category = () => {
@@ -21,12 +29,14 @@ const Category = () => {
       .then((res) => (res.ok ? res.json() : []))
       .then((data) => {
         if (Array.isArray(data) && data.length > 0) {
-          const formatted = data.map((c) => ({
-            img: c.banner?.startsWith("http")
-              ? c.banner
-              : `${API_BASE_URL}${c.banner || "/images/silk/silkCategory.png"}`,
-            title: c.name,
-          }));
+          const formatted = data.map((c) => {
+            const fallbackImg = DEFAULT_CATEGORY_IMAGES[c.name] || "/images/silk/silkCategory.webp";
+            return {
+              img: resolveImageUrl(c.banner || fallbackImg),
+              title: c.name,
+              defaultImg: fallbackImg,
+            };
+          });
           setCategories(formatted);
         }
       })
@@ -70,8 +80,12 @@ const Category = () => {
                 className='h-32 w-32 sm:h-36 sm:w-36 md:h-40 md:w-40 lg:h-44 lg:w-44 2xl:h-48 2xl:w-48
                 object-cover rounded-full border-4 border-white shadow-md group-hover:border-[#74202D] group-hover:scale-105 
                 transition-all duration-300 mx-auto'
-                src={cat.img}
+                src={resolveImageUrl(cat.img)}
                 alt={cat.title}
+                onError={(e) => {
+                  e.currentTarget.onerror = null;
+                  e.currentTarget.src = DEFAULT_CATEGORY_IMAGES[cat.title] || "/images/silk/silkCategory.webp";
+                }}
               />
 
               {/* Title */}

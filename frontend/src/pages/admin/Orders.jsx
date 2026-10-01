@@ -45,17 +45,17 @@ const Orders = () => {
               date: o.orderDate || new Date(o.createdAt).toLocaleDateString("en-IN"),
               items: o.items?.length
                 ? o.items.map((it) => ({
-                    ...it,
-                    img: it.img?.startsWith("http") ? it.img : `${API_BASE_URL}${it.img}`,
-                  }))
+                  ...it,
+                  img: it.img?.startsWith("http") ? it.img : `${API_BASE_URL}${it.img}`,
+                }))
                 : [
-                    {
-                      name: "Mysore Silk Saree - Crimson Gold",
-                      qty: 1,
-                      price: o.total || 3299,
-                      img: `${API_BASE_URL}/images/silk/silk-1.jpg`,
-                    },
-                  ],
+                  {
+                    name: "Mysore Silk Saree - Crimson Gold",
+                    qty: 1,
+                    price: o.total || 3299,
+                    img: `${API_BASE_URL}/images/silk/silk-1.webp`,
+                  },
+                ],
               total: Number(o.total || 0),
               paymentMethod: o.paymentMethod || "UPI (Google Pay)",
               status: o.status || "Pending",
@@ -116,7 +116,7 @@ const Orders = () => {
   };
 
   return (
-    <div className="space-y-6 sm:space-y-7 max-w-[1600px] mx-auto pb-12 text-slate-800">
+    <div className="space-y-6 sm:space-y-7 max-w-[1600px] mx-auto text-slate-800">
       {/* Metrics Row */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
         <div className="bg-white p-3.5 sm:p-5 md:p-6 rounded-2xl border border-slate-200/90 shadow-sm">
@@ -157,11 +157,10 @@ const Orders = () => {
               <button
                 key={status}
                 onClick={() => setStatusFilter(status)}
-                className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition cursor-pointer ${
-                  statusFilter === status
+                className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition cursor-pointer ${statusFilter === status
                     ? "bg-[#6B1527] text-white shadow-xs"
                     : "bg-slate-100 text-slate-700 hover:bg-slate-200"
-                }`}
+                  }`}
               >
                 {status}
               </button>
@@ -235,9 +234,8 @@ const Orders = () => {
                       <select
                         value={order.status}
                         onChange={(e) => updateOrderStatus(order, e.target.value)}
-                        className={`text-[11px] sm:text-xs font-bold px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full border-0 focus:ring-2 focus:ring-[#6B1527] cursor-pointer ${
-                          statusStyles[order.status] || "bg-slate-100 text-slate-700"
-                        }`}
+                        className={`text-[11px] sm:text-xs font-bold px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full border-0 focus:ring-2 focus:ring-[#6B1527] cursor-pointer ${statusStyles[order.status] || "bg-slate-100 text-slate-700"
+                          }`}
                       >
                         <option value="Delivered">Delivered</option>
                         <option value="Processing">Processing</option>

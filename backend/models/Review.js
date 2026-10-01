@@ -3,6 +3,9 @@ const mongoose = require("mongoose");
 const reviewSchema = new mongoose.Schema(
   {
     reviewer: { type: String, required: true, trim: true },
+    email: { type: String, default: "", trim: true },
+    userId: { type: String, default: "", trim: true },
+    productId: { type: String, default: "", trim: true },
     product: { type: String, required: true, trim: true },
     rating: { type: Number, min: 1, max: 5, default: 5 },
     date: { type: String, default: () => new Date().toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" }) },

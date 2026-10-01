@@ -102,25 +102,25 @@ const Admin = () => {
     <div className="admin-shell min-h-screen">
       <aside className="admin-sidebar">
         <div className="admin-brand">
-          <span className="admin-brand-mark"><FiShoppingBag /></span>
+          <span className="admin-brand-mark"><FiShoppingBag className="text-white" /></span>
           <span><strong>Eternal Vastra</strong><small>atelier console</small></span>
         </div>
         <div className="admin-label">Workspace</div>
         <nav className="admin-nav" aria-label="Admin navigation">
           {menuItems.map(({ label, icon: Icon }) => (
             <button key={label} className={activeMenu === label ? "active" : ""} onClick={() => setActiveMenu(label)}>
-              <Icon /><span>{label}</span>{label !== "Overview" && <FiChevronRight className="nav-arrow" />}
+              <Icon className="text-white" /><span>{label}</span>{label !== "Overview" && <FiChevronRight className="nav-arrow text-white" />}
             </button>
           ))}
         </nav>
         <div className="admin-sidebar-bottom">
-          <button className="admin-nav-link"><FiSettings /><span>Settings</span></button>
+          <button className="admin-nav-link"><FiSettings className="text-white" /><span className="text-white">Settings</span></button>
           <div className="admin-user">
             <span className="admin-avatar">SA</span>
             <span><strong>Super Admin</strong><small>Store owner</small></span>
-            <FiChevronDown />
+            <FiChevronDown className="text-white" />
           </div>
-          <Link to="/" className="admin-nav-link"><FiLogOut /><span>Back to storefront</span></Link>
+          <Link to="/" className="admin-nav-link"><FiLogOut className="text-white" /><span>Back to storefront</span></Link>
         </div>
       </aside>
 

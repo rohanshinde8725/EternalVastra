@@ -69,7 +69,7 @@ const Settings = () => {
   };
 
   return (
-    <div className="space-y-6 sm:space-y-7 max-w-[1400px] mx-auto pb-12 text-slate-800">
+    <div className="space-y-6 sm:space-y-7 max-w-[1400px] mx-auto text-slate-800">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
         <div>
           <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-800 tracking-tight">Store Configuration & Preferences</h3>

@@ -9,12 +9,14 @@ const Review = require("../models/Review");
 const StoreSettings = require("../models/StoreSettings");
 const RecycleBin = require("../models/RecycleBin");
 const ContactMessage = require("../models/ContactMessage");
+const User = require("../models/User");
 
 const resources = {
   products: Product,
   orders: Order,
   customers: Customer,
   categories: Category,
+  users: User,
   blog: BlogPost,
   banners: Banner,
   reviews: Review,
@@ -121,6 +123,23 @@ const saveProfile = async (req, res, next) => {
   }
 };
 
+const uploadAdminAvatar = async (req, res, next) => {
+  try {
+    if (!req.file) return res.status(400).json({ message: "No image file uploaded" });
+    const avatarUrl = `/uploads/admin/${req.file.filename}`;
+    const profile = await AdminProfile.findOneAndUpdate(
+      {},
+      { avatar: avatarUrl },
+      { new: true, upsert: true }
+    );
+    // Also update any matching admin users
+    await User.updateMany({ role: "admin" }, { avatar: avatarUrl });
+    res.json({ message: "Admin avatar updated successfully", avatar: avatarUrl, profile });
+  } catch (error) {
+    next(error);
+  }
+};
+
 // Store Settings Handlers
 const getSettings = async (_req, res, next) => {
   try {
@@ -219,17 +238,98 @@ const getDashboardStats = async (_req, res, next) => {
     // Sort activities by time descending
     activities.sort((a, b) => new Date(b.time) - new Date(a.time));
 
+    const totalUsersCount = users.length || 0;
+    const activeUsersCount = users.filter((u) => !u.isBlocked && u.status !== "blocked").length;
+    const blockedUsersCount = users.filter((u) => u.isBlocked || u.status === "blocked").length;
+    const recentUsers = users.slice(0, 8).map((u) => ({
+      id: u._id,
+      _id: u._id,
+      name: u.name,
+      email: u.email,
+      phone: u.phone,
+      role: u.role,
+      isBlocked: !!u.isBlocked || u.status === "blocked",
+      status: u.isBlocked || u.status === "blocked" ? "blocked" : "active",
+      avatar: u.avatar,
+      createdAt: u.createdAt,
+    }));
+
     res.json({
       totalSales,
       totalOrdersCount,
       totalCustomersCount,
       totalProductsCount,
+      totalUsersCount,
+      activeUsersCount,
+      blockedUsersCount,
+      recentUsers,
       ordersByStatus,
       salesByCategory: formattedSalesByCategory,
       activities: activities.slice(0, 5),
       recentOrders: orders.slice(0, 5),
       categories,
     });
+  } catch (error) {
+    next(error);
+  }
+};
+
+// Custom User Handlers
+const toggleBlockUser = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    if (user.email === "rohanshinde8725@gmail.com") {
+      return res.status(400).json({ message: "Master Admin account cannot be blocked." });
+    }
+
+    user.isBlocked = !user.isBlocked;
+    user.status = user.isBlocked ? "blocked" : "active";
+    await user.save();
+
+    res.json({
+      message: user.isBlocked ? `User ${user.name} has been blocked.` : `User ${user.name} is now active.`,
+      user: {
+        id: user._id,
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        phone: user.phone,
+        role: user.role,
+        isBlocked: user.isBlocked,
+        status: user.status,
+        avatar: user.avatar,
+        createdAt: user.createdAt,
+      },
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const deleteUser = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    if (user.email === "rohanshinde8725@gmail.com") {
+      return res.status(400).json({ message: "Master Admin account cannot be deleted." });
+    }
+
+    // Backup to RecycleBin
+    await RecycleBin.create({
+      itemType: "user",
+      originalId: String(user._id),
+      itemTitle: user.name || "Registered User",
+      itemSubtitle: `${user.email} • ${user.role}`,
+      image: user.avatar || "/images/default-avatar.webp",
+      data: user.toObject(),
+      deletedAt: new Date(),
+    }).catch(() => {});
+
+    await User.findByIdAndDelete(req.params.id);
+    res.status(204).send();
   } catch (error) {
     next(error);
   }
@@ -266,6 +366,8 @@ const addToRecycleBin = async (req, res, next) => {
       await Banner.findByIdAndDelete(originalId).catch(() => {});
     } else if (itemType === "review" && originalId) {
       await Review.findByIdAndDelete(originalId).catch(() => {});
+    } else if (itemType === "user" && originalId) {
+      await User.findByIdAndDelete(originalId).catch(() => {});
     }
 
     res.status(201).json(entry);
@@ -303,6 +405,10 @@ const restoreFromRecycleBin = async (req, res, next) => {
       const reviewPayload = { ...data };
       delete reviewPayload._id;
       await Review.create(reviewPayload);
+    } else if (itemType === "user") {
+      const userPayload = { ...data };
+      delete userPayload._id;
+      await User.create(userPayload);
     }
 
     await RecycleBin.findByIdAndDelete(req.params.id);
@@ -337,8 +443,11 @@ module.exports = {
   createResource,
   updateResource,
   deleteResource,
+  toggleBlockUser,
+  deleteUser,
   getProfile,
   saveProfile,
+  uploadAdminAvatar,
   getSettings,
   saveSettings,
   getDashboardStats,

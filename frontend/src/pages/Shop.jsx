@@ -233,7 +233,7 @@ const Shop = () => {
     <div className="w-full bg-[#FEFAF8]">
 
       {/* Banner */}
-      <div className="h-44 sm:h-56 md:h-64 w-full bg-center bg-cover bg-[url('/images/banner/banner-1.png')] flex items-center">
+      <div className="h-44 sm:h-56 md:h-64 w-full bg-center bg-cover bg-[url('/images/banner/banner-1.webp')] flex items-center">
         <div className="max-w-[1600px] w-full mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-baseline gap-2 sm:gap-3">
             <h3 className="text-xs sm:text-sm text-[#74202D] font-bold uppercase tracking-wider">Shop</h3>
@@ -338,13 +338,7 @@ const Shop = () => {
               })}
             </div>
 
-          </div>
-        </FadeUp>
-
-        {/* Products */}
-        <div className="">
-
-          <div className="flex flex-col gap-3 justify-between items-start mb-4 sm:mb-6 sm:flex-row sm:items-center">
+            <div className="flex flex-col gap-3 justify-between items-start sm:flex-row sm:items-center">
             <div>
               <p className="text-xs sm:text-sm text-gray-600">
                 Showing {filteredProducts.length === 0 ? 0 : indexOfFirstProduct + 1} -
@@ -356,40 +350,13 @@ const Shop = () => {
                 </p>
               )}
             </div>
-
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="text-xs sm:text-sm text-gray-600">View</span>
-              {[
-                { id: "4", label: "4/4", icon: <MdGridView className="h-4 w-4 sm:h-5 sm:w-5" /> },
-                { id: "table", label: "List", icon: <MdViewList className="h-4 w-4 sm:h-5 sm:w-5" /> },
-              ].map((option) => (
-                <button
-                  key={option.id}
-                  onClick={() => handleViewModeChange(option.id)}
-                  aria-label={option.label}
-                  className={`flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-md border transition cursor-pointer ${
-                    viewMode === option.id
-                      ? "bg-[#74202D] text-white border-[#74202D]"
-                      : "bg-white text-[#3b3737] border-gray-300 hover:border-[#74202D] hover:text-[#74202D]"
-                  }`}
-                >
-                  {option.icon}
-                </button>
-              ))}
-              <div className="flex items-center gap-2">
-                <span className="text-xs sm:text-sm text-gray-600">Sort</span>
-                <select
-                  value={sort}
-                  onChange={(e) => handleSortChange(e.target.value)}
-                  className="border border-gray-300 rounded-md px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm text-[#3b3737]"
-                >
-                  <option value="default">Default</option>
-                  <option value="low">Price: Low → High</option>
-                  <option value="high">Price: High → Low</option>
-                </select>
-              </div>
-            </div>
           </div>
+
+          </div>
+        </FadeUp>
+
+        {/* Products */}
+        <div className="">
 
           {loading ? (
             <div className="flex flex-col items-center justify-center py-24 gap-4 text-center">
@@ -422,7 +389,7 @@ const Shop = () => {
                           alt={item.title}
                           onError={(e) => {
                             e.currentTarget.onerror = null;
-                            e.currentTarget.src = "/images/silk/silk-1.jpg";
+                            e.currentTarget.src = "/images/silk/silk-1.webp";
                           }}
                           className="w-20 h-20 object-cover rounded shrink-0 transition-transform duration-300 ease-out group-hover:scale-110"
                         />
@@ -479,7 +446,7 @@ const Shop = () => {
                           alt={item.title}
                           onError={(e) => {
                             e.currentTarget.onerror = null;
-                            e.currentTarget.src = "/images/silk/silk-1.jpg";
+                            e.currentTarget.src = "/images/silk/silk-1.webp";
                           }}
                           className="w-full h-[230px] sm:h-[300px] 2xl:h-[360px] object-cover object-top transition duration-300 group-hover:scale-[1.05]"
                         />

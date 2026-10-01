@@ -9,7 +9,9 @@ const userSchema = new mongoose.Schema(
     dob: { type: String, default: "" },
     gender: { type: String, enum: ["Male", "Female", "Other", ""], default: "" },
     role: { type: String, enum: ["customer", "admin"], default: "customer" },
-    avatar: { type: String, default: "/images/default-avatar.png" },
+    isBlocked: { type: Boolean, default: false },
+    status: { type: String, enum: ["active", "blocked"], default: "active" },
+    avatar: { type: String, default: "/images/default-avatar.webp" },
     wishlist: [{ type: mongoose.Schema.Types.ObjectId, ref: "Product" }],
     addresses: [
       {

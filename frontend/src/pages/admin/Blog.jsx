@@ -14,7 +14,7 @@ const Blog = () => {
     category: "Style Guide",
     readTime: "4 min read",
     summary: "",
-    cover: `${API_BASE_URL}/images/silk/silk-1.jpg`,
+    cover: `${API_BASE_URL}/images/silk/silk-1.webp`,
   });
 
   const fetchBlog = () => {
@@ -30,7 +30,7 @@ const Blog = () => {
             data.map((p) => ({
               ...p,
               summary: p.excerpt || p.summary || "Traditional handloom drape guide.",
-              cover: p.cover?.startsWith("http") ? p.cover : `${API_BASE_URL}${p.cover || "/images/silk/silk-1.jpg"}`,
+              cover: p.cover?.startsWith("http") ? p.cover : `${API_BASE_URL}${p.cover || "/images/silk/silk-1.webp"}`,
               date: p.date || new Date(p.createdAt || Date.now()).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" }),
             }))
           );
@@ -103,12 +103,12 @@ const Blog = () => {
       category: "Style Guide",
       readTime: "4 min read",
       summary: "",
-      cover: `${API_BASE_URL}/images/silk/silk-1.jpg`,
+      cover: `${API_BASE_URL}/images/silk/silk-1.webp`,
     });
   };
 
   return (
-    <div className="space-y-6 sm:space-y-7 max-w-[1600px] mx-auto pb-12 text-slate-800">
+    <div className="space-y-6 sm:space-y-7 max-w-[1600px] mx-auto text-slate-800">
       {/* Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
         <div>

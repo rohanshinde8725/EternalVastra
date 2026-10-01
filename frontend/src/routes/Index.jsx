@@ -19,6 +19,7 @@ const AdminDashboard = lazy(() => import("../pages/admin/AdminDashboard"));
 const AdminOrders = lazy(() => import("../pages/admin/Orders"));
 const AdminProducts = lazy(() => import("../pages/admin/ProductCatalogue"));
 const AdminCustomers = lazy(() => import("../pages/admin/Customers"));
+const AdminUsers = lazy(() => import("../pages/admin/Users"));
 const AdminCategories = lazy(() => import("../pages/admin/Categories"));
 const AdminCoupons = lazy(() => import("../pages/admin/Coupons"));
 const AdminReviews = lazy(() => import("../pages/admin/Reviews"));
@@ -27,6 +28,16 @@ const AdminSettings = lazy(() => import("../pages/admin/Settings"));
 const AdminRecycleBin = lazy(() => import("../pages/admin/RecycleBin"));
 const AdminBlog = lazy(() => import("../pages/admin/Blog"));
 const AdminProfile = lazy(() => import("../pages/admin/Profile"));
+
+// User Pages
+const UserLayout = lazy(() => import("../pages/user/UserLayout"));
+const UserDashboard = lazy(() => import("../pages/user/Dashboard"));
+const UserOrders = lazy(() => import("../pages/user/Orders"));
+const UserReviews = lazy(() => import("../pages/user/Reviews"));
+const UserAddressBook = lazy(() => import("../pages/user/AddressBook"));
+const UserAccountDetails = lazy(() => import("../pages/user/AccountDetails"));
+const UserSecurity = lazy(() => import("../pages/user/Security"));
+
 const SignIn = lazy(() => import("../pages/SignIn"));
 const SignUp = lazy(() => import("../pages/SignUp"));
 const Profile = lazy(() => import("../pages/Profile"));
@@ -64,6 +75,7 @@ const AppRoutes = () => {
                             <Route path='orders' element={<AdminOrders />} />
                             <Route path='products' element={<AdminProducts />} />
                             <Route path='customers' element={<AdminCustomers />} />
+                            <Route path='users' element={<AdminUsers />} />
                             <Route path='categories' element={<AdminCategories />} />
                             <Route path='coupons' element={<AdminCoupons />} />
                             <Route path='reviews' element={<AdminReviews />} />
@@ -73,6 +85,30 @@ const AppRoutes = () => {
                             <Route path='blog' element={<AdminBlog />} />
                             <Route path='profile' element={<AdminProfile />} />
                         </Route>
+                    </Route>
+
+                    {/* Customer User Dashboard Routes */}
+                    <Route path='profile' element={<UserLayout />}>
+                        <Route index element={<UserDashboard />} />
+                        <Route path='dashboard' element={<UserDashboard />} />
+                        <Route path='orders' element={<UserOrders />} />
+                        <Route path='reviews' element={<UserReviews />} />
+                        <Route path='addresses' element={<UserAddressBook />} />
+                        <Route path='address-book' element={<UserAddressBook />} />
+                        <Route path='account' element={<UserAccountDetails />} />
+                        <Route path='details' element={<UserAccountDetails />} />
+                        <Route path='security' element={<UserSecurity />} />
+                    </Route>
+
+                    {/* User alias routes */}
+                    <Route path='user' element={<UserLayout />}>
+                        <Route index element={<UserDashboard />} />
+                        <Route path='dashboard' element={<UserDashboard />} />
+                        <Route path='orders' element={<UserOrders />} />
+                        <Route path='reviews' element={<UserReviews />} />
+                        <Route path='addresses' element={<UserAddressBook />} />
+                        <Route path='account' element={<UserAccountDetails />} />
+                        <Route path='security' element={<UserSecurity />} />
                     </Route>
                     <Route path='/' element={<MainLayout />}>
                         <Route index element={<Home />} />
@@ -88,7 +124,6 @@ const AppRoutes = () => {
                         <Route path='login' element={<SignIn />} />
                         <Route path='signup' element={<SignUp />} />
                         <Route path='register' element={<SignUp />} />
-                        <Route path='profile' element={<Profile />} />
                     </Route>
                 </Routes>
             </Suspense>

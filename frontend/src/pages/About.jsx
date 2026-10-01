@@ -16,27 +16,27 @@ const About = () => {
 
   const crafts = [
     {
-      img : "/images/craft/craft-1.png",
+      img : "/images/craft/craft-1.webp",
       title : "Finest Material",
       subTitle : "We source premium quality fabrics that define elegance and comfort.",
     },
     {
-      img : "/images/craft/craft-2.png",
+      img : "/images/craft/craft-2.webp",
       title : "Skilled Artist",
       subTitle : "Our Sarees are woven by skilled hands with Generations of expertise.",
     },
     {
-      img : "/images/craft/craft-3.png",
+      img : "/images/craft/craft-3.webp",
       title : "Exquisite Designs",
       subTitle : "From Classic weaves to contemporary styles designed for every you.",
     },
     {
-      img : "/images/craft/craft-4.png",
+      img : "/images/craft/craft-4.webp",
       title : "Impeccable Finish",
       subTitle : "Every Sarees goes through strict quality checks to ensure perfection.",
     },
     {
-      img : "/images/craft/craft-5.png",
+      img : "/images/craft/craft-5.webp",
       title : "Thoughful Packaging",
       subTitle : "Delivered with care, because you deserve the best experience.",
     },
@@ -45,7 +45,7 @@ const About = () => {
     <div className='w-full bg-[#FEFAF8]'>
 
       {/* Banner Start */}
-      <div className="bg-[url('/images/banner/banner-2.png')] bg-cover bg-center h-60 w-full 
+      <div className="bg-[url('/images/banner/banner-2.webp')] bg-cover bg-center h-60 w-full 
       flex items-center px-5 sm:px-8 md:px-12 lg:px-16 relative overflow-hidden">
         <div className='max-w-[1600px] mx-auto w-full'>
           <FadeUp delay={0.1}>
@@ -65,7 +65,7 @@ const About = () => {
             loading="lazy" 
             decoding="async" 
             className='h-full w-full object-cover rounded-2xl shadow-md' 
-            src="/images/aboutjourney.png" 
+            src="/images/aboutjourney.webp" 
             alt="Our Weaving Journey" 
           />
         </div>

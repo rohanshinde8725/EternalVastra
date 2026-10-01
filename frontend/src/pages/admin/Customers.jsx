@@ -28,7 +28,7 @@ const Customers = () => {
             data.map((c) => ({
               ...c,
               id: c.customerId || `CUST-${c._id?.slice(-3) || "001"}`,
-              avatar: c.avatar?.startsWith("http") ? c.avatar : `${API_BASE_URL}${c.avatar || "/images/testimonial/testimonial-1.png"}`,
+              avatar: c.avatar?.startsWith("http") ? c.avatar : `${API_BASE_URL}${c.avatar || "/images/testimonial/testimonial-1.webp"}`,
             }))
           );
         }
@@ -53,7 +53,7 @@ const Customers = () => {
   );
 
   return (
-    <div className="space-y-6 sm:space-y-7 max-w-[1600px] mx-auto pb-12 text-slate-800">
+    <div className="space-y-6 sm:space-y-7 max-w-[1600px] mx-auto text-slate-800">
       {/* Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
         <div>
@@ -143,9 +143,8 @@ const Customers = () => {
                     </td>
                     <td className="py-3 sm:py-4 px-3 sm:px-6 whitespace-nowrap">
                       <span
-                        className={`text-[11px] sm:text-xs font-bold px-2.5 sm:px-3 py-1 rounded-full ${
-                          tierStyles[customer.tier] || "bg-slate-100 text-slate-700"
-                        }`}
+                        className={`text-[11px] sm:text-xs font-bold px-2.5 sm:px-3 py-1 rounded-full ${tierStyles[customer.tier] || "bg-slate-100 text-slate-700"
+                          }`}
                       >
                         {customer.tier || "Silver Patron"}
                       </span>

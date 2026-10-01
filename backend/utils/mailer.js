@@ -45,9 +45,25 @@ const getTransporter = () => {
 
 const sendOtpEmail = async (toEmail, otp, type = "signup") => {
   const isSignup = type === "signup";
-  const subject = isSignup
+  const isForgot = type === "forgot-password" || type === "reset-password";
+  
+  const subject = isForgot
+    ? `Your Eternal Vastra Password Reset Code: ${otp}`
+    : isSignup
     ? `Your Eternal Vastra Verification Code: ${otp}`
-    : `Your Eternal Vastra Login OTP: ${otp}`;
+    : `Your Eternal Vastra Security Code: ${otp}`;
+
+  const greeting = isForgot
+    ? "Reset Your Account Password"
+    : isSignup
+    ? "Verify Your Account Registration"
+    : "Authentication Security Code";
+
+  const messageText = isForgot
+    ? "We received a request to reset your Eternal Vastra account password. Please enter the one-time verification code below to set your new password."
+    : isSignup
+    ? "Thank you for joining Eternal Vastra. Please use the verification code below to complete your account registration and explore our royal handloom saree collections."
+    : "You requested a security verification for your Eternal Vastra account. Please enter the one-time security password below.";
 
   const htmlContent = `
     <!DOCTYPE html>
@@ -78,18 +94,16 @@ const sendOtpEmail = async (toEmail, otp, type = "signup") => {
             <div class="tagline">Elegance Eternal • Handcrafted Sarees</div>
           </div>
           <div class="body">
-            <div class="greeting">${isSignup ? "Verify Your Account Registration" : "Authentication Security Code"}</div>
+            <div class="greeting">${greeting}</div>
             <p class="message">
-              ${isSignup 
-                ? "Thank you for joining Eternal Vastra. Please use the verification code below to complete your account registration and explore our royal handloom saree collections."
-                : "You requested to sign in to your Eternal Vastra account. Please enter the one-time security password below."}
+              ${messageText}
             </p>
             <div class="otp-box">
               <div class="otp-code">${otp}</div>
               <div class="expiry">Valid for 10 minutes only</div>
             </div>
             <p class="message" style="font-size: 11px; color: #A0AEC0; margin-top: 15px;">
-              If you did not request this verification code, please ignore this email or contact support.
+              If you did not request this verification code, you can safely ignore this email. Your account credentials remain secure.
             </p>
           </div>
           <div class="footer">

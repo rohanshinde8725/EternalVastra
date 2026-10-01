@@ -72,7 +72,7 @@ const seed = async () => {
       password: "admin123",
       phone: "+91 98200 87250",
       role: "admin",
-      avatar: "/images/testimonial/testimonial-1.png",
+      avatar: "/images/testimonial/testimonial-1.webp",
     }),
     User.create({
       name: "Ritika Sharma",
@@ -80,7 +80,7 @@ const seed = async () => {
       password: "patronpassword123",
       phone: "+91 98201 45678",
       role: "customer",
-      avatar: "/images/testimonial/testimonial-2.png",
+      avatar: "/images/testimonial/testimonial-2.webp",
     }),
   ]);
   console.log(`Seeded ${documents.length} products into products`);

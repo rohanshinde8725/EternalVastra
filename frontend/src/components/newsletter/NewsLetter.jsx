@@ -16,7 +16,7 @@ const NewsLetter = () => {
               loading="lazy"
               decoding="async"
               className="w-full h-64 sm:h-80 md:h-full min-h-[260px] md:min-h-[360px] object-cover object-center" 
-              src="/images/newslettersaree.png" 
+              src="/images/newslettersaree.webp" 
               alt="Handpicked Sarees Collection" 
             />
           </div>

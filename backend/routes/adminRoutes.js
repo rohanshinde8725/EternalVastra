@@ -9,9 +9,12 @@ const {
   deleteResource,
   getProfile,
   saveProfile,
+  uploadAdminAvatar,
   getSettings,
   saveSettings,
   getDashboardStats,
+  toggleBlockUser,
+  deleteUser,
   getRecycleBin,
   addToRecycleBin,
   restoreFromRecycleBin,
@@ -23,6 +26,11 @@ const router = express.Router();
 
 // Dashboard Summary Stats
 router.get("/dashboard-stats", getDashboardStats);
+
+// Custom User management actions
+router.patch("/users/:id/toggle-block", toggleBlockUser);
+router.put("/users/:id/toggle-block", toggleBlockUser);
+router.delete("/users/:id", deleteUser);
 
 // Image Upload (admin uploads from device)
 router.post("/upload-image", upload.single("image"), (req, res) => {
@@ -37,6 +45,7 @@ router.post("/upload-image", upload.single("image"), (req, res) => {
 // Profile
 router.get("/profile", getProfile);
 router.put("/profile", saveProfile);
+router.post("/profile/avatar", upload.single("avatar"), uploadAdminAvatar);
 
 // Store Settings
 router.get("/settings", getSettings);

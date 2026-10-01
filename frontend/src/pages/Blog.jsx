@@ -11,8 +11,50 @@ import {
   FiRotateCw,
 } from "react-icons/fi";
 import { PiFlowerLotus } from "react-icons/pi";
-import { API_BASE_URL } from "../api/products";
+import { API_BASE_URL, resolveImageUrl } from "../api/products";
 import FadeUp from "../components/animations/FadeUp";
+
+const BLOG_CURATED_COVERS = {
+  "ultimate-guide-choosing-perfect-saree": "/images/silk/silkCategory.webp",
+  "10-elegant-ways-to-drape-saree-perfectly": "/images/paithani/paithani-1.webp",
+  "guide-to-indian-saree-weaves": "/images/paithani/paithaniCategory.webp",
+  "how-to-care-for-sarees-last-forever": "/images/cotton/cotton-2.webp",
+  "art-behind-every-handwoven-saree": "/images/craft/craft-3.webp",
+  "sarees-and-celebrations-indian-traditions": "/images/organza/organzaCategory.webp",
+  "saree-styling-ideas-for-every-occasion": "/images/georgette/georgetteCategory.webp",
+  "cotton-silk-georgette-which-saree-is-for-you": "/images/cotton/cottonCategory.webp",
+};
+
+const BLOG_ROTATING_COVERS = [
+  "/images/silk/silkCategory.webp",
+  "/images/paithani/paithani-1.webp",
+  "/images/paithani/paithaniCategory.webp",
+  "/images/cotton/cotton-2.webp",
+  "/images/craft/craft-3.webp",
+  "/images/organza/organzaCategory.webp",
+  "/images/georgette/georgetteCategory.webp",
+  "/images/cotton/cottonCategory.webp",
+];
+
+const getBlogCover = (p, idx = 0) => {
+  if (p?.slug && BLOG_CURATED_COVERS[p.slug]) {
+    return resolveImageUrl(BLOG_CURATED_COVERS[p.slug]);
+  }
+  const title = (p?.title || "").toLowerCase();
+  if (title.includes("ultimate guide") || title.includes("perfect saree")) return resolveImageUrl("/images/silk/silkCategory.webp");
+  if (title.includes("drape") || title.includes("ways to drape")) return resolveImageUrl("/images/paithani/paithani-1.webp");
+  if (title.includes("weaves") || title.includes("heritage")) return resolveImageUrl("/images/paithani/paithaniCategory.webp");
+  if (title.includes("care") || title.includes("last forever")) return resolveImageUrl("/images/cotton/cotton-2.webp");
+  if (title.includes("art behind") || title.includes("handwoven")) return resolveImageUrl("/images/craft/craft-3.webp");
+  if (title.includes("celebration") || title.includes("tradition")) return resolveImageUrl("/images/organza/organzaCategory.webp");
+  if (title.includes("styling ideas") || title.includes("occasion")) return resolveImageUrl("/images/georgette/georgetteCategory.webp");
+  if (title.includes("cotton, silk or georgette") || title.includes("which saree")) return resolveImageUrl("/images/cotton/cottonCategory.webp");
+
+  if (p?.cover && !p.cover.includes("silk-1.") && !p.cover.includes("testimonial-1.")) {
+    return resolveImageUrl(p.cover);
+  }
+  return resolveImageUrl(BLOG_ROTATING_COVERS[idx % BLOG_ROTATING_COVERS.length]);
+};
 
 const categories = [
   "All Stories",
@@ -58,11 +100,7 @@ const Blog = () => {
                 "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
               date: p.date || "Aug 18, 2026",
               readTime: p.readTime || "5 min read",
-              cover: p.cover?.startsWith("http")
-                ? p.cover
-                : p.cover
-                  ? `${API_BASE_URL}${p.cover}`
-                  : `/images/silk/silk-${(idx % 4) + 1}.jpg`,
+              cover: getBlogCover(p, idx),
               excerpt: p.excerpt || p.summary || "Traditional handloom drape and care guide.",
               views: p.views || 1200,
               likes: p.likes || 80,
@@ -146,11 +184,11 @@ const Blog = () => {
   };
 
   return (
-    <div className="bg-[#FEFAF8] min-h-screen text-slate-800 pb-16 sm:pb-20">
+    <div className="bg-[#FEFAF8] min-h-screen text-slate-800">
       {/* ========================================================================= */}
       {/* 1. HERO BANNER SECTION (MATCHING SCREENSHOT) */}
       {/* ========================================================================= */}
-      <section className="bg-[url('/images/banner/banner-4.png')] bg-cover bg-center h-44 sm:h-56 md:h-64 w-full flex items-center relative overflow-hidden">
+      <section className="bg-[url('/images/banner/banner-4.webp')] bg-cover bg-center h-44 sm:h-56 md:h-64 w-full flex items-center relative overflow-hidden">
         <div className="max-w-[1600px] w-full mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
 

@@ -272,7 +272,7 @@ const SignUp = () => {
                     disabled={loading}
                     className="w-full py-3 sm:py-3.5 rounded-lg bg-[#701A2B] hover:bg-[#581321] text-white text-sm font-bold uppercase tracking-wider shadow-sm transition-all duration-300 cursor-pointer disabled:opacity-50 mt-1"
                   >
-                    {loading ? "Sending Verification OTP..." : "GET EMAIL VERIFICATION OTP"}
+                    {loading ? "Sending Verification OTP..." : "Sign Up"}
                   </button>
                 </form>
 
@@ -383,17 +383,17 @@ const SignUp = () => {
         </div>
 
         {/* ================= IMAGE CARD ================= */}
-        <div className="relative h-48 md:h-full min-h-[200px] md:min-h-[460px] overflow-hidden bg-[#F5ECE0]">
+        <div className="relative w-full h-[260px] sm:h-[320px] md:h-full md:min-h-[560px] lg:min-h-[600px] overflow-hidden bg-[#F5ECE0] shrink-0 order-first md:order-last">
           <img
-            src="/images/paithani/paithani-1.jpg"
+            src="/images/paithani/paithani-1.webp"
             alt="Royal Paithani Saree"
             onError={(e) => {
               e.currentTarget.onerror = null;
-              e.currentTarget.src = `${API_BASE_URL}/images/paithani/paithani-1.jpg`;
+              e.currentTarget.src = `${API_BASE_URL}/images/paithani/paithani-1.webp`;
             }}
-            className="w-full h-full object-cover object-top"
+            className="w-full h-full object-cover object-top transition-transform duration-700 hover:scale-105"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent flex flex-col justify-end p-6 md:p-8 text-white">
+          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent flex flex-col justify-end p-6 md:p-8 text-white">
             <h3 className="text-2xl sm:text-3xl font-serif font-bold drop-shadow">Eternal Vastra</h3>
             <p className="text-sm text-rose-100/90 mt-1">Join the Royal Patron Circle</p>
           </div>

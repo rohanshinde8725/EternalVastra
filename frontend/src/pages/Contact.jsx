@@ -112,7 +112,7 @@ const Contact = () => {
   return (
     <div className="w-full bg-[#FEFAF8]">
       {/* Banner Start */}
-      <div className="bg-[url('/images/banner/contact-banner.png')] bg-cover bg-center h-48 sm:h-56 md:h-64 lg:h-72 w-full flex items-center relative overflow-hidden">
+      <div className="bg-[url('/images/banner/contact-banner.webp')] bg-cover bg-center h-48 sm:h-56 md:h-64 lg:h-72 w-full flex items-center relative overflow-hidden">
         <div className="max-w-[1600px] w-full mx-auto px-4 sm:px-6 lg:px-8">
           <FadeUp delay={0.1}>
             <div className="inline-flex items-center mb-1.5 sm:mb-2 gap-2 text-xs sm:text-sm font-bold uppercase tracking-wider text-[#74202D]">
@@ -290,15 +290,15 @@ const Contact = () => {
         {/* 2nd Card: Image Only - Takes Exact Same Height as Form */}
         <FadeUp delay={0.3} className="w-full h-full min-h-[400px] lg:min-h-0 rounded-2xl overflow-hidden shadow-sm border border-gray-300 relative bg-[#F5ECE0]">
           <img
-            src="/images/eternal_vastra_store.jpg"
+            src="/images/eternal_vastra_store.webp"
             alt="Eternal Vastra Flagship Store"
             onError={(e) => {
               if (!e.currentTarget.dataset.retried) {
                 e.currentTarget.dataset.retried = "1";
-                e.currentTarget.src = `${API_BASE_URL}/images/eternal_vastra_store.jpg`;
+                e.currentTarget.src = `${API_BASE_URL}/images/eternal_vastra_store.webp`;
               } else if (e.currentTarget.dataset.retried === "1") {
                 e.currentTarget.dataset.retried = "2";
-                e.currentTarget.src = "/images/store.jpg";
+                e.currentTarget.src = "/images/store.webp";
               }
             }}
             className="w-full h-full object-cover absolute inset-0"

@@ -7,7 +7,7 @@
     "city": "Mumbai, Maharashtra",
     "ordersCount": 8,
     "totalSpent": 48950,
-    "avatar": "/images/testimonial/testimonial-1.png",
+    "avatar": "/images/testimonial/testimonial-1.webp",
     "tier": "VIP Patron",
     "joined": "Jan 2025"
   },
@@ -19,7 +19,7 @@
     "city": "Bangalore, Karnataka",
     "ordersCount": 5,
     "totalSpent": 32400,
-    "avatar": "/images/testimonial/testimonial-2.png",
+    "avatar": "/images/testimonial/testimonial-2.webp",
     "tier": "Gold Member",
     "joined": "Mar 2025"
   },
@@ -31,7 +31,7 @@
     "city": "New Delhi, Delhi",
     "ordersCount": 4,
     "totalSpent": 26800,
-    "avatar": "/images/testimonial/testimonial-3.png",
+    "avatar": "/images/testimonial/testimonial-3.webp",
     "tier": "Gold Member",
     "joined": "Apr 2025"
   },
@@ -43,7 +43,7 @@
     "city": "Pune, Maharashtra",
     "ordersCount": 2,
     "totalSpent": 11200,
-    "avatar": "/images/testimonial/testimonial-4.png",
+    "avatar": "/images/testimonial/testimonial-4.webp",
     "tier": "Silver Patron",
     "joined": "Jun 2025"
   },
@@ -55,7 +55,7 @@
     "city": "Chandigarh, Punjab",
     "ordersCount": 6,
     "totalSpent": 39500,
-    "avatar": "/images/testimonial/testimonial-1.png",
+    "avatar": "/images/testimonial/testimonial-1.webp",
     "tier": "VIP Patron",
     "joined": "Feb 2025"
   },
@@ -67,7 +67,7 @@
     "city": "Hyderabad, Telangana",
     "ordersCount": 3,
     "totalSpent": 18450,
-    "avatar": "/images/testimonial/testimonial-2.png",
+    "avatar": "/images/testimonial/testimonial-2.webp",
     "tier": "Silver Patron",
     "joined": "Aug 2025"
   }

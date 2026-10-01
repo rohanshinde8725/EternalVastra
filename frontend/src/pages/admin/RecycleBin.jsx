@@ -96,7 +96,7 @@ const RecycleBin = () => {
     try {
       await fetch(`${API_BASE_URL}/api/admin/recycle-bin`, {
         method: "DELETE",
-      }).catch(() => {});
+      }).catch(() => { });
       showToast.success("Recycle Bin has been completely emptied from database.");
     } catch {
       showToast.info("Recycle Bin cleared.");
@@ -122,7 +122,7 @@ const RecycleBin = () => {
       : items.filter((i) => i.itemType?.toLowerCase() === type.toLowerCase()).length;
 
   return (
-    <div className="space-y-6 sm:space-y-7 max-w-[1600px] mx-auto pb-12 text-slate-800">
+    <div className="space-y-6 sm:space-y-7 max-w-[1600px] mx-auto text-slate-800">
       {/* Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
         <div>
@@ -167,25 +167,23 @@ const RecycleBin = () => {
               <button
                 key={type}
                 onClick={() => setFilterType(type)}
-                className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition flex items-center gap-1.5 sm:gap-2 cursor-pointer ${
-                  filterType === type
+                className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-semibold whitespace-nowrap transition flex items-center gap-1.5 sm:gap-2 cursor-pointer ${filterType === type
                     ? "bg-[#6B1527] text-white shadow-xs"
                     : "bg-slate-100 text-slate-700 hover:bg-slate-200"
-                }`}
+                  }`}
               >
                 <span>
                   {type === "Product"
                     ? "Products"
                     : type === "Category"
-                    ? "Categories"
-                    : type === "Banner"
-                    ? "Banners"
-                    : "All Items"}
+                      ? "Categories"
+                      : type === "Banner"
+                        ? "Banners"
+                        : "All Items"}
                 </span>
                 <span
-                  className={`text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5 rounded-full font-bold ${
-                    filterType === type ? "bg-white/20 text-white" : "bg-slate-200 text-slate-700"
-                  }`}
+                  className={`text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5 rounded-full font-bold ${filterType === type ? "bg-white/20 text-white" : "bg-slate-200 text-slate-700"
+                    }`}
                 >
                   {countByType(type)}
                 </span>

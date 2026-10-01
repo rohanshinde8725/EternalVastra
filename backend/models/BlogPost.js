@@ -17,7 +17,7 @@ const blogPostSchema = new mongoose.Schema(
     authorAvatar: { type: String, default: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80" },
     date: { type: String, default: "Aug 18, 2026" },
     readTime: { type: String, default: "5 min read" },
-    cover: { type: String, required: true, default: "/images/silk/silk-1.jpg" },
+    cover: { type: String, required: true, default: "/images/silk/silk-1.webp" },
     excerpt: { type: String, trim: true, default: "" },
     summary: { type: String, trim: true, default: "" },
     content: { type: String, default: "" },

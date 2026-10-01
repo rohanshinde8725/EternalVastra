@@ -100,7 +100,7 @@ const Cart = () => {
   return (
     <div className="w-full bg-[#FEFAF8]">
       {/* Banner */}
-      <div className="h-60 bg-[url(/images/banner/banner-3.png)] bg-cover bg-center">
+      <div className="h-60 bg-[url(/images/banner/banner-3.webp)] bg-cover bg-center">
         <div className="py-20 px-5 sm:px-8 md:px-10 lg:px-12">
           <FadeUp delay={0.1}>
             <h1 className="text-4xl font-semibold text-[#74202D]">
@@ -183,7 +183,7 @@ const Cart = () => {
                                     alt={item.title}
                                     onError={(e) => {
                                       e.currentTarget.onerror = null;
-                                      e.currentTarget.src = "/images/silk/silk-1.jpg";
+                                      e.currentTarget.src = "/images/silk/silk-1.webp";
                                     }}
                                     className="w-20 h-20 object-cover rounded group-hover:opacity-90 transition cursor-pointer"
                                   />
@@ -241,7 +241,7 @@ const Cart = () => {
                             alt={item.title}
                             onError={(e) => {
                               e.currentTarget.onerror = null;
-                              e.currentTarget.src = "/images/silk/silk-1.jpg";
+                              e.currentTarget.src = "/images/silk/silk-1.webp";
                             }}
                             className="w-full h-44 object-cover rounded transition-transform duration-300 group-hover:scale-105 cursor-pointer"
                           />

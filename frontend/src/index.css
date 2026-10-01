@@ -38,6 +38,30 @@ body {
   background: #8b1c2c; /* rich saree red */
 }
 
+/* Equal Height Testimonial Review Cards */
+.testimonial-swiper {
+  display: flex;
+}
+
+.testimonial-swiper .swiper-wrapper {
+  display: flex !important;
+  align-items: stretch !important;
+}
+
+.testimonial-swiper .swiper-slide {
+  height: auto !important;
+  display: flex !important;
+  box-sizing: border-box !important;
+}
+
+.testimonial-swiper .swiper-slide > div {
+  width: 100% !important;
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+}
+
 
 @media screen and (max-width: 768px) {
    .banner-p{
