@@ -30,4 +30,9 @@ const orderSchema = new mongoose.Schema(
   { timestamps: true, versionKey: false }
 );
 
+orderSchema.index({ createdAt: -1 });
+orderSchema.index({ email: 1 });
+orderSchema.index({ "customer.email": 1 });
+orderSchema.index({ status: 1 });
+
 module.exports = mongoose.model("Order", orderSchema);

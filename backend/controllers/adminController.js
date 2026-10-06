@@ -10,6 +10,7 @@ const StoreSettings = require("../models/StoreSettings");
 const RecycleBin = require("../models/RecycleBin");
 const ContactMessage = require("../models/ContactMessage");
 const User = require("../models/User");
+const cache = require("../utils/cache");
 
 const resources = {
   products: Product,
@@ -26,9 +27,25 @@ const resources = {
   "contact-messages": ContactMessage,
 };
 
-const list = (Model) => async (_req, res, next) => {
+const invalidateAdminCache = (resourceName = "") => {
+  if (resourceName) {
+    cache.delPrefix(`admin:${resourceName.toLowerCase()}`);
+  }
+  cache.del("admin:dashboard-stats");
+  cache.delPrefix("products:");
+};
+
+const list = (Model, resourceName = "") => async (_req, res, next) => {
   try {
-    res.json(await Model.find().sort({ createdAt: -1 }).lean());
+    const cacheKey = `admin:resource:${resourceName.toLowerCase()}`;
+    const cached = cache.get(cacheKey);
+    if (cached) {
+      return res.json(cached);
+    }
+
+    const items = await Model.find().sort({ createdAt: -1 }).lean();
+    cache.set(cacheKey, items, 180);
+    res.json(items);
   } catch (error) {
     next(error);
   }
@@ -36,7 +53,7 @@ const list = (Model) => async (_req, res, next) => {
 
 const getOne = (Model) => async (req, res, next) => {
   try {
-    const item = await Model.findById(req.params.id);
+    const item = await Model.findById(req.params.id).lean();
     if (!item) return res.status(404).json({ message: "Record not found" });
     res.json(item);
   } catch (error) {
@@ -44,31 +61,35 @@ const getOne = (Model) => async (req, res, next) => {
   }
 };
 
-const create = (Model) => async (req, res, next) => {
+const create = (Model, resourceName = "") => async (req, res, next) => {
   try {
-    res.status(201).json(await Model.create(req.body));
+    const item = await Model.create(req.body);
+    invalidateAdminCache(resourceName);
+    res.status(201).json(item);
   } catch (error) {
     next(error);
   }
 };
 
-const update = (Model) => async (req, res, next) => {
+const update = (Model, resourceName = "") => async (req, res, next) => {
   try {
     const item = await Model.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true,
     });
     if (!item) return res.status(404).json({ message: "Record not found" });
+    invalidateAdminCache(resourceName);
     res.json(item);
   } catch (error) {
     next(error);
   }
 };
 
-const remove = (Model) => async (req, res, next) => {
+const remove = (Model, resourceName = "") => async (req, res, next) => {
   try {
     const item = await Model.findByIdAndDelete(req.params.id);
     if (!item) return res.status(404).json({ message: "Record not found" });
+    invalidateAdminCache(resourceName);
     res.status(204).send();
   } catch (error) {
     next(error);
@@ -76,34 +97,44 @@ const remove = (Model) => async (req, res, next) => {
 };
 
 const getResource = (req, res, next) => {
-  const Model = resources[req.params.resource?.toLowerCase()];
-  return Model ? list(Model)(req, res, next) : res.status(404).json({ message: "Resource not found" });
+  const resourceName = req.params.resource?.toLowerCase();
+  const Model = resources[resourceName];
+  return Model ? list(Model, resourceName)(req, res, next) : res.status(404).json({ message: "Resource not found" });
 };
 
 const getSingleResource = (req, res, next) => {
-  const Model = resources[req.params.resource?.toLowerCase()];
+  const resourceName = req.params.resource?.toLowerCase();
+  const Model = resources[resourceName];
   return Model ? getOne(Model)(req, res, next) : res.status(404).json({ message: "Resource not found" });
 };
 
 const createResource = (req, res, next) => {
-  const Model = resources[req.params.resource?.toLowerCase()];
-  return Model ? create(Model)(req, res, next) : res.status(404).json({ message: "Resource not found" });
+  const resourceName = req.params.resource?.toLowerCase();
+  const Model = resources[resourceName];
+  return Model ? create(Model, resourceName)(req, res, next) : res.status(404).json({ message: "Resource not found" });
 };
 
 const updateResource = (req, res, next) => {
-  const Model = resources[req.params.resource?.toLowerCase()];
-  return Model ? update(Model)(req, res, next) : res.status(404).json({ message: "Resource not found" });
+  const resourceName = req.params.resource?.toLowerCase();
+  const Model = resources[resourceName];
+  return Model ? update(Model, resourceName)(req, res, next) : res.status(404).json({ message: "Resource not found" });
 };
 
 const deleteResource = (req, res, next) => {
-  const Model = resources[req.params.resource?.toLowerCase()];
-  return Model ? remove(Model)(req, res, next) : res.status(404).json({ message: "Resource not found" });
+  const resourceName = req.params.resource?.toLowerCase();
+  const Model = resources[resourceName];
+  return Model ? remove(Model, resourceName)(req, res, next) : res.status(404).json({ message: "Resource not found" });
 };
 
 // Admin Profile Handlers
 const getProfile = async (_req, res, next) => {
   try {
-    res.json((await AdminProfile.findOne().sort({ createdAt: -1 }).lean()) || {});
+    const cached = cache.get("admin:profile");
+    if (cached) return res.json(cached);
+
+    const profile = (await AdminProfile.findOne().sort({ createdAt: -1 }).lean()) || {};
+    cache.set("admin:profile", profile, 300);
+    res.json(profile);
   } catch (error) {
     next(error);
   }
@@ -111,13 +142,13 @@ const getProfile = async (_req, res, next) => {
 
 const saveProfile = async (req, res, next) => {
   try {
-    res.json(
-      await AdminProfile.findOneAndUpdate({}, req.body, {
-        new: true,
-        upsert: true,
-        runValidators: true,
-      })
-    );
+    const updated = await AdminProfile.findOneAndUpdate({}, req.body, {
+      new: true,
+      upsert: true,
+      runValidators: true,
+    });
+    cache.del("admin:profile");
+    res.json(updated);
   } catch (error) {
     next(error);
   }
@@ -134,6 +165,8 @@ const uploadAdminAvatar = async (req, res, next) => {
     );
     // Also update any matching admin users
     await User.updateMany({ role: "admin" }, { avatar: avatarUrl });
+    cache.del("admin:profile");
+    cache.delPrefix("admin:users");
     res.json({ message: "Admin avatar updated successfully", avatar: avatarUrl, profile });
   } catch (error) {
     next(error);
@@ -143,7 +176,12 @@ const uploadAdminAvatar = async (req, res, next) => {
 // Store Settings Handlers
 const getSettings = async (_req, res, next) => {
   try {
-    res.json((await StoreSettings.findOne().sort({ createdAt: -1 }).lean()) || {});
+    const cached = cache.get("admin:settings");
+    if (cached) return res.json(cached);
+
+    const settings = (await StoreSettings.findOne().sort({ createdAt: -1 }).lean()) || {};
+    cache.set("admin:settings", settings, 300);
+    res.json(settings);
   } catch (error) {
     next(error);
   }
@@ -151,32 +189,38 @@ const getSettings = async (_req, res, next) => {
 
 const saveSettings = async (req, res, next) => {
   try {
-    res.json(
-      await StoreSettings.findOneAndUpdate({}, req.body, {
-        new: true,
-        upsert: true,
-        runValidators: true,
-      })
-    );
+    const updated = await StoreSettings.findOneAndUpdate({}, req.body, {
+      new: true,
+      upsert: true,
+      runValidators: true,
+    });
+    cache.del("admin:settings");
+    res.json(updated);
   } catch (error) {
     next(error);
   }
 };
 
-// Dashboard Stats Live Aggregation
+// High speed Dashboard Stats with lean projections & in-memory caching
 const getDashboardStats = async (_req, res, next) => {
   try {
-    const [orders, products, customers, categories, users] = await Promise.all([
-      Order.find().sort({ createdAt: -1 }).lean(),
-      Product.find().sort({ createdAt: -1 }).lean(),
-      Customer.find().sort({ createdAt: -1 }).lean(),
-      Category.find().lean(),
-      require("../models/User").find().sort({ createdAt: -1 }).lean()
+    const cached = cache.get("admin:dashboard-stats");
+    if (cached) {
+      return res.json(cached);
+    }
+
+    // Parallel fetch with lean projections to minimize memory and bandwidth overhead
+    const [orders, products, customerCount, categories, users] = await Promise.all([
+      Order.find().sort({ createdAt: -1 }).select("orderId customerName total status items createdAt").lean(),
+      Product.find().sort({ createdAt: -1 }).select("id title category createdAt").lean(),
+      Customer.countDocuments(),
+      Category.find().select("name slug description banner count share").lean(),
+      User.find().sort({ createdAt: -1 }).select("name email phone role isBlocked status avatar createdAt").lean()
     ]);
 
     const totalSales = orders.reduce((sum, o) => sum + Number(o.total || 0), 0) || 0;
     const totalOrdersCount = orders.length || 0;
-    const totalCustomersCount = (customers.length + users.length) || 0;
+    const totalCustomersCount = (customerCount + users.length) || 0;
     const totalProductsCount = products.length || 0;
 
     // Aggregate Orders by Status
@@ -254,7 +298,7 @@ const getDashboardStats = async (_req, res, next) => {
       createdAt: u.createdAt,
     }));
 
-    res.json({
+    const responseData = {
       totalSales,
       totalOrdersCount,
       totalCustomersCount,
@@ -268,7 +312,10 @@ const getDashboardStats = async (_req, res, next) => {
       activities: activities.slice(0, 5),
       recentOrders: orders.slice(0, 5),
       categories,
-    });
+    };
+
+    cache.set("admin:dashboard-stats", responseData, 30);
+    res.json(responseData);
   } catch (error) {
     next(error);
   }
@@ -287,6 +334,8 @@ const toggleBlockUser = async (req, res, next) => {
     user.isBlocked = !user.isBlocked;
     user.status = user.isBlocked ? "blocked" : "active";
     await user.save();
+
+    invalidateAdminCache("users");
 
     res.json({
       message: user.isBlocked ? `User ${user.name} has been blocked.` : `User ${user.name} is now active.`,
@@ -329,6 +378,9 @@ const deleteUser = async (req, res, next) => {
     }).catch(() => {});
 
     await User.findByIdAndDelete(req.params.id);
+    invalidateAdminCache("users");
+    invalidateAdminCache("recyclebin");
+
     res.status(204).send();
   } catch (error) {
     next(error);
@@ -369,6 +421,9 @@ const addToRecycleBin = async (req, res, next) => {
     } else if (itemType === "user" && originalId) {
       await User.findByIdAndDelete(originalId).catch(() => {});
     }
+
+    invalidateAdminCache(itemType);
+    invalidateAdminCache("recyclebin");
 
     res.status(201).json(entry);
   } catch (error) {
@@ -412,6 +467,9 @@ const restoreFromRecycleBin = async (req, res, next) => {
     }
 
     await RecycleBin.findByIdAndDelete(req.params.id);
+    invalidateAdminCache(itemType);
+    invalidateAdminCache("recyclebin");
+
     res.json({ message: "Item restored successfully", item });
   } catch (error) {
     next(error);
@@ -422,6 +480,7 @@ const deletePermanentFromRecycleBin = async (req, res, next) => {
   try {
     const item = await RecycleBin.findByIdAndDelete(req.params.id);
     if (!item) return res.status(404).json({ message: "Recycle bin item not found" });
+    invalidateAdminCache("recyclebin");
     res.status(204).send();
   } catch (error) {
     next(error);
@@ -431,6 +490,7 @@ const deletePermanentFromRecycleBin = async (req, res, next) => {
 const emptyRecycleBin = async (_req, res, next) => {
   try {
     await RecycleBin.deleteMany({});
+    invalidateAdminCache("recyclebin");
     res.status(204).send();
   } catch (error) {
     next(error);

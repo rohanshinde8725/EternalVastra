@@ -18,4 +18,7 @@ const contactMessageSchema = new mongoose.Schema(
   { timestamps: true, versionKey: false }
 );
 
+contactMessageSchema.index({ createdAt: -1 });
+contactMessageSchema.index({ status: 1 });
+
 module.exports = mongoose.model("ContactMessage", contactMessageSchema);

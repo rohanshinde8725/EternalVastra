@@ -33,4 +33,7 @@ const blogPostSchema = new mongoose.Schema(
   { timestamps: true, versionKey: false }
 );
 
+blogPostSchema.index({ createdAt: -1 });
+blogPostSchema.index({ slug: 1 });
+
 module.exports = mongoose.model("BlogPost", blogPostSchema);

@@ -39,4 +39,10 @@ const productSchema = new mongoose.Schema(
   { timestamps: true, versionKey: false }
 );
 
+// Performance indexes for fast lookups, sorting and filtering
+productSchema.index({ createdAt: -1, id: -1 });
+productSchema.index({ category: 1 });
+productSchema.index({ discountPrice: 1 });
+productSchema.index({ rating: -1 });
+
 module.exports = mongoose.model("Product", productSchema);

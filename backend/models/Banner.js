@@ -14,4 +14,6 @@ const bannerSchema = new mongoose.Schema(
   { timestamps: true, versionKey: false }
 );
 
+bannerSchema.index({ active: 1, createdAt: -1 });
+
 module.exports = mongoose.model("Banner", bannerSchema);

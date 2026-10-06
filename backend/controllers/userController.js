@@ -1,5 +1,7 @@
 const User = require("../models/User");
 const Order = require("../models/Order");
+const AdminProfile = require("../models/AdminProfile");
+const cache = require("../utils/cache");
 
 // Get user profile details (including recent orders)
 exports.getProfile = async (req, res) => {
@@ -11,7 +13,9 @@ exports.getProfile = async (req, res) => {
     if (!user) return res.status(404).json({ message: "User not found" });
 
     // Try fetching orders for this user by email
-    const orders = await Order.find({ "customer.email": user.email })
+    const orders = await Order.find({
+      $or: [{ email: user.email }, { "customer.email": user.email }]
+    })
       .sort({ createdAt: -1 })
       .lean();
 
@@ -41,6 +45,7 @@ exports.updateProfile = async (req, res) => {
     if (addresses !== undefined) user.addresses = addresses;
 
     await user.save();
+    cache.delPrefix("admin:users");
 
     res.json({
       message: "Profile updated successfully",
@@ -76,8 +81,10 @@ exports.updateAvatar = async (req, res) => {
     await user.save();
 
     if (user.role === "admin" || user.email === "rohanshinde8725@gmail.com") {
-      await require("../models/AdminProfile").findOneAndUpdate({}, { avatar: avatarUrl }, { upsert: true });
+      await AdminProfile.findOneAndUpdate({}, { avatar: avatarUrl }, { upsert: true });
+      cache.del("admin:profile");
     }
+    cache.delPrefix("admin:users");
 
     res.json({
       message: "Avatar updated successfully",

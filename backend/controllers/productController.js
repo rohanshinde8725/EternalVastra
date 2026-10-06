@@ -2,6 +2,7 @@ const fs = require("fs/promises");
 const path = require("path");
 const Product = require("../models/Product");
 const ProductDetail = require("../models/ProductDetail");
+const cache = require("../utils/cache");
 
 const uploadsDirectory = path.join(__dirname, "..", "uploads");
 
@@ -36,32 +37,43 @@ const removeStoredImage = async (imageUrl) => {
   await fs.unlink(path.join(uploadsDirectory, filename)).catch(() => {});
 };
 
+// High-speed lean product list with in-memory caching and zero redundant DB joins
 const getProducts = async (_req, res, next) => {
   try {
-    const products = await Product.aggregate([
-      { $sort: { createdAt: -1, id: -1, _id: -1 } },
-      {
-        $lookup: {
-          from: "ProductsDetail",
-          localField: "id",
-          foreignField: "productId",
-          as: "detailRecords",
-        },
-      },
-      {
-        $set: {
-          details: {
-            $cond: {
-              if: { $gt: [{ $size: "$detailRecords" }, 0] },
-              then: { $arrayElemAt: ["$detailRecords", 0] },
-              else: { $ifNull: ["$details", {}] },
-            },
-          },
-        },
-      },
-      { $unset: "detailRecords" },
-    ]);
-    res.json(products);
+    const cached = cache.get("products:all");
+    if (cached) {
+      return res.json(cached);
+    }
+
+    // Direct lean query with indexed sort for maximum throughput
+    const products = await Product.find().sort({ createdAt: -1, id: -1 }).lean();
+
+    // Check if any product has missing details and fallback to details collection if needed
+    const needsDetailMerge = products.some(p => !p.details || Object.keys(p.details).length === 0 || !p.details.material);
+    
+    let finalProducts = products;
+    if (needsDetailMerge) {
+      const details = await ProductDetail.find().lean();
+      const detailMap = new Map(details.map(d => [d.productId, d]));
+      finalProducts = products.map(p => {
+        const hasOwnDetails = p.details && (p.details.description || p.details.material);
+        if (hasOwnDetails) return p;
+        const matched = detailMap.get(p.id);
+        return {
+          ...p,
+          details: matched ? {
+            description: matched.description || "",
+            material: matched.material || "",
+            occasion: matched.occasion || "",
+            care: matched.care || "",
+            highlights: matched.highlights || [],
+          } : (p.details || {}),
+        };
+      });
+    }
+
+    cache.set("products:all", finalProducts, 120);
+    res.json(finalProducts);
   } catch (error) {
     next(error);
   }
@@ -70,33 +82,32 @@ const getProducts = async (_req, res, next) => {
 const getProduct = async (req, res, next) => {
   try {
     const requestedId = Number(req.params.id);
-    const filter = Number.isInteger(requestedId) ? { id: requestedId } : { _id: req.params.id };
+    const cacheKey = `products:id:${req.params.id}`;
+    const cached = cache.get(cacheKey);
+    if (cached) {
+      return res.json(cached);
+    }
 
-    const product = await Product.aggregate([
-      { $match: filter },
-      {
-        $lookup: {
-          from: "ProductsDetail",
-          localField: "id",
-          foreignField: "productId",
-          as: "detailRecords",
-        },
-      },
-      {
-        $set: {
-          details: {
-            $cond: {
-              if: { $gt: [{ $size: "$detailRecords" }, 0] },
-              then: { $arrayElemAt: ["$detailRecords", 0] },
-              else: { $ifNull: ["$details", {}] },
-            },
-          },
-        },
-      },
-      { $unset: "detailRecords" },
-    ]).then((items) => items[0]);
+    const filter = Number.isInteger(requestedId) ? { id: requestedId } : { _id: req.params.id };
+    const product = await Product.findOne(filter).lean();
 
     if (!product) return res.status(404).json({ message: "Product not found" });
+
+    // Fallback lookup if details subdocument is incomplete
+    if (!product.details || (!product.details.description && !product.details.material)) {
+      const detail = await ProductDetail.findOne({ productId: product.id }).lean();
+      if (detail) {
+        product.details = {
+          description: detail.description || "",
+          material: detail.material || "",
+          occasion: detail.occasion || "",
+          care: detail.care || "",
+          highlights: detail.highlights || [],
+        };
+      }
+    }
+
+    cache.set(cacheKey, product, 180);
     res.json(product);
   } catch (error) {
     next(error);
@@ -144,6 +155,10 @@ const createProduct = async (req, res, next) => {
       { productId: newId, ...productDetails },
       { upsert: true, new: true }
     ).catch(() => {});
+
+    // Invalidate product caches and admin stats cache
+    cache.delPrefix("products:");
+    cache.delPrefix("admin:");
 
     res.status(201).json(product);
   } catch (error) {
@@ -193,6 +208,11 @@ const updateProduct = async (req, res, next) => {
     ).catch(() => {});
 
     if (req.file && previousImage !== product.img) await removeStoredImage(previousImage);
+
+    // Invalidate caches
+    cache.delPrefix("products:");
+    cache.delPrefix("admin:");
+
     res.json(product);
   } catch (error) {
     if (req.file) await removeStoredImage(`/uploads/${req.file.filename}`);
@@ -211,6 +231,11 @@ const deleteProduct = async (req, res, next) => {
 
     await ProductDetail.findOneAndDelete({ productId: product.id }).catch(() => {});
     await removeStoredImage(product.img);
+
+    // Invalidate caches
+    cache.delPrefix("products:");
+    cache.delPrefix("admin:");
+
     res.status(204).send();
   } catch (error) {
     next(error);

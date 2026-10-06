@@ -18,4 +18,6 @@ const recycleBinSchema = new mongoose.Schema(
   { timestamps: true, versionKey: false }
 );
 
+recycleBinSchema.index({ deletedAt: -1 });
+
 module.exports = mongoose.model("RecycleBin", recycleBinSchema);

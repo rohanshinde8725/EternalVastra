@@ -1,5 +1,9 @@
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
+// Fast client-side in-memory cache and promise deduplicator
+const apiCache = new Map();
+const inFlightRequests = new Map();
+
 const resolveImageUrl = (imagePath) => {
   if (!imagePath || typeof imagePath !== "string") return "/images/silk/silk-1.webp";
 
@@ -37,18 +41,68 @@ const normalizeProduct = (product) => ({
   img: resolveImageUrl(product.img),
 });
 
-export const fetchProducts = async () => {
-  const response = await fetch(`${API_BASE_URL}/api/products`);
-  if (!response.ok) throw new Error("Unable to load products");
-  const products = await response.json();
+/**
+ * Deduplicated cached fetch with TTL
+ */
+const cachedFetch = async (url, options = {}, ttlMs = 60000) => {
+  const method = options.method || "GET";
+  if (method !== "GET") {
+    // Write request: invalidate cache and fetch fresh
+    apiCache.clear();
+    return fetch(url, options);
+  }
+
+  const cached = apiCache.get(url);
+  if (cached && Date.now() < cached.expiresAt) {
+    return cached.data;
+  }
+
+  if (inFlightRequests.has(url)) {
+    return inFlightRequests.get(url);
+  }
+
+  const promise = fetch(url, options)
+    .then(async (res) => {
+      if (!res.ok) {
+        throw new Error(`Request failed with status ${res.status}`);
+      }
+      const data = await res.json();
+      apiCache.set(url, { data, expiresAt: Date.now() + ttlMs });
+      return data;
+    })
+    .finally(() => {
+      inFlightRequests.delete(url);
+    });
+
+  inFlightRequests.set(url, promise);
+  return promise;
+};
+
+export const fetchProducts = async (forceRefresh = false) => {
+  const url = `${API_BASE_URL}/api/products`;
+  if (forceRefresh) {
+    apiCache.delete(url);
+  }
+  const products = await cachedFetch(url, {}, 60000);
   return products.map(normalizeProduct);
 };
 
-export const fetchProduct = async (id) => {
-  const response = await fetch(`${API_BASE_URL}/api/products/${id}`);
-  if (response.status === 404) return null;
-  if (!response.ok) throw new Error("Unable to load product");
-  return normalizeProduct(await response.json());
+export const fetchProduct = async (id, forceRefresh = false) => {
+  const url = `${API_BASE_URL}/api/products/${id}`;
+  if (forceRefresh) {
+    apiCache.delete(url);
+  }
+  try {
+    const product = await cachedFetch(url, {}, 60000);
+    return normalizeProduct(product);
+  } catch (err) {
+    if (err.message?.includes("404")) return null;
+    throw err;
+  }
 };
 
-export { API_BASE_URL, resolveImageUrl };
+export const invalidateProductCache = () => {
+  apiCache.clear();
+};
+
+export { API_BASE_URL, resolveImageUrl, cachedFetch };
