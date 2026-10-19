@@ -12,6 +12,7 @@ import {
 } from "react-icons/fi";
 import { API_BASE_URL } from "../../api/products";
 import { useToast } from "../../context/ToastContext";
+import { TableSkeleton } from "../../components/common";
 
 const typeBadgeStyles = {
   product: { bg: "bg-rose-50 text-[#8B1C2C]", label: "Product", icon: FiBox },
@@ -228,7 +229,16 @@ const RecycleBin = () => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
-                {filteredItems.map((item) => {
+                {loading ? (
+                  <TableSkeleton rows={5} columns={5} />
+                ) : filteredItems.length === 0 ? (
+                  <tr>
+                    <td colSpan="5" className="py-12 sm:py-16 text-center text-slate-500 text-xs sm:text-base">
+                      No deleted items found in the recycle bin.
+                    </td>
+                  </tr>
+                ) : (
+                  filteredItems.map((item) => {
                   const typeConfig =
                     typeBadgeStyles[item.itemType?.toLowerCase()] || typeBadgeStyles.product;
                   const Icon = typeConfig.icon;
@@ -309,7 +319,7 @@ const RecycleBin = () => {
                       </td>
                     </tr>
                   );
-                })}
+                }))}
               </tbody>
             </table>
           )}

@@ -17,6 +17,7 @@ import { FaFacebookF, FaTwitter, FaWhatsapp, FaPinterestP } from "react-icons/fa
 import { API_BASE_URL, resolveImageUrl } from "../api/products";
 import { useToast } from "../context/ToastContext";
 import FadeUp from "../components/animations/FadeUp";
+import { BlogDetailSkeleton } from "../components/common";
 
 const BLOG_CURATED_COVERS = {
   "ultimate-guide-choosing-perfect-saree": "/images/silk/silkCategory.webp",
@@ -123,14 +124,7 @@ const BlogDetail = () => {
   };
 
   if (loading) {
-    return (
-      <div className="bg-[#FEFAF8] min-h-screen flex items-center justify-center py-20">
-        <div className="text-center">
-          <div className="w-10 h-10 border-4 border-[#6B1527] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-          <p className="text-sm font-semibold text-slate-600">Loading saree story & drape tutorial...</p>
-        </div>
-      </div>
-    );
+    return <BlogDetailSkeleton />;
   }
 
   if (!post) {

@@ -6,6 +6,7 @@ import {
 import { API_BASE_URL, resolveImageUrl } from "../../api/products";
 import { useToast } from "../../context/ToastContext";
 import { getStoredUser } from "../../utils/auth";
+import { TableSkeleton } from "../../components/common";
 
 const Users = () => {
   const { showToast } = useToast();
@@ -378,12 +379,7 @@ const Users = () => {
 
             <tbody className="divide-y divide-slate-100 font-medium">
               {loading ? (
-                <tr>
-                  <td colSpan="6" className="py-16 text-center text-slate-400">
-                    <FiRotateCw className="animate-spin text-2xl mx-auto mb-2 text-[#74202D]" />
-                    <span>Loading user accounts from MongoDB...</span>
-                  </td>
-                </tr>
+                <TableSkeleton rows={6} columns={6} />
               ) : filteredUsers.length === 0 ? (
                 <tr>
                   <td colSpan="6" className="py-16 text-center text-slate-400">

@@ -11,6 +11,7 @@ import { useToast } from "../context/ToastContext";
 import { getStoredUser, isAuthenticated } from "../utils/auth";
 import FadeUp from "../components/animations/FadeUp";
 import { API_BASE_URL, resolveImageUrl } from "../api/products";
+import { ProductDetailSkeleton, ReviewSkeleton } from "../components/common";
 
 const getUserAvatarUrl = (avatarStr, userName = "Patron") => {
   if (!avatarStr || avatarStr === "/images/default-avatar.webp" || avatarStr.includes("testimonial-1.webp")) {
@@ -391,7 +392,7 @@ const SareeDetail = () => {
   }, [product]);
 
   if (loading) {
-    return <div className="container min-h-screen bg-[#fffdfb] px-5 py-24 text-center">Loading product...</div>;
+    return <ProductDetailSkeleton />;
   }
 
   if (error || !product) {
@@ -833,9 +834,7 @@ const SareeDetail = () => {
             {/* Right Reviews List */}
             <div className="lg:col-span-8">
               {loadingReviews ? (
-                <div className="py-12 text-center text-slate-500 font-medium">
-                  Loading customer reviews...
-                </div>
+                <ReviewSkeleton count={3} />
               ) : productReviews.length === 0 ? (
                 <div className="border-2 border-dashed border-[#EEDACB] rounded-2xl p-8 sm:p-12 text-center bg-[#FCF8F5]/60">
                   <div className="w-14 h-14 rounded-full bg-amber-50 text-amber-500 flex items-center justify-center mx-auto mb-3 text-2xl border border-amber-200">

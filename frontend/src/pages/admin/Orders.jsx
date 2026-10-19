@@ -9,6 +9,7 @@ import {
 } from "react-icons/fi";
 import { API_BASE_URL } from "../../api/products";
 import { useToast } from "../../context/ToastContext";
+import { TableSkeleton } from "../../components/common";
 
 const statusStyles = {
   Delivered: "bg-[#DCFCE7] text-[#15803D]",
@@ -204,7 +205,9 @@ const Orders = () => {
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100">
-              {filteredOrders.length === 0 ? (
+              {loading ? (
+                <TableSkeleton rows={6} columns={7} hasThumbnail={false} />
+              ) : filteredOrders.length === 0 ? (
                 <tr>
                   <td colSpan="7" className="py-12 sm:py-16 text-center text-slate-500 text-xs sm:text-base">
                     No orders found matching your filter criteria.

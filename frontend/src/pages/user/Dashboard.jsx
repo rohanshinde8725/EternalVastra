@@ -6,6 +6,7 @@ import {
 } from "react-icons/fi";
 import { API_BASE_URL, resolveImageUrl } from "../../api/products";
 import FadeUp from "../../components/animations/FadeUp";
+import { DashboardSkeleton } from "../../components/common";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -42,6 +43,10 @@ const Dashboard = () => {
       setLoading(false);
     }
   }, [user]);
+
+  if (loading) {
+    return <DashboardSkeleton />;
+  }
 
   return (
     <div className="space-y-8">

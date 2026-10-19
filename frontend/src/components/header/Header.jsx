@@ -24,15 +24,15 @@ const Header = () => {
   const [cartCount, setCartCount] = useState(0);
   const [wishlistCount, setWishlistCount] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
-  const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
-  const [isDesktopSearchOpen, setIsDesktopSearchOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
 
   const userMenuRef = useRef(null);
-  const desktopSearchContainerRef = useRef(null);
-  const mobileSearchInputRef = useRef(null);
-  const desktopSearchInputRef = useRef(null);
+  const searchContainerRef = useRef(null);
+  const searchInputRef = useRef(null);
+  const desktopSearchBtnRef = useRef(null);
+  const mobileSearchBtnRef = useRef(null);
   const location = useLocation();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -94,53 +94,68 @@ const Header = () => {
     };
   }, []);
 
-  // Close menus on click outside
+  // Close menus & search on click outside
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (userMenuRef.current && !userMenuRef.current.contains(e.target)) {
         setIsUserMenuOpen(false);
       }
       if (
-        desktopSearchContainerRef.current &&
-        !desktopSearchContainerRef.current.contains(e.target)
+        isSearchOpen &&
+        searchContainerRef.current &&
+        !searchContainerRef.current.contains(e.target) &&
+        !desktopSearchBtnRef.current?.contains(e.target) &&
+        !mobileSearchBtnRef.current?.contains(e.target)
       ) {
-        setIsDesktopSearchOpen(false);
+        setIsSearchOpen(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+  }, [isSearchOpen]);
+
+  // Close search on Escape key
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") {
+        setIsSearchOpen(false);
+      }
+    };
+    if (isSearchOpen) {
+      window.addEventListener("keydown", handleKeyDown);
+    }
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isSearchOpen]);
+
+  // Auto-focus search input when opened
+  useEffect(() => {
+    if (isSearchOpen && searchInputRef.current) {
+      setTimeout(() => searchInputRef.current?.focus(), 80);
+    }
+  }, [isSearchOpen]);
+
+  // Close search on page navigation
+  useEffect(() => {
+    setIsSearchOpen(false);
+  }, [location.pathname]);
 
   useEffect(() => {
     const query = searchParams.get("search") || "";
     setSearchTerm(query);
   }, [location.search, searchParams]);
 
-  useEffect(() => {
-    if (isSearchModalOpen && mobileSearchInputRef.current) {
-      setTimeout(() => mobileSearchInputRef.current?.focus(), 100);
-    }
-  }, [isSearchModalOpen]);
-
-  useEffect(() => {
-    if (isDesktopSearchOpen && desktopSearchInputRef.current) {
-      setTimeout(() => desktopSearchInputRef.current?.focus(), 100);
-    }
-  }, [isDesktopSearchOpen]);
-
   const handleSearchSubmit = (event) => {
     event.preventDefault();
     const trimmed = searchTerm.trim();
     const searchPath = trimmed ? `/shop?search=${encodeURIComponent(trimmed)}` : "/shop";
     navigate(searchPath);
-    setIsSearchModalOpen(false);
-    setIsDesktopSearchOpen(false);
+    setIsSearchOpen(false);
   };
 
   const handleQuickTagClick = (tag) => {
     setSearchTerm(tag);
     navigate(`/shop?search=${encodeURIComponent(tag)}`);
-    setIsSearchModalOpen(false);
+    setIsSearchOpen(false);
   };
 
   const handleSignOut = () => {
@@ -277,52 +292,24 @@ const Header = () => {
             </ul>
           </nav>
 
-          {/* RIGHT: ACTION CONTROLS (EXPANDABLE SEARCH ON CLICK) */}
+          {/* RIGHT: ACTION CONTROLS */}
           <div className="flex items-center flex-shrink-0">
             
-            {/* Desktop Expandable Search Bar */}
-            <div className="hidden lg:flex items-center" ref={desktopSearchContainerRef}>
-              {isDesktopSearchOpen ? (
-                <form
-                  onSubmit={handleSearchSubmit}
-                  className="relative flex items-center w-64 xl:w-72 animate-in fade-in zoom-in-95 duration-200"
-                >
-                  <input
-                    ref={desktopSearchInputRef}
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    type="text"
-                    placeholder="Search sarees..."
-                    className="w-full bg-white border border-slate-300 rounded-full pl-4 pr-16 py-2 text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-[#6B1527] focus:ring-2 focus:ring-[#6B1527]/15 shadow-sm transition"
-                  />
-                  <button
-                    type="submit"
-                    aria-label="Submit search"
-                    className="absolute right-8 top-1/2 -translate-y-1/2 p-1 text-slate-400 hover:text-[#6B1527] transition cursor-pointer"
-                  >
-                    <FiSearch className="text-base" />
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setIsDesktopSearchOpen(false)}
-                    aria-label="Close search"
-                    className="absolute right-2 top-1/2 -translate-y-1/2 p-1 text-slate-400 hover:text-slate-700 transition cursor-pointer"
-                  >
-                    <FiX className="text-base" />
-                  </button>
-                </form>
-              ) : (
-                <button
-                  type="button"
-                  onClick={() => setIsDesktopSearchOpen(true)}
-                  aria-label="Open Search"
-                  title="Search Store"
-                  className="p-2.5 rounded-full text-slate-700 hover:text-[#6B1527] hover:bg-rose-50/60 transition cursor-pointer"
-                >
-                  <FiSearch className="text-xl" />
-                </button>
-              )}
-            </div>
+            {/* Desktop Search Button (Toggles Search Drawer Under Header) */}
+            <button
+              ref={desktopSearchBtnRef}
+              type="button"
+              onClick={() => setIsSearchOpen((prev) => !prev)}
+              aria-label={isSearchOpen ? "Close Search" : "Open Search"}
+              title={isSearchOpen ? "Close Search" : "Search Store"}
+              className={`hidden lg:flex p-2.5 rounded-full transition cursor-pointer ${
+                isSearchOpen
+                  ? "bg-rose-100/80 text-[#6B1527] ring-2 ring-[#6B1527]/20"
+                  : "text-slate-700 hover:text-[#6B1527] hover:bg-rose-50/60"
+              }`}
+            >
+              {isSearchOpen ? <FiX className="text-xl" /> : <FiSearch className="text-xl" />}
+            </button>
 
             {/* Desktop Wishlist Icon */}
             <button
@@ -439,12 +426,17 @@ const Header = () => {
 
             {/* Mobile Top Header: Search Icon Trigger */}
             <button
+              ref={mobileSearchBtnRef}
               type="button"
-              onClick={() => setIsSearchModalOpen(true)}
-              aria-label="Search"
-              className="lg:hidden p-2 rounded-full text-slate-700 hover:text-[#6B1527] hover:bg-rose-50 transition cursor-pointer"
+              onClick={() => setIsSearchOpen((prev) => !prev)}
+              aria-label={isSearchOpen ? "Close Search" : "Search Store"}
+              className={`lg:hidden p-2 rounded-full transition cursor-pointer ${
+                isSearchOpen
+                  ? "bg-rose-100/80 text-[#6B1527] ring-2 ring-[#6B1527]/20"
+                  : "text-slate-700 hover:text-[#6B1527] hover:bg-rose-50"
+              }`}
             >
-              <FiSearch className="text-2xl" />
+              {isSearchOpen ? <FiX className="text-2xl" /> : <FiSearch className="text-2xl" />}
             </button>
 
             {/* Mobile Top Header: Hamburger Menu Button */}
@@ -458,7 +450,95 @@ const Header = () => {
             </button>
           </div>
         </div>
+
+        {/* ========================================================================= */}
+        {/* EXPANDABLE SEARCH PANEL DIRECTLY UNDER THE HEADER */}
+        {/* ========================================================================= */}
+        {isSearchOpen && (
+          <div
+            ref={searchContainerRef}
+            className="w-full border-t border-rose-100/90 bg-white/98 backdrop-blur-md shadow-lg transition-all animate-in slide-in-from-top-2 duration-200"
+          >
+            <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 py-3.5 sm:py-5">
+              <form onSubmit={handleSearchSubmit} className="relative flex items-center gap-2 sm:gap-3">
+                <div className="relative flex-1">
+                  <FiSearch className="absolute left-3.5 sm:left-4 top-1/2 -translate-y-1/2 text-slate-400 text-base sm:text-lg pointer-events-none" />
+                  <input
+                    required
+                    ref={searchInputRef}
+                    type="text"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    placeholder="Search authentic sarees, silk, paithani, cotton, occasions..."
+                    className="w-full bg-slate-50 border border-slate-200 rounded-full pl-10 sm:pl-11 pr-10 py-2.5 sm:py-3 text-xs sm:text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-[#6B1527] focus:bg-white focus:ring-2 focus:ring-[#6B1527]/15 transition"
+                  />
+                  {searchTerm && (
+                    <button
+                      type="button"
+                      onClick={() => setSearchTerm("")}
+                      className="absolute right-3.5 top-1/2 -translate-y-1/2 p-1 text-slate-400 hover:text-slate-700 transition cursor-pointer"
+                      aria-label="Clear search text"
+                    >
+                      <FiX className="text-base" />
+                    </button>
+                  )}
+                </div>
+
+                <button
+                  type="submit"
+                  className="px-4 sm:px-6 py-2.5 sm:py-3 rounded-full bg-[#6B1527] hover:bg-[#5A1622] text-white text-xs sm:text-sm font-semibold uppercase tracking-wider transition-all duration-200 shadow-xs cursor-pointer whitespace-nowrap"
+                >
+                  Search
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setIsSearchOpen(false)}
+                  aria-label="Close search"
+                  className="p-2 sm:p-2.5 rounded-full text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition cursor-pointer"
+                  title="Close Search"
+                >
+                  <FiX className="text-lg sm:text-xl" />
+                </button>
+              </form>
+
+              {/* Popular Searches Quick Suggestions */}
+              <div className="mt-2.5 sm:mt-3 pt-2.5 border-t border-slate-100 flex items-center gap-2 flex-wrap">
+                <span className="text-[10px] sm:text-[11px] font-bold text-slate-400 uppercase tracking-wider whitespace-nowrap">
+                  Popular Searches:
+                </span>
+                {[
+                  "Silk Sarees",
+                  "Paithani Sarees",
+                  "Cotton Sarees",
+                  "Organza Sarees",
+                  "Georgette Sarees",
+                  "Banarasi Sarees",
+                  "New Arrivals",
+                ].map((tag) => (
+                  <button
+                    key={tag}
+                    type="button"
+                    onClick={() => handleQuickTagClick(tag)}
+                    className="px-2.5 sm:px-3 py-1 rounded-full text-[11px] sm:text-xs font-medium bg-slate-100 text-slate-700 hover:bg-rose-50 hover:text-[#6B1527] border border-transparent hover:border-[#6B1527]/20 transition cursor-pointer"
+                  >
+                    {tag}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
       </header>
+
+      {/* Dimmed backdrop overlay when search is open */}
+      {isSearchOpen && (
+        <div
+          onClick={() => setIsSearchOpen(false)}
+          className="fixed inset-0 z-30 bg-black/25 backdrop-blur-[2px] transition-opacity animate-in fade-in duration-200"
+          aria-hidden="true"
+        />
+      )}
 
       {/* ========================================================================= */}
       {/* 2. MOBILE & TABLET BOTTOM NAVIGATION BAR (MATCHING USER SCREENSHOT) */}
@@ -487,8 +567,15 @@ const Header = () => {
           {/* 2. SEARCH */}
           <button
             type="button"
-            onClick={() => setIsSearchModalOpen(true)}
-            className="flex flex-col items-center justify-center py-1 text-slate-600 hover:text-[#6B1527] transition-all duration-200 cursor-pointer"
+            onClick={() => {
+              setIsSearchOpen((prev) => !prev);
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
+            className={`flex flex-col items-center justify-center py-1 transition-all duration-200 cursor-pointer ${
+              isSearchOpen
+                ? "text-[#6B1527] font-bold"
+                : "text-slate-600 hover:text-[#6B1527]"
+            }`}
           >
             <FiSearch className="text-xl" />
             <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider mt-1">
@@ -561,71 +648,7 @@ const Header = () => {
         </div>
       </nav>
 
-      {/* ========================================================================= */}
-      {/* 3. MOBILE SEARCH MODAL / OVERLAY */}
-      {/* ========================================================================= */}
-      {isSearchModalOpen && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-start justify-center p-4 pt-16 sm:pt-20 animate-in fade-in duration-200">
-          <div className="bg-white w-full max-w-lg rounded-3xl p-5 shadow-2xl border border-slate-100 animate-in zoom-in-95 duration-200">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-100 mb-4">
-              <div className="flex items-center gap-2 text-slate-800">
-                <FiSearch className="text-[#6B1527] text-lg" />
-                <h3 className="font-bold text-base">Search Store</h3>
-              </div>
-              <button
-                type="button"
-                onClick={() => setIsSearchModalOpen(false)}
-                className="p-2 rounded-full text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition cursor-pointer"
-              >
-                <FiX className="text-xl" />
-              </button>
-            </div>
 
-            <form onSubmit={handleSearchSubmit} className="relative mb-5">
-              <input
-                ref={mobileSearchInputRef}
-                type="text"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder="Search authentic sarees, silk, cotton..."
-                className="w-full bg-slate-50 border border-slate-200 rounded-2xl pl-4 pr-12 py-3 text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-[#6B1527] focus:bg-white transition"
-              />
-              <button
-                type="submit"
-                className="absolute right-2 top-1/2 -translate-y-1/2 px-3 py-1.5 rounded-xl bg-[#6B1527] text-white text-xs font-semibold hover:bg-[#7E1A2E] transition cursor-pointer"
-              >
-                Search
-              </button>
-            </form>
-
-            <div>
-              <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-2.5">
-                Popular Searches
-              </span>
-              <div className="flex flex-wrap gap-2">
-                {[
-                  "Silk Sarees",
-                  "Paithani Sarees",
-                  "Cotton Sarees",
-                  "Organza Sarees",
-                  "Georgette Sarees",
-                  "Banarasi Sarees",
-                  "New Arrivals",
-                ].map((tag) => (
-                  <button
-                    key={tag}
-                    type="button"
-                    onClick={() => handleQuickTagClick(tag)}
-                    className="px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-rose-50 hover:text-[#6B1527] text-slate-700 text-xs font-semibold transition cursor-pointer"
-                  >
-                    {tag}
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* ========================================================================= */}
       {/* 4. MOBILE NAVIGATION DRAWER */}

@@ -13,6 +13,7 @@ import {
 import { PiFlowerLotus } from "react-icons/pi";
 import { API_BASE_URL, resolveImageUrl } from "../api/products";
 import FadeUp from "../components/animations/FadeUp";
+import { BlogGridSkeleton } from "../components/common";
 
 const BLOG_CURATED_COVERS = {
   "ultimate-guide-choosing-perfect-saree": "/images/silk/silkCategory.webp",
@@ -310,10 +311,7 @@ const Blog = () => {
       {/* ========================================================================= */}
       <section className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
         {loading ? (
-          <div className="py-24 text-center">
-            <FiRotateCw className="animate-spin text-3xl text-[#6B1527] mx-auto mb-3" />
-            <p className="text-sm font-semibold text-slate-500">Loading stories and guides from MongoDB...</p>
-          </div>
+          <BlogGridSkeleton count={6} />
         ) : paginatedPosts.length === 0 ? (
           <div className="py-20 text-center bg-white rounded-3xl border border-slate-200 p-8 max-w-lg mx-auto">
             <h3 className="text-xl font-bold text-slate-800">No Articles Found</h3>

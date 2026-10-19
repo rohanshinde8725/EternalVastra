@@ -16,6 +16,7 @@ import {
 import { API_BASE_URL } from "../../api/products";
 import { useToast } from "../../context/ToastContext";
 import ImageUploader from "../../components/admin/ImageUploader";
+import { TableSkeleton } from "../../components/common";
 
 const ITEMS_PER_PAGE = 20;
 
@@ -380,7 +381,9 @@ const ProductCatalogue = () => {
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100">
-              {filteredProducts.length === 0 ? (
+              {loading ? (
+                <TableSkeleton rows={6} columns={7} />
+              ) : filteredProducts.length === 0 ? (
                 <tr>
                   <td colSpan="7" className="py-12 sm:py-16 text-center text-slate-500 text-xs sm:text-base">
                     No sarees found matching your criteria.

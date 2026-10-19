@@ -3,6 +3,7 @@ import { FiStar, FiTrash2, FiRotateCw, FiPlus, FiEdit2, FiX, FiCheckCircle, FiCh
 import { API_BASE_URL } from "../../api/products";
 import { useToast } from "../../context/ToastContext";
 import ImageUploader from "../../components/admin/ImageUploader";
+import { ReviewSkeleton } from "../../components/common";
 
 const initialReviewForm = {
   reviewer: "",
@@ -263,7 +264,9 @@ const Reviews = () => {
 
       {/* Review List */}
       <div className="space-y-4 sm:space-y-5">
-        {filteredReviews.length === 0 ? (
+        {loading ? (
+          <ReviewSkeleton count={4} />
+        ) : filteredReviews.length === 0 ? (
           <div className="bg-white rounded-2xl p-8 sm:p-12 text-center border border-slate-200">
             <p className="text-slate-500 font-medium">No reviews found matching the selected filter.</p>
           </div>

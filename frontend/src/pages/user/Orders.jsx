@@ -3,6 +3,7 @@ import { Link, useNavigate, useOutletContext } from "react-router-dom";
 import { FiShoppingBag, FiArrowRight, FiRefreshCw } from "react-icons/fi";
 import { API_BASE_URL, resolveImageUrl } from "../../api/products";
 import FadeUp from "../../components/animations/FadeUp";
+import { TableSkeleton } from "../../components/common";
 
 const Orders = () => {
   const navigate = useNavigate();
@@ -54,9 +55,22 @@ const Orders = () => {
       </div>
 
       {loading ? (
-        <div className="py-20 text-center text-slate-500">
-          <FiRefreshCw className="text-2xl animate-spin mx-auto mb-3 text-[#74202D]" />
-          <p className="text-sm font-medium">Loading your orders...</p>
+        <div className="overflow-x-auto -mx-4 sm:mx-0 px-4 sm:px-0">
+          <table className="w-full text-sm text-left min-w-[700px]">
+            <thead>
+              <tr className="text-slate-400 font-semibold border-b border-[#EEDACB] text-xs uppercase tracking-wider bg-[#FCF8F5]">
+                <th className="py-4 px-4 rounded-tl-lg">Order ID</th>
+                <th className="py-4 px-4">Date</th>
+                <th className="py-4 px-4">Items</th>
+                <th className="py-4 px-4">Amount</th>
+                <th className="py-4 px-4 text-center">Status</th>
+                <th className="py-4 px-4 text-center rounded-tr-lg">Action</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-[#F3E6DA]">
+              <TableSkeleton rows={4} columns={6} hasThumbnail={false} />
+            </tbody>
+          </table>
         </div>
       ) : orders.length === 0 ? (
         <div className="text-center py-20">

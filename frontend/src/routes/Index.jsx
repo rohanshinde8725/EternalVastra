@@ -2,6 +2,7 @@ import { Routes, Route, Outlet, useLocation } from 'react-router-dom'
 import { lazy, Suspense } from "react";
 import { motion } from "framer-motion";
 import AdminRoute from "./AdminRoute";
+import { PageSkeleton } from "../components/common";
 
 const Home = lazy(() => import("../pages/Home"));
 const About = lazy(() => import("../pages/About"));
@@ -67,7 +68,7 @@ const MainLayout = () => {
 const AppRoutes = () => {
     return (
         <>
-            <Suspense fallback={<div className='flex justify-center items-center h-screen'>Loading...</div>}>
+            <Suspense fallback={<PageSkeleton />}>
                 <Routes>
                     <Route element={<AdminRoute />}>
                         <Route path='admin' element={<AdminLayout />}>

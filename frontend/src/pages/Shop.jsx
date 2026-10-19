@@ -9,6 +9,7 @@ import { API_BASE_URL } from "../api/products";
 import { useToast } from "../context/ToastContext";
 import { isAuthenticated } from "../utils/auth";
 import FadeUp from "../components/animations/FadeUp";
+import { ProductGridSkeleton } from "../components/common";
 
 const DEFAULT_CATEGORIES = [
   "Silk Sarees",
@@ -359,11 +360,7 @@ const Shop = () => {
         <div className="">
 
           {loading ? (
-            <div className="flex flex-col items-center justify-center py-24 gap-4 text-center">
-              <div className="w-12 h-12 border-4 border-[#74202D] border-t-transparent rounded-full animate-spin"></div>
-              <p className="text-base font-medium text-[#74202D]">Loading sarees collection...</p>
-              <p className="text-xs text-gray-500">Fetching handpicked weaves just for you</p>
-            </div>
+            <ProductGridSkeleton count={productsPerPage} viewMode={viewMode} />
           ) : error ? (
             <div className="flex flex-col items-center justify-center py-20 gap-3 text-center">
               <div className="w-12 h-12 rounded-full bg-red-50 text-red-600 flex items-center justify-center text-xl font-bold">!</div>

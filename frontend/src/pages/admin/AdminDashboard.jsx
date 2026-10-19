@@ -25,10 +25,12 @@ import {
 import { API_BASE_URL, resolveImageUrl } from "../../api/products";
 import { useToast } from "../../context/ToastContext";
 import { getStoredUser } from "../../utils/auth";
+import { Skeleton, TableSkeleton } from "../../components/common";
 
 const AdminDashboard = () => {
   const { showToast } = useToast();
   const currentUser = getStoredUser();
+  const [loading, setLoading] = useState(true);
   const [globalPeriod, setGlobalPeriod] = useState("This Week");
   const [showGlobalDropdown, setShowGlobalDropdown] = useState(false);
 
@@ -54,6 +56,7 @@ const AdminDashboard = () => {
 
   // Fetch live stats from backend
   const fetchDashboardStats = () => {
+    setLoading(true);
     fetch(`${API_BASE_URL}/api/admin/dashboard-stats`)
       .then((res) => {
         if (!res.ok) throw new Error("Dashboard stats failed");
@@ -86,7 +89,8 @@ const AdminDashboard = () => {
           });
         }
       })
-      .catch((err) => console.error(err));
+      .catch((err) => console.error(err))
+      .finally(() => setLoading(false));
   };
 
   useEffect(() => {
@@ -248,7 +252,19 @@ const AdminDashboard = () => {
 
       {/* 2. TOP 5 METRIC CARDS (INCLUDING REGISTERED USERS) */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 sm:gap-3.5 xl:gap-4">
-        {/* Total Sales */}
+        {loading ? (
+          Array.from({ length: 5 }, (_, i) => (
+            <div key={i} className="bg-white rounded-xl xl:rounded-2xl p-3 sm:p-4 border border-slate-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] flex items-center gap-3">
+              <Skeleton variant="circular" className="w-10 h-10 shrink-0" />
+              <div className="flex-1 space-y-1.5 min-w-0">
+                <Skeleton variant="text" className="h-3 w-16" />
+                <Skeleton variant="text" className="h-5 w-20" />
+              </div>
+            </div>
+          ))
+        ) : (
+          <>
+            {/* Total Sales */}
         <div className="bg-white rounded-xl xl:rounded-2xl p-3 sm:p-4 border border-slate-100 shadow-[0_2px_12px_rgba(0,0,0,0.03)] flex items-start xl:items-center gap-3 min-w-0">
           <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-rose-50 flex items-center justify-center shrink-0 text-rose-500">
             <FiShoppingBag className="text-base sm:text-lg" />
@@ -343,6 +359,8 @@ const AdminDashboard = () => {
             </div>
           </div>
         </Link>
+          </>
+        )}
       </div>
 
       {/* 3. USER MANAGEMENT & ACCESS CONTROL SECTION */}
@@ -386,7 +404,9 @@ const AdminDashboard = () => {
             </thead>
 
             <tbody className="divide-y divide-slate-100">
-              {stats.recentUsers.length === 0 ? (
+              {loading ? (
+                <TableSkeleton rows={4} columns={6} />
+              ) : stats.recentUsers.length === 0 ? (
                 <tr>
                   <td colSpan="6" className="py-8 text-center text-slate-400 text-xs">
                     No registered user accounts found.
