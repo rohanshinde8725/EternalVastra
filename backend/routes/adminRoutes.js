@@ -32,7 +32,7 @@ router.patch("/users/:id/toggle-block", toggleBlockUser);
 router.put("/users/:id/toggle-block", toggleBlockUser);
 router.delete("/users/:id", deleteUser);
 
-// Image Upload (admin uploads from device)
+// Image Upload (admin uploads single image from device)
 router.post("/upload-image", upload.single("image"), (req, res) => {
   if (!req.file) {
     return res.status(400).json({ message: "No image file provided" });
@@ -40,6 +40,15 @@ router.post("/upload-image", upload.single("image"), (req, res) => {
   // Return a publicly accessible URL
   const imageUrl = `/uploads/admin/${req.file.filename}`;
   res.json({ url: imageUrl, filename: req.file.filename });
+});
+
+// Multi-Image Upload (admin uploads multiple gallery images from device)
+router.post("/upload-images", upload.array("images", 10), (req, res) => {
+  if (!req.files || req.files.length === 0) {
+    return res.status(400).json({ message: "No image files provided" });
+  }
+  const urls = req.files.map((file) => `/uploads/admin/${file.filename}`);
+  res.json({ urls, count: urls.length });
 });
 
 // Profile

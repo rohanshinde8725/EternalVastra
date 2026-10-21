@@ -28,12 +28,42 @@ const productSchema = new mongoose.Schema(
     inventory: { type: Number, min: 0, default: 0 },
     rating: { type: Number, min: 0, max: 5, default: 0 },
     ratings: { type: String, default: "0" },
+    images: { type: [String], default: [] },
+    slug: { type: String, trim: true, default: "" },
+    sku: { type: String, trim: true, default: "" },
+    status: { type: String, enum: ["Draft", "Published"], default: "Published" },
+    shortDescription: { type: String, default: "" },
+    tags: { type: [String], default: [] },
+    specifications: {
+      fabric: { type: String, default: "" },
+      sareeLength: { type: String, default: "5.5 Meters" },
+      blousePiece: { type: String, default: "Included (0.8 Meter Unstitched)" },
+      color: { type: String, default: "" },
+      pattern: { type: String, default: "" },
+      workType: { type: String, default: "" },
+      occasion: { type: String, default: "" },
+      care: { type: String, default: "" },
+    },
+    relatedProductIds: { type: [Number], default: [] },
     details: {
       description: { type: String, default: "" },
+      shortDescription: { type: String, default: "" },
       material: { type: String, default: "" },
       occasion: { type: String, default: "" },
       care: { type: String, default: "" },
       highlights: { type: [String], default: [] },
+      specifications: {
+        fabric: { type: String, default: "" },
+        sareeLength: { type: String, default: "5.5 Meters" },
+        blousePiece: { type: String, default: "Included (0.8 Meter Unstitched)" },
+        color: { type: String, default: "" },
+        pattern: { type: String, default: "" },
+        workType: { type: String, default: "" },
+        occasion: { type: String, default: "" },
+        care: { type: String, default: "" },
+      },
+      shippingInfo: { type: String, default: "" },
+      returnInfo: { type: String, default: "" },
     },
   },
   { timestamps: true, versionKey: false }
@@ -44,5 +74,7 @@ productSchema.index({ createdAt: -1, id: -1 });
 productSchema.index({ category: 1 });
 productSchema.index({ discountPrice: 1 });
 productSchema.index({ rating: -1 });
+productSchema.index({ status: 1 });
+productSchema.index({ slug: 1 });
 
 module.exports = mongoose.model("Product", productSchema);

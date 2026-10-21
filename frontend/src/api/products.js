@@ -36,10 +36,19 @@ const resolveImageUrl = (imagePath) => {
   return `${API_BASE_URL}${cleanPath.startsWith("/") ? "" : "/"}${cleanPath}`;
 };
 
-const normalizeProduct = (product) => ({
-  ...product,
-  img: resolveImageUrl(product.img),
-});
+const normalizeProduct = (product) => {
+  const rawImages = Array.isArray(product.images) && product.images.length > 0
+    ? product.images
+    : (product.img ? [product.img] : []);
+  const resolvedImages = rawImages.map(resolveImageUrl);
+  const resolvedMain = resolveImageUrl(product.img || resolvedImages[0]);
+
+  return {
+    ...product,
+    img: resolvedMain,
+    images: resolvedImages.length > 0 ? resolvedImages : [resolvedMain],
+  };
+};
 
 /**
  * Deduplicated cached fetch with TTL
