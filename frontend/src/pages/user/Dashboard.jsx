@@ -6,7 +6,6 @@ import {
 } from "react-icons/fi";
 import { API_BASE_URL, resolveImageUrl } from "../../api/products";
 import FadeUp from "../../components/animations/FadeUp";
-import { DashboardSkeleton } from "../../components/common";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -45,7 +44,12 @@ const Dashboard = () => {
   }, [user]);
 
   if (loading) {
-    return <DashboardSkeleton />;
+    return (
+      <div className="py-20 text-center text-slate-500">
+        <div className="w-8 h-8 border-3 border-[#74202D]/20 border-t-[#74202D] rounded-full animate-spin mx-auto mb-3" />
+        <p className="text-sm font-medium">Loading your dashboard...</p>
+      </div>
+    );
   }
 
   return (

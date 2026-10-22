@@ -445,7 +445,7 @@ const Shop = () => {
                             e.currentTarget.onerror = null;
                             e.currentTarget.src = "/images/silk/silk-1.webp";
                           }}
-                          className="w-full h-[230px] sm:h-[300px] 2xl:h-[360px] object-cover object-top transition duration-300 group-hover:scale-[1.05]"
+                          className="w-full h-[380px] sm:h-[450px] 2xl:h-[490px] object-cover object-top transition duration-300 group-hover:scale-[1.05]"
                         />
                       </Link>
                       {/* Hover Overlay: Tag + Action Icons (Wishlist & View Eye) */}

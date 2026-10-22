@@ -4,7 +4,6 @@ import { FiStar, FiEdit2, FiTrash2, FiPlus, FiX, FiCheckCircle, FiRefreshCw } fr
 import { API_BASE_URL, resolveImageUrl } from "../../api/products";
 import { useToast } from "../../context/ToastContext";
 import FadeUp from "../../components/animations/FadeUp";
-import { ReviewSkeleton } from "../../components/common";
 
 const getUserAvatarUrl = (avatarStr, userName = "Patron") => {
   if (!avatarStr || avatarStr === "/images/default-avatar.webp" || avatarStr.includes("testimonial-1.webp")) {
@@ -199,8 +198,9 @@ const Reviews = () => {
       </div>
 
       {loading ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          <ReviewSkeleton count={4} />
+        <div className="py-20 text-center text-slate-500">
+          <FiRefreshCw className="text-2xl animate-spin mx-auto mb-3 text-[#74202D]" />
+          <p className="text-sm font-medium">Loading your reviews...</p>
         </div>
       ) : userReviews.length === 0 ? (
         <div className="text-center py-16 border-2 border-dashed border-[#EEDACB] rounded-2xl bg-[#FCF8F5]">

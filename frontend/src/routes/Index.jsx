@@ -2,7 +2,8 @@ import { Routes, Route, Outlet, useLocation } from 'react-router-dom'
 import { lazy, Suspense } from "react";
 import { motion } from "framer-motion";
 import AdminRoute from "./AdminRoute";
-import { PageSkeleton } from "../components/common";
+import Header from "../components/header/Header";
+import Footer from "../components/footer/Footer";
 
 const Home = lazy(() => import("../pages/Home"));
 const About = lazy(() => import("../pages/About"));
@@ -10,8 +11,6 @@ const Shop = lazy(() => import("../pages/Shop"));
 const SareeDetail = lazy(() => import("../pages/SareeDetail"));
 const Cart = lazy(()=> import ('../pages/Cart'));
 const Wishlist = lazy(() => import('../pages/Wishlist'));
-const Header = lazy(()=> import ('../components/header/Header'));
-const Footer = lazy(()=> import ('../components/footer/Footer'));
 const Contact = lazy(() => import("../pages/Contact"));
 const Blog = lazy(() => import("../pages/Blog"));
 const BlogDetail = lazy(() => import("../pages/BlogDetail"));
@@ -43,6 +42,12 @@ const SignIn = lazy(() => import("../pages/SignIn"));
 const SignUp = lazy(() => import("../pages/SignUp"));
 const Profile = lazy(() => import("../pages/Profile"));
 
+const RouteLoader = () => (
+  <div className="flex justify-center items-center min-h-[50vh] py-16" role="status" aria-label="Loading">
+    <div className="w-8 h-8 border-3 border-[#74202D]/20 border-t-[#74202D] rounded-full animate-spin" />
+  </div>
+);
+
 const MainLayout = () => {
   const location = useLocation();
 
@@ -57,7 +62,9 @@ const MainLayout = () => {
           transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
           className="w-full"
         >
-          <Outlet />
+          <Suspense fallback={<RouteLoader />}>
+            <Outlet />
+          </Suspense>
         </motion.div>
       </main>
       <Footer />
@@ -68,7 +75,7 @@ const MainLayout = () => {
 const AppRoutes = () => {
     return (
         <>
-            <Suspense fallback={<PageSkeleton />}>
+            <Suspense fallback={<RouteLoader />}>
                 <Routes>
                     <Route element={<AdminRoute />}>
                         <Route path='admin' element={<AdminLayout />}>

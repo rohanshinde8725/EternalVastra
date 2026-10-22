@@ -129,7 +129,7 @@ const Seller = () => {
                           e.currentTarget.onerror = null;
                           e.currentTarget.src = "/images/silk/silk-1.webp";
                         }}
-                        className="h-[230px] sm:h-[300px] w-full rounded-t-xl object-cover object-top transition duration-300 group-hover:scale-[1.05]"
+                        className="h-[380px] sm:h-[450px] 2xl:h-[490px] w-full rounded-t-xl object-cover object-top transition duration-300 group-hover:scale-[1.05]"
                       />
                     </Link>
 
