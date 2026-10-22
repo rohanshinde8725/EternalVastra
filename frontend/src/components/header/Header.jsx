@@ -747,7 +747,7 @@ const Header = () => {
                   onClick={() => setIsOpen(false)}
                   className="block py-2.5 px-3 rounded-xl hover:bg-rose-50 hover:text-[#6B1527] transition"
                 >
-                  Shop Sarees
+                  Shop
                 </Link>
               </li>
               <li>
@@ -756,7 +756,7 @@ const Header = () => {
                   onClick={() => setIsOpen(false)}
                   className="block py-2.5 px-3 rounded-xl hover:bg-rose-50 hover:text-[#6B1527] transition"
                 >
-                  Blog & Heritage Stories
+                  Blog
                 </Link>
               </li>
               <li>
