@@ -569,7 +569,7 @@ const SareeDetail = () => {
             
             {/* Primary Main Image Box */}
             <div
-              className="relative w-full aspect-[3/4] max-h-[640px] rounded-2xl overflow-hidden border border-[#EEDACB] bg-[#FAF5F0] shadow-sm flex items-center justify-center select-none"
+              className="relative w-full rounded-2xl overflow-hidden border border-[#EEDACB] bg-[#FAF5F0] shadow-sm flex items-center justify-center select-none"
             >
               {/* Product Image */}
               <motion.img
@@ -583,7 +583,7 @@ const SareeDetail = () => {
                 initial={{ opacity: 0.6 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.35, ease: "easeOut" }}
-                className="w-full h-full object-cover object-top"
+                className="w-full h-auto block object-cover object-top"
               />
 
               {/* Tag / Discount Badge on top-left */}
